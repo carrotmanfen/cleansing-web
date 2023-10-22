@@ -1,0 +1,52 @@
+import React from 'react'
+import Image from 'next/legacy/image'
+import {Navbar} from '../components/Navbar'
+import { databaseIcon, uploadIcon } from '@/assets'
+
+const UploadPage = () => {
+  return (
+    <div className='relative w-screen h-full'>
+        <Navbar/>
+        <div className='w-full flex flex-col items-center'>
+            <p className='text-[48px] text-textPrimary font-kanit mt-8'>อัปโหลด</p>
+            <div className='w-full flex flex-row mt-8 justify-around'>
+                <div className='w-[430px]'>
+                    <div className='w-full flex flex-col h-[400px] rounded-[32px] border-2 border-primary justify-around items-center'>
+                        <Image src={uploadIcon} width={80} height={80} objectFit='cover' alt="logo" />
+                        <p className='font-kanit text-[32px] text-textPrimary'>ลากวางหรือแนบไฟล์</p>
+                        <button className='font-kanit text-[32px] px-8 py-2 bg-primary text-white rounded-3xl hover:bg-hoverPrimary'>
+                            แนบไฟล์
+                        </button>
+                    </div>
+                    <div className='text-[28px] font-kanit mt-8'>
+                        <p className='w-full text-center text-textPrimary'>อัปโหลดไฟล์ของคุณโดยที่</p>
+                        <p className='text-textGray'>- ต้องเป็นไฟล์ Csv, Excel เท่านั้น</p>
+                        <p className='text-textGray'>- ไฟล์ขนาดไม่เกิน 10 MB</p>
+                    </div>
+                </div>
+                <div className='w-[430px]'>
+                    <div className='w-full flex flex-col h-[400px] rounded-[32px] border-2 border-primary justify-around items-center'>
+                        <Image src={databaseIcon} width={80} height={80} objectFit='cover' alt="logo" />
+                        <p className='font-kanit text-[32px] text-textPrimary'>เชื่อมฐานข้อมูล</p>
+                        <button className='font-kanit text-[32px] px-8 py-2 bg-primary text-white rounded-3xl hover:bg-hoverPrimary'>
+                            เชื่อมฐานข้อมูล
+                        </button>
+                    </div>
+                    <div className='text-[28px] font-kanit mt-8'>
+                        <p className='w-full text-center text-textPrimary'>การนำไฟล์จากฐานข้อมูลมาใช้</p>
+                        <p className='text-textGray'>- ต้องเป็น mysql เท่านั้น</p>
+                        <p className='text-textGray'>- ไฟล์ขนาดไม่เกิน 10 MB</p>
+                    </div>
+                </div>
+            </div>
+                <div className='flex flex-col w-full mt-8 text-[28px] font-kanit text-textPrimary text-center items-center'>
+                    <p>หรือคุณสามารถทดลองชุดข้อมูล</p>
+                    <p>ตัวอย่างของเราได้</p>
+                    <button className='px-12 py-2 bg-primary text-white w-fit rounded-2xl mt-1 '>ทดลอง</button>
+                </div>
+        </div>
+    </div>
+  )
+}
+
+export default UploadPage

@@ -24,6 +24,8 @@ module.exports = {
           primaryOrange:"#F6A546",
           hlRed:"#FF8484",
           hlYellow:"#FFE144",
+          borderNavbar:"#C9C9C9",
+          textGray:"#777777",
         },
         screens: {
           xs: "375px",
