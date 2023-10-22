@@ -26,7 +26,9 @@ const UploadPage = () => {
                 </div>
                 <div className='w-[430px]'>
                     <div className='w-full flex flex-col h-[400px] rounded-[32px] border-2 border-primary justify-around items-center'>
-                        <Image src={databaseIcon} width={80} height={80} objectFit='cover' alt="logo" />
+                        <div className='z-0'>
+                            <Image src={databaseIcon} width={80} height={80} objectFit='cover' alt="logo" />
+                        </div>
                         <p className='font-kanit text-[32px] text-textPrimary'>เชื่อมฐานข้อมูล</p>
                         <button className='font-kanit text-[32px] px-8 py-2 bg-primary text-white rounded-3xl hover:bg-hoverPrimary'>
                             เชื่อมฐานข้อมูล
