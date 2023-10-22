@@ -42,7 +42,7 @@ const UploadPage = () => {
                 <div className='flex flex-col w-full mt-8 text-[28px] font-kanit text-textPrimary text-center items-center'>
                     <p>หรือคุณสามารถทดลองชุดข้อมูล</p>
                     <p>ตัวอย่างของเราได้</p>
-                    <button className='px-12 py-2 bg-primary text-white w-fit rounded-2xl mt-1 '>ทดลอง</button>
+                    <button className='px-12 py-2 bg-primary text-white w-fit rounded-2xl mt-1 hover:bg-hoverPrimary'>ทดลอง</button>
                 </div>
         </div>
     </div>
