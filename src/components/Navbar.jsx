@@ -7,7 +7,7 @@ export const Navbar = () => {
   return (
     <div className='w-screen flex flex-row justify-between sticky h-[80px] border-b-2 border-borderNavbar z-50 top-0 bg-white'>
         <div className='flex flex-row items-center gap-4 h-full font-kanit text-[20px] text-textPrimary pl-8'>
-            <Image src={logo} width={80} height={80} objectFit='cover' alt="logo" />
+            <Image src={logo} width={60} height={60} objectFit='contain' alt="logo" />
             <button className="h-full hover:bg-primary hover:text-white px-4">คลีนเนอร์</button>
             <button className="h-full hover:bg-primary hover:text-white px-4">เอกสาร</button>
             <button className="h-full hover:bg-primary hover:text-white px-4">คู่มือ</button>
