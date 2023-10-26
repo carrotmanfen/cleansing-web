@@ -26,6 +26,7 @@ module.exports = {
           hlYellow:"#FFE144",
           borderNavbar:"#C9C9C9",
           textGray:"#777777",
+          gray:"#C9C9C9"
         },
         screens: {
           xs: "375px",

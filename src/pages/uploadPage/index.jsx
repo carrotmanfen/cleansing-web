@@ -1,38 +1,11 @@
 import React , {useState, useEffect} from 'react'
 import Image from 'next/legacy/image'
-import {Navbar} from '../components/Navbar'
+import Link from 'next/link'
+import {Navbar} from '../../components/Navbar'
 import { databaseIcon, uploadIcon } from '@/assets'
 
 const UploadPage = () => {
-    const [data, setData] = useState(null);
-
-    const handleConnect = async () => {
-        const response = await fetch('/api/connect', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            host: 'localhost',
-            user: 'root',
-            password: '',
-            database: 'bootbootshop',
-            table: 'shop',
-          }),
-        });
-    
-        if (response.ok) {
-          const result = await response.json();
-          setData(result.data);
-        } else {
-          // Handle the error
-        }
-      };
-    
-    useEffect(()=>{
-        console.log(data)
-    },[data])
-
+   
   return (
     <div className='relative w-screen h-full'>
         <Navbar/>
@@ -59,9 +32,11 @@ const UploadPage = () => {
                             <Image src={databaseIcon} width={80} height={80} objectFit='cover' alt="logo" />
                         </div>
                         <p className='font-kanit text-[24px] text-textPrimary'>เชื่อมฐานข้อมูล</p>
-                        <button onClick={handleConnect} className='font-kanit text-[24px] px-8 py-2 bg-primary text-white rounded-3xl hover:bg-hoverPrimary'>
-                            เชื่อมฐานข้อมูล
-                        </button>
+                        <Link href={"/uploadPage/databaseConnectPage"}>
+                            <button className='font-kanit text-[24px] px-8 py-2 bg-primary text-white rounded-3xl hover:bg-hoverPrimary'>
+                                เชื่อมฐานข้อมูล
+                            </button>
+                        </Link>
                     </div>
                     <div className='text-[16px] font-kanit mt-8 px-24'>
                         <p className='w-full text-center text-textPrimary text-[20px]'>การนำไฟล์จากฐานข้อมูลมาใช้</p>
