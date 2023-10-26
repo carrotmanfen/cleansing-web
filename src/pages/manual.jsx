@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/legacy/image'
 import { Navbar } from '../components/Navbar'
-import { doc, pic, docTest } from '@/assets'
+import { manualTest } from '@/assets'
 
 const manual = () => {
 
@@ -12,19 +12,19 @@ const manual = () => {
                 <div className='w-[700px] flex flex-col mt-10 justify-around border-0'>
                     <p className='text-textPrimary font-kanit text-[24px]'>Why Data Important</p>
                     <div className='w-[700px] mt-5 flex flex-col justify-center border-0'>
-                        <Image src={pic} width={700} height={500} objectFit='corver' alt="pic" />
+                        <Image src={manualTest} width={700} height={500} objectFit='corver' alt="pic-manual" />
                         <p className='text-textGray text-[16px] mt-2'> Some of description Some of description Some of description Some of description Some of description Some of description Some of description Some of description Some of descriptionSome of descriptionSome of descriptionSome of descriptionSome of description</p>
                     </div>
 
                     <p className='text-textPrimary font-kanit text-[24px] mt-5'>Cleansing Data</p>
                     <div className='w-[700px] mt-5 flex flex-col justify-center border-0'>
-                        <Image src={pic} width={700} height={500} objectFit='contain' alt="pic" />
+                        <Image src={manualTest} width={700} height={500} objectFit='contain' alt="pic-manual" />
                         <p className='text-textGray text-[16px] mt-2'> Some of description Some of description Some of description Some of description Some of description Some of description Some of description Some of description Some of descriptionSome of descriptionSome of descriptionSome of descriptionSome of description</p>
                     </div>
 
-                    <p className='text-textPrimary font-kanit text-[24px] mt-5'>Profiling of Data</p>
+                    <p className='text-textPrimary font-kanit text-[24px] mt-5'>Export</p>
                     <div className='w-[700px] mt-5 flex flex-col justify-center border-0'>
-                        <Image src={pic} width={700} height={500} objectFit='corver' alt="pic" />
+                        <Image src={manualTest} width={700} height={500} objectFit='corver' alt="pic-manual" />
                         <p className='text-textGray text-[16px] mt-2'> Some of description Some of description Some of description Some of description Some of description Some of description Some of description Some of description Some of descriptionSome of descriptionSome of descriptionSome of descriptionSome of description</p>
                     </div>
                 </div>
