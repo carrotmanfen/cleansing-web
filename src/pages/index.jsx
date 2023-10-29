@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/legacy/image'
 import { logo } from '@/assets';
 import { Navbar } from '../components/Navbar'
-import { pic, uploadIcon } from '@/assets'
+import { pic } from '@/assets'
 
 export default function Home() {
   return (

@@ -3,11 +3,11 @@ import Image from 'next/legacy/image'
 import { Navbar } from '../components/Navbar'
 import { doc } from '@/assets'
 
-const document = () => {
+const Document = () => {
 
     return (
         <div className='relative w-screen h-full pb-20'>
-            <Navbar />
+            <Navbar menu={1}/>
             <div className='w-full flex flex-col items-center'>
                 <div className='w-[700px] flex flex-col mt-10 justify-around border-0'>
                     <p className='text-textPrimary font-kanit text-[24px]'>Why Data Important</p>
@@ -36,4 +36,4 @@ const document = () => {
     )
 }
 
-export default document
+export default Document
