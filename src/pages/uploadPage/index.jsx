@@ -53,7 +53,7 @@ const UploadPage = () => {
                             <div className='flex flex-row gap-16 border justify-around'>
                                 {
                                     file ? 
-                                    <p className='text-[20px] font-kanit pl-2'>ไฟล์ที่เลือก: {file.name}</p>
+                                    <p className='text-[20px] max-w-[250px] font-kanit pl-2 truncate'>ไฟล์ที่เลือก: {file.name}</p>
                                     :
                                     <p className='text-[20px] font-kanit pl-2'>ยังไ่ม่ได้เลือกไฟล์</p>
                                 }
