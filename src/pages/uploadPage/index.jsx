@@ -1,11 +1,39 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/legacy/image'
 import Link from 'next/link'
 import { Navbar } from '../../components/Navbar'
 import { databaseIcon, uploadIcon } from '@/assets'
 
 const UploadPage = () => {
+    const [file, setFile] = useState(null);
 
+    const handleFileChange = (event) => {
+        const selectedFile = event.target.files[0];
+        setFile(selectedFile);
+    };
+
+    const handleUpload = async () => {
+        if (file) {
+          const formData = new FormData();
+          formData.append('file', file);
+    
+          try {
+            const response = await fetch('/api/upload', {
+              method: 'POST',
+              body: formData,
+            });
+    
+            if (response.ok) {
+              console.log('File uploaded successfully');
+            } else {
+              console.error('File upload failed');
+            }
+          } catch (error) {
+            console.error('An error occurred:', error);
+          }
+        }
+      };
+      
     return (
         <div className='relative w-screen h-full'>
             <Navbar />
@@ -15,10 +43,34 @@ const UploadPage = () => {
                     <div className='w-[430px]'>
                         <div className='w-full flex flex-col h-[400px] rounded-[32px] border-2 border-primary justify-around items-center'>
                             <Image src={uploadIcon} width={80} height={80} objectFit='cover' alt="logo" />
-                            <p className='font-kanit text-[24px] text-textPrimary'>ลากวางหรือแนบไฟล์</p>
-                            <button className='font-kanit text-[24px] px-8 py-2 bg-primary text-white rounded-3xl hover:bg-hoverPrimary'>
-                                แนบไฟล์
-                            </button>
+                            <p className='font-kanit text-[24px] text-textPrimary'>กรุณาแนบไฟล์</p>
+                            <input
+                                type="file"
+                                id="fileInput"
+                                className='hidden'
+                                onChange={handleFileChange}
+                            />
+                            <div className='flex flex-row gap-16 border justify-around'>
+                                {
+                                    file ? 
+                                    <p className='text-[20px] font-kanit pl-2'>ไฟล์ที่เลือก: {file.name}</p>
+                                    :
+                                    <p className='text-[20px] font-kanit pl-2'>ยังไ่ม่ได้เลือกไฟล์</p>
+                                }
+                                <label for="fileInput">
+                                    <span className='text-[20px] font-kanit bg-primary text-white px-2 h-full'>แนบไฟล์</span>
+                                </label>
+                            </div>
+                            {
+                                file?
+                                <button onClick={handleUpload} className='font-kanit text-[24px] px-8 py-2 bg-primary text-white rounded-3xl hover:bg-hoverPrimary'>
+                                    อัพโหลด
+                                </button>
+                                :
+                                <button  className='font-kanit text-[24px] px-8 py-2 bg-gray rounded-3xl pointer-events-none'>
+                                    อัพโหลด
+                                </button>
+                            }
                         </div>
                         <div className='text-[16px] font-kanit mt-8 px-24'>
                             <p className='w-full text-center text-textPrimary text-[20px]'>อัปโหลดไฟล์ของคุณโดยที่</p>
