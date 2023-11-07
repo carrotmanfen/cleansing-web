@@ -4,6 +4,8 @@ import databaseIcon from './databaseIcon.svg'
 import pic from './pic.svg'
 import doc from './doc.svg'
 import manualTest from './manualTest.svg'
+import downloadIcon from './downloadIcon.svg'
+import arrowLeft from './arrowLeft.svg'
 
 export{
     logo,
@@ -12,4 +14,6 @@ export{
     pic,
     doc,
     manualTest,
+    downloadIcon,
+    arrowLeft
 }
