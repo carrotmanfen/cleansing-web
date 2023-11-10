@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import NavbarMain from "@/components/NavbarMain";
-import { NavbarDetail } from "@/components/NavbarDetail";
+import NavbarMain from "@/components/main/NavbarMain";
+import { NavbarDetail } from "@/components/main/NavbarDetail";
 import Pagination from "@mui/material/Pagination";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -11,9 +11,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { TableVirtuoso } from "react-virtuoso";
 import { rows, columns } from "@/constants/tableData";
+import { PivotView } from "@/components/main/PivotView";
 
 const Main = () => {
-  const [menu, setMenu] = useState(1);
+  const [menu, setMenu] = useState(2);
 
   const buttonLeftClick = () => {
     setMenu(1);
@@ -122,23 +123,32 @@ const Main = () => {
             ทำความสะอาดข้อมูล
           </button>
         </div>
-        <Paper style={{ height: "70vh", width: "100%" }}>
-          <TableVirtuoso
-            data={visibleRows}
-            components={VirtuosoTableComponents}
-            fixedHeaderContent={fixedHeaderContent}
-            itemContent={rowContent}
-          />
-        </Paper>
+        {
+            menu==1?<div className="flex flex-col">
+                <Paper style={{ height: "70vh", width: "100%" }}>
+                    <TableVirtuoso
+                        data={visibleRows}
+                        components={VirtuosoTableComponents}
+                        fixedHeaderContent={fixedHeaderContent}
+                        itemContent={rowContent}
+                    />
+                </Paper>
 
-        <div className="w-full flex justify-end mt-6">
-          <Pagination
-            count={pageCount}
-            color="primary"
-            page={page}
-            onChange={handlePageChange}
-          />
-        </div>
+                <div className="w-full flex justify-end mt-6">
+                    <Pagination
+                        count={pageCount}
+                        color="primary"
+                        page={page}
+                        onChange={handlePageChange}
+                    />
+                </div>
+            </div>
+
+            :<div className="w-full">
+                <PivotView/>
+            </div>
+
+        }
       </div>
     </div>
   );

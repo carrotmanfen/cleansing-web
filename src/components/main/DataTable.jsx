@@ -1,0 +1,55 @@
+import React from 'react';
+import { BarChartCell } from './BarChartCell';
+
+export const DataTable = ({ tableData, onSelectChange }) => {
+  // Extract column names from the first row of the tableData
+  const columns = Object.keys(tableData[0] || []);
+
+  return (
+    <table className='w-full table-auto'>
+      <thead>
+        <tr>
+          {columns.map((column, index) => (
+            <th
+              key={index}
+              className='border border-black p-2 text-center font-semibold bg-primary text-white text-[20px]'
+              style={{ width: `calc(100% / ${columns.length})`, fontFamily: 'Sarabun' }}
+            >
+              {column}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {tableData.map((rowData, rowIndex) => (
+          <tr key={rowIndex}>
+            {columns.map((column, colIndex) => (
+              <td
+                key={colIndex}
+                className='border p-2 text-center text-[20px]'
+                style={{ width: `calc(100% / ${columns.length})`, fontFamily: 'Sarabun' }}
+              >
+                {colIndex === 1 ? (
+                  <select
+                    value={rowData[column]}
+                    onChange={(e) => {
+                        onSelectChange(rowIndex, column, e.target.value)
+                    }}
+                  >
+                    <option value='integer'>integer</option>
+                    <option value='decimal'>decimal</option>
+                    <option value='string'>string</option>
+                  </select>
+                ) : column === 'Data Set 3' ? (
+                  <BarChartCell data={rowData[column]} />
+                ) : (
+                  rowData[column]
+                )}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
