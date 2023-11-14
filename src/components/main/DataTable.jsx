@@ -12,8 +12,10 @@ export const DataTable = ({ tableData, onSelectChange }) => {
           {columns.map((column, index) => (
             <th
               key={index}
-              className='border border-black p-2 text-center font-semibold bg-primary text-white text-[20px]'
-              style={{ width: `calc(100% / ${columns.length})`, fontFamily: 'Sarabun' }}
+              className={`border border-black p-2 text-center font-semibold bg-primary text-white text-[20px] ${
+                index === columns.length - 1 ? 'w-3/6' : 'w-1/6'
+              }`}
+              style={{ fontFamily: 'Sarabun' }}
             >
               {column}
             </th>
@@ -26,21 +28,24 @@ export const DataTable = ({ tableData, onSelectChange }) => {
             {columns.map((column, colIndex) => (
               <td
                 key={colIndex}
-                className='border p-2 text-center text-[20px]'
-                style={{ width: `calc(100% / ${columns.length})`, fontFamily: 'Sarabun' }}
+                className='border p-2 text-center text-[20px] '
+                style={{
+                  width: `calc(${colIndex=== columns.length - 1 ? '3/6' : '1/6'} * 100%)`,
+                  fontFamily: 'Sarabun',
+                }}
               >
                 {colIndex === 1 ? (
                   <select
                     value={rowData[column]}
                     onChange={(e) => {
-                        onSelectChange(rowIndex, column, e.target.value)
+                      onSelectChange(rowIndex, column, e.target.value);
                     }}
                   >
                     <option value='integer'>integer</option>
                     <option value='decimal'>decimal</option>
                     <option value='string'>string</option>
                   </select>
-                ) : column === 'Data Set 3' ? (
+                ) : column === 'แผนภูมิ' ? (
                   <BarChartCell data={rowData[column]} />
                 ) : (
                   rowData[column]

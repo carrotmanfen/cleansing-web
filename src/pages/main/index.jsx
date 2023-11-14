@@ -12,9 +12,30 @@ import Paper from "@mui/material/Paper";
 import { TableVirtuoso } from "react-virtuoso";
 import { rows, columns } from "@/constants/tableData";
 import { PivotView } from "@/components/main/PivotView";
+import PopUpChangeProjectName from "@/components/main/PopUpChangeProjectName";
 
 const Main = () => {
-  const [menu, setMenu] = useState(2);
+  const [menu, setMenu] = useState(1);
+  const [popUpChangeProjectName, setPopUpChangeProjectName] = useState(false)
+  const [projectName, setProjectName] = useState("project 1")
+  const [projectNameFill, setProjectNameFill] = useState(projectName)
+
+  const handleClosePopUpChangeProjectName = () =>{
+    setPopUpChangeProjectName(false)
+  }
+
+  const handleOpenPopUpChangeProjectName = () =>{
+    setPopUpChangeProjectName(true)
+  }
+
+  const handleChangeProjectNameFill = (e) =>{
+    setProjectNameFill(e.target.value)
+  }
+  
+  const handleChangeProjectName = (e) =>{
+    setProjectName(projectNameFill)
+    setPopUpChangeProjectName(false)
+  }
 
   const buttonLeftClick = () => {
     setMenu(1);
@@ -65,6 +86,8 @@ const Main = () => {
               backgroundColor: "#3498DB",
               color: "white",
               fontFamily: "Sarabun",
+              border: 1,
+              borderColor: "black"
             }}
           >
             {column.label}
@@ -80,7 +103,11 @@ const Main = () => {
         {columns.map((column) => (
           <TableCell
             key={column.dataKey}
-            align={column.numeric || false ? "center" : "left"}
+            align={column.numeric || false ? "left" : "left"}
+            sx={{
+              border: 1,
+              borderColor: "black"
+            }}
           >
             {row[column.dataKey]}
           </TableCell>
@@ -91,8 +118,15 @@ const Main = () => {
 
   return (
     <div className="relative w-screen h-full">
-      <NavbarMain projectName={"project 1"} />
+      <NavbarMain popup={handleOpenPopUpChangeProjectName} projectName={projectName} />
       <NavbarDetail rowNumber={3000} colNumber={400} />
+      <PopUpChangeProjectName isOpen={popUpChangeProjectName}>
+        <input type="text" value={projectNameFill} onChange={handleChangeProjectNameFill} className="border rounded-md w-full px-4 py-3 text-[16px] font-kanit" placeholder="พิมพ์ชื่อใหม่ของโปรเจกต์"/>
+        <div className="flex flex-row w-full justify-between mt-8">
+          <button onClick={handleClosePopUpChangeProjectName} className="px-10 py-2 bg-gray rounded-lg hover:bg-textGray">ยกเลิก</button>
+          <button onClick={handleChangeProjectName} className="px-10 py-2 bg-primary hover:bg-hoverPrimary rounded-lg text-white">ยืนยัน</button>
+        </div>
+      </PopUpChangeProjectName>
       <div className="flex flex-col w-full px-10 font-kanit">
         <div className="flex flex-row py-4 justify-between">
           <div className="gap-4 flex flex-row">
@@ -118,7 +152,7 @@ const Main = () => {
             </button>
           </div>
           <button
-            className={`py-2 px-4 text-[16px] bg-primary hover:bg-hoverPrimary text-white} text-white rounded-md`}
+            className={`py-2 px-4 text-[16px] bg-cleansing hover:bg-hoverCleansing text-white} text-white rounded-md`}
           >
             ทำความสะอาดข้อมูล
           </button>

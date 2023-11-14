@@ -6,6 +6,7 @@ import doc from './doc.svg'
 import manualTest from './manualTest.svg'
 import downloadIcon from './downloadIcon.svg'
 import arrowLeft from './arrowLeft.svg'
+import pencilIcon from './pencilIcon.svg'
 
 export{
     logo,
@@ -15,5 +16,7 @@ export{
     doc,
     manualTest,
     downloadIcon,
-    arrowLeft
+    arrowLeft,
+    pencilIcon,
+    
 }
