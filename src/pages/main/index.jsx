@@ -13,6 +13,7 @@ import { TableVirtuoso } from "react-virtuoso";
 import { rows, columns } from "@/constants/tableData";
 import { PivotView } from "@/components/main/PivotView";
 import PopUpChangeProjectName from "@/components/main/PopUpChangeProjectName";
+import PopUpCleansing from "@/components/main/PopUpCleansing";
 
 const Main = () => {
   const [menu, setMenu] = useState(1);
@@ -116,6 +117,16 @@ const Main = () => {
     );
   }
 
+  const [popUpCleansing, setPopUpCleansing] = useState(false)
+
+  const handleOpenCleansing = () =>{
+    setPopUpCleansing(true)
+  }
+
+  const handleCloseCleansing = () =>{
+    setPopUpCleansing(false)
+  }
+
   return (
     <div className="relative w-screen h-full">
       <NavbarMain popup={handleOpenPopUpChangeProjectName} projectName={projectName} />
@@ -127,6 +138,7 @@ const Main = () => {
           <button onClick={handleChangeProjectName} className="px-10 py-2 bg-primary hover:bg-hoverPrimary rounded-lg text-white">ยืนยัน</button>
         </div>
       </PopUpChangeProjectName>
+      <PopUpCleansing isOpen={popUpCleansing} close={handleCloseCleansing}/>
       <div className="flex flex-col w-full px-10 font-kanit">
         <div className="flex flex-row py-4 justify-between">
           <div className="gap-4 flex flex-row">
@@ -152,6 +164,7 @@ const Main = () => {
             </button>
           </div>
           <button
+            onClick={handleOpenCleansing}
             className={`py-2 px-4 text-[16px] bg-cleansing hover:bg-hoverCleansing text-white} text-white rounded-md`}
           >
             ทำความสะอาดข้อมูล
