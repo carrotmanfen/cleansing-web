@@ -18,12 +18,17 @@ export const Navbar = ({ menu }) => {
         </Link>
         <button className={`h-full hover:bg-primary hover:text-white px-4 ${menu == 1 ? `bg-primary text-white` : ``}`}>
           <Link href={"/document"}>
-            เอกสาร
+            ทฤษฏี
           </Link>
         </button>
         <button className={`h-full hover:bg-primary hover:text-white px-4 ${menu == 2 ? `bg-primary text-white` : ``}`}>
           <Link href={"/manual"}>
             คู่มือ
+          </Link>
+        </button>
+        <button className={`h-full hover:bg-primary hover:text-white px-4 ${menu == 3 ? `bg-primary text-white` : ``}`}>
+          <Link href={"/myProject"}>
+            โปรเจกต์ของฉัน
           </Link>
         </button>
       </div>

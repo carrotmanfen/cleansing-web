@@ -7,6 +7,7 @@ import manualTest from './manualTest.svg'
 import downloadIcon from './downloadIcon.svg'
 import arrowLeft from './arrowLeft.svg'
 import pencilIcon from './pencilIcon.svg'
+import afterArrow from './afterArrow.svg'
 
 export{
     logo,
@@ -18,5 +19,6 @@ export{
     downloadIcon,
     arrowLeft,
     pencilIcon,
+    afterArrow,
     
 }
