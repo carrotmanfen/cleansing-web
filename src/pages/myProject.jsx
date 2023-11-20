@@ -7,28 +7,36 @@ import { Projects } from '@/components/Projects'
 const myProject = () => {
     const mockData = [
         {
-            projectName:"project1"
+            projectName:"project1",
+            fileName:"fileName.csv"
         },
         {
-            projectName:"project1"
+            projectName:"project1",
+            fileName:"fileName.csv"
         },
         {
-            projectName:"project1"
+            projectName:"project1",
+            fileName:"fileName.csv"
         },
         {
-            projectName:"projecv2222211122222t1"
+            projectName:"projecv2222211122222t1",
+            fileName:"fileName.csv"
         },
         {
-            projectName:"project1"
+            projectName:"project1",
+            fileName:"fileName.csv"
         },
         {
-            projectName:"project1"
+            projectName:"project1",
+            fileName:"fileName.csv"
         },
         {
-            projectName:"project1"
+            projectName:"project1",
+            fileName:"fileName.csv"
         },
         {
-            projectName:"project1"
+            projectName:"project1",
+            fileName:"fileName.csv"
         }
     ]
   return (
@@ -49,7 +57,7 @@ const myProject = () => {
                     </div>
                 </div>
                 {mockData.map((data,index)=>(
-                    <Projects projectName={data.projectName}/>
+                    <Projects projectName={data.projectName} fileName={data.fileName}/>
                 ))}
             </div>
         </div>

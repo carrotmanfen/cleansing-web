@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Chart from 'chart.js/auto';
 
-export const BarChartCell = ({ data }) => {
+export const BarChartCell = ({ data, type }) => {
     const chartRef = useRef(null);
 
     useEffect(() => {
@@ -15,7 +15,7 @@ export const BarChartCell = ({ data }) => {
   
         // Create a new chart instance
         chartRef.current.chart = new Chart(ctx, {
-          type: 'bar',
+          type: type,
           data: {
             labels: ['Category 1', 'Category 2', 'Category 3', 'Category 4', 'Category 5'],
             datasets: [
