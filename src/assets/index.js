@@ -8,6 +8,8 @@ import downloadIcon from './downloadIcon.svg'
 import arrowLeft from './arrowLeft.svg'
 import pencilIcon from './pencilIcon.svg'
 import afterArrow from './afterArrow.svg'
+import paper from './paper.svg'
+import binIcon from './binIcon.svg'
 
 export{
     logo,
@@ -20,5 +22,6 @@ export{
     arrowLeft,
     pencilIcon,
     afterArrow,
-    
+    paper,
+    binIcon,
 }
