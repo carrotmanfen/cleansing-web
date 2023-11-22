@@ -20,7 +20,7 @@ module.exports = {
           lightBlue:"#E9F6FF",
           textPrimary:"#2B2B2B",
           primaryRed:"#EF2020",
-          HoverRed:"#BB1A1A",
+          hoverRed:"#BB1A1A",
           primaryGreen:"#67CF8B",
           primaryOrange:"#F6A546",
           hlRed:"#FF8484",

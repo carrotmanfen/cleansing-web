@@ -1,10 +1,23 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Image from 'next/legacy/image'
+import Link from 'next/link';
 import { paper } from '@/assets'
 import { Navbar } from '@/components/Navbar'
-import { Projects } from '@/components/Projects'
+import { Projects } from '@/components/myProject/Projects'
+import PopUpDeleteProject from '@/components/myProject/popUpDeleteProject';
 
 const myProject = () => {
+    const [isPopUpDelete, setIsPopUpDelete] = useState(false)
+    const handleDelete = () =>{
+        setIsPopUpDelete(true);
+    }
+    const handleCanCelDelete = () =>{
+        setIsPopUpDelete(false);
+    }
+    const handleDeleteProject = () =>{
+        console.log("delete")
+    }
+
     const mockData = [
         {
             projectName:"project1",
@@ -42,6 +55,7 @@ const myProject = () => {
   return (
     <div className="relative w-screen h-full">
         <Navbar />
+        <PopUpDeleteProject isOpen={isPopUpDelete} onClickCancel={handleCanCelDelete} onClick={handleDeleteProject}/>    
         <div className='flex flex-col w-full px-16 justify-center'>
             <p className='font-kanit text-textPrimary text-[32px] text-center mt-10'>โปรเจกต์ของฉัน</p>
             <div className='grid grid-cols-4 gap-12 mt-16'>
@@ -50,14 +64,14 @@ const myProject = () => {
                         <Image src={paper} alt='paper' objectFit='fill' width={100} height={100} />
                         <p className='font-kanit text-textPrimary text-[24px] w-full text-center'>สร้างโปรเจกท์ใหม่</p>
                     </div>
-                    <div className='font-kanit text-[24px] w-full text-center border-t border-borderNavbar py-4 flex flex-row justify-center px-6 bg-primary text-white rounded-b-lg hover:bg-hoverPrimary hover:cursor-pointer'>
+                    <Link href={"/uploadPage"}  className='font-kanit text-[24px] w-full text-center border-t border-borderNavbar py-4 flex flex-row justify-center px-6 bg-primary text-white rounded-b-lg hover:bg-hoverPrimary hover:cursor-pointer'>
                         <p className=''>
                            + อัปโหลด
                         </p>
-                    </div>
+                    </Link>
                 </div>
                 {mockData.map((data,index)=>(
-                    <Projects projectName={data.projectName} fileName={data.fileName}/>
+                    <Projects projectName={data.projectName} fileName={data.fileName} onClick={handleDelete}/>
                 ))}
             </div>
         </div>
