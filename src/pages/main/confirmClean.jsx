@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Image from "next/legacy/image";
+import Link from "next/link"
 import NavbarMain from "@/components/main/NavbarMain";
 import { NavbarDetail } from "@/components/main/NavbarDetail";
 import Pagination from "@mui/material/Pagination";
@@ -10,33 +12,13 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { TableVirtuoso } from "react-virtuoso";
-import { rows, columns } from "@/constants/tableData";
+import { rows, columns } from "@/constants/tableDataConfirm";
 import { PivotView } from "@/components/main/PivotView";
-import PopUpChangeProjectName from "@/components/main/PopUpChangeProjectName";
-import PopUpCleansing from "@/components/main/PopUpCleansing";
+import { redDot, yellowDot } from "@/assets";
 
-const Main = () => {
+const ConfirmClean = () => {
   const [menu, setMenu] = useState(1);
-  const [popUpChangeProjectName, setPopUpChangeProjectName] = useState(false)
   const [projectName, setProjectName] = useState("project 1")
-  const [projectNameFill, setProjectNameFill] = useState(projectName)
-
-  const handleClosePopUpChangeProjectName = () =>{
-    setPopUpChangeProjectName(false)
-  }
-
-  const handleOpenPopUpChangeProjectName = () =>{
-    setPopUpChangeProjectName(true)
-  }
-
-  const handleChangeProjectNameFill = (e) =>{
-    setProjectNameFill(e.target.value)
-  }
-  
-  const handleChangeProjectName = (e) =>{
-    setProjectName(projectNameFill)
-    setPopUpChangeProjectName(false)
-  }
 
   const buttonLeftClick = () => {
     setMenu(1);
@@ -84,7 +66,7 @@ const Main = () => {
             align={"center"}
             style={{ width: 300 }}
             sx={{
-              backgroundColor: "#3498DB",
+              backgroundColor: "#008F7A",
               color: "white",
               fontFamily: "Sarabun",
               border: 1,
@@ -110,12 +92,13 @@ const Main = () => {
             key={column.dataKey}
             align={"left"}
             sx={{
-              border: 1,
-              borderColor: "black",
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
-              maxWidth: '300px',
+                border: 1,
+                borderColor: 'black',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                maxWidth: '300px',
+                backgroundColor: row.status=="delete" ? '#FCA1A1' :row.status=="edit"? "#FFED92" :'white'
             }}
           >
             {row[column.dataKey]}
@@ -125,28 +108,15 @@ const Main = () => {
     );
   }
 
-  const [popUpCleansing, setPopUpCleansing] = useState(false)
-
-  const handleOpenCleansing = () =>{
-    setPopUpCleansing(true)
-  }
-
-  const handleCloseCleansing = () =>{
-    setPopUpCleansing(false)
+  const handleConfirm = () =>{
+    console.log("confirm");
   }
 
   return (
     <div className="relative w-screen h-full">
-      <NavbarMain popup={handleOpenPopUpChangeProjectName} projectName={projectName} />
+      <NavbarMain disableButton={true}  projectName={projectName} />
       <NavbarDetail rowNumber={3000} colNumber={400} />
-      <PopUpChangeProjectName isOpen={popUpChangeProjectName}>
-        <input type="text" value={projectNameFill} onChange={handleChangeProjectNameFill} className="border rounded-md w-full px-4 py-3 text-[16px] font-kanit" placeholder="พิมพ์ชื่อใหม่ของโปรเจกต์"/>
-        <div className="flex flex-row w-full justify-between mt-8">
-          <button onClick={handleClosePopUpChangeProjectName} className="px-10 py-2 bg-gray rounded-lg hover:bg-textGray">ยกเลิก</button>
-          <button onClick={handleChangeProjectName} className="px-10 py-2 bg-primary hover:bg-hoverPrimary rounded-lg text-white">ยืนยัน</button>
-        </div>
-      </PopUpChangeProjectName>
-      <PopUpCleansing isOpen={popUpCleansing} close={handleCloseCleansing}/>
+     
       <div className="flex flex-col w-full px-10 font-kanit">
         <div className="flex flex-row py-4 justify-between">
           <div className="gap-4 flex flex-row">
@@ -158,7 +128,7 @@ const Main = () => {
                   : `bg-white hover:bg-gray text-black border`
               }  rounded-md`}
             >
-              มุมมองตาราง
+              ข้อมูลหลังทำความสะอาด
             </button>
             <button
               onClick={buttonRightClick}
@@ -168,15 +138,26 @@ const Main = () => {
                   : `bg-white hover:bg-gray text-black border`
               } rounded-md`}
             >
-              มุมมองภาพรวม
+              ข้อมูลที่ถูกจัดการ
             </button>
           </div>
-          <button
-            onClick={handleOpenCleansing}
-            className={`py-2 px-4 text-[16px] bg-cleansing hover:bg-hoverCleansing text-white} text-white rounded-md`}
-          >
-            ทำความสะอาดข้อมูล
-          </button>
+          <div className="flex flex-row gap-6 ">
+            <Link href={"/main"} className="py-2 px-10 text-[16px] bg-gray hover:bg-textGray hover:text-white text-white} text-black rounded-md">
+                ยกเลิก
+            </Link>
+            <button
+                onClick={handleConfirm}
+                className={`py-2 px-10 text-[16px] bg-primary hover:bg-hoverPrimary text-white} text-white rounded-md`}
+            >
+                ยืนยัน
+            </button>
+          </div>
+        </div>
+        <div className="flex flex-row gap-2 pb-4">
+              <Image src={redDot} height={20} width={20} objectFit="contain"/>
+              <p className="mr-4">ข้อมูลที่จะถูกลบ</p>
+              <Image src={yellowDot} height={20} width={20} objectFit="contain"/>
+              <p>ข้อมูลที่จะถูกเปลี่ยนแปลง</p>
         </div>
         {
             menu==1?<div className="flex flex-col">
@@ -209,4 +190,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default ConfirmClean;

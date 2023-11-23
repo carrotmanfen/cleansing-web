@@ -1,6 +1,6 @@
 export const columns = [
     {
-        label: "Dessertsadaffffffffffffffffffffffffffffffffffffffffffzzz",
+        label: "Desserts",
         dataKey: "dessert",
     },
     {
@@ -79,6 +79,7 @@ export const rows = [
         test8: 12,
         test9: 12,
         test10: 12,
+        status: "delete"
     },
     {
         id: 1,
@@ -97,6 +98,7 @@ export const rows = [
         test8: 12,
         test9: 12,
         test10: 12,
+        status: "delete"
     },
     {
         id: 1,
@@ -115,6 +117,7 @@ export const rows = [
         test8: 12,
         test9: 12,
         test10: 12,
+        status: "edit"
     },
     {
         id: 1,
@@ -133,6 +136,7 @@ export const rows = [
         test8: 12,
         test9: 12,
         test10: 12,
+        status: "edit"
     },
 
     {

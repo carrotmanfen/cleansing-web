@@ -10,6 +10,8 @@ import pencilIcon from './pencilIcon.svg'
 import afterArrow from './afterArrow.svg'
 import paper from './paper.svg'
 import binIcon from './binIcon.svg'
+import redDot from './redDot.svg'
+import yellowDot from './yellowDot.svg'
 
 export{
     logo,
@@ -24,4 +26,7 @@ export{
     afterArrow,
     paper,
     binIcon,
+    redDot,
+    yellowDot,
+    
 }
