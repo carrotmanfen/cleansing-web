@@ -11,26 +11,26 @@ export const Navbar = ({ menu }) => {
         <Link href={"/"} className='h-full mt-4'>
           <Image src={logo} width={60} height={60} objectFit='contain' alt="logo" />
         </Link>
-        <Link href={"/"} className='h-full '>
+        <Link href={"/"} className='h-full'>
           <button className="h-full hover:bg-primary hover:text-white px-4">
             คลีนเนอร์
           </button>
         </Link>
-        <button className={`h-full hover:bg-primary hover:text-white px-4 ${menu == 1 ? `bg-primary text-white` : ``}`}>
-          <Link href={"/document"}>
+        <Link href={"/document"} className='h-full'>
+          <button className={`h-full hover:bg-primary hover:text-white px-4 ${menu == 1 ? `bg-primary text-white` : ``}`}>
             ทฤษฏี
-          </Link>
-        </button>
-        <button className={`h-full hover:bg-primary hover:text-white px-4 ${menu == 2 ? `bg-primary text-white` : ``}`}>
-          <Link href={"/manual"}>
+          </button>
+        </Link>
+        <Link href={"/manual"} className='h-full'>
+          <button className={`h-full hover:bg-primary hover:text-white px-4 ${menu == 2 ? `bg-primary text-white` : ``}`}>
             คู่มือ
-          </Link>
-        </button>
-        <button className={`h-full hover:bg-primary hover:text-white px-4 ${menu == 3 ? `bg-primary text-white` : ``}`}>
-          <Link href={"/myProject"}>
+          </button>
+        </Link>
+        <Link href={"/myProject"} className='h-full'>
+          <button className={`h-full hover:bg-primary hover:text-white px-4 ${menu == 3 ? `bg-primary text-white` : ``}`}>
             โปรเจกต์ของฉัน
-          </Link>
-        </button>
+          </button>
+        </Link>
       </div>
       <div className='flex flex-row items-center gap-8 h-full font-kanit text-[20px] pr-8'>
         <button className='w-36 py-2 border-2 border-primary rounded-2xl text-primary hover:bg-primary hover:text-white'>

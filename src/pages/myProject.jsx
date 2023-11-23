@@ -54,7 +54,7 @@ const myProject = () => {
     ]
   return (
     <div className="relative w-screen h-full">
-        <Navbar />
+        <Navbar menu={3}/>
         <PopUpDeleteProject isOpen={isPopUpDelete} onClickCancel={handleCanCelDelete} onClick={handleDeleteProject}/>    
         <div className='flex flex-col w-full px-16 justify-center'>
             <p className='font-kanit text-textPrimary text-[32px] text-center mt-10'>โปรเจกต์ของฉัน</p>
