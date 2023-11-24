@@ -14,6 +14,7 @@ import { rows, columns } from "@/constants/tableData";
 import { PivotView } from "@/components/main/PivotView";
 import PopUpChangeProjectName from "@/components/main/PopUpChangeProjectName";
 import PopUpCleansing from "@/components/main/PopUpCleansing";
+import DownloadPopup from "@/components/main/DownloadPopup";
 
 const Main = () => {
   const [menu, setMenu] = useState(1);
@@ -134,10 +135,18 @@ const Main = () => {
   const handleCloseCleansing = () =>{
     setPopUpCleansing(false)
   }
+  
+  const [downloadPopup, setDownloadPopup] = useState(false)  
+  const handleDownloadPopup = () =>{
+    setDownloadPopup(true)
+  }
+  const handleCloseDownload = () =>{
+    setDownloadPopup(false)
+  }
 
   return (
     <div className="relative w-screen h-full">
-      <NavbarMain popup={handleOpenPopUpChangeProjectName} projectName={projectName} />
+      <NavbarMain popup={handleOpenPopUpChangeProjectName} projectName={projectName} downloadOnClick={handleDownloadPopup} />
       <NavbarDetail rowNumber={3000} colNumber={400} />
       <PopUpChangeProjectName isOpen={popUpChangeProjectName}>
         <input type="text" value={projectNameFill} onChange={handleChangeProjectNameFill} className="border rounded-md w-full px-4 py-3 text-[16px] font-kanit" placeholder="พิมพ์ชื่อใหม่ของโปรเจกต์"/>
@@ -146,7 +155,8 @@ const Main = () => {
           <button onClick={handleChangeProjectName} className="px-10 py-2 bg-primary hover:bg-hoverPrimary rounded-lg text-white">ยืนยัน</button>
         </div>
       </PopUpChangeProjectName>
-      <PopUpCleansing isOpen={popUpCleansing} close={handleCloseCleansing}/>
+      <PopUpCleansing isOpen={popUpCleansing} close={handleCloseCleansing} column={columns}/>
+      <DownloadPopup isOpen={downloadPopup} onClose={handleCloseDownload} projectName={projectName}/>
       <div className="flex flex-col w-full px-10 font-kanit">
         <div className="flex flex-row py-4 justify-between">
           <div className="gap-4 flex flex-row">

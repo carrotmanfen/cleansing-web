@@ -1,10 +1,9 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Link from 'next/link'
 import { logo, downloadIcon, arrowLeft, pencilIcon } from '@/assets'
 import Image from 'next/legacy/image'
 
-const NavbarMain = ({projectName, popup, disableButton}) => {
-    
+const NavbarMain = ({projectName, popup, disableButton, downloadOnClick}) => {
   return (
     <div className='w-screen flex flex-row justify-between sticky h-[80px] border-b-2 border-borderNavbar z-50 top-0 bg-white'>
             <div className='flex flex-row items-center gap-4 h-full font-kanit text-[20px] text-textPrimary pl-8'>
@@ -22,7 +21,7 @@ const NavbarMain = ({projectName, popup, disableButton}) => {
                 </div>
             </div>
             <div className='flex flex-row items-center gap-8 h-full font-kanit text-[20px] pr-8'>
-                <button className={`w-42 py-1 border-2 border-primary bg-primary rounded-2xl text-white hover:bg-hoverPrimary px-4 ${disableButton?`cursor-not-allowed`:``}`}>
+                <button onClick={downloadOnClick} className={`w-42 py-1 border-2 border-primary bg-primary rounded-2xl text-white hover:bg-hoverPrimary px-4 ${disableButton?`cursor-not-allowed`:``}`}>
                         <div className='flex flex-row gap-3 '>
                             <p>ดาวน์โหลด</p>
                             <Image src={downloadIcon} objectFit='contain' alt='download' />
