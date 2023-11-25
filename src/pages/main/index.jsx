@@ -83,9 +83,10 @@ const Main = () => {
             key={column.dataKey}
             variant="head"
             align={"center"}
-            style={{ width: 300 }}
+            style={{ width: 200 }}
             sx={{
               backgroundColor: "#3498DB",
+              fontSize:20,
               color: "white",
               fontFamily: "Sarabun",
               border: 1,
@@ -93,7 +94,7 @@ const Main = () => {
               overflow: 'hidden',
               textOverflow: 'ellipsis',
               whiteSpace: 'nowrap',
-              maxWidth: '300px',
+              maxWidth: '200px',
             }}
           >
             {column.label}
@@ -116,7 +117,7 @@ const Main = () => {
               overflow: 'hidden',
               textOverflow: 'ellipsis',
               whiteSpace: 'nowrap',
-              maxWidth: '300px',
+              maxWidth: '200px',
             }}
           >
             {row[column.dataKey]}

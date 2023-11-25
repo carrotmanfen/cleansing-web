@@ -1,6 +1,6 @@
 export const columns = [
     {
-        label: "Dessertsadaffffffffffffffffffffffffffffffffffffffffffzzz",
+        label: "Dessert",
         dataKey: "dessert",
     },
     {
@@ -64,7 +64,7 @@ export const columns = [
 export const rows = [
     {
         id: 1,
-        dessert: "eqwe1",
+        dessert: "น้ำตาล",
         calories: 2,
         fat: 2,
         carbs: 122,
@@ -82,7 +82,7 @@ export const rows = [
     },
     {
         id: 1,
-        dessert: "eqwe2",
+        dessert: "ขนมปังหวาน",
         calories: 2,
         fat: 2,
         carbs: 122,
@@ -100,7 +100,7 @@ export const rows = [
     },
     {
         id: 1,
-        dessert: "eqwe3",
+        dessert: "ลอดช่อง",
         calories: 2,
         fat: 2,
         carbs: 122,
@@ -118,7 +118,7 @@ export const rows = [
     },
     {
         id: 1,
-        dessert: "eqwe4",
+        dessert: "ข้าวเหนียวมะม่วง",
         calories: 2,
         fat: 2,
         carbs: 122,
@@ -137,7 +137,7 @@ export const rows = [
 
     {
         id: 1,
-        dessert: "eqwe5",
+        dessert: "น้ำแข็งใส",
         calories: 2,
         fat: 2,
         carbs: 122,
@@ -155,7 +155,7 @@ export const rows = [
     },
     {
         id: 1,
-        dessert: "eqwe6",
+        dessert: "ชานม",
         calories: 2,
         fat: 2,
         carbs: 122,
@@ -173,7 +173,7 @@ export const rows = [
     },
     {
         id: 1,
-        dessert: "eqwe7",
+        dessert: "เค่ก",
         calories: 2,
         fat: 2,
         carbs: 122,
@@ -190,7 +190,7 @@ export const rows = [
         test10: 12,
     }, {
         id: 1,
-        dessert: "eqwe8",
+        dessert: "ไอศครีม",
         calories: 2,
         fat: 2,
         carbs: 122,
@@ -207,7 +207,7 @@ export const rows = [
         test10: 12,
     }, {
         id: 1,
-        dessert: "eqwe1",
+        dessert: "ลูกชุบ",
         calories: 2,
         fat: 2,
         carbs: 122,
@@ -225,7 +225,7 @@ export const rows = [
     },
     {
         id: 1,
-        dessert: "eqwe2",
+        dessert: "สายไหม",
         calories: 2,
         fat: 2,
         carbs: 122,
@@ -243,7 +243,7 @@ export const rows = [
     },
     {
         id: 1,
-        dessert: "eqwe3",
+        dessert: "เยลลี่",
         calories: 2,
         fat: 2,
         carbs: 122,
@@ -261,7 +261,7 @@ export const rows = [
     },
     {
         id: 1,
-        dessert: "eqwe4",
+        dessert: "พุดดิ้งใส่คาราเมลหวานน้อยทอปปิ้งด้วยโอริโอ",
         calories: 2,
         fat: 2,
         carbs: 122,

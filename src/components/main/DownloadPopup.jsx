@@ -15,7 +15,7 @@ const DownloadPopup = ({ isOpen , onClose, projectName }) => {
         <div className="relative flex flex-col w-full bg-white border-2 border-borderNavbar rounded-lg outline-none focus:outline-none">
           {/* Header */}
           <div className="flex items-center justify-between px-6 py-4 rounded-t bg-primary">
-            <h3 className="text-[20px] text-white">ทำความสะอาดข้อมูล</h3>
+            <h3 className="text-[20px] text-white">ดาวน์โหลด</h3>
             <button onClick={onClose} className='text-[24px] text-white h-full px-3 text-center hover:text-black'>
                 X
             </button>

@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/legacy/image'
+import Link from 'next/link'
 import { logo } from '@/assets';
 import { Navbar } from '../components/Navbar'
 import { pic } from '@/assets'
@@ -20,7 +21,7 @@ export default function Home() {
             <p className='text-textGray text-[16px]'>คลีนเนอร์เว็บไซต์สำหรับการศึกษา เรียนรู้</p>
             <p className='text-textGray text-[16px]'>และทำความสะอาดข้อมูล คลีนเนอร์จะช่วยทำให้</p>
             <p className='text-textGray text-[16px]'>ข้อมูลของผู้ใช้มีคุณภาพมากยิ่งขึ้น</p>
-            <button className='px-12 py-2 bg-primary text-white text-[24px] w-fit rounded-2xl mt-8 hover:bg-hoverPrimary'>ทำความสะอาดข้อมูล</button>
+            <Link href={"/uploadPage"} className='px-12 py-2 bg-primary text-white text-[24px] w-fit rounded-2xl mt-8 hover:bg-hoverPrimary'>ทำความสะอาดข้อมูล</Link>
           </div>
           <div className='w-[700px] flex flex-col mt-20 justify-around border-0 pb-20'>
             <p className='text-textPrimary font-kanit text-[24px]'>Some of Feature</p>

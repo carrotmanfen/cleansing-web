@@ -13,18 +13,23 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { TableVirtuoso } from "react-virtuoso";
 import { rows, columns } from "@/constants/tableDataConfirm";
-import { PivotView } from "@/components/main/PivotView";
 import { redDot, yellowDot } from "@/assets";
 
 const ConfirmClean = () => {
   const [menu, setMenu] = useState(1);
   const [projectName, setProjectName] = useState("project 1")
+  const [rowsData, setRowData] = useState(rows)
+  const [columnsData, setColumnsData] = useState(columns)
 
   const buttonLeftClick = () => {
     setMenu(1);
+    setRowData(rows)
   };
   const buttonRightClick = () => {
     setMenu(2);
+    const filteredRows = rowsData.filter((row) => row.status === 'delete' || row.status === 'edit');
+    setRowData(filteredRows);
+
   };
 
   const handlePageChange = (event, page) => {
@@ -33,11 +38,11 @@ const ConfirmClean = () => {
 
   const [page, setPage] = useState(1);
   const rowsPerPage = 25
-  const pageCount = Math.ceil(rows.length / rowsPerPage);
+  const pageCount = Math.ceil(rowsData.length / rowsPerPage);
 
   const startIndex = (page - 1) * rowsPerPage;
   const endIndex = startIndex + rowsPerPage;
-  const visibleRows = rows.slice(startIndex, endIndex);
+  const visibleRows = rowsData.slice(startIndex, endIndex);
 
   const VirtuosoTableComponents = {
     Scroller: React.forwardRef((props, ref) => (
@@ -59,7 +64,7 @@ const ConfirmClean = () => {
   function fixedHeaderContent() {
     return (
       <TableRow>
-        {columns.map((column) => (
+        {columnsData.map((column) => (
           <TableCell
             key={column.dataKey}
             variant="head"
@@ -87,7 +92,7 @@ const ConfirmClean = () => {
   function rowContent(_index, row) {
     return (
       <React.Fragment>
-        {columns.map((column) => (
+        {columnsData.map((column) => (
           <TableCell
             key={column.dataKey}
             align={"left"}
@@ -159,8 +164,7 @@ const ConfirmClean = () => {
               <Image src={yellowDot} height={20} width={20} objectFit="contain"/>
               <p>ข้อมูลที่จะถูกเปลี่ยนแปลง</p>
         </div>
-        {
-            menu==1?<div className="flex flex-col">
+            <div className="flex flex-col">
                 <Paper style={{ height: "70vh", width: "100%" }}>
                     <TableVirtuoso
                         data={visibleRows}
@@ -179,12 +183,6 @@ const ConfirmClean = () => {
                     />
                 </div>
             </div>
-
-            :<div className="w-full">
-                <PivotView/>
-            </div>
-
-        }
       </div>
     </div>
   );

@@ -34,7 +34,7 @@ const Login = () => {
 
           <p className="w-full text-left">รหัสผ่าน</p>
           <input
-            type="text"
+            type="password"
             className="w-full px-4 py-2 border-2 border-primary rounded-lg focus:outline-none focus:ring focus:border-primary"
             placeholder="******"
             value={password}

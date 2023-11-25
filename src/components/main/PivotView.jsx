@@ -5,7 +5,7 @@ import { DataTable } from './DataTable';
 export const PivotView = () => {
     const [tableData, setTableData] = useState([
         {
-            'ชื่อคอลัมน์': 'Januaryหกฟหที่',
+            'ชื่อคอลัมน์': 'January',
             'ประเภท': 'integer',
             'ข้อมูลว่าง': 40,
             'แผนภูมิ': {

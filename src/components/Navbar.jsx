@@ -33,16 +33,16 @@ export const Navbar = ({ menu }) => {
         </Link>
       </div>
       <div className='flex flex-row items-center gap-8 h-full font-kanit text-[20px] pr-8'>
-        <button className='w-36 py-2 border-2 border-primary rounded-2xl text-primary hover:bg-primary hover:text-white'>
-          <Link href={"/register"}>
+        <Link href={"/register"}>
+          <button className='w-36 py-2 border-2 border-primary rounded-2xl text-primary hover:bg-primary hover:text-white'>
             สมัครสมาชิก
-          </Link>
-        </button>
-        <button className='w-36 py-2 bg-primary text-white rounded-2xl hover:bg-hoverPrimary'>
+          </button>
+        </Link>
           <Link href={"/login"}>
-            เข้าสู่ระบบ
+            <button className='w-36 py-2 bg-primary text-white rounded-2xl hover:bg-hoverPrimary'>
+              เข้าสู่ระบบ
+            </button>
           </Link>
-        </button>
       </div>
     </div>
   )
