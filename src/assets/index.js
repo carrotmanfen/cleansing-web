@@ -12,6 +12,7 @@ import paper from './paper.svg'
 import binIcon from './binIcon.svg'
 import redDot from './redDot.svg'
 import yellowDot from './yellowDot.svg'
+import arrowLeftWhite from './arrowLeftWhite.svg'
 
 export{
     logo,
@@ -28,5 +29,6 @@ export{
     binIcon,
     redDot,
     yellowDot,
+    arrowLeftWhite
     
 }
