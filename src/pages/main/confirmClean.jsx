@@ -165,7 +165,7 @@ const ConfirmClean = () => {
               <p>ข้อมูลที่จะถูกเปลี่ยนแปลง</p>
         </div>
             <div className="flex flex-col">
-                <Paper style={{ height: "70vh", width: "100%" }}>
+                <Paper style={{ height: "65vh", width: "100%" }}>
                     <TableVirtuoso
                         data={visibleRows}
                         components={VirtuosoTableComponents}
