@@ -156,7 +156,7 @@ const Main = () => {
           <button onClick={handleChangeProjectName} className="px-10 py-2 bg-primary hover:bg-hoverPrimary rounded-lg text-white">ยืนยัน</button>
         </div>
       </PopUpChangeProjectName>
-      <PopUpCleansing isOpen={popUpCleansing} close={handleCloseCleansing} column={columns}/>
+      <PopUpCleansing isOpen={popUpCleansing} close={handleCloseCleansing} columns={columns}/>
       <DownloadPopup isOpen={downloadPopup} onClose={handleCloseDownload} projectName={projectName}/>
       <div className="flex flex-col w-full px-10 font-kanit">
         <div className="flex flex-row py-4 justify-between">
