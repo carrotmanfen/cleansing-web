@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/legacy/image'
 import Link from 'next/link'
 import { logo } from '@/assets'
+import useAccount from '@/hooks/useAccount'
 
 const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
+  const {isPending, register} = useAccount()
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value); // Update the state when the input changes
@@ -19,6 +21,12 @@ const Register = () => {
   const handleConfirmPassChange = (e) => {
     setConfirmPass(e.target.value); // Update the state when the input changes
   };
+
+  const handleRegister = async()=>{
+    if(password === confirmPass && username && password && confirmPass){
+        register(username, password)
+    }
+  }
 
   return (
     <div className="relative w-screen h-full">
@@ -59,9 +67,7 @@ const Register = () => {
             <Link href={"/"}>
               <button className="px-16 py-2 mt-8 bg-gray hover:bg-textGray rounded-2xl">ยกเลิก</button>
             </Link>
-            <Link href={"/login"}>
-              <button className="px-16 py-2 mt-8 bg-primary hover:bg-hoverPrimary rounded-2xl text-white">ยืนยัน</button>
-            </Link>
+            <button onClick={handleRegister} className="px-16 py-2 mt-8 bg-primary hover:bg-hoverPrimary rounded-2xl text-white">ยืนยัน</button>
           </div>
         </div>
       </div>
