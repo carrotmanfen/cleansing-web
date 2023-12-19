@@ -2,7 +2,7 @@ import multer from 'multer';
 import path from 'path';
 
 // Configure multer to specify where to store uploaded files
-export const storage = multer.diskStorage({
+const storage = multer.diskStorage({
   destination: './public/uploads/', // Set the destination folder for uploaded files
   filename: (req, file, callback) => {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
@@ -11,15 +11,15 @@ export const storage = multer.diskStorage({
   },
 });
 
+const upload = multer({ storage });
 
 export const config = {
-    api: {
-        bodyParser: false, // Disable automatic body parsing, so we can handle the form data ourselves
-    },
+  api: {
+    bodyParser: false, // Disable automatic body parsing, so we can handle the form data ourselves
+  },
 };
 
-export const async = (req, res) => {
-  const upload = multer({ storage });
+export default async (req, res) => {
   if (req.method === 'POST') {
     try {
       upload.single('file')(req, res, (err) => {
