@@ -43,7 +43,7 @@ export const BarChartCell = ({ data, type }) => {
           },
         });
       }
-    }, [data]);
+    }, [data, type]);
   
     return <canvas ref={chartRef} />;
   };

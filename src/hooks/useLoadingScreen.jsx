@@ -6,13 +6,13 @@ export function useLoadingScreen() {
   const [isLoading, setIsLoading] = useRecoilState(isLoadingState);
   // const [isLoadingPriorityValue, setIsLoadingPriority] = useRecoilState(isLoadingPriority);
 
-  const showLoading = useCallback(() => {
+  const showLoading = () => {
     setIsLoading(true);
-  }, [isLoading]);
+  };
 
-  const hideLoading = useCallback(() => {
+  const hideLoading = () => {
     setIsLoading(false);
-  }, [isLoading]);
+  };
 
   return {
     isLoading,

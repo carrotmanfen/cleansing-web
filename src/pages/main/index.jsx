@@ -59,20 +59,22 @@ const Main = () => {
   const visibleRows = rows.slice(startIndex, endIndex);
 
   const VirtuosoTableComponents = {
-    Scroller: React.forwardRef((props, ref) => (
-      <TableContainer component={Paper} {...props} ref={ref} />
-    )),
-    Table: (props) => (
-      <Table
-        {...props}
-        sx={{ borderCollapse: "separate", tableLayout: "fixed" }}
-      />
-    ),
+    Scroller: React.forwardRef(function Scroller(props, ref) {
+      return <TableContainer component={Paper} {...props} ref={ref} />;
+    }),
+    Table: function CustomTable(props) {
+      return (
+        <Table
+          {...props}
+          sx={{ borderCollapse: "separate", tableLayout: "fixed" }}
+        />
+      );
+    },
     TableHead,
     TableRow: ({ item: _item, ...props }) => <TableRow {...props} />,
-    TableBody: React.forwardRef((props, ref) => (
-      <TableBody {...props} ref={ref} />
-    )),
+    TableBody: React.forwardRef(function CustomTableBody(props, ref) {
+      return <TableBody {...props} ref={ref} />;
+    }),
   };
 
   function fixedHeaderContent() {

@@ -45,20 +45,22 @@ const ConfirmClean = () => {
   const visibleRows = rowsData.slice(startIndex, endIndex);
 
   const VirtuosoTableComponents = {
-    Scroller: React.forwardRef((props, ref) => (
-      <TableContainer component={Paper} {...props} ref={ref} />
-    )),
-    Table: (props) => (
-      <Table
-        {...props}
-        sx={{ borderCollapse: "separate", tableLayout: "fixed" }}
-      />
-    ),
+    Scroller: React.forwardRef(function Scroller(props, ref) {
+      return <TableContainer component={Paper} {...props} ref={ref} />;
+    }),
+    Table: function CustomTable(props) {
+      return (
+        <Table
+          {...props}
+          sx={{ borderCollapse: "separate", tableLayout: "fixed" }}
+        />
+      );
+    },
     TableHead,
     TableRow: ({ item: _item, ...props }) => <TableRow {...props} />,
-    TableBody: React.forwardRef((props, ref) => (
-      <TableBody {...props} ref={ref} />
-    )),
+    TableBody: React.forwardRef(function CustomTableBody(props, ref) {
+      return <TableBody {...props} ref={ref} />;
+    }),
   };
 
   function fixedHeaderContent() {
@@ -159,9 +161,9 @@ const ConfirmClean = () => {
           </div>
         </div>
         <div className="flex flex-row gap-2 pb-4">
-              <Image src={redDot} height={20} width={20} objectFit="contain"/>
+              <Image src={redDot} height={20} width={20} alt="redDot" objectFit="contain"/>
               <p className="mr-4">ข้อมูลที่จะถูกลบ</p>
-              <Image src={yellowDot} height={20} width={20} objectFit="contain"/>
+              <Image src={yellowDot} height={20} width={20} alt="yellowDot" objectFit="contain"/>
               <p>ข้อมูลที่จะถูกเปลี่ยนแปลง</p>
         </div>
             <div className="flex flex-col">

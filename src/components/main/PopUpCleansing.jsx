@@ -3,24 +3,24 @@ import Image from 'next/legacy/image';
 import { afterArrow, arrowLeftWhite } from '@/assets';
 
 const PopUpCleansing = ({ isOpen, close, columns }) => {
+    const [cleanMenu, setCleanMenu] = useState(1)
+  
+    const [checkedItems, setCheckedItems] = useState(Array(columns.length).fill(false));
+  
+    const handleCheckboxChange = (index) => {
+      const newCheckedItems = [...checkedItems];
+      newCheckedItems[index] = !newCheckedItems[index];
+      setCheckedItems(newCheckedItems);
+      console.log(newCheckedItems)
+    };
+  
+    const isAnyCheckboxChecked = checkedItems.some((isChecked) => isChecked);
+  
+    const [numberFill, setNumberFill] = useState("")
   if (!isOpen) {
     return null;
   }
 
-  const [cleanMenu, setCleanMenu] = useState(1)
-
-  const [checkedItems, setCheckedItems] = useState(Array(columns.length).fill(false));
-
-  const handleCheckboxChange = (index) => {
-    const newCheckedItems = [...checkedItems];
-    newCheckedItems[index] = !newCheckedItems[index];
-    setCheckedItems(newCheckedItems);
-    console.log(newCheckedItems)
-  };
-
-  const isAnyCheckboxChecked = checkedItems.some((isChecked) => isChecked);
-
-  const [numberFill, setNumberFill] = useState("")
   
   return (
     <div className="w-screen h-screen bg-black bg-opacity-30 fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none font-kanit text-textPrimary">

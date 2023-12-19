@@ -6,7 +6,7 @@ import { Navbar } from '@/components/Navbar'
 import { Projects } from '@/components/myProject/Projects'
 import PopUpDeleteProject from '@/components/myProject/popUpDeleteProject';
 
-const myProject = () => {
+const MyProject = () => {
     const [isPopUpDelete, setIsPopUpDelete] = useState(false)
     const handleDelete = () =>{
         setIsPopUpDelete(true);
@@ -71,7 +71,9 @@ const myProject = () => {
                     </Link>
                 </div>
                 {mockData.map((data,index)=>(
-                    <Projects projectName={data.projectName} fileName={data.fileName} onClick={handleDelete}/>
+                    <div key={index}>
+                        <Projects projectName={data.projectName} fileName={data.fileName} onClick={handleDelete}/>
+                    </div>
                 ))}
             </div>
         </div>
@@ -79,4 +81,4 @@ const myProject = () => {
   )
 }
 
-export default myProject
+export default MyProject

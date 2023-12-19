@@ -36,7 +36,7 @@ export default function useAccount() {
         } finally {
             hideLoading();
         }
-    }, [url, showLoading, hideLoading]);
+    }, [url, showLoading, hideLoading, router]);
 
 
     const login = useCallback(async(username, password)=>{
@@ -64,7 +64,7 @@ export default function useAccount() {
         } finally {
             hideLoading();
         }
-    },[url, showLoading, hideLoading])
+    },[url, showLoading, hideLoading, router])
 
     return { data, error, isPending, register, login };
 }
