@@ -25,6 +25,8 @@ const Register = () => {
   const handleRegister = async()=>{
     if(password === confirmPass && username && password && confirmPass){
         register(username, password)
+    }else{
+        console.log("Please fill all attribute")
     }
   }
 

@@ -1,5 +1,7 @@
 import '@/styles/globals.css'
 import Head from 'next/head';
+import { RecoilRoot } from 'recoil';
+import { LoadingBackdrop } from "@/components/LoadingBackdrop";
 
 export default function App({ Component, pageProps }) {
     return(
@@ -9,7 +11,10 @@ export default function App({ Component, pageProps }) {
                 <title>Cleansing</title>
             </Head>
 
-              <Component {...pageProps} />
+            <RecoilRoot>
+                <LoadingBackdrop />
+                <Component {...pageProps} />
+            </RecoilRoot>
 
         </>
       )

@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/legacy/image'
 import Link from 'next/link'
 import { logo } from '@/assets'
+import useAccount from '@/hooks/useAccount'
 
 const Login = () => {  
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const {isPending, login} = useAccount()
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value); // Update the state when the input changes
@@ -14,6 +16,14 @@ const Login = () => {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value); // Update the state when the input changes
   };
+
+  const handleLogin= ()=>{
+    if(password&&username){
+        login(username, password)
+    }else{
+        console.log("Please fill all attribute")
+    }
+  }
 
   return (
     <div className="relative w-screen h-full">
@@ -45,9 +55,8 @@ const Login = () => {
             <Link href={"/"}>
               <button className="px-16 py-2 mt-8 bg-gray hover:bg-textGray rounded-2xl">ยกเลิก</button>
             </Link>
-            <Link href={"/"}>
-              <button className="px-16 py-2 mt-8 bg-primary hover:bg-hoverPrimary rounded-2xl text-white">ยืนยัน</button>
-            </Link>
+            <button onClick={handleLogin} className="px-16 py-2 mt-8 bg-primary hover:bg-hoverPrimary rounded-2xl text-white">ยืนยัน</button>
+            
           </div>
         </div>
       </div>
