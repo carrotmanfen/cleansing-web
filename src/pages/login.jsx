@@ -3,11 +3,17 @@ import Image from 'next/legacy/image'
 import Link from 'next/link'
 import { logo } from '@/assets'
 import useAccount from '@/hooks/useAccount'
+import { useRecoilState } from "recoil";
+import { atomUserRole } from "@/atoms/atomUserRole";
+import { useRouter } from "next/router";
 
 const Login = () => {  
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const router= useRouter()
   const {isPending, login} = useAccount()
+
+  const [userRole, setUserRole] = useRecoilState(atomUserRole)
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value); // Update the state when the input changes
@@ -17,9 +23,12 @@ const Login = () => {
     setPassword(e.target.value); // Update the state when the input changes
   };
 
-  const handleLogin= ()=>{
+  const handleLogin = async()=>{
     if(password&&username){
-        login(username, password)
+        await login(username, password)
+        
+        // router.push('/myProject')
+        
     }else{
         console.log("Please fill all attribute")
     }

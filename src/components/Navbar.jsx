@@ -3,7 +3,7 @@ import Image from "next/legacy/image";
 import { logo } from '@/assets';
 import Link from 'next/link';
 
-export const Navbar = ({ menu }) => {
+export const Navbar = ({ menu, isLogin }) => {
 
   return (
     <div className='w-screen flex flex-row justify-between sticky h-[80px] border-b-2 border-borderNavbar z-50 top-0 bg-white'>
@@ -32,7 +32,20 @@ export const Navbar = ({ menu }) => {
           </button>
         </Link>
       </div>
-      <div className='flex flex-row items-center gap-8 h-full font-kanit text-[20px] pr-8'>
+      {isLogin?<div className='flex flex-row items-center gap-8 h-full font-kanit text-[20px] pr-8'>
+        <Link href={"/register"}>
+          <button className='w-36 py-2 border-2 border-primary rounded-2xl text-primary hover:bg-primary hover:text-white'>
+            login la
+          </button>
+        </Link>
+          <Link href={"/login"}>
+            <button className='w-36 py-2 bg-primary text-white rounded-2xl hover:bg-hoverPrimary'>
+              login la na
+            </button>
+          </Link>
+      </div>
+      
+      :<div className='flex flex-row items-center gap-8 h-full font-kanit text-[20px] pr-8'>
         <Link href={"/register"}>
           <button className='w-36 py-2 border-2 border-primary rounded-2xl text-primary hover:bg-primary hover:text-white'>
             สมัครสมาชิก
@@ -43,7 +56,7 @@ export const Navbar = ({ menu }) => {
               เข้าสู่ระบบ
             </button>
           </Link>
-      </div>
+      </div>}
     </div>
   )
 }

@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useLoadingScreen } from "./useLoadingScreen";
 import { useRouter } from "next/router";
+import { useRecoilState } from "recoil";
+import { atomUserRole } from "@/atoms/atomUserRole";
 
 export default function useAccount() {
     const [data, setData] = useState(null);
@@ -10,6 +12,7 @@ export default function useAccount() {
     const { showLoading, hideLoading } = useLoadingScreen();
     const router = useRouter()
     const url = process.env.NEXT_PUBLIC_DATABASE_ACCOUNT_SERVICE_URL;
+    const [userRole, setUserRole] = useRecoilState(atomUserRole)
 
     const register = useCallback(async (username, password) => {
         try {
@@ -50,7 +53,16 @@ export default function useAccount() {
             const res = await axios.post(url+'login', requestBody);
             console.log(res);
             if (res.status === 200) {
-                console.log(res.results);
+                console.log(res.data.results.username);
+                console.log(res.data.results._id);
+                console.log(res.data.results.project);
+                setUserRole((prevUser) => ({
+                    isLogin: true,
+                    username:res.data.results.username,
+                    userId:res.data.results._id,
+                    project: [...prevUser.project, res.data.results.project]
+                }));
+                console.log("lklkl")
                 router.push('/myProject')
             }else if(res.status === 400){
                 console.log("bad request look network for reason")
