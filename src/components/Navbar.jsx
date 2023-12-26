@@ -1,10 +1,23 @@
 import React from 'react'
 import Image from "next/legacy/image";
-import { logo } from '@/assets';
+import { logo, profile } from '@/assets';
 import Link from 'next/link';
+import { atomUserRole } from '@/atoms/atomUserRole';
+import { useRecoilState } from "recoil";
+import { useRouter } from 'next/router';
 
-export const Navbar = ({ menu, isLogin }) => {
-
+export const Navbar = ({ menu }) => {
+  const [user, setUser] = useRecoilState(atomUserRole)
+  const router = useRouter()
+  const handleLogout = () =>{
+    setUser({
+      isLogin: false,
+      username:null,
+      userId:null,
+      project:[]
+    })
+    router.push('/login')
+  }
   return (
     <div className='w-screen flex flex-row justify-between sticky h-[80px] border-b-2 border-borderNavbar z-50 top-0 bg-white'>
       <div className='flex flex-row items-center gap-4 h-full font-kanit text-[20px] text-textPrimary pl-8'>
@@ -32,17 +45,16 @@ export const Navbar = ({ menu, isLogin }) => {
           </button>
         </Link>
       </div>
-      {isLogin?<div className='flex flex-row items-center gap-8 h-full font-kanit text-[20px] pr-8'>
-        <Link href={"/register"}>
-          <button className='w-36 py-2 border-2 border-primary rounded-2xl text-primary hover:bg-primary hover:text-white'>
-            login la
+      {user.isLogin?<div className='flex flex-row items-center gap-8 h-full font-kanit text-[20px] pr-8'>
+        <div className='flex flex-row items-center gap-2'>
+          <Image src={profile} width={60} height={60} objectFit='contain' alt="profile" />
+          <p className='text-primary'>{user.username}</p>
+        </div>
+        
+          <button onClick={handleLogout} className='w-36 py-2 bg-primary text-white rounded-2xl hover:bg-hoverPrimary'>
+            ออกจากระบบ
           </button>
-        </Link>
-          <Link href={"/login"}>
-            <button className='w-36 py-2 bg-primary text-white rounded-2xl hover:bg-hoverPrimary'>
-              login la na
-            </button>
-          </Link>
+          
       </div>
       
       :<div className='flex flex-row items-center gap-8 h-full font-kanit text-[20px] pr-8'>

@@ -56,12 +56,12 @@ export default function useAccount() {
                 console.log(res.data.results.username);
                 console.log(res.data.results._id);
                 console.log(res.data.results.project);
-                setUserRole((prevUser) => ({
+                setUserRole({
                     isLogin: true,
                     username:res.data.results.username,
                     userId:res.data.results._id,
-                    project: [...prevUser.project, res.data.results.project]
-                }));
+                    project: res.data.results.project
+                });
                 console.log("lklkl")
                 router.push('/myProject')
             }else if(res.status === 400){

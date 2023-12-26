@@ -105,7 +105,11 @@ const UploadPage = () => {
                 <div className='flex flex-col w-full mt-8 font-kanit text-textPrimary text-center items-center'>
                     <p className='text-[24px]'>หรือคุณสามารถทดลองชุดข้อมูล</p>
                     <p className='text-[24px]'>ตัวอย่างของเราได้</p>
-                    <button className='text-[24px] px-12 py-2 bg-primary text-white w-fit rounded-2xl mt-8 hover:bg-hoverPrimary'>ทดลอง</button>
+                    <Link href={"/uploadPage/dataTestPage"}>
+                        <button className='text-[24px] px-12 py-2 bg-primary text-white w-fit rounded-2xl mt-8 hover:bg-hoverPrimary'>
+                            ทดลอง
+                        </button>
+                    </Link>
                 </div>
             </div>
         </div>

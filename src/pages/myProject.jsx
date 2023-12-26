@@ -10,7 +10,7 @@ import { useRecoilValue } from "recoil";
 
 const MyProject = () => {
     const [isPopUpDelete, setIsPopUpDelete] = useState(false)
-    const userRole = useRecoilValue(atomUserRole)
+    const user = useRecoilValue(atomUserRole)
     const handleDelete = () =>{
         setIsPopUpDelete(true);
     }
@@ -57,7 +57,7 @@ const MyProject = () => {
     ]
   return (
     <div className="relative w-screen h-full">
-        <Navbar menu={3} isLogin={userRole.isLogin}/>
+        <Navbar menu={3}/>
         <PopUpDeleteProject isOpen={isPopUpDelete} onClickCancel={handleCanCelDelete} onClick={handleDeleteProject}/>    
         <div className='flex flex-col w-full px-16 justify-center'>
             <p className='font-kanit text-textPrimary text-[32px] text-center mt-10'>โปรเจกต์ของฉัน</p>
@@ -73,11 +73,14 @@ const MyProject = () => {
                         </p>
                     </Link>
                 </div>
-                {mockData.map((data,index)=>(
-                    <div key={index}>
-                        <Projects projectName={data.projectName} fileName={data.fileName} onClick={handleDelete}/>
-                    </div>
-                ))}
+                {user.project.map((data,index)=>{
+                    console.log(data.project_name)
+                    return(
+                        <div key={index}>
+                            <Projects projectName={data.project_name} fileName={data.file_name} onClick={handleDelete}/>
+                        </div>
+                    )
+                })}
             </div>
         </div>
     </div>

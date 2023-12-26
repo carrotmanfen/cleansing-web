@@ -13,6 +13,7 @@ import binIcon from './binIcon.svg'
 import redDot from './redDot.svg'
 import yellowDot from './yellowDot.svg'
 import arrowLeftWhite from './arrowLeftWhite.svg'
+import profile from './profile.svg'
 
 export{
     logo,
@@ -29,6 +30,7 @@ export{
     binIcon,
     redDot,
     yellowDot,
-    arrowLeftWhite
+    arrowLeftWhite,
+    profile
     
 }
