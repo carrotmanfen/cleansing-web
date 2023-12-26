@@ -5,8 +5,8 @@ import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import { atomUserRole } from "@/atoms/atomUserRole";
 
-export default function useAccount() {
-    const [data, setData] = useState(null);
+export default function useAddProject() {
+    // const [data, setData] = useState(null);
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
     const { showLoading, hideLoading } = useLoadingScreen();
@@ -14,19 +14,35 @@ export default function useAccount() {
     const url = process.env.NEXT_PUBLIC_DATABASE_SERVICE_URL;
     const [userRole, setUserRole] = useRecoilState(atomUserRole)
 
-    const register = useCallback(async (username, password) => {
+    const formatDate = (day, month, year) => {
+        const currentDate = new Date();
+        const formattedDay = (day || currentDate.getDate()).toString().padStart(2, '0');
+        const formattedMonth = ((month || currentDate.getMonth()) + 1).toString().padStart(2, '0');
+        const formattedYear = year || currentDate.getFullYear();
+
+        return `${formattedDay}/${formattedMonth}/${formattedYear}`;
+    }
+
+    const createProject = useCallback(async (projectName, fileName, columns, rows) => {
         try {
             showLoading();
+            const startDate = formatDate()
             const requestBody  = {
-                username: username,
-                password: password
+                "start_date": startDate,
+                "data_set": {
+                    "columns":columns,
+                    "rows":rows
+                },
+                "project_name": projectName,
+                "file_name": fileName
             }
             console.log(requestBody)
-            const res = await axios.post(url+'accounts/register', requestBody);
+            const res = await axios.post(url+'projects/createProject', requestBody);
             console.log(res);
             if (res.status === 200|| res.status==201) {
                 console.log(res.data.results);
-                router.push('/login');
+                // router.push('/login');
+                addProject(userRole.username,res.data.results._id,projectName, fileName)
             }else if(res.status === 400){
                 console.log("bad request look network for reason")
             } else {
@@ -39,31 +55,30 @@ export default function useAccount() {
         } finally {
             hideLoading();
         }
-    }, [url, showLoading, hideLoading, router]);
+    }, [url, showLoading, hideLoading]);
 
-
-    const login = useCallback(async(username, password)=>{
+    const addProject = useCallback(async (username, project_id, project_name, file_name) => {
         try {
             showLoading();
+            console.log(userRole)
             const requestBody  = {
-                username: username,
-                password: password
+                "username": username,
+                "project_id": project_id,
+                "project_name": project_name,
+                "file_name": file_name
             }
             console.log(requestBody)
-            const res = await axios.post(url+'accounts/login', requestBody);
+            const res = await axios.patch(url+'accounts/addProject', requestBody);
             console.log(res);
-            if (res.status === 200) {
-                console.log(res.data.results.username);
-                console.log(res.data.results._id);
-                console.log(res.data.results.project);
+            if (res.status === 200|| res.status==201) {
+                console.log(res.data.results);
                 setUserRole({
                     isLogin: true,
                     username:res.data.results.username,
                     userId:res.data.results._id,
                     project: res.data.results.project
                 });
-                console.log("lklkl")
-                router.push('/myProject')
+                router.push('/main');
             }else if(res.status === 400){
                 console.log("bad request look network for reason")
             } else {
@@ -76,7 +91,7 @@ export default function useAccount() {
         } finally {
             hideLoading();
         }
-    },[url, showLoading, hideLoading, router])
+    }, [url, showLoading, hideLoading, router]);   
 
-    return { data, error, isPending, register, login };
+    return { error, isPending, createProject, addProject };
 }

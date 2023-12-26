@@ -41,5 +41,3 @@ export const rows = [
     },
 
 ];
-
-export default { columns, rows };
