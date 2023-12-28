@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import NavbarMain from "@/components/main/NavbarMain";
 import { NavbarDetail } from "@/components/main/NavbarDetail";
 import Pagination from "@mui/material/Pagination";
@@ -15,26 +15,28 @@ import { PivotView } from "@/components/main/PivotView";
 import PopUpChangeProjectName from "@/components/main/PopUpChangeProjectName";
 import PopUpCleansing from "@/components/main/PopUpCleansing";
 import DownloadPopup from "@/components/main/DownloadPopup";
+import useProject from "@/hooks/useProject";
 
 const Main = () => {
   const [menu, setMenu] = useState(1);
   const [popUpChangeProjectName, setPopUpChangeProjectName] = useState(false)
   const [projectName, setProjectName] = useState("project 1")
   const [projectNameFill, setProjectNameFill] = useState(projectName)
+  const { getProject, data } = useProject()
 
-  const handleClosePopUpChangeProjectName = () =>{
+  const handleClosePopUpChangeProjectName = () => {
     setPopUpChangeProjectName(false)
   }
 
-  const handleOpenPopUpChangeProjectName = () =>{
+  const handleOpenPopUpChangeProjectName = () => {
     setPopUpChangeProjectName(true)
   }
 
-  const handleChangeProjectNameFill = (e) =>{
+  const handleChangeProjectNameFill = (e) => {
     setProjectNameFill(e.target.value)
   }
-  
-  const handleChangeProjectName = (e) =>{
+
+  const handleChangeProjectName = (e) => {
     setProjectName(projectNameFill)
     setPopUpChangeProjectName(false)
   }
@@ -52,11 +54,11 @@ const Main = () => {
 
   const [page, setPage] = useState(1);
   const rowsPerPage = 25
-  const pageCount = Math.ceil(rows.length / rowsPerPage);
+  // const pageCount = Math.ceil(data.data_set.rows.length / rowsPerPage);
 
   const startIndex = (page - 1) * rowsPerPage;
   const endIndex = startIndex + rowsPerPage;
-  const visibleRows = rows.slice(startIndex, endIndex);
+  // const visibleRows = data.data_set.rows.slice(startIndex, endIndex);
 
   const VirtuosoTableComponents = {
     Scroller: React.forwardRef(function Scroller(props, ref) {
@@ -78,38 +80,43 @@ const Main = () => {
   };
 
   function fixedHeaderContent() {
-    return (
-      <TableRow>
-        {columns.map((column) => (
-          <TableCell
-            key={column.dataKey}
-            variant="head"
-            align={"center"}
-            style={{ width: 200 }}
-            sx={{
-              backgroundColor: "#3498DB",
-              fontSize:20,
-              color: "white",
-              fontFamily: "Sarabun",
-              border: 1,
-              borderColor: "black",
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
-              maxWidth: '200px',
-            }}
-          >
-            {column.label}
-          </TableCell>
-        ))}
-      </TableRow>
-    );
+    if (data == null) {
+      return (<p> </p>)
+    }
+    else {
+      return (
+        <TableRow>
+          {data.data_set.columns.map((column) => (
+            <TableCell
+              key={column.dataKey}
+              variant="head"
+              align={"center"}
+              style={{ width: 200 }}
+              sx={{
+                backgroundColor: "#3498DB",
+                fontSize: 20,
+                color: "white",
+                fontFamily: "Sarabun",
+                border: 1,
+                borderColor: "black",
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                maxWidth: '200px',
+              }}
+            >
+              {column.label}
+            </TableCell>
+          ))}
+        </TableRow>
+      );
+    }
   }
 
   function rowContent(_index, row) {
     return (
       <React.Fragment>
-        {columns.map((column) => (
+        {data.data_set.columns.map((column) => (
           <TableCell
             key={column.dataKey}
             align={"left"}
@@ -131,55 +138,59 @@ const Main = () => {
 
   const [popUpCleansing, setPopUpCleansing] = useState(false)
 
-  const handleOpenCleansing = () =>{
+  const handleOpenCleansing = () => {
     setPopUpCleansing(true)
   }
 
-  const handleCloseCleansing = () =>{
+  const handleCloseCleansing = () => {
     setPopUpCleansing(false)
   }
-  
-  const [downloadPopup, setDownloadPopup] = useState(false)  
-  const handleDownloadPopup = () =>{
+
+  const [downloadPopup, setDownloadPopup] = useState(false)
+  const handleDownloadPopup = () => {
     setDownloadPopup(true)
   }
-  const handleCloseDownload = () =>{
+  const handleCloseDownload = () => {
     setDownloadPopup(false)
   }
 
+  useEffect(() => {
+    if(data != null){
+      setProjectNameFill(data.project_name)
+    }
+}, [data]);
+
   return (
     <div className="relative w-screen h-full">
-      <NavbarMain popup={handleOpenPopUpChangeProjectName} projectName={projectName} downloadOnClick={handleDownloadPopup} />
+      {data == null ? <p> </p> : <NavbarMain popup={handleOpenPopUpChangeProjectName} projectName={data.project_name} downloadOnClick={handleDownloadPopup} />}
       <NavbarDetail rowNumber={3000} colNumber={400} />
       <PopUpChangeProjectName isOpen={popUpChangeProjectName}>
-        <input type="text" value={projectNameFill} onChange={handleChangeProjectNameFill} className="border rounded-md w-full px-4 py-3 text-[16px] font-kanit" placeholder="พิมพ์ชื่อใหม่ของโปรเจกต์"/>
+        <input type="text" value={projectNameFill} onChange={handleChangeProjectNameFill} className="border rounded-md w-full px-4 py-3 text-[16px] font-kanit" placeholder="พิมพ์ชื่อใหม่ของโปรเจกต์" />
         <div className="flex flex-row w-full justify-between mt-8">
           <button onClick={handleClosePopUpChangeProjectName} className="px-10 py-2 bg-gray rounded-lg hover:bg-textGray">ยกเลิก</button>
           <button onClick={handleChangeProjectName} className="px-10 py-2 bg-primary hover:bg-hoverPrimary rounded-lg text-white">ยืนยัน</button>
         </div>
       </PopUpChangeProjectName>
-      <PopUpCleansing isOpen={popUpCleansing} close={handleCloseCleansing} columns={columns}/>
-      <DownloadPopup isOpen={downloadPopup} onClose={handleCloseDownload} projectName={projectName}/>
+      {data == null ? <p> </p> : <PopUpCleansing isOpen={popUpCleansing} close={handleCloseCleansing} columns={data.data_set.columns} />}
+      <DownloadPopup isOpen={downloadPopup} onClose={handleCloseDownload} projectName={projectName} />
       <div className="flex flex-col w-full px-10 font-kanit">
         <div className="flex flex-row py-4 justify-between">
           <div className="gap-4 flex flex-row">
             <button
               onClick={buttonLeftClick}
-              className={`py-2 px-4 text-[16px] ${
-                menu === 1
-                  ? `bg-primary hover:bg-hoverPrimary text-white`
-                  : `bg-white hover:bg-gray text-black border`
-              }  rounded-md`}
+              className={`py-2 px-4 text-[16px] ${menu === 1
+                ? `bg-primary hover:bg-hoverPrimary text-white`
+                : `bg-white hover:bg-gray text-black border`
+                }  rounded-md`}
             >
               มุมมองตาราง
             </button>
             <button
               onClick={buttonRightClick}
-              className={`py-2 px-4 text-[16px] ${
-                menu === 2
-                  ? `bg-primary hover:bg-hoverPrimary text-white`
-                  : `bg-white hover:bg-gray text-black border`
-              } rounded-md`}
+              className={`py-2 px-4 text-[16px] ${menu === 2
+                ? `bg-primary hover:bg-hoverPrimary text-white`
+                : `bg-white hover:bg-gray text-black border`
+                } rounded-md`}
             >
               มุมมองภาพรวม
             </button>
@@ -192,28 +203,28 @@ const Main = () => {
           </button>
         </div>
         {
-            menu==1?<div className="flex flex-col">
-                <Paper style={{ height: "70vh", width: "100%" }}>
-                    <TableVirtuoso
-                        data={visibleRows}
-                        components={VirtuosoTableComponents}
-                        fixedHeaderContent={fixedHeaderContent}
-                        itemContent={rowContent}
-                    />
-                </Paper>
+          menu == 1 ? <div className="flex flex-col">
+            {data == null ? <p> </p> : <Paper style={{ height: "70vh", width: "100%" }}>
+              <TableVirtuoso
+                data={data.data_set.rows.slice(startIndex, endIndex)}
+                components={VirtuosoTableComponents}
+                fixedHeaderContent={fixedHeaderContent}
+                itemContent={rowContent}
+              />
+            </Paper>}
 
-                <div className="w-full flex justify-end mt-6">
-                    <Pagination
-                        count={pageCount}
-                        color="primary"
-                        page={page}
-                        onChange={handlePageChange}
-                    />
-                </div>
-            </div>
+            {data == null ? <p> </p> : <div className="w-full flex justify-end mt-6">
+              <Pagination
+                count={Math.ceil(data.data_set.rows.length / rowsPerPage)}
+                color="primary"
+                page={page}
+                onChange={handlePageChange}
+              />
+            </div>}
+          </div>
 
-            :<div className="w-full">
-                <PivotView/>
+            : <div className="w-full">
+              <PivotView />
             </div>
 
         }
