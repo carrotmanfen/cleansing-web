@@ -16,14 +16,14 @@ const DataTest = () => {
             rows:rows1
         },
        {
-            projectName: "project1",
-            fileName: "fileName.csv",
+            projectName: "Apple Stock Price till 2023 December",
+            fileName: "apple_stock.csv",
             columns:columns2,
             rows:rows2
         }, 
         {
-            projectName: "project1",
-            fileName: "fileName.csv",
+            projectName: "Tweets and User Engagement",
+            fileName: "Twitterdatainsheets.csv",
             columns:columns3,
             rows:rows3
         },

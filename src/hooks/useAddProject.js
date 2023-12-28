@@ -27,23 +27,23 @@ export default function useAddProject() {
         try {
             showLoading();
             const startDate = formatDate()
-            const requestBody  = {
+            const requestBody = {
                 "start_date": startDate,
                 "data_set": {
-                    "columns":columns,
-                    "rows":rows
+                    "columns": columns,
+                    "rows": rows
                 },
                 "project_name": projectName,
                 "file_name": fileName
             }
             console.log(requestBody)
-            const res = await axios.post(url+'projects/createProject', requestBody);
+            const res = await axios.post(url + 'projects/createProject', requestBody);
             console.log(res);
-            if (res.status === 200|| res.status==201) {
+            if (res.status === 200 || res.status == 201) {
                 console.log(res.data.results);
                 // router.push('/login');
-                addProject(userRole.username,res.data.results._id,projectName, fileName)
-            }else if(res.status === 400){
+                addProject(userRole.username, res.data.results._id, projectName, fileName)
+            } else if (res.status === 400) {
                 console.log("bad request look network for reason")
             } else {
                 setError(err);
@@ -61,25 +61,28 @@ export default function useAddProject() {
         try {
             showLoading();
             console.log(userRole)
-            const requestBody  = {
+            const requestBody = {
                 "username": username,
                 "project_id": project_id,
                 "project_name": project_name,
                 "file_name": file_name
             }
             console.log(requestBody)
-            const res = await axios.patch(url+'accounts/addProject', requestBody);
+            const res = await axios.patch(url + 'accounts/addProject', requestBody);
             console.log(res);
-            if (res.status === 200|| res.status==201) {
+            if (res.status === 200 || res.status == 201) {
                 console.log(res.data.results);
                 setUserRole({
                     isLogin: true,
-                    username:res.data.results.username,
-                    userId:res.data.results._id,
+                    username: res.data.results.username,
+                    userId: res.data.results._id,
                     project: res.data.results.project
                 });
-                router.push('/main');
-            }else if(res.status === 400){
+                router.push({
+                    pathname: '/main',
+                    query: { projectId: project_id},
+                });
+            } else if (res.status === 400) {
                 console.log("bad request look network for reason")
             } else {
                 setError(err);
@@ -91,7 +94,7 @@ export default function useAddProject() {
         } finally {
             hideLoading();
         }
-    }, [url, showLoading, hideLoading, router]);   
+    }, [url, showLoading, hideLoading, router]);
 
     return { error, isPending, createProject, addProject };
 }
