@@ -4,6 +4,9 @@ import Link from 'next/link'
 import { Navbar } from '../../components/Navbar'
 import { databaseIcon, uploadIcon } from '@/assets'
 import Alert from '@mui/material/Alert';
+import Papa from 'papaparse';
+
+const acceptableCSVFileTypes = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, .csv";
 
 const UploadPage = () => {
     const [file, setFile] = useState(null);
@@ -19,7 +22,7 @@ const UploadPage = () => {
         if (file) {
           const formData = new FormData();
           formData.append('file', file);
-    
+          console.log(formData)
           try {
             const response = await fetch('/api/upload', {
               method: 'POST',
@@ -34,6 +37,27 @@ const UploadPage = () => {
             console.error('An error occurred:', error);
           }
         }
+      };
+
+      const onFileChangeHandler = (event) => {
+        setAlert(false)
+        const csvFile = event.target.files[0];
+        setFile(csvFile);
+    
+        Papa.parse(csvFile, {
+          skipEmptyLines: true,
+          header: true,
+          complete: function(results) {
+            // Extract and log column names
+            const columns = Object.keys(results.data[0]);
+            console.log('Columns:', columns);
+
+            // Parse it back to the original structure
+            const parsedData = JSON.parse(JSON.stringify(results.data));
+            console.log(parsedData);
+          }
+        });
+        
       };
       
     return (
@@ -53,7 +77,9 @@ const UploadPage = () => {
                                 type="file"
                                 id="fileInput"
                                 className='hidden'
-                                onChange={handleFileChange}
+                                accept={acceptableCSVFileTypes}
+                                // onChange={handleFileChange}
+                                onChange={onFileChangeHandler}
                             />
                             <div className='flex flex-row gap-16 border justify-around'>
                                 {
