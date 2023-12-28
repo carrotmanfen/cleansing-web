@@ -53,8 +53,8 @@ const UploadPage = () => {
             console.log('Columns:', columns);
 
             // Parse it back to the original structure
-            const parsedData = JSON.parse(JSON.stringify(results.data));
-            console.log(parsedData);
+            const rows = JSON.parse(JSON.stringify(results.data));
+            console.log(rows);
           }
         });
         
