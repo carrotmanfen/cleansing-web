@@ -7,7 +7,7 @@ const NavbarMain = ({projectName, popup, disableButton, downloadOnClick}) => {
   return (
     <div className='w-screen flex flex-row justify-between sticky h-[80px] border-b-2 border-borderNavbar z-50 top-0 bg-white'>
             <div className='flex flex-row items-center gap-4 h-full font-kanit text-[20px] text-textPrimary pl-8'>
-                <Link href={"/"} className='h-full mt-4'>
+                <Link href={"/myProject"} className='h-full mt-4'>
                     <div className='flex flex-row'>
                         <Image src={arrowLeft} objectFit='contain' alt='arrow'/>
                         <Image src={logo} width={60} height={60} objectFit='contain' alt="logo" />
