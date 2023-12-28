@@ -77,7 +77,7 @@ const MyProject = () => {
                     console.log(data.project_name)
                     return(
                         <div key={index}>
-                            <Projects projectName={data.project_name} fileName={data.file_name} onClick={handleDelete}/>
+                            <Projects projectId={data._id} projectName={data.project_name} fileName={data.file_name} onClick={handleDelete}/>
                         </div>
                     )
                 })}
