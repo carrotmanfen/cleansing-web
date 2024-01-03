@@ -16,14 +16,14 @@ const DataTest = () => {
             rows:rows1
         },
        {
-            projectName: "Apple Stock Price till 2023 December",
-            fileName: "apple_stock.csv",
+            projectName: "ดัชนีสมรรถนะสิ่งแวดล้อมของประเทศไทย",
+            fileName: "EPI.csv",
             columns:columns2,
             rows:rows2
         }, 
         {
-            projectName: "Tweets and User Engagement",
-            fileName: "Twitterdatainsheets.csv",
+            projectName: "ผลการรับฟังประสบการณ์ผู้ป่วยสู่การปรับระบบบริการ",
+            fileName: "datapex2022.csv",
             columns:columns3,
             rows:rows3
         },

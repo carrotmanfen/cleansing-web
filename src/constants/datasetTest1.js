@@ -330,7 +330,7 @@ export const rows = [
     {
         Index: 33,
         Name: 'Big Blue Bistro',
-        Overall_Rating: '-',
+        Overall_Rating: null,
         Cuisine: 'Cafe, Coffee, Shake, Beverages, Pizza, Fast Food, Chinese, North Indian',
         Rate_for_two: 1000,
         City: 'Ahmedabad',
@@ -339,7 +339,7 @@ export const rows = [
     {
         Index: 34,
         Name: 'Silver Fork Cafe & Restaurant',
-        Overall_Rating: '-',
+        Overall_Rating: null,
         Cuisine: 'North Indian, Chinese, Continental, Italian, Mexican, Cafe, Beverages',
         Rate_for_two: 900,
         City: 'Ahmedabad',
@@ -348,7 +348,7 @@ export const rows = [
     {
         Index: 35,
         Name: 'Silver Fork Cafe & Restaurant',
-        Overall_Rating: '-',
+        Overall_Rating: null,
         Cuisine: 'North Indian, Chinese, Continental, Italian, Mexican, Cafe, Beverages',
         Rate_for_two: 900,
         City: 'Ahmedabad',
@@ -429,7 +429,7 @@ export const rows = [
     {
         Index: 44,
         Name: 'Aarambh Cafe',
-        Overall_Rating: '-',
+        Overall_Rating: null,
         Cuisine: 'Cafe, Coffee, South Indian, Street Food',
         Rate_for_two: 500,
         City: 'Ahmedabad',
@@ -1293,6 +1293,7 @@ export const rows = [
     {
         Index: 141,
         Name: 'IKOV Art Cafe Studio',
+        Overall_Rating: null,
         Cuisine: 'Cafe, Sandwich, Desserts, Beverages',
         Rate_for_two: 300,
         City: 'Pune',
@@ -1301,7 +1302,7 @@ export const rows = [
     {
         Index: 142,
         Name: 'Cafe Nadora By Sneha',
-        Overall_Rating: 'New',
+        Overall_Rating: null,
         Cuisine: 'Cafe, Bakery, Fast Food, Sandwich, Coffee',
         Rate_for_two: 600,
         City: 'Pune',
@@ -1310,7 +1311,7 @@ export const rows = [
     {
         Index: 143,
         Name: 'Cafe Nadora By Sneha',
-        Overall_Rating: 'New',
+        Overall_Rating: null,
         Cuisine: 'Cafe, Bakery, Fast Food, Sandwich, Coffee',
         Rate_for_two: 600,
         City: 'Pune',
@@ -1400,6 +1401,7 @@ export const rows = [
     {
         Index: 153,
         Name: 'K.K\'s Cafe',
+        Overall_Rating: null,
         Cuisine: 'Sandwich, Fast Food, Street Food, Pizza, Burger, Tea, Coffee, Cafe',
         Rate_for_two: 500,
         City: 'Pune',
@@ -1453,6 +1455,7 @@ export const rows = [
     {
         Index: 159,
         Name: 'La Segreto Cafe And Resto',
+        Overall_Rating: null,
         Cuisine: 'Cafe, Coffee, Burger, Pizza, Pasta, Italian, Fast Food, Beverages',
         Rate_for_two: 500,
         City: 'Pune',
@@ -1461,6 +1464,7 @@ export const rows = [
     {
         Index: 160,
         Name: 'La Segreto Cafe And Resto',
+        Overall_Rating: null,
         Cuisine: 'Cafe, Coffee, Burger, Pizza, Pasta, Italian, Fast Food, Beverages',
         Rate_for_two: 500,
         City: 'Pune',
@@ -1469,6 +1473,7 @@ export const rows = [
     {
         Index: 161,
         Name: 'La Segreto Cafe And Resto',
+        Overall_Rating: null,
         Cuisine: 'Cafe, Coffee, Burger, Pizza, Pasta, Italian, Fast Food, Beverages',
         Rate_for_two: 500,
         City: 'Pune',
@@ -1531,7 +1536,7 @@ export const rows = [
     {
         Index: 168,
         Name: 'Cafe Fairytale',
-        Overall_Rating: 'New',
+        Overall_Rating: null,
         Cuisine: 'Cafe, Fast Food',
         Rate_for_two: 300,
         City: 'Pune',
@@ -1540,7 +1545,7 @@ export const rows = [
     {
         Index: 169,
         Name: 'Cafe Fairytale',
-        Overall_Rating: 'New',
+        Overall_Rating: null,
         Cuisine: 'Cafe, Fast Food',
         Rate_for_two: 300,
         City: 'Pune',
@@ -1558,7 +1563,7 @@ export const rows = [
     {
         Index: 171,
         Name: 'BREWBURG',
-        Overall_Rating: 'New',
+        Overall_Rating: null,
         Cuisine: 'Cafe, Coffee, Fast Food, Burger, Beverages',
         Rate_for_two: 550,
         City: 'Pune',

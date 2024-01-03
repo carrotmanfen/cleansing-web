@@ -1,4 +1,5 @@
-import React, { useState,useEffect } from "react";
+//index.jsx
+import React, { useState, useEffect } from "react";
 import NavbarMain from "@/components/main/NavbarMain";
 import { NavbarDetail } from "@/components/main/NavbarDetail";
 import Pagination from "@mui/material/Pagination";
@@ -17,6 +18,8 @@ import PopUpCleansing from "@/components/main/PopUpCleansing";
 import DownloadPopup from "@/components/main/DownloadPopup";
 import useProject from "@/hooks/useProject";
 import useChangeProjectName from "@/hooks/useChangeProjectName";
+import Papa from 'papaparse';
+import useDownload from "@/hooks/useDownload";
 
 const Main = () => {
   const [menu, setMenu] = useState(1);
@@ -24,7 +27,10 @@ const Main = () => {
   const [projectName, setProjectName] = useState("project 1")
   const [projectNameFill, setProjectNameFill] = useState("")
   const { getProject, data } = useProject()
-  const {changeProjectNameInProject} = useChangeProjectName()
+  const { changeProjectNameInProject } = useChangeProjectName()
+  const { handleDownload } = useDownload()
+  const [fileName, setFileName] = useState("defaultFilename");
+  const [selectOption, setSelectOption] = useState("csv");
 
   const handleClosePopUpChangeProjectName = () => {
     setPopUpChangeProjectName(false)
@@ -38,13 +44,13 @@ const Main = () => {
     setProjectNameFill(e.target.value)
   }
 
-  const handleChangeProjectName = async(e) => {
-    if(projectNameFill==""){
-        alert("fill the projectName")
-    }else{
-        await changeProjectNameInProject(projectNameFill)
-        await getProject()
-        setPopUpChangeProjectName(false)
+  const handleChangeProjectName = async (e) => {
+    if (projectNameFill == "") {
+      alert("fill the projectName")
+    } else {
+      await changeProjectNameInProject(projectNameFill)
+      await getProject()
+      setPopUpChangeProjectName(false)
     }
   }
 
@@ -154,18 +160,21 @@ const Main = () => {
   }
 
   const [downloadPopup, setDownloadPopup] = useState(false)
+
   const handleDownloadPopup = () => {
-    setDownloadPopup(true)
+    setDownloadPopup(true);
+    setFileName(data?.project_name || "defaultFilename");
+    setSelectOption("csv");
   }
   const handleCloseDownload = () => {
     setDownloadPopup(false)
   }
 
   useEffect(() => {
-    if(data != null){
+    if (data != null) {
       setProjectNameFill(data.project_name)
     }
-}, [data]);
+  }, [data]);
 
   return (
     <div className="relative w-screen h-full">
@@ -179,7 +188,15 @@ const Main = () => {
         </div>
       </PopUpChangeProjectName>
       {data == null ? <p> </p> : <PopUpCleansing isOpen={popUpCleansing} close={handleCloseCleansing} columns={data.data_set.columns} />}
-      {data == null ? <p> </p> : <DownloadPopup isOpen={downloadPopup} onClose={handleCloseDownload} projectName={data.project_name} />}
+      {data == null ? <p> </p> : <DownloadPopup
+        isOpen={downloadPopup}
+        onClose={handleCloseDownload}
+        projectName={data?.project_name}
+        handleDownload={() => handleDownload(data, fileName, selectOption)}
+        fileName={fileName}
+        setFileName={setFileName}
+        selectOption={selectOption}
+        setSelectOption={setSelectOption} />}
       <div className="flex flex-col w-full px-10 font-kanit">
         <div className="flex flex-row py-4 justify-between">
           <div className="gap-4 flex flex-row">
