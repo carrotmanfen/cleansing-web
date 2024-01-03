@@ -36,8 +36,11 @@ export default function useAddProject() {
                 "project_name": projectName,
                 "file_name": fileName
             }
+            const headers = {
+                "content-type": "application/json"
+            }
             console.log(requestBody)
-            const res = await axios.post(url + 'projects/createProject', requestBody);
+            const res = await axios.post(url + 'projects/createProject', requestBody, {headers:headers});
             console.log(res);
             if (res.status === 200 || res.status == 201) {
                 console.log(res.data.results);
@@ -67,8 +70,11 @@ export default function useAddProject() {
                 "project_name": project_name,
                 "file_name": file_name
             }
+            const headers = {
+                "content-type": "application/json"
+            }
             console.log(requestBody)
-            const res = await axios.patch(url + 'accounts/addProject', requestBody);
+            const res = await axios.patch(url + 'accounts/addProject', requestBody, {headers:headers});
             console.log(res);
             if (res.status === 200 || res.status == 201) {
                 console.log(res.data.results);

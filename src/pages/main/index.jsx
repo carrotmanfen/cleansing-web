@@ -16,13 +16,15 @@ import PopUpChangeProjectName from "@/components/main/PopUpChangeProjectName";
 import PopUpCleansing from "@/components/main/PopUpCleansing";
 import DownloadPopup from "@/components/main/DownloadPopup";
 import useProject from "@/hooks/useProject";
+import useChangeProjectName from "@/hooks/useChangeProjectName";
 
 const Main = () => {
   const [menu, setMenu] = useState(1);
   const [popUpChangeProjectName, setPopUpChangeProjectName] = useState(false)
   const [projectName, setProjectName] = useState("project 1")
-  const [projectNameFill, setProjectNameFill] = useState(projectName)
+  const [projectNameFill, setProjectNameFill] = useState("")
   const { getProject, data } = useProject()
+  const {changeProjectNameInProject} = useChangeProjectName()
 
   const handleClosePopUpChangeProjectName = () => {
     setPopUpChangeProjectName(false)
@@ -36,9 +38,14 @@ const Main = () => {
     setProjectNameFill(e.target.value)
   }
 
-  const handleChangeProjectName = (e) => {
-    setProjectName(projectNameFill)
-    setPopUpChangeProjectName(false)
+  const handleChangeProjectName = async(e) => {
+    if(projectNameFill==""){
+        alert("fill the projectName")
+    }else{
+        await changeProjectNameInProject(projectNameFill)
+        await getProject()
+        setPopUpChangeProjectName(false)
+    }
   }
 
   const buttonLeftClick = () => {
@@ -172,7 +179,7 @@ const Main = () => {
         </div>
       </PopUpChangeProjectName>
       {data == null ? <p> </p> : <PopUpCleansing isOpen={popUpCleansing} close={handleCloseCleansing} columns={data.data_set.columns} />}
-      <DownloadPopup isOpen={downloadPopup} onClose={handleCloseDownload} projectName={projectName} />
+      {data == null ? <p> </p> : <DownloadPopup isOpen={downloadPopup} onClose={handleCloseDownload} projectName={data.project_name} />}
       <div className="flex flex-col w-full px-10 font-kanit">
         <div className="flex flex-row py-4 justify-between">
           <div className="gap-4 flex flex-row">

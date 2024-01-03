@@ -5,8 +5,8 @@ import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import { atomUserRole } from "@/atoms/atomUserRole";
 
-export default function useAccount() {
-    const [data, setData] = useState(null);
+export default function useChangeProjectName() {
+    // const [data, setData] = useState(null);
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
     const { showLoading, hideLoading } = useLoadingScreen();
@@ -14,23 +14,67 @@ export default function useAccount() {
     const url = process.env.NEXT_PUBLIC_DATABASE_SERVICE_URL;
     const [userRole, setUserRole] = useRecoilState(atomUserRole)
 
-    const register = useCallback(async (username, password) => {
+    const changeProjectNameInProject = useCallback(async (projectName) => {
+        const queryParams = new URLSearchParams(window.location.search);
+        const searchProjectId = queryParams.get('projectId');
         try {
             showLoading();
-            const requestBody  = {
-                username: username,
-                password: password
+            const requestBody = {
+                "project_id": searchProjectId,
+                "project_name": projectName,
             }
             const headers = {
                 "content-type": "application/json"
             }
             console.log(requestBody)
-            const res = await axios.post(url+'accounts/register', requestBody, {headers:headers});
+            const res = await axios.patch(url + 'projects/updateProjectName', requestBody, {headers:headers});
             console.log(res);
-            if (res.status === 200|| res.status==201) {
+            if (res.status === 200 || res.status == 201) {
                 console.log(res.data.results);
-                router.push('/login');
-            }else if(res.status === 400){
+                // router.push('/login');
+                changeProjectNameInAccount(userRole.username, res.data.results._id, projectName)
+            } else if (res.status === 400) {
+                console.log("bad request look network for reason")
+            } else {
+                setError(err);
+            }
+            setIsPending(false);
+        } catch (err) {
+            setError(err);
+            setIsPending(false);
+        } finally {
+            hideLoading();
+        }
+    }, [url, showLoading, hideLoading]);
+
+    const changeProjectNameInAccount = useCallback(async (username, project_id, project_name) => {
+        try {
+            showLoading();
+            console.log(userRole)
+            const requestBody = {
+                "username": username,
+                "project_id": project_id,
+                "project_name": project_name,
+            }
+            const headers = {
+                "content-type": "application/json"
+            }
+            console.log(requestBody)
+            const res = await axios.patch(url + 'accounts/updateProjectName', requestBody, {headers:headers});
+            console.log(res);
+            if (res.status === 200 || res.status == 201) {
+                console.log(res.data.results);
+                setUserRole({
+                    isLogin: true,
+                    username: res.data.results.username,
+                    userId: res.data.results._id,
+                    project: res.data.results.project
+                });
+                router.push({
+                    pathname: '/main',
+                    query: { projectId: project_id},
+                });
+            } else if (res.status === 400) {
                 console.log("bad request look network for reason")
             } else {
                 setError(err);
@@ -44,45 +88,5 @@ export default function useAccount() {
         }
     }, [url, showLoading, hideLoading, router]);
 
-
-    const login = useCallback(async(username, password)=>{
-        try {
-            showLoading();
-            const requestBody  = {
-                username: username,
-                password: password
-            }
-            const headers = {
-                "content-type": "application/json"
-            }
-            console.log(requestBody)
-            const res = await axios.post(url+'accounts/login', requestBody, {headers:headers});
-            console.log(res);
-            if (res.status === 200) {
-                console.log(res.data.results.username);
-                console.log(res.data.results._id);
-                console.log(res.data.results.project);
-                setUserRole({
-                    isLogin: true,
-                    username:res.data.results.username,
-                    userId:res.data.results._id,
-                    project: res.data.results.project
-                });
-                console.log("lklkl")
-                router.push('/myProject')
-            }else if(res.status === 400){
-                console.log("bad request look network for reason")
-            } else {
-                setError(err);
-            }
-            setIsPending(false);
-        } catch (err) {
-            setError(err);
-            setIsPending(false);
-        } finally {
-            hideLoading();
-        }
-    },[url, showLoading, hideLoading, router])
-
-    return { data, error, isPending, register, login };
+    return { error, isPending, changeProjectNameInProject, changeProjectNameInAccount };
 }
