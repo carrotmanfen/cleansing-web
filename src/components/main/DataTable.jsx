@@ -4,6 +4,7 @@ import { BarChartCell } from './BarChartCell';
 export const DataTable = ({ tableData, onSelectChange }) => {
   // Extract column names from the first row of the tableData
   const columns = Object.keys(tableData[0] || []);
+  console.log(columns)
   const [type, setType] = useState("string")
   return (
     <table className='w-full table-auto'>
@@ -34,7 +35,7 @@ export const DataTable = ({ tableData, onSelectChange }) => {
                   fontFamily: 'Sarabun',
                 }}
               >
-                {colIndex === 1 ? (
+                {/* {colIndex === 1 ? (
                   <select
                     value={rowData[column]}
                     onChange={(e) => {
@@ -57,7 +58,43 @@ export const DataTable = ({ tableData, onSelectChange }) => {
                       )
                 ) : (
                   rowData[column]
-                )}
+                )} */}
+                 
+                  {colIndex === 0 ?
+                  <p>{rowData[column]}</p>
+                    
+                :colIndex === 1 ?
+                (
+                    <select
+                    value={rowData[column]}
+                    onChange={(e) => {
+                      onSelectChange(rowIndex, column, e.target.value);
+                    }}
+                  >
+                    <option value='integer'>integer</option>
+                    <option value='decimal'>decimal</option>
+                    <option value='string'>string</option>
+                    <option value='category'>category</option>
+                  </select>
+                )  
+                :colIndex === 2 ?
+                <p>{rowData[column]}</p>
+
+                :colIndex === 3 ?
+                (
+                    
+                    rowData[column].type === 'bar' ? (
+                        <BarChartCell data={rowData[column].data} type={rowData[column].type} />
+                      ) : rowData[column].type === 'pie' ? (
+                        <BarChartCell data={rowData[column].data} type={rowData[column].type} />
+                      ) :rowData[column].type === 'non' ?(
+                        <p>จำนวนข้อมูลซ้ำทั้งหมด : example แถว</p>
+                      ):<p></p>
+                )
+
+                :(<p></p>)
+                }
+                
               </td>
             ))}
           </tr>

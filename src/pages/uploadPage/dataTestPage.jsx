@@ -11,7 +11,7 @@ const DataTest = () => {
     const testData = [
         {
             projectName: "Zomato Cafe Reviews",
-            fileName: "revies.csv",
+            fileName: "reviews.csv",
             columns:columns1,
             rows:rows1
         },

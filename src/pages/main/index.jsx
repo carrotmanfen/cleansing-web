@@ -18,13 +18,11 @@ import PopUpCleansing from "@/components/main/PopUpCleansing";
 import DownloadPopup from "@/components/main/DownloadPopup";
 import useProject from "@/hooks/useProject";
 import useChangeProjectName from "@/hooks/useChangeProjectName";
-import Papa from 'papaparse';
 import useDownload from "@/hooks/useDownload";
 
 const Main = () => {
   const [menu, setMenu] = useState(1);
   const [popUpChangeProjectName, setPopUpChangeProjectName] = useState(false)
-  const [projectName, setProjectName] = useState("project 1")
   const [projectNameFill, setProjectNameFill] = useState("")
   const { getProject, data } = useProject()
   const { changeProjectNameInProject } = useChangeProjectName()
@@ -112,9 +110,9 @@ const Main = () => {
                 fontFamily: "Sarabun",
                 border: 1,
                 borderColor: "black",
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
+                // overflow: 'hidden',
+                // textOverflow: 'ellipsis',
+                // whiteSpace: 'nowrap',
                 maxWidth: '200px',
               }}
             >
@@ -136,9 +134,9 @@ const Main = () => {
             sx={{
               border: 1,
               borderColor: "black",
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
+            //   overflow: 'hidden',
+            //   textOverflow: 'ellipsis',
+            //   whiteSpace: 'nowrap',
               maxWidth: '200px',
             }}
           >
@@ -178,7 +176,7 @@ const Main = () => {
 
   return (
     <div className="relative w-screen h-full">
-      {data == null ? <p> </p> : <NavbarMain popup={handleOpenPopUpChangeProjectName} projectName={data.project_name} downloadOnClick={handleDownloadPopup} />}
+      {data&&<NavbarMain popup={handleOpenPopUpChangeProjectName} projectName={data.project_name} downloadOnClick={handleDownloadPopup} />}
       <NavbarDetail rowNumber={3000} colNumber={400} />
       <PopUpChangeProjectName isOpen={popUpChangeProjectName}>
         <input type="text" value={projectNameFill} onChange={handleChangeProjectNameFill} className="border rounded-md w-full px-4 py-3 text-[16px] font-kanit" placeholder="พิมพ์ชื่อใหม่ของโปรเจกต์" />
@@ -187,8 +185,8 @@ const Main = () => {
           <button onClick={handleChangeProjectName} className="px-10 py-2 bg-primary hover:bg-hoverPrimary rounded-lg text-white">ยืนยัน</button>
         </div>
       </PopUpChangeProjectName>
-      {data == null ? <p> </p> : <PopUpCleansing isOpen={popUpCleansing} close={handleCloseCleansing} columns={data.data_set.columns} />}
-      {data == null ? <p> </p> : <DownloadPopup
+      {data&&<PopUpCleansing isOpen={popUpCleansing} close={handleCloseCleansing} columns={data.data_set.columns} />}
+      {data&&<DownloadPopup
         isOpen={downloadPopup}
         onClose={handleCloseDownload}
         projectName={data?.project_name}
@@ -228,7 +226,7 @@ const Main = () => {
         </div>
         {
           menu == 1 ? <div className="flex flex-col">
-            {data == null ? <p> </p> : <Paper style={{ height: "70vh", width: "100%" }}>
+            {data&&<Paper style={{ height: "70vh", width: "100%" }}>
               <TableVirtuoso
                 data={data.data_set.rows.slice(startIndex, endIndex)}
                 components={VirtuosoTableComponents}
@@ -237,7 +235,7 @@ const Main = () => {
               />
             </Paper>}
 
-            {data == null ? <p> </p> : <div className="w-full flex justify-end mt-6">
+            {data&&<div className="w-full flex justify-end mt-6">
               <Pagination
                 count={Math.ceil(data.data_set.rows.length / rowsPerPage)}
                 color="primary"
@@ -247,9 +245,9 @@ const Main = () => {
             </div>}
           </div>
 
-            : <div className="w-full">
-              <PivotView />
-            </div>
+            : (data == null ? <p> </p> :<div className="w-full">
+              <PivotView dataColumns={data.data_set.columns} dataRows={data.data_set.rows}/>
+            </div>)
 
         }
       </div>
