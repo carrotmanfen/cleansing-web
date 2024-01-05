@@ -14,27 +14,14 @@ export default function useAddProject() {
     const url = process.env.NEXT_PUBLIC_DATABASE_SERVICE_URL;
     const [userRole, setUserRole] = useRecoilState(atomUserRole)
 
-    const formatDate = (day, month, year) => {
-        const currentDate = new Date();
-        const formattedDay = (day || currentDate.getDate()).toString().padStart(2, '0');
-        const formattedMonth = ((month || currentDate.getMonth()) + 1).toString().padStart(2, '0');
-        const formattedYear = year || currentDate.getFullYear();
-
-        return `${formattedDay}/${formattedMonth}/${formattedYear}`;
-    }
-
-    const createProject = useCallback(async (projectName, fileName, columns, rows) => {
+    const createProject = useCallback(async (columns, rows) => {
         try {
             showLoading();
-            const startDate = formatDate()
             const requestBody = {
-                "start_date": startDate,
                 "data_set": {
                     "columns": columns,
                     "rows": rows
                 },
-                "project_name": projectName,
-                "file_name": fileName
             }
             const headers = {
                 "content-type": "application/json"
@@ -45,7 +32,7 @@ export default function useAddProject() {
             if (res.status === 200 || res.status == 201) {
                 console.log(res.data.results);
                 // router.push('/login');
-                addProject(userRole.username, res.data.results._id, projectName, fileName)
+                addProject(userRole.username, res.data.results._id)
             } else if (res.status === 400) {
                 console.log("bad request look network for reason")
             } else {
@@ -60,15 +47,13 @@ export default function useAddProject() {
         }
     }, [url, showLoading, hideLoading]);
 
-    const addProject = useCallback(async (username, project_id, project_name, file_name) => {
+    const addProject = useCallback(async (username, project_id) => {
         try {
             showLoading();
             console.log(userRole)
             const requestBody = {
                 "username": username,
                 "project_id": project_id,
-                "project_name": project_name,
-                "file_name": file_name
             }
             const headers = {
                 "content-type": "application/json"

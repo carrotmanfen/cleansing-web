@@ -24,8 +24,9 @@ const Main = () => {
   const [menu, setMenu] = useState(1);
   const [popUpChangeProjectName, setPopUpChangeProjectName] = useState(false)
   const [projectNameFill, setProjectNameFill] = useState("")
+
   const { getProject, data } = useProject()
-  const { changeProjectNameInProject } = useChangeProjectName()
+  const { changeProjectNameInAccount } = useChangeProjectName()
   const { handleDownload } = useDownload()
   const [fileName, setFileName] = useState("defaultFilename");
   const [selectOption, setSelectOption] = useState("csv");
@@ -46,7 +47,7 @@ const Main = () => {
     if (projectNameFill == "") {
       alert("fill the projectName")
     } else {
-      await changeProjectNameInProject(projectNameFill)
+      await changeProjectNameInAccount(projectNameFill)
       await getProject()
       setPopUpChangeProjectName(false)
     }

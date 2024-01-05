@@ -14,46 +14,15 @@ export default function useChangeProjectName() {
     const url = process.env.NEXT_PUBLIC_DATABASE_SERVICE_URL;
     const [userRole, setUserRole] = useRecoilState(atomUserRole)
 
-    const changeProjectNameInProject = useCallback(async (projectName) => {
+    const changeProjectNameInAccount = useCallback(async (project_name) => {
         const queryParams = new URLSearchParams(window.location.search);
         const searchProjectId = queryParams.get('projectId');
         try {
             showLoading();
-            const requestBody = {
-                "project_id": searchProjectId,
-                "project_name": projectName,
-            }
-            const headers = {
-                "content-type": "application/json"
-            }
-            console.log(requestBody)
-            const res = await axios.patch(url + 'projects/updateProjectName', requestBody, {headers:headers});
-            console.log(res);
-            if (res.status === 200 || res.status == 201) {
-                console.log(res.data.results);
-                // router.push('/login');
-                changeProjectNameInAccount(userRole.username, res.data.results._id, projectName)
-            } else if (res.status === 400) {
-                console.log("bad request look network for reason")
-            } else {
-                setError(err);
-            }
-            setIsPending(false);
-        } catch (err) {
-            setError(err);
-            setIsPending(false);
-        } finally {
-            hideLoading();
-        }
-    }, [url, showLoading, hideLoading]);
-
-    const changeProjectNameInAccount = useCallback(async (username, project_id, project_name) => {
-        try {
-            showLoading();
             console.log(userRole)
             const requestBody = {
-                "username": username,
-                "project_id": project_id,
+                "username": userRole.username,
+                "project_id": searchProjectId,
                 "project_name": project_name,
             }
             const headers = {
@@ -88,5 +57,5 @@ export default function useChangeProjectName() {
         }
     }, [url, showLoading, hideLoading, router]);
 
-    return { error, isPending, changeProjectNameInProject, changeProjectNameInAccount };
+    return { error, isPending, changeProjectNameInAccount };
 }
