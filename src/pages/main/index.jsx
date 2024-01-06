@@ -19,17 +19,20 @@ import DownloadPopup from "@/components/main/DownloadPopup";
 import useProject from "@/hooks/useProject";
 import useChangeProjectName from "@/hooks/useChangeProjectName";
 import useDownload from "@/hooks/useDownload";
+import { atomUserRole } from '@/atoms/atomUserRole';
+import { useRecoilState } from "recoil";
 
 const Main = () => {
   const [menu, setMenu] = useState(1);
   const [popUpChangeProjectName, setPopUpChangeProjectName] = useState(false)
   const [projectNameFill, setProjectNameFill] = useState("")
-
+  const [projectName, setProjectName] = useState("")
   const { getProject, data } = useProject()
   const { changeProjectNameInAccount } = useChangeProjectName()
   const { handleDownload } = useDownload()
   const [fileName, setFileName] = useState("defaultFilename");
   const [selectOption, setSelectOption] = useState("csv");
+  const [user, setUser] = useRecoilState(atomUserRole)
 
   const handleClosePopUpChangeProjectName = () => {
     setPopUpChangeProjectName(false)
@@ -162,22 +165,39 @@ const Main = () => {
 
   const handleDownloadPopup = () => {
     setDownloadPopup(true);
-    setFileName(data?.project_name || "defaultFilename");
+    if(projectName===""){
+        setFileName("defaultFilename")
+    }else{
+        setFileName(projectName);
+    }
     setSelectOption("csv");
   }
   const handleCloseDownload = () => {
     setDownloadPopup(false)
   }
 
+  const handleFindProjectName = () => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const searchProjectId = queryParams.get('projectId');
+    const results = user.project.filter(
+      (project) =>
+        project._id.toLowerCase().includes(searchProjectId.toLowerCase())
+    );
+
+    console.log(results[0].project_name)
+    setProjectName(results[0].project_name)
+  };
+
   useEffect(() => {
     if (data != null) {
-      setProjectNameFill(data.project_name)
+      handleFindProjectName()
+      setProjectNameFill(projectName)
     }
   }, [data]);
 
   return (
     <div className="relative w-screen h-full">
-      {data&&<NavbarMain popup={handleOpenPopUpChangeProjectName} projectName={data.project_name} downloadOnClick={handleDownloadPopup} />}
+      {data&&<NavbarMain popup={handleOpenPopUpChangeProjectName} projectName={projectName} downloadOnClick={handleDownloadPopup} />}
       <NavbarDetail rowNumber={3000} colNumber={400} />
       <PopUpChangeProjectName isOpen={popUpChangeProjectName}>
         <input type="text" value={projectNameFill} onChange={handleChangeProjectNameFill} className="border rounded-md w-full px-4 py-3 text-[16px] font-kanit" placeholder="พิมพ์ชื่อใหม่ของโปรเจกต์" />
@@ -190,7 +210,7 @@ const Main = () => {
       {data&&<DownloadPopup
         isOpen={downloadPopup}
         onClose={handleCloseDownload}
-        projectName={data?.project_name}
+        projectName={projectName}
         handleDownload={() => handleDownload(data, fileName, selectOption)}
         fileName={fileName}
         setFileName={setFileName}
