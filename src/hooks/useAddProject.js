@@ -55,7 +55,7 @@ export default function useAddProject() {
                 "username": username,
                 "project_id": project_id,
                 "project_name" : project_name,
-                "filename": file_name
+                "file_name": file_name
             }
             const headers = {
                 "content-type": "application/json"
