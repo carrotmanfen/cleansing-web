@@ -6,36 +6,57 @@ import useAccount from '@/hooks/useAccount'
 import { useRecoilState } from "recoil";
 import { atomUserRole } from "@/atoms/atomUserRole";
 import { useRouter } from "next/router";
+import Alert from '@mui/material/Alert';
 
-const Login = () => {  
+const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const router= useRouter()
-  const {isPending, login} = useAccount()
+  const router = useRouter()
+  const [notification, setNotification] = useState('');
+  const { isPending, login, setError } = useAccount()
 
   const [userRole, setUserRole] = useRecoilState(atomUserRole)
 
   const handleUsernameChange = (e) => {
+    setError(false)
     setUsername(e.target.value); // Update the state when the input changes
+    setNotification('');
   };
 
   const handlePasswordChange = (e) => {
+    setError(false)
     setPassword(e.target.value); // Update the state when the input changes
+    setNotification('');
   };
 
-  const handleLogin = async()=>{
-    if(password&&username){
-        await login(username, password)
-        
-        // router.push('/myProject')
-        
-    }else{
-        console.log("Please fill all attribute")
+  const handleEnterKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleLogin();
+    }
+  };
+
+  const handleLogin = async () => {
+    if (!username) {
+      setNotification('กรุณาป้อนชื่อผู้ใช้งาน');
+      return;
+    }
+
+    if (!password) {
+      setNotification('กรุณาป้อนรหัสผ่าน');
+      return;
+    }
+    if (password && username) {
+      await login(username, password);
+      setNotification('ไม่พบบัญชีผู้ใช้งาน');
+      return;
     }
   }
 
   return (
     <div className="relative w-screen h-full">
+      <div className="fixed top-4 z-50 left-1/2 transform -translate-x-1/2 w-1/2">
+        {notification && <Alert severity="error" className="w-full font-kanit text-lg">{notification}</Alert>}
+      </div>
       <div className="w-full flex flex-col items-center pb-20 ">
         <div className='mt-8'>
           <Image src={logo} width={150} height={200} objectFit='contain' alt="logo" />
@@ -49,6 +70,7 @@ const Login = () => {
             placeholder="คลีนเนอร์"
             value={username}
             onChange={handleUsernameChange}
+            onKeyDown={handleEnterKeyPress}
           />
 
           <p className="w-full text-left">รหัสผ่าน</p>
@@ -58,6 +80,7 @@ const Login = () => {
             placeholder="******"
             value={password}
             onChange={handlePasswordChange}
+            onKeyDown={handleEnterKeyPress}
           />
 
           <div className="flex flex-row w-full justify-between">
@@ -65,7 +88,7 @@ const Login = () => {
               <button className="px-16 py-2 mt-8 bg-gray hover:bg-textGray rounded-2xl">ยกเลิก</button>
             </Link>
             <button onClick={handleLogin} className="px-16 py-2 mt-8 bg-primary hover:bg-hoverPrimary rounded-2xl text-white">ยืนยัน</button>
-            
+
           </div>
         </div>
       </div>

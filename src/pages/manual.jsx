@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/legacy/image'
 import { Navbar } from '../components/Navbar'
 import { manualTest } from '@/assets'
+import Link from 'next/link'
 
 const Manual = () => {
 
@@ -30,7 +31,7 @@ const Manual = () => {
                 </div>
             </div>
             <div className='flex flex-col w-full mt-2 font-kanit text-textPrimary text-center items-center'>
-                <button className='px-12 py-2 bg-primary text-white text-[24px] w-fit rounded-2xl mt-8 hover:bg-hoverPrimary'>ทำความสะอาดข้อมูล</button>
+                <Link href={"/uploadPage"} className='px-12 py-2 bg-primary text-white text-[24px] w-fit rounded-2xl mt-8 hover:bg-hoverPrimary'>ทำความสะอาดข้อมูล</Link>
             </div>
         </div>
     )

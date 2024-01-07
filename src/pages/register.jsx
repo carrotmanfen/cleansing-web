@@ -3,35 +3,74 @@ import Image from 'next/legacy/image'
 import Link from 'next/link'
 import { logo } from '@/assets'
 import useAccount from '@/hooks/useAccount'
+import Alert from '@mui/material/Alert';
 
 const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
-  const {isPending, register} = useAccount()
+  const [notification, setNotification] = useState('');
+  const { isPending, register, error, setError } = useAccount();
 
   const handleUsernameChange = (e) => {
+    setError(false)
     setUsername(e.target.value); // Update the state when the input changes
+    setNotification('');
   };
 
   const handlePasswordChange = (e) => {
+    setError(false)
     setPassword(e.target.value); // Update the state when the input changes
+    setNotification('');
   };
 
   const handleConfirmPassChange = (e) => {
+    setError(false)
     setConfirmPass(e.target.value); // Update the state when the input changes
+    setNotification('');
   };
 
-  const handleRegister = async()=>{
-    if(password === confirmPass && username && password && confirmPass){
-        register(username, password)
-    }else{
-        console.log("Please fill all attribute")
+  const handleEnterKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleRegister();
     }
-  }
+  };
+
+  const handleRegister = async () => {
+    if (!username) {
+      setNotification('กรุณาป้อนชื่อผู้ใช้งาน');
+      return;
+    }
+
+    if (!password) {
+      setNotification('กรุณาป้อนรหัสผ่าน');
+      return;
+    }
+
+    if (!confirmPass) {
+      setNotification('กรุณาป้อนยืนยันรหัสผ่าน');
+      return;
+    }
+
+    if (password !== confirmPass) {
+      setNotification('รหัสผ่านและรหัสยืนยันไม่ถูกต้อง กรุณาป้อนใหม่อีกครั้ง');
+      return;
+    }
+
+    // If all validations pass, proceed with registration
+    register(username, password);
+  };
 
   return (
     <div className="relative w-screen h-full">
+      <div className="fixed top-4 z-50 left-1/2 transform -translate-x-1/2 w-1/2">
+        {error &&
+          <Alert severity="error" className="w-full font-kanit text-lg">
+            บัญชีนี้ถูกใช้แล้ว
+          </Alert>
+        }
+        {notification && <Alert severity="error" className="w-full font-kanit text-lg">{notification}</Alert>}
+      </div>
       <div className="w-full flex flex-col items-center pb-20 ">
         <div className='mt-8'>
           <Image src={logo} width={150} height={200} objectFit='contain' alt="logo" />
@@ -45,6 +84,7 @@ const Register = () => {
             placeholder="คลีนเนอร์"
             value={username}
             onChange={handleUsernameChange}
+            onKeyDown={handleEnterKeyPress}
           />
 
           <p className="w-full text-left">รหัสผ่าน</p>
@@ -54,6 +94,7 @@ const Register = () => {
             placeholder="******"
             value={password}
             onChange={handlePasswordChange}
+            onKeyDown={handleEnterKeyPress}
           />
 
           <p className="w-full text-left">ยืนยันรหัสผ่าน</p>
@@ -63,8 +104,8 @@ const Register = () => {
             placeholder="******"
             value={confirmPass}
             onChange={handleConfirmPassChange}
+            onKeyDown={handleEnterKeyPress}
           />
-
           <div className="flex flex-row w-full justify-between">
             <Link href={"/"}>
               <button className="px-16 py-2 mt-8 bg-gray hover:bg-textGray rounded-2xl">ยกเลิก</button>

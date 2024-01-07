@@ -21,6 +21,7 @@ import useChangeProjectName from "@/hooks/useChangeProjectName";
 import useDownload from "@/hooks/useDownload";
 import { atomUserRole } from '@/atoms/atomUserRole';
 import { useRecoilState } from "recoil";
+import Alert from '@mui/material/Alert';
 
 const Main = () => {
   const [menu, setMenu] = useState(1);
@@ -33,6 +34,7 @@ const Main = () => {
   const [fileName, setFileName] = useState("defaultFilename");
   const [selectOption, setSelectOption] = useState("csv");
   const [user, setUser] = useRecoilState(atomUserRole)
+  const [notification, setNotification] = useState('');
 
   const handleClosePopUpChangeProjectName = () => {
     setPopUpChangeProjectName(false)
@@ -44,11 +46,13 @@ const Main = () => {
 
   const handleChangeProjectNameFill = (e) => {
     setProjectNameFill(e.target.value)
+    setNotification('');
   }
 
   const handleChangeProjectName = async (e) => {
-    if (projectNameFill == "") {
-      alert("fill the projectName")
+    if (!projectNameFill) {
+      setNotification('กรุณาป้อนชื่อโปรเจกต์');
+      return;
     } else {
       await changeProjectNameInAccount(projectNameFill)
       await getProject()
@@ -188,19 +192,28 @@ const Main = () => {
     setProjectName(results[0].project_name)
   };
 
+  const handleEnterKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleChangeProjectName();
+    }
+  };
+
   useEffect(() => {
     if (data != null) {
       handleFindProjectName()
       setProjectNameFill(projectName)
     }
-  }, [data]);
+  }, [data, user]);
 
   return (
     <div className="relative w-screen h-full">
       {data&&<NavbarMain popup={handleOpenPopUpChangeProjectName} projectName={projectName} downloadOnClick={handleDownloadPopup} />}
       <NavbarDetail rowNumber={3000} colNumber={400} />
       <PopUpChangeProjectName isOpen={popUpChangeProjectName}>
-        <input type="text" value={projectNameFill} onChange={handleChangeProjectNameFill} className="border rounded-md w-full px-4 py-3 text-[16px] font-kanit" placeholder="พิมพ์ชื่อใหม่ของโปรเจกต์" />
+      <div className="fixed top-4 z-50 left-1/2 transform -translate-x-1/2 w-1/2">
+        {notification && <Alert severity="error" className="w-full font-kanit text-lg">{notification}</Alert>}
+      </div>
+        <input type="text" value={projectNameFill} onChange={handleChangeProjectNameFill} className="border rounded-md w-full px-4 py-3 text-[16px] font-kanit" placeholder="พิมพ์ชื่อใหม่ของโปรเจกต์" onKeyDown={handleEnterKeyPress} />
         <div className="flex flex-row w-full justify-between mt-8">
           <button onClick={handleClosePopUpChangeProjectName} className="px-10 py-2 bg-gray rounded-lg hover:bg-textGray">ยกเลิก</button>
           <button onClick={handleChangeProjectName} className="px-10 py-2 bg-primary hover:bg-hoverPrimary rounded-lg text-white">ยืนยัน</button>
@@ -215,7 +228,7 @@ const Main = () => {
         fileName={fileName}
         setFileName={setFileName}
         selectOption={selectOption}
-        setSelectOption={setSelectOption} />}
+        setSelectOption={setSelectOption}/>}
       <div className="flex flex-col w-full px-10 font-kanit">
         <div className="flex flex-row py-4 justify-between">
           <div className="gap-4 flex flex-row">

@@ -8,7 +8,7 @@ import { atomUserRole } from "@/atoms/atomUserRole";
 export default function useAccount() {
     const [data, setData] = useState(null);
     const [isPending, setIsPending] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(false);
     const { showLoading, hideLoading } = useLoadingScreen();
     const router = useRouter()
     const url = process.env.NEXT_PUBLIC_DATABASE_SERVICE_URL;
@@ -16,6 +16,7 @@ export default function useAccount() {
 
     const register = useCallback(async (username, password) => {
         try {
+            setError(false);
             showLoading();
             const requestBody  = {
                 username: username,
@@ -32,12 +33,13 @@ export default function useAccount() {
                 router.push('/login');
             }else if(res.status === 400){
                 console.log("bad request look network for reason")
+                setError(true);
             } else {
-                setError(err);
+                setError(true);
             }
             setIsPending(false);
         } catch (err) {
-            setError(err);
+            setError(true);
             setIsPending(false);
         } finally {
             hideLoading();
@@ -47,6 +49,7 @@ export default function useAccount() {
 
     const login = useCallback(async(username, password)=>{
         try {
+            setError(false);
             showLoading();
             const requestBody  = {
                 username: username,
@@ -72,17 +75,18 @@ export default function useAccount() {
                 router.push('/myProject')
             }else if(res.status === 400){
                 console.log("bad request look network for reason")
+                setError(true);
             } else {
-                setError(err);
+                setError(true);
             }
             setIsPending(false);
         } catch (err) {
-            setError(err);
+            setError(true);
             setIsPending(false);
         } finally {
             hideLoading();
         }
     },[url, showLoading, hideLoading, router])
 
-    return { data, error, isPending, register, login };
+    return { data, error, isPending, register, login, setError };
 }

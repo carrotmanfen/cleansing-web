@@ -1,7 +1,22 @@
-//index.jsx
+//DownloadPopup.jsx
 import React, { useState } from 'react';
+import Alert from '@mui/material/Alert';
 
 const DownloadPopup = ({ isOpen, onClose, projectName, handleDownload, data, fileName, setFileName, selectOption, setSelectOption }) => {
+
+  const [notification, setNotification] = useState('');
+
+  const handleInputKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      if (!fileName.trim()) {
+        setNotification('กรุณาป้อนชื่อไฟล์');
+        return;
+      }
+      else {
+        handleDownload(data, fileName, selectOption);
+      }
+    }
+  };
 
   if (!isOpen) {
     return null;
@@ -25,7 +40,15 @@ const DownloadPopup = ({ isOpen, onClose, projectName, handleDownload, data, fil
 
                 <input type="text" className='border-2 rounded-md p-2 text-[20px] w-full font-kanit text-textPrimary focus:border-primary focus:outline-none selection:border-primary '
                   value={fileName}
-                  onChange={(e) => setFileName(e.target.value)} />
+                  onChange={(e) => {
+                    setFileName(e.target.value);
+                    setNotification(''); // Clear the notification when the user starts typing
+                  }}
+                  onKeyDown={handleInputKeyDown} />
+                <div className="fixed top-4 z-50 left-1/2 transform -translate-x-1/2 w-1/2">
+                  {notification && <Alert severity="error" className="w-full font-kanit text-lg">{notification}</Alert>}
+                </div>
+
                 <select
                   className='border-2 rounded-md py-2 px-4 text-[20px] font-kanit text-textPrimary focus:border-primary selection:border-primary'
                   value={selectOption}
@@ -34,11 +57,16 @@ const DownloadPopup = ({ isOpen, onClose, projectName, handleDownload, data, fil
                   <option value='csv'>csv</option>
                   {/* <option value='xsl'>xsl</option> */}
                 </select>
+
               </div>
-              <div onClick={async () => {
-                handleDownload(data, fileName, selectOption);
-              }} className="relative py-10 flex flex-row justify-around">
-                <button className='font-kanit text-[20px] text-white bg-primary px-16 py-3 rounded-xl hover:bg-hoverPrimary'>ดาวน์โหลด</button>
+              <div className="relative py-10 flex flex-row justify-around">
+                <button onClick={async () => {
+                  if (!fileName.trim()) {
+                    setNotification('กรุณาป้อนชื่อไฟล์');
+                  } else {
+                    handleDownload(data, fileName, selectOption);
+                  }
+                }} className='font-kanit text-[20px] text-white bg-primary px-16 py-3 rounded-xl hover:bg-hoverPrimary'>ดาวน์โหลด</button>
               </div>
             </div>
           </div>
