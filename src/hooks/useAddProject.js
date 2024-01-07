@@ -14,7 +14,7 @@ export default function useAddProject() {
     const url = process.env.NEXT_PUBLIC_DATABASE_SERVICE_URL;
     const [userRole, setUserRole] = useRecoilState(atomUserRole)
 
-    const createProject = useCallback(async (columns, rows) => {
+    const createProject = useCallback(async (columns, rows, project_name, file_name) => {
         try {
             showLoading();
             const requestBody = {
@@ -32,7 +32,7 @@ export default function useAddProject() {
             if (res.status === 200 || res.status == 201) {
                 console.log(res.data.results);
                 // router.push('/login');
-                addProject(userRole.username, res.data.results._id)
+                addProject(userRole.username, res.data.results._id,project_name, file_name )
             } else if (res.status === 400) {
                 console.log("bad request look network for reason")
             } else {
@@ -47,13 +47,15 @@ export default function useAddProject() {
         }
     }, [url, showLoading, hideLoading]);
 
-    const addProject = useCallback(async (username, project_id) => {
+    const addProject = useCallback(async (username, project_id, project_name, file_name) => {
         try {
             showLoading();
             console.log(userRole)
             const requestBody = {
                 "username": username,
                 "project_id": project_id,
+                "project_name" : project_name,
+                "filename": file_name
             }
             const headers = {
                 "content-type": "application/json"

@@ -7,7 +7,7 @@ import useAddProject from '@/hooks/useAddProject';
 export const DatasetComponent = ({projectName, fileName, columns, rows}) => {
   const {error, isPending, createProject} = useAddProject()
   const handleCreateProject = () =>{
-    createProject(columns, rows)
+    createProject(columns, rows, projectName, fileName)
   }
   return (
     <div className='flex flex-col w-full h-full border-2 border-borderNavbar rounded-xl '>
