@@ -4,6 +4,9 @@ import Image from 'next/legacy/image'
 import { paper, binIcon } from '@/assets'
 
 export const Projects = ({projectId, projectName, fileName, onClick}) => {
+    const handleDelete = () =>{
+        onClick(projectId)
+    }
   return (
     <div className='flex flex-col w-full h-full border-2 border-borderNavbar rounded-xl '>
         <Link href={"/main?projectId=" + projectId} className='flex flex-col hover:cursor-pointer hover:bg-gray py-4'>
@@ -14,7 +17,7 @@ export const Projects = ({projectId, projectName, fileName, onClick}) => {
             <Link href={"/main?projectId=" + projectId} className='hover:cursor-pointer hover:text-primary hover:underline truncate'>
                 {projectName}
             </Link>
-            <div onClick={onClick} className='hover:bg-primaryRed px-2 rounded-md w-[40px] flex-shrink-0 cursor-pointer'>
+            <div onClick={handleDelete} className='hover:bg-primaryRed px-2 rounded-md w-[40px] flex-shrink-0 cursor-pointer'>
                 <button >
                     <Image src={binIcon} alt='binIcon' objectFit='fill' height={20} width={20}/>
                 </button>

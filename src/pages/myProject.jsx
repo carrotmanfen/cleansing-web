@@ -7,54 +7,27 @@ import { Projects } from '@/components/myProject/Projects'
 import PopUpDeleteProject from '@/components/myProject/popUpDeleteProject';
 import { atomUserRole } from "@/atoms/atomUserRole";
 import { useRecoilValue } from "recoil";
+import useDeleteProject from '@/hooks/useDeleteProject';
 
 const MyProject = () => {
     const [isPopUpDelete, setIsPopUpDelete] = useState(false)
+    const {deleteProject, error} = useDeleteProject()
+
+    const [projectIdClick, setProjectIdClick] = useState("")
+
     const user = useRecoilValue(atomUserRole)
-    const handleDelete = () =>{
+    const handleDelete = (project_id) =>{
         setIsPopUpDelete(true);
+        setProjectIdClick(project_id)
     }
     const handleCanCelDelete = () =>{
         setIsPopUpDelete(false);
     }
     const handleDeleteProject = () =>{
         console.log("delete")
+        deleteProject(projectIdClick)
     }
 
-    const mockData = [
-        {
-            projectName:"project1",
-            fileName:"fileName.csv"
-        },
-        {
-            projectName:"project1",
-            fileName:"fileName.csv"
-        },
-        {
-            projectName:"project1",
-            fileName:"fileName.csv"
-        },
-        {
-            projectName:"projecv2222211122222t1",
-            fileName:"fileName.csv"
-        },
-        {
-            projectName:"project1",
-            fileName:"fileName.csv"
-        },
-        {
-            projectName:"project1",
-            fileName:"fileName.csv"
-        },
-        {
-            projectName:"project1",
-            fileName:"fileName.csv"
-        },
-        {
-            projectName:"project1",
-            fileName:"fileName.csv"
-        }
-    ]
   return (
     <div className="relative w-screen h-full">
         <Navbar menu={3}/>

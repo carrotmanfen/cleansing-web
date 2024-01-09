@@ -5,6 +5,11 @@ const PopUpDeleteProject = ({ isOpen , onClick, onClickCancel }) => {
     return null;
   }
 
+  const handleDelete = async() =>{
+    await onClick()
+    onClickCancel()
+  }
+
   return (
     <div className="w-screen h-screen bg-black bg-opacity-30 fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none font-kanit text-textPrimary">
       <div className="relative w-2/5 h-2/3 mx-auto my-6">
@@ -18,7 +23,7 @@ const PopUpDeleteProject = ({ isOpen , onClick, onClickCancel }) => {
           {/* Body */}
           <div className="relative p-6 flex flex-row justify-around">
             <button onClick={onClickCancel} className='font-kanit text-[20px] text-white bg-primary px-12 py-3 border-black border-2 rounded-xl hover:bg-hoverPrimary'>ยกเลิก</button>
-            <button onClick={onClick} className='font-kanit text-[20px] px-12 py-3 bg-white border-2 rounded-xl hover:bg-gray'>ยืนยัน</button>
+            <button onClick={handleDelete} className='font-kanit text-[20px] px-12 py-3 bg-white border-2 rounded-xl hover:bg-gray'>ยืนยัน</button>
           </div>
         </div>
       </div>

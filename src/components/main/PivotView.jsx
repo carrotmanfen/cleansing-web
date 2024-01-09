@@ -30,13 +30,13 @@ export const PivotView = ({dataColumns, dataRows}) => {
         let chartType;
 
         switch (type) {
-            case 'integer': chartType = 'pie';
+            case 'integer': chartType = 'bar';
             break;
             case 'decimal': chartType = 'pie';
             break;
-            case 'string': chartType = 'non';
+            case 'string': chartType = 'bar';
             break;
-            case 'category': chartType = 'bar';
+            case 'category': chartType = 'pie';
             break;
             default: chartType = 'non';
         }
