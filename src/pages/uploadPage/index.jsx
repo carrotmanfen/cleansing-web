@@ -5,60 +5,48 @@ import { Navbar } from '../../components/Navbar'
 import { databaseIcon, uploadIcon } from '@/assets'
 import Alert from '@mui/material/Alert';
 import Papa from 'papaparse';
+import useAddProject from '@/hooks/useAddProject';
+import { rows } from '@/constants/datasetTest1'
 
 const acceptableCSVFileTypes = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, .csv";
 
 const UploadPage = () => {
     const [file, setFile] = useState(null);
     const [alert, setAlert] = useState(false)
+    const {error, isPending, createProject} = useAddProject()
 
-    const handleFileChange = (event) => {
-        setAlert(false)
-        const selectedFile = event.target.files[0];
-        setFile(selectedFile);
+    const onFileChangeHandler = (event) => {
+    setAlert(false)
+    const csvFile = event.target.files[0];
+    setFile(csvFile);
+    
     };
 
-    const handleUpload = async () => {
-        if (file) {
-          const formData = new FormData();
-          formData.append('file', file);
-          console.log(formData)
-          try {
-            const response = await fetch('/api/upload', {
-              method: 'POST',
-              body: formData,
+    const onUpload = async() => {
+
+        if(file!==null){
+            Papa.parse(file, {
+                skipEmptyLines: true,
+                header: true,
+                complete: async function(results) {
+                    // Extract and log column names
+                    const columns = Object.keys(results.data[0]);
+                    console.log('Columns:', columns);
+                    // Parse it back to the original structure
+                    const rows = JSON.parse(JSON.stringify(results.data));
+                    console.log(rows);
+                    console.log(columns);
+                    const transformedColumns = columns.map((label) => ({ label, dataKey: label }));
+                    console.log(transformedColumns);
+                    console.log(file.name)
+                    const parts = file.name.split(".");
+                    console.log(parts[0])
+                    await createProject(transformedColumns, rows, parts[0], file.name)
+                }
             });
-            if (response.ok) {
-              console.log('File uploaded successfully');
-            } else {
-              console.error('File upload failed');
-            }
-          } catch (error) {
-            console.error('An error occurred:', error);
-          }
         }
-      };
-
-      const onFileChangeHandler = (event) => {
-        setAlert(false)
-        const csvFile = event.target.files[0];
-        setFile(csvFile);
     
-        Papa.parse(csvFile, {
-          skipEmptyLines: true,
-          header: true,
-          complete: function(results) {
-            // Extract and log column names
-            const columns = Object.keys(results.data[0]);
-            console.log('Columns:', columns);
-
-            // Parse it back to the original structure
-            const rows = JSON.parse(JSON.stringify(results.data));
-            console.log(rows);
-          }
-        });
-        
-      };
+    };
       
     return (
         <div className='relative w-screen h-full'>
@@ -78,7 +66,6 @@ const UploadPage = () => {
                                 id="fileInput"
                                 className='hidden'
                                 accept={acceptableCSVFileTypes}
-                                // onChange={handleFileChange}
                                 onChange={onFileChangeHandler}
                             />
                             <div className='flex flex-row gap-16 border justify-around'>
@@ -94,7 +81,7 @@ const UploadPage = () => {
                             </div>
                             {
                                 file?
-                                <button onClick={handleUpload} className='font-kanit text-[24px] px-8 py-2 bg-primary text-white rounded-3xl hover:bg-hoverPrimary'>
+                                <button onClick={onUpload} className='font-kanit text-[24px] px-8 py-2 bg-primary text-white rounded-3xl hover:bg-hoverPrimary'>
                                     อัพโหลด
                                 </button>
                                 :
