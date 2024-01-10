@@ -89,5 +89,5 @@ export default function useAddProject() {
         }
     }, [url, showLoading, hideLoading, router]);
 
-    return { error, isPending, createProject, addProject };
+    return { error, setError, isPending, showLoading, hideLoading, createProject, addProject };
 }

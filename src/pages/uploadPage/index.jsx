@@ -12,11 +12,10 @@ const acceptableCSVFileTypes = "application/vnd.openxmlformats-officedocument.sp
 
 const UploadPage = () => {
     const [file, setFile] = useState(null);
-    const [alert, setAlert] = useState(false)
-    const {error, isPending, createProject} = useAddProject()
+    const {error, setError, isPending, createProject} = useAddProject()
 
     const onFileChangeHandler = (event) => {
-    setAlert(false)
+    setError(null)
     const csvFile = event.target.files[0];
     setFile(csvFile);
     
@@ -51,9 +50,10 @@ const UploadPage = () => {
     return (
         <div className='relative w-screen h-full'>
             <Navbar />
-            {alert && <div className='w-full flex justify-center absolute mt-10'>
-                <Alert severity="error" className='w-1/2 font-kanit text-[16px]'>เกิดข้อผิดพลาด - ไฟล์ที่อัปโหลดมีรูปแบบไม่ถูกต้อง</Alert>
+            {error && <div className='w-full flex justify-center absolute mt-10'>
+                <Alert severity="error" className='w-1/2 font-kanit text-[16px]'>เกิดข้อผิดพลาด - ไฟล์ที่อัปโหลดมีรูปแบบไม่ถูกต้องหรือเซิฟเวอร์ไม่ตอบสนอง</Alert>
             </div>}
+            
             <div className='w-full flex flex-col items-center pb-20'>
                 <p className='text-[32px] text-textPrimary font-kanit mt-8'>อัปโหลด</p>
                 <div className='w-[1000px] flex flex-row mt-8 justify-around'>

@@ -142,7 +142,7 @@ const Main = () => {
             sx={{
               border: 1,
               borderColor: "black",
-            //   overflow: 'hidden',
+              overflow: 'hidden',
             //   textOverflow: 'ellipsis',
             //   whiteSpace: 'nowrap',
               maxWidth: '200px',
