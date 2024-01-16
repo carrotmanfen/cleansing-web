@@ -22,6 +22,7 @@ import useDownload from "@/hooks/useDownload";
 import { atomUserRole } from '@/atoms/atomUserRole';
 import { useRecoilState } from "recoil";
 import Alert from '@mui/material/Alert';
+import useAccount from '@/hooks/useAccount';
 
 const Main = () => {
   const [menu, setMenu] = useState(1);
@@ -35,6 +36,7 @@ const Main = () => {
   const [selectOption, setSelectOption] = useState("csv");
   const [user, setUser] = useRecoilState(atomUserRole)
   const [notification, setNotification] = useState('');
+  const {refreshLogin} = useAccount()
 
   const handleClosePopUpChangeProjectName = () => {
     setPopUpChangeProjectName(false)
@@ -204,7 +206,17 @@ const Main = () => {
       setProjectNameFill(projectName)
     }
   }, [data, user]);
-
+  useEffect(() => {
+        
+    if (user.isLogin === false) {
+        const username = localStorage.getItem('username')
+        if(username){
+            refreshLogin(username)
+        }else{
+            window.location.replace("/login")
+        }
+    }
+  }, [user.isLogin,refreshLogin]);
   return (
     <div className="relative w-screen h-full">
       {data&&<NavbarMain popup={handleOpenPopUpChangeProjectName} projectName={projectName} downloadOnClick={handleDownloadPopup} />}

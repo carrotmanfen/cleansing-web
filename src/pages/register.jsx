@@ -4,13 +4,16 @@ import Link from 'next/link'
 import { logo } from '@/assets'
 import useAccount from '@/hooks/useAccount'
 import Alert from '@mui/material/Alert';
+import { atomUserRole } from "@/atoms/atomUserRole";
+import { useRecoilState } from "recoil";
 
 const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
   const [notification, setNotification] = useState('');
-  const { isPending, register, error, setError } = useAccount();
+  const [userRole, setUserRole] = useRecoilState(atomUserRole)
+  const { isPending, register, refreshLogin, error, setError } = useAccount();
 
   const handleUsernameChange = (e) => {
     setError(false)
@@ -60,6 +63,16 @@ const Register = () => {
     // If all validations pass, proceed with registration
     register(username, password);
   };
+
+  useEffect(() => {
+        
+    if (userRole.isLogin === false) {
+        const username = localStorage.getItem('username')
+        if(username){
+            refreshLogin(username)
+        }
+    }
+  }, [userRole.isLogin,refreshLogin]);
 
   return (
     <div className="relative w-screen h-full">

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Image from 'next/legacy/image'
 import Link from 'next/link';
 import { paper } from '@/assets'
@@ -6,16 +6,17 @@ import { Navbar } from '@/components/Navbar'
 import { Projects } from '@/components/myProject/Projects'
 import PopUpDeleteProject from '@/components/myProject/popUpDeleteProject';
 import { atomUserRole } from "@/atoms/atomUserRole";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import useDeleteProject from '@/hooks/useDeleteProject';
+import useAccount from '@/hooks/useAccount';
 
 const MyProject = () => {
     const [isPopUpDelete, setIsPopUpDelete] = useState(false)
     const {deleteProject, error} = useDeleteProject()
-
+    const {refreshLogin} = useAccount()
     const [projectIdClick, setProjectIdClick] = useState("")
 
-    const user = useRecoilValue(atomUserRole)
+    const [userRole, setUserRole] = useRecoilState(atomUserRole)
     const handleDelete = (project_id) =>{
         setIsPopUpDelete(true);
         setProjectIdClick(project_id)
@@ -27,7 +28,17 @@ const MyProject = () => {
         console.log("delete")
         deleteProject(projectIdClick)
     }
-
+    useEffect(() => {
+        
+        if (userRole.isLogin === false) {
+            const username = localStorage.getItem('username')
+            if(username){
+                refreshLogin(username)
+            }else{
+                window.location.replace("/login")
+            }
+        }
+      }, [userRole.isLogin,refreshLogin]);
   return (
     <div className="relative w-screen h-full">
         <Navbar menu={3}/>
@@ -46,7 +57,7 @@ const MyProject = () => {
                         </p>
                     </Link>
                 </div>
-                {user.project.map((data,index)=>{
+                {userRole.project.map((data,index)=>{
                     console.log(data.project_name)
                     return(
                         <div key={index}>

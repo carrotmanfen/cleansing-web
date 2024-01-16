@@ -6,6 +6,9 @@ import { databaseIcon, uploadIcon } from '@/assets'
 import Alert from '@mui/material/Alert';
 import Papa from 'papaparse';
 import useAddProject from '@/hooks/useAddProject';
+import { atomUserRole } from "@/atoms/atomUserRole";
+import { useRecoilState } from "recoil";
+import useAccount from '@/hooks/useAccount';
 import { rows } from '@/constants/datasetTest1'
 
 const acceptableCSVFileTypes = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, .csv";
@@ -13,6 +16,8 @@ const acceptableCSVFileTypes = "application/vnd.openxmlformats-officedocument.sp
 const UploadPage = () => {
     const [file, setFile] = useState(null);
     const {error, setError, isPending, createProject} = useAddProject()
+    const [userRole, setUserRole] = useRecoilState(atomUserRole)
+    const {refreshLogin} = useAccount()
 
     const onFileChangeHandler = (event) => {
     setError(null)
@@ -46,6 +51,18 @@ const UploadPage = () => {
         }
     
     };
+
+    useEffect(() => {
+        
+        if (userRole.isLogin === false) {
+            const username = localStorage.getItem('username')
+            if(username){
+                refreshLogin(username)
+            }else{
+                window.location.replace("/login")
+            }
+        }
+      }, [userRole.isLogin,refreshLogin]);
       
     return (
         <div className='relative w-screen h-full'>

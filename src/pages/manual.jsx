@@ -3,9 +3,22 @@ import Image from 'next/legacy/image'
 import { Navbar } from '../components/Navbar'
 import { manualTest } from '@/assets'
 import Link from 'next/link'
+import { atomUserRole } from "@/atoms/atomUserRole";
+import { useRecoilState } from "recoil";
+import useAccount from '@/hooks/useAccount';
 
 const Manual = () => {
-
+    const [userRole, setUserRole] = useRecoilState(atomUserRole)
+    const {refreshLogin} = useAccount()
+    useEffect(() => {
+        
+        if (userRole.isLogin === false) {
+            const username = localStorage.getItem('username')
+            if(username){
+                refreshLogin(username)
+            }
+        }
+      }, [userRole.isLogin,refreshLogin]);
     return (
         <div className='relative w-screen h-full pb-20'>
             <Navbar  menu={2} />

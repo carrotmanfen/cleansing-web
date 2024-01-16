@@ -13,7 +13,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const router = useRouter()
   const [notification, setNotification] = useState('');
-  const { isPending, login, setError } = useAccount()
+  const { isPending, refreshLogin, login, setError } = useAccount()
 
   const [userRole, setUserRole] = useRecoilState(atomUserRole)
 
@@ -51,6 +51,15 @@ const Login = () => {
       return;
     }
   }
+  useEffect(() => {
+        
+    if (userRole.isLogin === false) {
+        const username = localStorage.getItem('username')
+        if(username){
+            refreshLogin(username)
+        }
+    }
+  }, [userRole.isLogin,refreshLogin]);
 
   return (
     <div className="relative w-screen h-full">

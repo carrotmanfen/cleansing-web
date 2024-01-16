@@ -16,6 +16,7 @@ export const Navbar = ({ menu }) => {
       userId:null,
       project:[]
     })
+    localStorage.setItem('username',"")
     router.push('/login')
   }
   return (

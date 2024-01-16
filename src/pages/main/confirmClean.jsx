@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/legacy/image";
 import Link from "next/link"
 import NavbarMain from "@/components/main/NavbarMain";
@@ -14,12 +14,18 @@ import Paper from "@mui/material/Paper";
 import { TableVirtuoso } from "react-virtuoso";
 import { rows, columns } from "@/constants/tableDataConfirm";
 import { redDot, yellowDot } from "@/assets";
+import useAccount from '@/hooks/useAccount';
+import { atomUserRole } from '@/atoms/atomUserRole';
+import { useRecoilState } from "recoil";
 
 const ConfirmClean = () => {
   const [menu, setMenu] = useState(1);
   const [projectName, setProjectName] = useState("project 1")
   const [rowsData, setRowData] = useState(rows)
   const [columnsData, setColumnsData] = useState(columns)
+  const [user, setUser] = useRecoilState(atomUserRole)
+  const [notification, setNotification] = useState('');
+  const {refreshLogin} = useAccount()
 
   const buttonLeftClick = () => {
     setMenu(1);
@@ -118,7 +124,17 @@ const ConfirmClean = () => {
   const handleConfirm = () =>{
     console.log("confirm");
   }
-
+  useEffect(() => {
+        
+    if (user.isLogin === false) {
+        const username = localStorage.getItem('username')
+        if(username){
+            refreshLogin(username)
+        }else{
+            window.location.replace("/login")
+        }
+    }
+  }, [user.isLogin,refreshLogin]);
   return (
     <div className="relative w-screen h-full">
       <NavbarMain disableButton={true}  projectName={projectName} />

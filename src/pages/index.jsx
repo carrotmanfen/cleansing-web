@@ -1,11 +1,25 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Image from 'next/legacy/image'
 import Link from 'next/link'
 import { logo } from '@/assets';
 import { Navbar } from '../components/Navbar'
 import { pic } from '@/assets'
+import { atomUserRole } from "@/atoms/atomUserRole";
+import { useRecoilState } from "recoil";
+import useAccount from '@/hooks/useAccount';
 
 export default function Home() {
+    const [userRole, setUserRole] = useRecoilState(atomUserRole)
+    const {refreshLogin} = useAccount()
+    useEffect(() => {
+        
+        if (userRole.isLogin === false) {
+            const username = localStorage.getItem('username')
+            if(username){
+                refreshLogin(username)
+            }
+        }
+      }, [userRole.isLogin,refreshLogin]);
   return (
     <main
       className="text-red"

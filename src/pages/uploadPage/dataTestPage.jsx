@@ -1,13 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { paper } from '@/assets'
 import { Navbar } from '@/components/Navbar'
 import { DatasetComponent } from '@/components/uploaddataset/datasetComponent';
 import {columns as columns1, rows as rows1} from '@/constants/datasetTest1';
 import {columns as columns2, rows as rows2} from '@/constants/datasetTest2';
 import {columns as columns3, rows as rows3} from '@/constants/datasetTest3';
+import { atomUserRole } from "@/atoms/atomUserRole";
+import { useRecoilState } from "recoil";
+import useAccount from '@/hooks/useAccount';
 
 const DataTest = () => {
-
+    const [userRole, setUserRole] = useRecoilState(atomUserRole)
+    const {refreshLogin} = useAccount()
     const testData = [
         {
             projectName: "Zomato Cafe Reviews",
@@ -28,6 +32,18 @@ const DataTest = () => {
             rows:rows3
         },
     ]
+    useEffect(() => {
+        
+        if (userRole.isLogin === false) {
+            const username = localStorage.getItem('username')
+            if(username){
+                refreshLogin(username)
+            }else{
+                window.location.replace("/login")
+            }
+        }
+      }, [userRole.isLogin,refreshLogin]);
+
     return (
         <div className="relative w-screen h-full">
             <Navbar />

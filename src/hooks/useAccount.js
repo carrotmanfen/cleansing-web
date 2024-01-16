@@ -65,6 +65,7 @@ export default function useAccount() {
                 console.log(res.data.results.username);
                 console.log(res.data.results._id);
                 console.log(res.data.results.project);
+                localStorage.setItem('username', username)
                 setUserRole({
                     isLogin: true,
                     username:res.data.results.username,
@@ -88,5 +89,38 @@ export default function useAccount() {
         }
     },[url, showLoading, hideLoading, router])
 
-    return { data, error, isPending, register, login, setError };
+    const refreshLogin = useCallback(async(username)=>{
+        try {
+            setError(false);
+            showLoading();
+            
+            const res = await axios.get(url+'accounts/'+username);
+            console.log(res);
+            if (res.status === 200) {
+                console.log(res.data.results.account.username);
+                console.log(res.data.results.account._id);
+                console.log(res.data.results.account.project);
+                localStorage.setItem('username', username)
+                setUserRole({
+                    isLogin: true,
+                    username:res.data.results.account.username,
+                    userId:res.data.results.account._id,
+                    project: res.data.results.account.project
+                });
+            }else if(res.status === 400){
+                console.log("bad request look network for reason")
+                setError(true);
+            } else {
+                setError(true);
+            }
+            setIsPending(false);
+        } catch (err) {
+            setError(true);
+            setIsPending(false);
+        } finally {
+            hideLoading();
+        }
+    },[url, showLoading, hideLoading, router])
+
+    return { data, error, isPending, register, login, refreshLogin, setError };
 }

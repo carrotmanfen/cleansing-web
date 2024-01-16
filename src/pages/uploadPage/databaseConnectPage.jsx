@@ -6,6 +6,9 @@ import { databaseIcon, uploadIcon } from "@/assets";
 import { root } from "postcss";
 import useAddProject from '@/hooks/useAddProject';
 import Alert from '@mui/material/Alert';
+import { atomUserRole } from "@/atoms/atomUserRole";
+import { useRecoilState } from "recoil";
+import useAccount from '@/hooks/useAccount';
 
 const DatabaseConnectPage = () => {
   const [host, setHost] = useState('');
@@ -14,6 +17,8 @@ const DatabaseConnectPage = () => {
   const [database, setDatabase] = useState('');
   const [table, setTable] = useState('');
   const {error, setError, isPending, showLoading, hideLoading, createProject} = useAddProject()
+  const [userRole, setUserRole] = useRecoilState(atomUserRole)
+  const {refreshLogin} = useAccount()
 
   const handleHostChange = (e) => {
     setHost(e.target.value); // Update the state when the input changes
@@ -80,7 +85,17 @@ const DatabaseConnectPage = () => {
     }
   };
 
-
+  useEffect(() => {
+        
+    if (userRole.isLogin === false) {
+        const username = localStorage.getItem('username')
+        if(username){
+            refreshLogin(username)
+        }else{
+            window.location.replace("/login")
+        }
+    }
+  }, [userRole.isLogin,refreshLogin]);
 
   return (
     <div className="relative w-screen h-full">
