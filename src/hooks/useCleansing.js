@@ -32,7 +32,13 @@ export default function useCleansing() {
             const res = await axios.post(url+urlMethod, requestBody, {headers:headers});
             console.log(res);
             if (res.status === 200|| res.status==201) {
-                console.log(res.data.results);
+                const columns = Object.keys(res.data[0]).map(label => ({ label, dataKey: label }));
+                const dataSet ={
+                    columns,
+                    rows:res.data
+                }
+                console.log(dataSet)
+                setData(dataSet)
                 
             }else if(res.status === 400){
                 console.log("bad request look network for reason")
@@ -48,9 +54,6 @@ export default function useCleansing() {
             hideLoading();
         }
     }, [url, showLoading, hideLoading, router]);
-
-
-    
 
     return { data, error, isPending, setError, getDataCheck };
 }

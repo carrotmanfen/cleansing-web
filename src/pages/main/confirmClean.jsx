@@ -30,11 +30,6 @@ const ConfirmClean = () => {
   const {refreshLogin} = useAccount()
   const { getProject, data } = useProject()
   const [projectId, setProjectId] = useState("")
-//   if (typeof window !== 'undefined') {
-//     const queryParams = new URLSearchParams(window.location.search);
-//     const searchProjectId = queryParams.get('projectId');
-//     setProjectId(searchProjectId)
-//   }
   const {data:dataConfirm, error, getDataCheck } = useCleansing()
 
   const handleFindProjectName = () => {
@@ -49,11 +44,11 @@ const ConfirmClean = () => {
 
   const buttonLeftClick = () => {
     setMenu(1);
-    setRowData(rows)
+    setRowData(dataConfirm.rows)
   };
   const buttonRightClick = () => {
     setMenu(2);
-    const filteredRows = rowsData.filter((row) => row.status === 'delete' || row.status === 'edit');
+    const filteredRows = dataConfirm.rows.filter((row) => row['st@tus'] === 'delete' || row['st@tus'] === 'edit');
     setRowData(filteredRows);
 
   };
@@ -104,9 +99,9 @@ const ConfirmClean = () => {
               fontFamily: "Sarabun",
               border: 1,
               borderColor: "black",
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
+            //   overflow: 'hidden',
+            //   textOverflow: 'ellipsis',
+            //   whiteSpace: 'nowrap',
               maxWidth: '300px',
             }}
           >
@@ -131,7 +126,7 @@ const ConfirmClean = () => {
                 textOverflow: 'ellipsis',
                 whiteSpace: 'nowrap',
                 maxWidth: '300px',
-                backgroundColor: row.status=="delete" ? '#FCA1A1' :row.status=="edit"? "#FFED92" :'white'
+                backgroundColor: row['st@tus']=="delete" ? '#FCA1A1' :row['st@tus']=="edit"? "#FFED92" :'white'
             }}
           >
             {row[column.dataKey]}
@@ -147,14 +142,21 @@ const ConfirmClean = () => {
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     const searchProjectId = queryParams.get('projectId');
+    const searchMethod = queryParams.get('clean');
+    const searchColumn = queryParams.get('column');
+    const resultArray = searchColumn.split(',');
     setProjectId(searchProjectId)
     if (data != null) {
-        // handleFindProjectName()
-        console.log("dataSet")
-        const dataSet = data.data_set
-        dataSet.columns_match=["id", "quantity"]
-        getDataCheck("1",dataSet)
-    }else{
+        handleFindProjectName()
+        if(dataConfirm === null){
+            const dataSet = data.data_set
+            dataSet.columns_match=resultArray
+            getDataCheck(searchMethod,dataSet)
+        }
+    }
+    if(dataConfirm!=null){
+        setColumnsData(dataConfirm.columns)
+        setRowData(dataConfirm.rows)
     }
   }, [data, user, dataConfirm]);
 
