@@ -17,6 +17,8 @@ import { redDot, yellowDot } from "@/assets";
 import useAccount from '@/hooks/useAccount';
 import { atomUserRole } from '@/atoms/atomUserRole';
 import { useRecoilState } from "recoil";
+import useProject from "@/hooks/useProject";
+import useCleansing from "@/hooks/useCleansing";
 
 const ConfirmClean = () => {
   const [menu, setMenu] = useState(1);
@@ -26,6 +28,24 @@ const ConfirmClean = () => {
   const [user, setUser] = useRecoilState(atomUserRole)
   const [notification, setNotification] = useState('');
   const {refreshLogin} = useAccount()
+  const { getProject, data } = useProject()
+  const [projectId, setProjectId] = useState("")
+//   if (typeof window !== 'undefined') {
+//     const queryParams = new URLSearchParams(window.location.search);
+//     const searchProjectId = queryParams.get('projectId');
+//     setProjectId(searchProjectId)
+//   }
+  const {data:dataConfirm, error, getDataCheck } = useCleansing()
+
+  const handleFindProjectName = () => {
+    const results = user.project.filter(
+      (project) =>
+        project._id.toLowerCase().includes(projectId.toLowerCase())
+    );
+
+    console.log(results[0].project_name)
+    setProjectName(results[0].project_name)
+  };
 
   const buttonLeftClick = () => {
     setMenu(1);
@@ -125,6 +145,20 @@ const ConfirmClean = () => {
     console.log("confirm");
   }
   useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const searchProjectId = queryParams.get('projectId');
+    setProjectId(searchProjectId)
+    if (data != null) {
+        // handleFindProjectName()
+        console.log("dataSet")
+        const dataSet = data.data_set
+        dataSet.columns_match=["id", "quantity"]
+        getDataCheck("1",dataSet)
+    }else{
+    }
+  }, [data, user, dataConfirm]);
+
+  useEffect(() => {
         
     if (user.isLogin === false) {
         const username = localStorage.getItem('username')
@@ -135,6 +169,7 @@ const ConfirmClean = () => {
         }
     }
   }, [user.isLogin,refreshLogin]);
+
   return (
     <div className="relative w-screen h-full">
       <NavbarMain disableButton={true}  projectName={projectName} />
@@ -165,7 +200,7 @@ const ConfirmClean = () => {
             </button>
           </div>
           <div className="flex flex-row gap-6 ">
-            <Link href={"/main"} className="py-2 px-10 text-[16px] bg-gray hover:bg-textGray hover:text-white text-white} text-black rounded-md">
+            <Link href={`/main?projectId=${projectId}`} className="py-2 px-10 text-[16px] bg-gray hover:bg-textGray hover:text-white text-white} text-black rounded-md">
                 ยกเลิก
             </Link>
             <button
