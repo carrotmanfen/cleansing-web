@@ -23,6 +23,8 @@ import { atomUserRole } from '@/atoms/atomUserRole';
 import { useRecoilState } from "recoil";
 import Alert from '@mui/material/Alert';
 import useAccount from '@/hooks/useAccount';
+import ReversePopUp from "@/components/main/ReversePopUp";
+import useReverse from "@/hooks/useReverse";
 
 const Main = () => {
   const [menu, setMenu] = useState(1);
@@ -37,6 +39,8 @@ const Main = () => {
   const [user, setUser] = useRecoilState(atomUserRole)
   const [notification, setNotification] = useState('');
   const {refreshLogin} = useAccount()
+  const [reverse, setReverse] = useState(false)
+  const {reverseProject} = useReverse()
 
   const handleClosePopUpChangeProjectName = () => {
     setPopUpChangeProjectName(false)
@@ -52,6 +56,7 @@ const Main = () => {
   }
 
   const handleChangeProjectName = async (e) => {
+    
     if (!projectNameFill) {
       setNotification('กรุณาป้อนชื่อโปรเจกต์');
       return;
@@ -183,15 +188,20 @@ const Main = () => {
   }
 
   const handleFindProjectName = () => {
-    const queryParams = new URLSearchParams(window.location.search);
-    const searchProjectId = queryParams.get('projectId');
-    const results = user.project.filter(
-      (project) =>
-        project._id.toLowerCase().includes(searchProjectId.toLowerCase())
-    );
-
-    console.log(results[0].project_name)
-    setProjectName(results[0].project_name)
+    if(projectName==""){
+        const queryParams = new URLSearchParams(window.location.search);
+        const searchProjectId = queryParams.get('projectId');
+        const results = user.project.filter(
+          (project) =>{
+              if(project._id!==null)
+                return project._id.toLowerCase().includes(searchProjectId.toLowerCase())
+          }
+        );
+        
+        console.log(results[0].project_name)
+        setProjectName(results[0].project_name)
+        
+    }
   };
 
   const handleEnterKeyPress = (e) => {
@@ -199,6 +209,24 @@ const Main = () => {
       handleChangeProjectName();
     }
   };
+
+  const handleReversePopUp = () =>{
+    setReverse(true)
+  }
+
+  const closeReversePopUp = () =>{
+    setReverse(false)
+  }
+
+  const handleReverseVersion = async() =>{
+    console.log("click")
+    const queryParams = new URLSearchParams(window.location.search);
+    const searchProjectId = queryParams.get('projectId');
+    console.log(data.clean.clean_id)
+    await reverseProject(searchProjectId, data.clean.clean_id)
+    await getProject()
+    window.location.reload()
+  }
 
   useEffect(() => {
     if (data != null) {
@@ -220,17 +248,26 @@ const Main = () => {
   return (
     <div className="relative w-screen h-full">
       {data&&<NavbarMain popup={handleOpenPopUpChangeProjectName} projectName={projectName} downloadOnClick={handleDownloadPopup} />}
-      <NavbarDetail rowNumber={3000} colNumber={400} />
+      {data&&<NavbarDetail rowNumber={data.data_set.rows.length} colNumber={data.data_set.columns.length} clean_name={data.clean.clean_name} onClick={handleReversePopUp}/>}
       <PopUpChangeProjectName isOpen={popUpChangeProjectName}>
-      <div className="fixed top-4 z-50 left-1/2 transform -translate-x-1/2 w-1/2">
-        {notification && <Alert severity="error" className="w-full font-kanit text-lg">{notification}</Alert>}
-      </div>
+        <div className="fixed top-4 z-50 left-1/2 transform -translate-x-1/2 w-1/2">
+            {notification && <Alert severity="error" className="w-full font-kanit text-lg">{notification}</Alert>}
+        </div>
         <input type="text" value={projectNameFill} onChange={handleChangeProjectNameFill} className="border rounded-md w-full px-4 py-3 text-[16px] font-kanit" placeholder="พิมพ์ชื่อใหม่ของโปรเจกต์" onKeyDown={handleEnterKeyPress} />
         <div className="flex flex-row w-full justify-between mt-8">
           <button onClick={handleClosePopUpChangeProjectName} className="px-10 py-2 bg-gray rounded-lg hover:bg-textGray">ยกเลิก</button>
           <button onClick={handleChangeProjectName} className="px-10 py-2 bg-primary hover:bg-hoverPrimary rounded-lg text-white">ยืนยัน</button>
         </div>
       </PopUpChangeProjectName>
+      <ReversePopUp isOpen={reverse}>
+      <div className="fixed top-4 z-50 left-1/2 transform -translate-x-1/2 w-1/2">
+            {notification && <Alert severity="error" className="w-full font-kanit text-lg">{notification}</Alert>}
+        </div>
+        <div className="flex flex-row w-full justify-around mt-8">
+          <button onClick={closeReversePopUp} className="px-10 py-2 bg-gray rounded-lg hover:bg-textGray">ยกเลิก</button>
+          <button onClick={handleReverseVersion} className="px-10 py-2 bg-primary hover:bg-hoverPrimary rounded-lg text-white">ยืนยัน</button>
+        </div>
+      </ReversePopUp>
       {data&&<PopUpCleansing isOpen={popUpCleansing} close={handleCloseCleansing} columns={data.data_set.columns} />}
       {data&&<DownloadPopup
         isOpen={downloadPopup}

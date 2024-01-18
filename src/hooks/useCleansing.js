@@ -105,7 +105,7 @@ export default function useCleansing() {
         }
     }, [url, showLoading, hideLoading, router]);
 
-    const createProject = useCallback(async (columns, rows, projectId) => {
+    const createProject = useCallback(async (columns, rows, projectId, clean_name) => {
         try {
             showLoading();
             const requestBody = {
@@ -113,7 +113,7 @@ export default function useCleansing() {
                     "columns": columns,
                     "rows": rows
                 },
-                "clean":projectId
+                "clean":{"clean_id":projectId,"clean_name":clean_name}
             }
             const headers = {
                 "content-type": "application/json"
@@ -152,16 +152,19 @@ export default function useCleansing() {
             }
             console.log(requestBody)
             let urlMethod;
+            let clean_name;
             if(method == "1"){
                 urlMethod = "removeirrdata/clean"
+                clean_name = "ลบคอลัมน์ที่ไม่เกี่ยวข้อง"
             }else if(method=="2"){
                 urlMethod = "removedupdata/clean"
+                clean_name = "ลบข้อมูลที่ซ้ำซ้อน"
             }
             const res = await axios.post(url+urlMethod, requestBody, {headers:headers});
             console.log(res);
             if (res.status === 200|| res.status==201) {
                 const columns = Object.keys(res.data[0]).map(label => ({ label, dataKey: label }));
-                createProject(columns, res.data, projectId)
+                createProject(columns, res.data, projectId, clean_name)
             }else if(res.status === 400){
                 console.log("bad request look network for reason")
                 setError(true);

@@ -37,8 +37,10 @@ const ConfirmClean = () => {
         const queryParams = new URLSearchParams(window.location.search);
         const searchProjectId = queryParams.get('projectId');
         const results = user.project.filter(
-          (project) =>
-            project._id.toLowerCase().includes(searchProjectId.toLowerCase())
+          (project) =>{
+            if(project._id!==null)
+              return project._id.toLowerCase().includes(searchProjectId.toLowerCase())
+            }
         );
         if(results[0].project_name){
             console.log(results[0].project_name)

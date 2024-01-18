@@ -25,7 +25,7 @@ const PopUpCleansing = ({ isOpen, close, columns }) => {
         const columnSelect = new Array()
         checkedItems.map((check,index)=>{
             if(check){
-                columnSelect.push(columns[index].label)
+                columnSelect.push(columns[index].dataKey)
             }
         })
         router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+columnSelect)
