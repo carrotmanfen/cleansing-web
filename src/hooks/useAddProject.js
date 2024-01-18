@@ -22,17 +22,18 @@ export default function useAddProject() {
                     "columns": columns,
                     "rows": rows
                 },
+                "clean":""
             }
             const headers = {
                 "content-type": "application/json"
             }
             console.log(requestBody)
-            const res = await axios.post(url + 'projects/createProject', requestBody, {headers:headers});
+            const res = await axios.post(url + 'projects/createProject', requestBody, { headers: headers });
             console.log(res);
             if (res.status === 200 || res.status == 201) {
                 console.log(res.data.results);
                 // router.push('/login');
-                addProject(userRole.username, res.data.results._id,project_name, file_name )
+                addProject(userRole.username, res.data.results._id, project_name, file_name)
             } else if (res.status === 400) {
                 console.log("bad request look network for reason")
             } else {
@@ -54,14 +55,14 @@ export default function useAddProject() {
             const requestBody = {
                 "username": username,
                 "project_id": project_id,
-                "project_name" : project_name,
+                "project_name": project_name,
                 "file_name": file_name
             }
             const headers = {
                 "content-type": "application/json"
             }
             console.log(requestBody)
-            const res = await axios.patch(url + 'accounts/addProject', requestBody, {headers:headers});
+            const res = await axios.patch(url + 'accounts/addProject', requestBody, { headers: headers });
             console.log(res);
             if (res.status === 200 || res.status == 201) {
                 console.log(res.data.results);
@@ -73,7 +74,7 @@ export default function useAddProject() {
                 });
                 router.push({
                     pathname: '/main',
-                    query: { projectId: project_id},
+                    query: { projectId: project_id },
                 });
             } else if (res.status === 400) {
                 console.log("bad request look network for reason")

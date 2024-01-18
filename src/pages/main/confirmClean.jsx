@@ -22,7 +22,7 @@ import useCleansing from "@/hooks/useCleansing";
 
 const ConfirmClean = () => {
   const [menu, setMenu] = useState(1);
-  const [projectName, setProjectName] = useState("project 1")
+  const [projectName, setProjectName] = useState("")
   const [rowsData, setRowData] = useState(rows)
   const [columnsData, setColumnsData] = useState(columns)
   const [user, setUser] = useRecoilState(atomUserRole)
@@ -30,16 +30,21 @@ const ConfirmClean = () => {
   const {refreshLogin} = useAccount()
   const { getProject, data } = useProject()
   const [projectId, setProjectId] = useState("")
-  const {data:dataConfirm, error, getDataCheck } = useCleansing()
+  const {data:dataConfirm, error, getDataCheck, cleanConfirm } = useCleansing()
 
   const handleFindProjectName = () => {
-    const results = user.project.filter(
-      (project) =>
-        project._id.toLowerCase().includes(projectId.toLowerCase())
-    );
-
-    console.log(results[0].project_name)
-    setProjectName(results[0].project_name)
+    if(projectName==""){
+        const queryParams = new URLSearchParams(window.location.search);
+        const searchProjectId = queryParams.get('projectId');
+        const results = user.project.filter(
+          (project) =>
+            project._id.toLowerCase().includes(searchProjectId.toLowerCase())
+        );
+        if(results[0].project_name){
+            console.log(results[0].project_name)
+            setProjectName(results[0].project_name)
+        }
+    }
   };
 
   const buttonLeftClick = () => {
@@ -137,7 +142,15 @@ const ConfirmClean = () => {
   }
 
   const handleConfirm = () =>{
+    const queryParams = new URLSearchParams(window.location.search);
+    const searchProjectId = queryParams.get('projectId');
+    const searchMethod = queryParams.get('clean');
+    const searchColumn = queryParams.get('column');
+    const resultArray = searchColumn.split(',');
+    const dataSet = data.data_set
+    dataSet.columns_match=resultArray
     console.log("confirm");
+    cleanConfirm(searchMethod, dataSet, searchProjectId)
   }
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
