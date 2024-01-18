@@ -56,6 +56,13 @@ const PopUpCleansing = ({ isOpen, close, columns }) => {
                 </div>
                 <h3 className="text-[20px] text-white group-hover:underline">เติมด้วยค่าที่กำหนดเอง</h3>
             </div>
+            :cleanMenu==4?
+            <div onClick={()=>setCleanMenu(2)} className='flex flex-row group hover:cursor-pointer'>
+                <div className='flex items-center mr-8'>
+                    <Image src={arrowLeftWhite} alt='arrow' objectFit='contain'/>
+                </div>
+                <h3 className="text-[20px] text-white group-hover:underline">ลบข้อมูลที่ซ้ำซ้อน</h3>
+            </div>
             :
             <div onClick={()=>setCleanMenu(1)} className='flex flex-row group hover:cursor-pointer'>
                 <div className='flex items-center mr-8'>
@@ -80,7 +87,7 @@ const PopUpCleansing = ({ isOpen, close, columns }) => {
                 </div>
             </div>
 
-            <div onClick={()=>{setCleanMenu(5); setCheckedItems(Array(columns.length).fill(false)); setMethod("2")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
+            <div onClick={()=>{setCleanMenu(4); setCheckedItems(Array(columns.length).fill(false)); setMethod("2")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
                 <div className='flex flex-col'>
                     <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>ลบข้อมูลที่ซ้ำซ้อน (Delete Duplicate Data)</p>
                     <p className='text-[16px] text-textGray cursor-pointer'>ลบแถวข้อมูลที่มีข้อมูลทุกตัวซ้ำกับแถวอื่น</p>
@@ -213,6 +220,14 @@ const PopUpCleansing = ({ isOpen, close, columns }) => {
                     className='text-[20px] font-kanit bg-primary rounded-md py-2 px-4 text-white'>ยืนยัน</button>
                 </div>
             </div>
+          </div>
+          :cleanMenu==4?
+          <div className='flex pl-12 flex-col justify-center border-b border-borderNavbar cursor-pointer py-4 gap-4'>
+            <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>การทำความสะอาดด้วยวิธีนี้จะลบแถวที่มีคอลัมน์ซ้ำกันทุกแถวโดยอัตโนมัติ</p>
+            <div className='w-full flex items-center justify-end p-4'>
+              <button onClick={handleConfirm} className={`text-[20px] font-kanit  px-6 py-2 rounded-lg bg-primary text-white hover:bg-hoverPrimary`}>ถัดไป <span className='ml-4'>{"->"}</span></button>
+            </div>
+            
           </div>
           :cleanMenu==5?
           <div className='flex flex-col'>

@@ -63,6 +63,7 @@ const Main = () => {
     } else {
       await changeProjectNameInAccount(projectNameFill)
       await getProject()
+      setProjectName(projectNameFill)
       setPopUpChangeProjectName(false)
     }
   }
@@ -197,10 +198,10 @@ const Main = () => {
                 return project._id.toLowerCase().includes(searchProjectId.toLowerCase())
           }
         );
-        
-        console.log(results[0].project_name)
-        setProjectName(results[0].project_name)
-        
+        if(results[0].project_name){
+            console.log(results[0].project_name)
+            setProjectName(results[0].project_name)
+        }
     }
   };
 
