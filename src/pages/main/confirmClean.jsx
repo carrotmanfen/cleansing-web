@@ -151,6 +151,25 @@ const ConfirmClean = () => {
     const resultArray = searchColumn.split(',');
     const dataSet = data.data_set
     dataSet.columns_match=resultArray
+    if(searchMethod=="3"){
+        const searchNewValue = queryParams.get('newValue');
+        const newValue = parseInt(searchNewValue)
+        const searchOldValue = queryParams.get('oldValue');
+        const oldValue = parseInt(searchOldValue)
+        if(!isNaN(newValue)) {
+            dataSet.data_change = newValue
+          } else {
+              dataSet.data_change = searchNewValue
+          }
+          if(!isNaN(oldValue)) {
+            dataSet.data_select = oldValue
+          } else {
+              dataSet.data_select = searchOldValue
+          }
+    }else if(searchMethod=="4"){
+        const searchOrderSelect = queryParams.get('orderSelect')
+        dataSet.order_select = searchOrderSelect
+    }
     console.log("confirm");
     cleanConfirm(searchMethod, dataSet, searchProjectId)
   }
@@ -166,6 +185,25 @@ const ConfirmClean = () => {
         if(dataConfirm === null){
             const dataSet = data.data_set
             dataSet.columns_match=resultArray
+            if(searchMethod=="3"){
+                const searchNewValue = queryParams.get('newValue');
+                const newValue = parseInt(searchNewValue)
+                const searchOldValue = queryParams.get('oldValue');
+                const oldValue = parseInt(searchOldValue)
+                if(!isNaN(newValue)) {
+                    dataSet.data_change = newValue
+                  } else {
+                      dataSet.data_change = searchNewValue
+                  }
+                  if(!isNaN(oldValue)) {
+                    dataSet.data_select = oldValue
+                  } else {
+                      dataSet.data_select = searchOldValue
+                  }
+            }else if(searchMethod=="4"){
+                const searchOrderSelect = queryParams.get('orderSelect')
+                dataSet.order_select = searchOrderSelect
+            }
             getDataCheck(searchMethod,dataSet)
         }
     }

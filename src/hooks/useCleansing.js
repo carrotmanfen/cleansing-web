@@ -7,6 +7,7 @@ import { atomUserRole } from "@/atoms/atomUserRole";
 
 export default function useCleansing() {
     const [data, setData] = useState(null);
+    const [data3, setData3] = useState(null)
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(false);
     const { showLoading, hideLoading } = useLoadingScreen();
@@ -14,7 +15,6 @@ export default function useCleansing() {
     const url = process.env.NEXT_PUBLIC_CLEANSING_SERVICE_URL;
     const [userRole, setUserRole] = useRecoilState(atomUserRole)
    
-
     const getDataCheck = useCallback(async (method, data_set) => {
         try {
             setError(false);
@@ -31,6 +31,12 @@ export default function useCleansing() {
                 urlMethod = "removeirrdata/check"
             }else if(method=="2"){
                 urlMethod = "removedupdata/check"
+            }else if(method=="6"){
+                urlMethod = "replaceexcdata/check"
+            }else if(method=="3"){
+                urlMethod = "editincdata/check"
+            }else if(method=="4"){
+                urlMethod = "managenavalue/check"
             }
             const res = await axios.post(url+urlMethod, requestBody, {headers:headers});
             console.log(res);
@@ -159,6 +165,15 @@ export default function useCleansing() {
             }else if(method=="2"){
                 urlMethod = "removedupdata/clean"
                 clean_name = "ลบข้อมูลที่ซ้ำซ้อน"
+            }else if(method=="6") {
+                urlMethod = "replaceexcdata/clean"
+                clean_name = "จัดกลุ่มชุดข้อมูล"
+            }else if (method=="3"){
+                urlMethod = "editincdata/clean"
+                clean_name = "แก้ไขข้อมูลที่ผิดปกติ"
+            }else if (method=="4"){
+                urlMethod = "managenavalue/clean"
+                clean_name = "จัดการข้อมูลที่หายไป"
             }
             const res = await axios.post(url+urlMethod, requestBody, {headers:headers});
             console.log(res);
@@ -180,5 +195,37 @@ export default function useCleansing() {
         }
     }, [url, showLoading, hideLoading, router]);
 
-    return { data, error, isPending, setError, getDataCheck, cleanConfirm };
+    const getDataMethod3 = useCallback(async (data_set) => {
+        try {
+            setError(false);
+            showLoading();
+            const requestBody  = {
+                data_set
+            }
+            const headers = {
+                "content-type": "application/json"
+            }
+            console.log(requestBody)
+            const res = await axios.post(url+"editincdata", requestBody, {headers:headers});
+            console.log(res);
+            if (res.status === 200|| res.status==201) {
+                console.log(res.data.column)
+                setData3(res.data.column)
+                
+            }else if(res.status === 400){
+                console.log("bad request look network for reason")
+                setError(true);
+            } else {
+                setError(true);
+            }
+            setIsPending(false);
+        } catch (err) {
+            setError(true);
+            setIsPending(false);
+        } finally {
+            hideLoading();
+        }
+    }, [url, showLoading, hideLoading, router]);
+
+    return { data, error, isPending, setError, getDataCheck, cleanConfirm, getDataMethod3, data3 };
 }

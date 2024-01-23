@@ -269,7 +269,7 @@ const Main = () => {
           <button onClick={handleReverseVersion} className="px-10 py-2 bg-primary hover:bg-hoverPrimary rounded-lg text-white">ยืนยัน</button>
         </div>
       </ReversePopUp>
-      {data&&<PopUpCleansing isOpen={popUpCleansing} close={handleCloseCleansing} columns={data.data_set.columns} />}
+      {data&&<PopUpCleansing isOpen={popUpCleansing} close={handleCloseCleansing} columns={data.data_set.columns} rows={data.data_set.rows} />}
       {data&&<DownloadPopup
         isOpen={downloadPopup}
         onClose={handleCloseDownload}
