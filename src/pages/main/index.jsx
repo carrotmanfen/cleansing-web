@@ -126,9 +126,9 @@ const Main = () => {
                 fontFamily: "Sarabun",
                 border: 1,
                 borderColor: "black",
-                // overflow: 'hidden',
-                // textOverflow: 'ellipsis',
-                // whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
                 maxWidth: '200px',
               }}
             >

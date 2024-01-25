@@ -29,14 +29,24 @@ export default function useCleansing() {
             let urlMethod;
             if(method == "1"){
                 urlMethod = "removeirrdata/check"
-            }else if(method=="2"){
+            }
+            else if(method=="2"){
                 urlMethod = "removedupdata/check"
-            }else if(method=="6"){
+            }
+            else if(method=="6"){
                 urlMethod = "replaceexcdata/check"
-            }else if(method=="3"){
+            }
+            else if(method=="3"){
                 urlMethod = "editincdata/check"
-            }else if(method=="4"){
+            }
+            else if(method=="4"){
                 urlMethod = "managenavalue/check"
+            }
+            else if(method=="7"){
+                urlMethod = "removeunrnumber/check"
+            }
+            else if(method=="8"){
+                urlMethod = "flagoutlier/check"
             }
             const res = await axios.post(url+urlMethod, requestBody, {headers:headers});
             console.log(res);
@@ -165,21 +175,37 @@ export default function useCleansing() {
             }else if(method=="2"){
                 urlMethod = "removedupdata/clean"
                 clean_name = "ลบข้อมูลที่ซ้ำซ้อน"
-            }else if(method=="6") {
-                urlMethod = "replaceexcdata/clean"
-                clean_name = "จัดกลุ่มชุดข้อมูล"
-            }else if (method=="3"){
+            }
+            else if (method=="3"){
                 urlMethod = "editincdata/clean"
                 clean_name = "แก้ไขข้อมูลที่ผิดปกติ"
-            }else if (method=="4"){
+            }
+            else if (method=="4"){
                 urlMethod = "managenavalue/clean"
-                clean_name = "จัดการข้อมูลที่หายไป"
+                clean_name = "จัดการข้อมูลที่ขาดหายไป"
+            }
+            else if(method=="6") {
+                urlMethod = "replaceexcdata/clean"
+                clean_name = "เปลี่ยนข้อมูลประเภท กลุ่ม ที่มีจำนวนน้อย เป็น “อื่น "
+            }
+            else if(method=="7"){
+                urlMethod = "removeunrnumber/clean"
+                clean_name = "นำข้อมูลที่ไม่ตรงกับประเภทข้อมูลออก"
+            }
+            else if(method=="8"){
+                urlMethod = "flagoutlier/clean"
+                clean_name = "ระบุค่าผิดปกติทางสถิติ"
             }
             const res = await axios.post(url+urlMethod, requestBody, {headers:headers});
             console.log(res);
             if (res.status === 200|| res.status==201) {
-                const columns = Object.keys(res.data[0]).map(label => ({ label, dataKey: label }));
-                createProject(columns, res.data, projectId, clean_name)
+                if(res.data[0]){
+                    const columns = Object.keys(res.data[0]).map(label => ({ label, dataKey: label }));
+                    createProject(columns, res.data, projectId, clean_name)
+                }else{
+                    setError("ไม่สามารถทำความสะอาดด้วยวิธีนี้ได้เนื้องจากส่งผลให้ข้อมูลทั้งหมดหายไป")
+                    console.log("no data")
+                }
             }else if(res.status === 400){
                 console.log("bad request look network for reason")
                 setError(true);

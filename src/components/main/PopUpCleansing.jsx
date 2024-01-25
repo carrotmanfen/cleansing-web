@@ -193,7 +193,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
 
             <div onClick={()=>{setCleanMenu(5); setCheckedItems(Array(columns.length).fill(false)); setMethod("7")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
                 <div className='flex flex-col'>
-                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>นำข้อมูลที่ไม่ตรงกับประเภทข้อมูล (Remove Unreadable Columns)</p>
+                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>นำข้อมูลที่ไม่ตรงกับประเภทข้อมูลออก (Remove Unreadable Columns)</p>
                     <p className='text-[16px] text-textGray cursor-pointer'>ลบแถวข้อมูลที่มีข้อมูลไม่ตรงกับ Column ที่กำหนด</p>
                 </div>
                 <div className='flex items-center mr-8'>

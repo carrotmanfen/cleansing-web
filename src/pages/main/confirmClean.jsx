@@ -19,6 +19,7 @@ import { atomUserRole } from '@/atoms/atomUserRole';
 import { useRecoilState } from "recoil";
 import useProject from "@/hooks/useProject";
 import useCleansing from "@/hooks/useCleansing";
+import Alert from '@mui/material/Alert';
 
 const ConfirmClean = () => {
   const [menu, setMenu] = useState(1);
@@ -106,9 +107,9 @@ const ConfirmClean = () => {
               fontFamily: "Sarabun",
               border: 1,
               borderColor: "black",
-            //   overflow: 'hidden',
-            //   textOverflow: 'ellipsis',
-            //   whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
               maxWidth: '300px',
             }}
           >
@@ -272,7 +273,12 @@ const ConfirmClean = () => {
               <Image src={yellowDot} height={20} width={20} alt="yellowDot" objectFit="contain"/>
               <p>ข้อมูลที่จะถูกเปลี่ยนแปลง</p>
         </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col relative">
+            {error && 
+                <div className="absolute w-full z-50 -top-[180px]">
+                    <Alert severity="error" className="w-full font-kanit text-lg">{error}</Alert>
+                </div>
+            }
                 <Paper style={{ height: "65vh", width: "100%" }}>
                     <TableVirtuoso
                         data={visibleRows}
