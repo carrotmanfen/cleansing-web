@@ -13,6 +13,9 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
     const [option4, setOption4] = useState("hello")
     const [selectColumn3, setSelectColumn3] = useState("")
     const [radio3, setRadio3] = useState("")
+    const [delimiter, setDelimiter] = useState("")
+    const [column1, setColumn1] = useState("")
+    const [column2, setColumn2] = useState("")
     const handleCheckboxChange = (index) => {
       const newCheckedItems = [...checkedItems];
       newCheckedItems[index] = !newCheckedItems[index];
@@ -32,6 +35,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
         setNumberFill("")
         setCleanMenu(1)
         setSelectColumn3("")
+        setOption4("")
     }
 
     const handleMethod3 = async() =>{
@@ -57,6 +61,10 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
             router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+radio3+"&oldValue="+selectColumn3+"&newValue="+numberFill)
         }else if(cleanMethod==4){
             router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+columnSelect+"&orderSelect="+option4)
+        }else if(cleanMethod==5){
+            router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+columnSelect+"&delimiter="+delimiter+"&columnName1="+column1+"&columnName2="+column2)
+        }else if(cleanMethod==10){
+            router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+columnSelect+"&order="+numberFill)
         }
         else{
             router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+columnSelect)
@@ -86,7 +94,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                 <div className='flex items-center mr-8'>
                     <Image src={arrowLeftWhite} alt='arrow' objectFit='contain'/>
                 </div>
-                <h3 className="text-[20px] text-white group-hover:underline">เติมด้วยค่าที่กำหนดเอง</h3>
+                {option4=="fillManual"?<h3 className="text-[20px] text-white group-hover:underline">เติมด้วยค่าที่กำหนดเอง</h3>:<h3 className="text-[20px] text-white group-hover:underline">เติมด้วยค่าทางสถิติ</h3>}
             </div>
             :cleanMenu==4?
             <div onClick={()=>setCleanMenu(1)} className='flex flex-row group hover:cursor-pointer'>
@@ -117,12 +125,33 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                 </div>
                 <h3 className="text-[20px] text-white group-hover:underline">เลือกข้อมูลเฉพาะทั้งหมด</h3>
             </div>
+            :cleanMenu==11?
+            <div onClick={()=>{setCleanMenu(10); setNumberFill("")}} className='flex flex-row group hover:cursor-pointer'>
+                <div className='flex items-center mr-8'>
+                    <Image src={arrowLeftWhite} alt='arrow' objectFit='contain'/>
+                </div>
+                <h3 className="text-[20px] text-white group-hover:underline">เลือกฟังก์ชันที่ต้องการเปลี่ยนค่าทางสถิติ</h3>
+            </div>
+            :cleanMenu==12?
+            <div onClick={()=>setCleanMenu(11)} className='flex flex-row group hover:cursor-pointer'>
+                <div className='flex items-center mr-8'>
+                    <Image src={arrowLeftWhite} alt='arrow' objectFit='contain'/>
+                </div>
+                <h3 className="text-[20px] text-white group-hover:underline">เติมด้วยค่ามากที่สุดและน้อยที่สุด</h3>
+            </div>
+            :cleanMenu==13?
+            <div onClick={()=>setCleanMenu(11)} className='flex flex-row group hover:cursor-pointer'>
+                <div className='flex items-center mr-8'>
+                    <Image src={arrowLeftWhite} alt='arrow' objectFit='contain'/>
+                </div>
+                <h3 className="text-[20px] text-white group-hover:underline">เติมด้วยค่าที่กำหนดเอง</h3>
+            </div>
             :
             <div onClick={()=>setCleanMenu(1)} className='flex flex-row group hover:cursor-pointer'>
                 <div className='flex items-center mr-8'>
                     <Image src={arrowLeftWhite} alt='arrow' objectFit='contain'/>
                 </div>
-                <h3 className="text-[20px] text-white group-hover:underline">เลือกคอลัมน์ที่จะทำความสะอาดข้อมูลเลือกคอลัมน์ที่จะทำความสะอาดข้อมูล</h3>
+                <h3 className="text-[20px] text-white group-hover:underline">เลือกคอลัมน์ที่จะทำความสะอาดข้อมูล</h3>
             </div>
             }
             <button onClick={handleClose} className='text-[24px] text-white h-full px-3 text-center hover:text-black'>
@@ -170,7 +199,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                 </div>
             </div>
 
-            <div onClick={()=>{setCleanMenu(5); setCheckedItems(Array(columns.length).fill(false)); setMethod("5")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
+            <div onClick={()=>{setCleanMenu(14); setCheckedItems(Array(columns.length).fill(false)); setMethod("5")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
                 <div className='flex flex-col'>
                     <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>เปลี่ยนค่าวันที่ให้เป็นมาตรฐาน (Standardize Date Columns)</p>
                     <p className='text-[16px] text-textGray cursor-pointer'>ใช้มาตรฐาน ISO 8601 (“ปปปป-ดด-วว”)</p>
@@ -221,7 +250,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                 </div>
             </div>
 
-            <div onClick={()=>{setCleanMenu(5); setCheckedItems(Array(columns.length).fill(false)); setMethod("10")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
+            <div onClick={()=>{setCleanMenu(10); setCheckedItems(Array(columns.length).fill(false)); setMethod("10")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
                 <div className='flex flex-col'>
                     <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>ลบค่าผิดปกติทางสถิติ (Delete Outliers)</p>
                     <p className='text-[16px] text-textGray cursor-pointer'>นำแถวข้อมูลที่มีค่าผิดปกติทางสถิติออก</p>
@@ -244,7 +273,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
                 </div>
             </div>
-            <div onClick={()=>setCleanMenu(3)} className='flex pl-12 flex-row justify-between border-b border-borderNavbar hover:bg-gray cursor-pointer'>
+            <div onClick={()=>{setCleanMenu(3); setOption4("fillManual");}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar hover:bg-gray cursor-pointer'>
                     <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>เติมด้วยค่าที่กำหนดเอง</p>
                 <div className='flex items-center mr-8'>
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
@@ -260,7 +289,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
           :cleanMenu==3&&option4=="mean"?
           <div className='flex pl-12 flex-col justify-center border-b border-borderNavbar py-4 gap-4'>
             <div className='flex flex-row gap-8'>
-                <p className='text-[20px] font-kanit text-textPrimary'>ระบบจำทำการคำนวณค่าและแทนที่ข้อมูลลโดยอัตโนมัติ</p>
+                <p className='text-[20px] font-kanit text-textPrimary'>ระบบจำทำการคำนวณค่าและแทนที่ข้อมูลโดยอัตโนมัติ</p>
                 <div className='flex items-center mr-8'>
                     <button 
                     onClick={()=>{
@@ -273,7 +302,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
           :cleanMenu==3&&option4=="median"?
           <div className='flex pl-12 flex-col justify-center border-b border-borderNavbar py-4 gap-4'>
             <div className='flex flex-row gap-8'>
-                <p className='text-[20px] font-kanit text-textPrimary'>ระบบจำทำการคำนวณค่าและแทนที่ข้อมูลลโดยอัตโนมัติ</p>
+                <p className='text-[20px] font-kanit text-textPrimary'>ระบบจำทำการคำนวณค่าและแทนที่ข้อมูลโดยอัตโนมัติ</p>
                 <div className='flex items-center mr-8'>
                     <button 
                     onClick={()=>{
@@ -286,7 +315,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
           :cleanMenu==3&&option4=="remove"?
           <div className='flex pl-12 flex-col justify-center border-b border-borderNavbar py-4 gap-4'>
             <div className='flex flex-row gap-8'>
-                <p className='text-[20px] font-kanit text-textPrimary'>ระบบจำทำการคำนวณค่าและแทนที่ข้อมูลลโดยอัตโนมัติ</p>
+                <p className='text-[20px] font-kanit text-textPrimary'>ระบบจำทำการคำนวณค่าและแทนที่ข้อมูลโดยอัตโนมัติ</p>
                 <div className='flex items-center mr-8'>
                     <button 
                     onClick={()=>{
@@ -309,7 +338,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                             handleConfirm()
                         }
                     }} 
-                    className='text-[20px] font-kanit bg-primary rounded-md py-2 px-4 text-white'>ยืนยัน</button>
+                    className={`text-[20px] font-kanit rounded-md py-2 px-4 text-white ${numberFill!=""?`bg-primary hover:bg-hoverPrimary`:`bg-gray hover:cursor-not-allowed`}`}>ยืนยัน</button>
                 </div>
             </div>
           </div>
@@ -367,7 +396,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                             handleConfirm()
                         }
                     }} 
-                    className='text-[20px] font-kanit bg-primary rounded-md py-2 px-4 text-white'>ยืนยัน</button>
+                    className={`text-[20px] font-kanit rounded-md py-2 px-4 text-white ${numberFill!=""?`bg-primary hover:bg-hoverPrimary`:`bg-gray hover:cursor-not-allowed`}`}>ยืนยัน</button>
                 </div>
             </div>
           </div>
@@ -403,7 +432,116 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
               <button onClick={()=>setCleanMenu(2)} disabled={!isAnyCheckboxChecked} className={`text-[20px] font-kanit  px-6 py-2 rounded-lg ${isAnyCheckboxChecked?`bg-primary text-white hover:bg-hoverPrimary`:`bg-gray hover:cursor-not-allowed`} `}>ถัดไป <span className='ml-4'>{"->"}</span></button>
             </div>
           </div>
-          :<p></p>}
+          :cleanMenu==10?<div className='flex flex-col'>
+          {columns.map((column, index)=>{
+            return(
+                <label key={index} className='flex flex-row w-full justify-between items-center gap-2 hover:cursor-pointer border-b border-borderNavbar p-3 hover:bg-gray'>
+                    <input type="checkbox" checked={checkedItems[index]} onChange={() => handleCheckboxChange(index)} className='hover:cursor-pointer'/>
+                    <p className='w-full text-[20px] font-kanit text-textPrimary'>{column.label}</p>
+                </label>
+            )
+          })}
+        <div className='w-full flex items-center justify-end p-4'>
+          <button onClick={()=>setCleanMenu(11)} disabled={!isAnyCheckboxChecked} className={`text-[20px] font-kanit  px-6 py-2 rounded-lg ${isAnyCheckboxChecked?`bg-primary text-white hover:bg-hoverPrimary`:`bg-gray hover:cursor-not-allowed`} `}>ถัดไป <span className='ml-4'>{"->"}</span></button>
+        </div>
+      </div>
+      
+      :cleanMenu==11?
+      <div className="relative flex-auto">
+          <div onClick={()=>{ setCleanMenu(12); setNumberFill("clamp")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar hover:bg-gray cursor-pointer'>
+                  <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>เปลี่ยนเป็นค่ามากที่สุดหรือน้อยที่สุดที่ไม่ผิดปกติทางสถิติ</p>
+              <div className='flex items-center mr-8'>
+                  <Image src={afterArrow} alt='arrow' objectFit='fill'/>
+              </div>
+          </div>
+          <div onClick={()=>{ setCleanMenu(13)}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar hover:bg-gray cursor-pointer'>
+                  <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>เปลี่ยนเป็นค่าที่ผู้ใช้ต้องการ</p>
+              <div className='flex items-center mr-8'>
+                  <Image src={afterArrow} alt='arrow' objectFit='fill'/>
+              </div>
+          </div>
+          
+        </div>
+        :cleanMenu==12?
+        <div className='flex pl-12 flex-col justify-center border-b border-borderNavbar py-4 gap-4'>
+            <div className='flex flex-row gap-8'>
+                <p className='text-[20px] font-kanit text-textPrimary'>ระบบจำทำการคำนวณค่าและแทนที่ข้อมูลโดยอัตโนมัติ</p>
+                <div className='flex items-center mr-8'>
+                    <button 
+                    onClick={()=>{
+                        handleConfirm()
+                    }} 
+                    className='text-[20px] font-kanit bg-primary rounded-md py-2 px-4 text-white'>ยืนยัน</button>
+                </div>
+            </div>
+          </div>
+        :cleanMenu==13?
+        <div className='flex pl-12 flex-col justify-center border-b border-borderNavbar py-4 gap-4'>
+            <p className='text-[20px] font-kanit text-textPrimary'>ใส่ข้อมูล</p>
+            <div className='flex flex-row gap-8'>
+                <input type='text' value={numberFill} className='text-start text-[20px] text-textPrimary border-2 w-full rounded-md px-3'
+                onChange={(e)=>{setNumberFill(e.target.value); setOption4(e.target.value)}}/>
+                <div className={`flex items-center mr-8 `}>
+                    <button 
+                    onClick={()=>{
+                        if(numberFill!=""){
+                            handleConfirm()
+                        }
+                    }} 
+                    className={`text-[20px] font-kanit rounded-md py-2 px-4 text-white ${numberFill!=""?`bg-primary hover:bg-hoverPrimary`:`bg-gray hover:cursor-not-allowed`}`}>ยืนยัน</button>
+                </div>
+            </div>
+          </div>
+      :cleanMenu==14?
+      <div className='flex flex-col'>
+              {columns.map((column, index) => (
+                <label key={index} className='flex flex-row w-full justify-between items-center gap-2 hover:cursor-pointer border-b border-borderNavbar p-3 hover:bg-gray'>
+                    <input
+                    type='radio'
+                    name='radioGroup'  
+                    onChange={() => handleRadio3Check(column.dataKey)}
+                    className='hover:cursor-pointer'
+                    />
+                    <p className='w-full text-[20px] font-kanit text-textPrimary'>{column.label}</p>
+                </label>
+                ))}
+            <div className='w-full flex items-center justify-end p-4'>
+              <button onClick={()=>setCleanMenu(15)} disabled={!radio3} className={`text-[20px] font-kanit  px-6 py-2 rounded-lg ${radio3?`bg-primary text-white hover:bg-hoverPrimary`:`bg-gray hover:cursor-not-allowed`} `}>ถัดไป <span className='ml-4'>{"->"}</span></button>
+            </div>
+          </div>
+          :cleanMenu==15?
+          <div className='flex px-12 flex-col justify-center border-b border-borderNavbar py-4 gap-4'>
+          <div className='flex flex-col gap-8 items-start'>
+              <div className='flex flex-col w-full'>
+                <p className='text-[20px] font-kanit text-textPrimary'>แบ่งโดยใช้ (เช่น , : _ -)</p>
+                <input type='text' value={delimiter} className='text-start text-[20px] text-textPrimary border-2 w-full rounded-md px-3'
+                onChange={(e)=>{setDelimiter(e.target.value); setOption4(e.target.value)}}/>
+              </div>
+              <div className='flex flex-col w-full'>
+                <p className='text-[20px] font-kanit text-textPrimary'>ชื่อของคอลัมน์ที่ 1</p>
+                <input type='text' value={column1} className='text-start text-[20px] text-textPrimary border-2 w-full rounded-md px-3'
+                onChange={(e)=>{setColumn1(e.target.value); setOption4(e.target.value)}}/>
+              </div>
+              <div className='flex flex-col w-full'>
+                <p className='text-[20px] font-kanit text-textPrimary'>ชื่อของคอลัมน์ที่ 2</p>
+                <input type='text' value={column2} className='text-start text-[20px] text-textPrimary border-2 w-full rounded-md px-3'
+                onChange={(e)=>{setColumn2(e.target.value); setOption4(e.target.value)}}/>
+              </div>
+              <div className={`flex w-full justify-end`}>
+                  <button 
+                  onClick={()=>{
+                      if(delimiter!=""&&column1!=""&&column2!=""){
+                          handleConfirm()
+                      }
+                  }} 
+                  className={`text-[20px] font-kanit rounded-md py-2 px-4 text-white ${delimiter!=""&&column1!=""&&column2!=""?`bg-primary hover:bg-hoverPrimary`:`bg-gray hover:cursor-not-allowed`}`}>ยืนยัน</button>
+              </div>
+          </div>
+        </div>
+
+          :
+          <p></p>
+    }
         </div>
       </div>
     </div>

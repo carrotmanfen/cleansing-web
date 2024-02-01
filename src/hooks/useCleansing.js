@@ -48,6 +48,9 @@ export default function useCleansing() {
             else if(method=="8"){
                 urlMethod = "flagoutlier/check"
             }
+            else if(method=="10"){
+                urlMethod = "changeoutlier/check"
+            }
             const res = await axios.post(url+urlMethod, requestBody, {headers:headers});
             console.log(res);
             if (res.status === 200|| res.status==201) {
@@ -195,6 +198,10 @@ export default function useCleansing() {
             else if(method=="8"){
                 urlMethod = "flagoutlier/clean"
                 clean_name = "ระบุค่าผิดปกติทางสถิติ"
+            }
+            else if(method=="10"){
+                urlMethod = "changeoutlier/clean"
+                clean_name = "ลบค่าผิดปกติทางสถิติ"
             }
             const res = await axios.post(url+urlMethod, requestBody, {headers:headers});
             console.log(res);

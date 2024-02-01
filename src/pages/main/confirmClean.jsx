@@ -170,6 +170,14 @@ const ConfirmClean = () => {
     }else if(searchMethod=="4"){
         const searchOrderSelect = queryParams.get('orderSelect')
         dataSet.order_select = searchOrderSelect
+    }else if(searchMethod=="10"){
+        const searchOrder = queryParams.get('order')
+        const orderValue = parseFloat(searchOrder)
+        if(!isNaN(orderValue)){
+            dataSet.order_select = orderValue
+        }else{
+            dataSet.order_select = searchOrder
+        }
     }
     console.log("confirm");
     cleanConfirm(searchMethod, dataSet, searchProjectId)
@@ -188,22 +196,30 @@ const ConfirmClean = () => {
             dataSet.columns_match=resultArray
             if(searchMethod=="3"){
                 const searchNewValue = queryParams.get('newValue');
-                const newValue = parseInt(searchNewValue)
+                const newValue = parseFloat(searchNewValue)
                 const searchOldValue = queryParams.get('oldValue');
-                const oldValue = parseInt(searchOldValue)
+                const oldValue = parseFloat(searchOldValue)
                 if(!isNaN(newValue)) {
                     dataSet.data_change = newValue
-                  } else {
-                      dataSet.data_change = searchNewValue
-                  }
-                  if(!isNaN(oldValue)) {
-                    dataSet.data_select = oldValue
-                  } else {
-                      dataSet.data_select = searchOldValue
-                  }
+                } else {
+                    dataSet.data_change = searchNewValue
+                }
+                if(!isNaN(oldValue)) {
+                dataSet.data_select = oldValue
+                } else {
+                    dataSet.data_select = searchOldValue
+                }
             }else if(searchMethod=="4"){
                 const searchOrderSelect = queryParams.get('orderSelect')
                 dataSet.order_select = searchOrderSelect
+            }else if(searchMethod=="10"){
+                const searchOrder = queryParams.get('order')
+                const orderValue = parseFloat(searchOrder)
+                if(!isNaN(orderValue)){
+                    dataSet.order_select = orderValue
+                }else{
+                    dataSet.order_select = searchOrder
+                }
             }
             getDataCheck(searchMethod,dataSet)
         }
