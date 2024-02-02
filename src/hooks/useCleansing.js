@@ -42,6 +42,9 @@ export default function useCleansing() {
             else if(method=="4"){
                 urlMethod = "managenavalue/check"
             }
+            else if(method=="5"){
+                urlMethod = "splitcolumn/check"
+            }
             else if(method=="7"){
                 urlMethod = "removeunrnumber/check"
             }
@@ -186,6 +189,10 @@ export default function useCleansing() {
             else if (method=="4"){
                 urlMethod = "managenavalue/clean"
                 clean_name = "จัดการข้อมูลที่ขาดหายไป"
+            }
+            else if(method=="5"){
+                urlMethod = "splitcolumn/clean"
+                clean_name = "แยกคอลัมน์"
             }
             else if(method=="6") {
                 urlMethod = "replaceexcdata/clean"

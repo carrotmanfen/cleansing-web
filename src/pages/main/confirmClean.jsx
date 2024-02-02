@@ -170,6 +170,14 @@ const ConfirmClean = () => {
     }else if(searchMethod=="4"){
         const searchOrderSelect = queryParams.get('orderSelect')
         dataSet.order_select = searchOrderSelect
+    }else if (searchMethod=="5"){
+        const searchDelimiter = queryParams.get('delimiter')
+        const searchCol1 = queryParams.get('columnName1')
+        const searchCol2 = queryParams.get('columnName2')
+        dataSet.delimiter = searchDelimiter
+        dataSet.column_1 = searchCol1
+        dataSet.column_2 = searchCol2
+        dataSet.columns_match = resultArray[0]
     }else if(searchMethod=="10"){
         const searchOrder = queryParams.get('order')
         const orderValue = parseFloat(searchOrder)
@@ -212,7 +220,16 @@ const ConfirmClean = () => {
             }else if(searchMethod=="4"){
                 const searchOrderSelect = queryParams.get('orderSelect')
                 dataSet.order_select = searchOrderSelect
-            }else if(searchMethod=="10"){
+            }else if (searchMethod=="5"){
+                const searchDelimiter = queryParams.get('delimiter')
+                const searchCol1 = queryParams.get('columnName1')
+                const searchCol2 = queryParams.get('columnName2')
+                dataSet.delimiter = searchDelimiter
+                dataSet.column_1 = searchCol1
+                dataSet.column_2 = searchCol2
+                dataSet.columns_match = resultArray[0]
+            }
+            else if(searchMethod=="10"){
                 const searchOrder = queryParams.get('order')
                 const orderValue = parseFloat(searchOrder)
                 if(!isNaN(orderValue)){

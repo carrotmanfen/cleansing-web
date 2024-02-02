@@ -62,7 +62,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
         }else if(cleanMethod==4){
             router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+columnSelect+"&orderSelect="+option4)
         }else if(cleanMethod==5){
-            router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+columnSelect+"&delimiter="+delimiter+"&columnName1="+column1+"&columnName2="+column2)
+            router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+radio3+"&delimiter="+delimiter+"&columnName1="+column1+"&columnName2="+column2)
         }else if(cleanMethod==10){
             router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+columnSelect+"&order="+numberFill)
         }
@@ -182,7 +182,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
 
             <div onClick={()=>{setCleanMenu(6); setCheckedItems(Array(columns.length).fill(false)); setMethod("3")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
                 <div className='flex flex-col'>
-                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>แก้ไขข้อมูลที่ผิดปกติ</p>
+                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>แก้ไขข้อมูลที่ผิดปกติ (Edit Inconsistant Data)</p>
                     <p className='text-[16px] text-textGray cursor-pointer'>กับลบค่าว่างคือการลบข้อมูลค่าว่างคือการลบข้อมูลค่าว่าง</p>
                 </div>
                 <div className='flex items-center mr-8'>
@@ -201,8 +201,8 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
 
             <div onClick={()=>{setCleanMenu(14); setCheckedItems(Array(columns.length).fill(false)); setMethod("5")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
                 <div className='flex flex-col'>
-                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>เปลี่ยนค่าวันที่ให้เป็นมาตรฐาน (Standardize Date Columns)</p>
-                    <p className='text-[16px] text-textGray cursor-pointer'>ใช้มาตรฐาน ISO 8601 (“ปปปป-ดด-วว”)</p>
+                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>แยกคอลัมน์ (split column)</p>
+                    <p className='text-[16px] text-textGray cursor-pointer'>แยกโดยใช้ตัวแบ่ง (delimiter)</p>
                 </div>
                 <div className='flex items-center mr-8'>
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
@@ -515,7 +515,9 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
               <div className='flex flex-col w-full'>
                 <p className='text-[20px] font-kanit text-textPrimary'>แบ่งโดยใช้ (เช่น , : _ -)</p>
                 <input type='text' value={delimiter} className='text-start text-[20px] text-textPrimary border-2 w-full rounded-md px-3'
-                onChange={(e)=>{setDelimiter(e.target.value); setOption4(e.target.value)}}/>
+                onChange={(e)=>{const inputValue = e.target.value.slice(0, 1); 
+                setDelimiter(inputValue);
+                setOption4(inputValue);}}/>
               </div>
               <div className='flex flex-col w-full'>
                 <p className='text-[20px] font-kanit text-textPrimary'>ชื่อของคอลัมน์ที่ 1</p>
