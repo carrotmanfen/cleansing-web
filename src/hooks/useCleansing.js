@@ -51,6 +51,9 @@ export default function useCleansing() {
             else if(method=="8"){
                 urlMethod = "flagoutlier/check"
             }
+            else if(method=="9"){
+                urlMethod = "removeoutlier/check"
+            }
             else if(method=="10"){
                 urlMethod = "changeoutlier/check"
             }
@@ -204,6 +207,10 @@ export default function useCleansing() {
             }
             else if(method=="8"){
                 urlMethod = "flagoutlier/clean"
+                clean_name = "ระบุค่าผิดปกติทางสถิติ"
+            }
+            else if(method=="9"){
+                urlMethod = "removeoutlier/clean"
                 clean_name = "ระบุค่าผิดปกติทางสถิติ"
             }
             else if(method=="10"){
