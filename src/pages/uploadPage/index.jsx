@@ -99,17 +99,17 @@ const UploadPage = () => {
                             {
                                 file?
                                 <button onClick={onUpload} className='font-kanit text-[24px] px-8 py-2 bg-primary text-white rounded-3xl hover:bg-hoverPrimary'>
-                                    อัพโหลด
+                                    อัปโหลด
                                 </button>
                                 :
                                 <button  className='font-kanit text-[24px] px-8 py-2 bg-gray rounded-3xl pointer-events-none'>
-                                    อัพโหลด
+                                    อัปโหลด
                                 </button>
                             }
                         </div>
-                        <div className='text-[16px] font-kanit mt-8 px-24'>
+                        <div className='text-[16px] font-kanit mt-8 px-16'>
                             <p className='w-full text-center text-textPrimary text-[20px]'>อัปโหลดไฟล์ของคุณโดยที่</p>
-                            <p className='text-textGray'>- ต้องเป็นไฟล์ Csv, Excel เท่านั้น</p>
+                            <p className='text-textGray'>- ต้องเป็นไฟล์ json, csv, xls หรือ xlsx เท่านั้น</p>
                             <p className='text-textGray'>- ไฟล์ขนาดไม่เกิน 10 MB</p>
                         </div>
                     </div>
@@ -127,7 +127,7 @@ const UploadPage = () => {
                         </div>
                         <div className='text-[16px] font-kanit mt-8 px-24'>
                             <p className='w-full text-center text-textPrimary text-[20px]'>การนำไฟล์จากฐานข้อมูลมาใช้</p>
-                            <p className='text-textGray'>- ต้องเป็น mysql เท่านั้น</p>
+                            <p className='text-textGray'>- ต้องเป็น MySQL เท่านั้น</p>
                             <p className='text-textGray'>- ไฟล์ขนาดไม่เกิน 10 MB</p>
                         </div>
                     </div>

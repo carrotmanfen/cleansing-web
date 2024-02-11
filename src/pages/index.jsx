@@ -3,7 +3,7 @@ import Image from 'next/legacy/image'
 import Link from 'next/link'
 import { logo } from '@/assets';
 import { Navbar } from '../components/Navbar'
-import { pic } from '@/assets'
+import { upload, connectMysql, functionCleansing, changProjectName, test } from '@/assets'
 import { atomUserRole } from "@/atoms/atomUserRole";
 import { useRecoilState } from "recoil";
 import useAccount from '@/hooks/useAccount';
@@ -38,22 +38,28 @@ export default function Home() {
             <Link href={"/uploadPage"} className='px-12 py-2 bg-primary text-white text-[24px] w-fit rounded-2xl mt-8 hover:bg-hoverPrimary'>ทำความสะอาดข้อมูล</Link>
           </div>
           <div className='w-[700px] flex flex-col mt-20 justify-around border-0 pb-20'>
-            <p className='text-textPrimary font-kanit text-[24px]'>Some of Feature</p>
+            <p className='text-textPrimary font-kanit text-[24px]'>อัปโหลดไฟล์</p>
             <div className='w-[700px] mt-5 flex flex-col justify-center border-0'>
-              <Image src={pic} width={700} height={500} objectFit='corver' alt="pic" />
-              <p className='text-textGray text-[16px] mt-2'> Some of description Some of description Some of description Some of description Some of description Some of description Some of description Some of description Some of descriptionSome of descriptionSome of descriptionSome of descriptionSome of description</p>
+              <Image src={test} width={1200} height={800} objectFit='contain' alt="upload" />
+              <p className='text-textGray text-[16px] mt-2'> ผู้ใช้งานสามารถอัพโหลดไฟล์ประเภท json, csv, xls และ xlsx ที่มีข้อมูลอยู่ในรูปแบบตาราง หรือเลือกเชื่อมต่อฐานข้อมูล MySQL หรือเลือกใช้ชุดข้อมูลทดลองที่มีบนเว็บไซต์ เพื่อนำมาทำความสะอาด </p>
             </div>
 
-            <p className='text-textPrimary font-kanit text-[24px] mt-5'>Some of Feature 2</p>
+            <p className='text-textPrimary font-kanit text-[24px] mt-5'>เชื่อมฐานข้อมูล</p>
             <div className='w-[700px] mt-5 flex flex-col justify-center border-0'>
-              <Image src={pic} width={700} height={500} objectFit='corver' alt="pic" />
-              <p className='text-textGray text-[16px] mt-2'> Some of description Some of description Some of description Some of description Some of description Some of description Some of description Some of description Some of descriptionSome of descriptionSome of descriptionSome of descriptionSome of description</p>
+              <Image src={test} width={700} height={500} objectFit='corver' alt="connectMysql" />
+              <p className='text-textGray text-[16px] mt-2'> ผู้ใช้งานสามารถเชื่อมฐานข้อมูล MySQL เพื่อดึงข้อมูลมาทำความสะอาด</p>
             </div>
 
-            <p className='text-textPrimary font-kanit text-[24px] mt-5'>Some of Feature 3</p>
+            <p className='text-textPrimary font-kanit text-[24px] mt-5'>ฟังก์ชันทำความสะอาดข้อมูล</p>
             <div className='w-[700px] mt-5 flex flex-col justify-center border-0'>
-              <Image src={pic} width={700} height={500} objectFit='corver' alt="pic" />
-              <p className='text-textGray text-[16px] mt-2'> Some of description Some of description Some of description Some of description Some of description Some of description Some of description Some of description Some of descriptionSome of descriptionSome of descriptionSome of descriptionSome of description</p>
+              <Image src={functionCleansing} width={700} height={500} objectFit='corver' alt="functionCleansing" />
+              <p className='text-textGray text-[16px] mt-2'> มีฟังก์ชันทำความสะอาดข้อมูลทั้ง 10 ฟังก์ชัน ให้ผู้ใช้งานได้เลือกใช้ให้เหมาะสมกับข้อมูลของผู้ใช้งาน ไม่ว่าจะเป็น ลบคอลัมน์ข้อมูลที่ไม่เกี่ยวข้อง (Delete Irrelevant Data), ลบข้อมูลที่ซ้ำซ้อน (Delete Duplicate Data), แก้ไขข้อมูลที่ผิดปกติ (Edit inconsistent value) ฯลฯ เป็นต้น</p>
+            </div>
+
+            <p className='text-textPrimary font-kanit text-[24px] mt-5'>ดาวน์โหลดไฟล์</p>
+            <div className='w-[700px] mt-5 flex flex-col justify-center border-0'>
+              <Image src={changProjectName} width={700} height={500} objectFit='corver' alt="changProjectName" />
+              <p className='text-textGray text-[16px] mt-2'> เมื่อผู้ใช้งานทำความสะอาดข้อมูลเสร็จแล้ว สามารถดาวน์โหลดไฟล์ข้อมูลหลังทำความสะอาดได้ โดยไฟล์ที่ดาวโหลดจะเป็นไฟล์ .csv</p>
             </div>
           </div>
         </div>
