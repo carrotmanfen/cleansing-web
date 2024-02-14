@@ -178,6 +178,13 @@ const ConfirmClean = () => {
         dataSet.column_1 = searchCol1
         dataSet.column_2 = searchCol2
         dataSet.columns_match = resultArray[0]
+    }else if (searchMethod=="55"){
+        const searchDelimiter = queryParams.get('delimiter')
+        const searchColNew = queryParams.get('columnNewName')
+        dataSet.delimiter = searchDelimiter
+        dataSet.column_new = searchColNew
+        dataSet.columns_match1 = resultArray[0]
+        dataSet.columns_match2 = resultArray[1]
     }else if(searchMethod=="10"){
         const searchOrder = queryParams.get('order')
         const orderValue = parseFloat(searchOrder)
@@ -228,6 +235,13 @@ const ConfirmClean = () => {
                 dataSet.column_1 = searchCol1
                 dataSet.column_2 = searchCol2
                 dataSet.columns_match = resultArray[0]
+            }else if (searchMethod=="55"){
+                const searchDelimiter = queryParams.get('delimiter')
+                const searchColNew = queryParams.get('columnNewName')
+                dataSet.delimiter = searchDelimiter
+                dataSet.column_new = searchColNew
+                dataSet.columns_match1 = resultArray[0]
+                dataSet.columns_match2 = resultArray[1]
             }
             else if(searchMethod=="10"){
                 const searchOrder = queryParams.get('order')

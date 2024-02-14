@@ -22,6 +22,22 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
       setCheckedItems(newCheckedItems);
       console.log(newCheckedItems)
     };
+    const handleCheckboxChangeOnly2 = (index) => {
+        const newCheckedItems = [...checkedItems];
+        
+        // Count the number of checked items
+        const checkedCount = newCheckedItems.filter((item) => item).length;
+      
+        // If already two items are checked, prevent further changes
+        if (checkedCount === 2 && !newCheckedItems[index]) {
+          return;
+        }
+      
+        // Toggle the checkbox
+        newCheckedItems[index] = !newCheckedItems[index];
+        setCheckedItems(newCheckedItems);
+        console.log(newCheckedItems);
+      };
     const handleRadio3Check = (value) =>{
         setRadio3(value)
     }
@@ -63,6 +79,8 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
             router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+columnSelect+"&orderSelect="+option4)
         }else if(cleanMethod==5){
             router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+radio3+"&delimiter="+delimiter+"&columnName1="+column1+"&columnName2="+column2)
+        }else if(cleanMethod==55){
+            router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+columnSelect+"&delimiter="+delimiter+"&columnNewName="+column1)
         }else if(cleanMethod==10){
             router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+columnSelect+"&order="+numberFill)
         }
@@ -146,6 +164,29 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                 </div>
                 <h3 className="text-[20px] text-white group-hover:underline">เติมด้วยค่าที่กำหนดเอง</h3>
             </div>
+            :cleanMenu==15?
+            <div onClick={()=>setCleanMenu(14)} className='flex flex-row group hover:cursor-pointer'>
+                <div className='flex items-center mr-8'>
+                    <Image src={arrowLeftWhite} alt='arrow' objectFit='contain'/>
+                </div>
+                <h3 className="text-[20px] text-white group-hover:underline">กรอกข้อมูลให้ครบถ้วน</h3>
+            </div>
+            
+            :cleanMenu==16?
+            <div onClick={()=>setCleanMenu(1)} className='flex flex-row group hover:cursor-pointer'>
+                <div className='flex items-center mr-8'>
+                    <Image src={arrowLeftWhite} alt='arrow' objectFit='contain'/>
+                </div>
+                <h3 className="text-[20px] text-white group-hover:underline">เลือกคอลัมน์ที่ต้องการเชื่อม (เลือก 2 คอลัมน์)</h3>
+            </div>
+            :cleanMenu==17?
+            <div onClick={()=>setCleanMenu(16)} className='flex flex-row group hover:cursor-pointer'>
+                <div className='flex items-center mr-8'>
+                    <Image src={arrowLeftWhite} alt='arrow' objectFit='contain'/>
+                </div>
+                <h3 className="text-[20px] text-white group-hover:underline">กรอกข้อมูลให้ครบถ้วน</h3>
+            </div>
+            
             :
             <div onClick={()=>setCleanMenu(1)} className='flex flex-row group hover:cursor-pointer'>
                 <div className='flex items-center mr-8'>
@@ -203,6 +244,15 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                 <div className='flex flex-col'>
                     <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>แยกคอลัมน์ (split column)</p>
                     <p className='text-[16px] text-textGray cursor-pointer'>แยกโดยใช้ตัวแบ่ง (delimiter)</p>
+                </div>
+                <div className='flex items-center mr-8'>
+                    <Image src={afterArrow} alt='arrow' objectFit='fill'/>
+                </div>
+            </div>
+            <div onClick={()=>{setCleanMenu(16); setCheckedItems(Array(columns.length).fill(false)); setMethod("55")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
+                <div className='flex flex-col'>
+                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>รวมคอลัมน์ (merge column)</p>
+                    <p className='text-[16px] text-textGray cursor-pointer'>ทำการรวมคอลัมน์ 2 คอลัมน์โดยมีตัวเชื่อม (connector)</p>
                 </div>
                 <div className='flex items-center mr-8'>
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
@@ -522,12 +572,12 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
               <div className='flex flex-col w-full'>
                 <p className='text-[20px] font-kanit text-textPrimary'>ชื่อของคอลัมน์ที่ 1</p>
                 <input type='text' value={column1} className='text-start text-[20px] text-textPrimary border-2 w-full rounded-md px-3'
-                onChange={(e)=>{setColumn1(e.target.value); setOption4(e.target.value)}}/>
+                onChange={(e)=>{setColumn1(e.target.value); }}/>
               </div>
               <div className='flex flex-col w-full'>
                 <p className='text-[20px] font-kanit text-textPrimary'>ชื่อของคอลัมน์ที่ 2</p>
                 <input type='text' value={column2} className='text-start text-[20px] text-textPrimary border-2 w-full rounded-md px-3'
-                onChange={(e)=>{setColumn2(e.target.value); setOption4(e.target.value)}}/>
+                onChange={(e)=>{setColumn2(e.target.value); }}/>
               </div>
               <div className={`flex w-full justify-end`}>
                   <button 
@@ -537,6 +587,48 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                       }
                   }} 
                   className={`text-[20px] font-kanit rounded-md py-2 px-4 text-white ${delimiter!=""&&column1!=""&&column2!=""?`bg-primary hover:bg-hoverPrimary`:`bg-gray hover:cursor-not-allowed`}`}>ยืนยัน</button>
+              </div>
+          </div>
+        </div>
+
+          :cleanMenu==16?
+          <div className='flex flex-col'>
+              {columns.map((column, index)=>{
+                return(
+                    <label key={index} className='flex flex-row w-full justify-between items-center gap-2 hover:cursor-pointer border-b border-borderNavbar p-3 hover:bg-gray'>
+                        <input type="checkbox" checked={checkedItems[index]} onChange={() => handleCheckboxChangeOnly2(index)} className='hover:cursor-pointer'/>
+                        <p className='w-full text-[20px] font-kanit text-textPrimary'>{column.label}</p>
+                    </label>
+                )
+              })}
+            <div className='w-full flex items-center justify-end p-4'>
+              <button onClick={()=>{setCleanMenu(17);}} disabled={checkedItems.filter(item => item).length !== 2} className={`text-[20px] font-kanit  px-6 py-2 rounded-lg ${checkedItems.filter(item => item).length == 2?`bg-primary text-white hover:bg-hoverPrimary`:`bg-gray hover:cursor-not-allowed`} `}>ถัดไป <span className='ml-4'>{"->"}</span></button>
+            </div>
+          </div>
+          
+          :cleanMenu==17?
+          <div className='flex px-12 flex-col justify-center border-b border-borderNavbar py-4 gap-4'>
+          <div className='flex flex-col gap-8 items-start'>
+              <div className='flex flex-col w-full'>
+                <p className='text-[20px] font-kanit text-textPrimary'>เชื่อมโดยใช้ (เช่น , : _ -)</p>
+                <input type='text' value={delimiter} className='text-start text-[20px] text-textPrimary border-2 w-full rounded-md px-3'
+                onChange={(e)=>{const inputValue = e.target.value.slice(0, 1); 
+                setDelimiter(inputValue);
+                }}/>
+              </div>
+              <div className='flex flex-col w-full'>
+                <p className='text-[20px] font-kanit text-textPrimary'>ชื่อของคอลัมน์ใหม่</p>
+                <input type='text' value={column1} className='text-start text-[20px] text-textPrimary border-2 w-full rounded-md px-3'
+                onChange={(e)=>{setColumn1(e.target.value); }}/>
+              </div>
+              <div className={`flex w-full justify-end`}>
+                  <button 
+                  onClick={()=>{
+                      if(delimiter!=""&&column1!=""){
+                          handleConfirm()
+                      }
+                  }} 
+                  className={`text-[20px] font-kanit rounded-md py-2 px-4 text-white ${delimiter!=""&&column1!=""?`bg-primary hover:bg-hoverPrimary`:`bg-gray hover:cursor-not-allowed`}`}>ยืนยัน</button>
               </div>
           </div>
         </div>

@@ -45,6 +45,9 @@ export default function useCleansing() {
             else if(method=="5"){
                 urlMethod = "splitcolumn/check"
             }
+            else if(method=="55"){
+                urlMethod = "joincolumns/check"
+            }
             else if(method=="7"){
                 urlMethod = "removeunrnumber/check"
             }
@@ -196,6 +199,10 @@ export default function useCleansing() {
             else if(method=="5"){
                 urlMethod = "splitcolumn/clean"
                 clean_name = "แยกคอลัมน์"
+            }
+            else if(method=="55"){
+                urlMethod = "joincolumns/clean"
+                clean_name = "รวมคอลัมน์"
             }
             else if(method=="6") {
                 urlMethod = "replaceexcdata/clean"
