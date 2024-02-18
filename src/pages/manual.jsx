@@ -71,7 +71,7 @@ const Manual = () => {
                         <div class="rounded-lg shadow-xl dark:shadow-gray-900">
                             <Image src={theory} width={700} height={400} objectFit='contain' alt="theory" />
                         </div>
-                        <p className='text-textGray text-[16px] mt-6'> ภายในหน้า <strong>ทฤษฎี</strong> จะมีรายละเอียดการใช้งานฟังก์ชันทำความสะอาดทั้ง 10 ฟังก์ชัน ให้ผู้ใช้งานได้ศึกษาวิธีการใช้งานแต่ละฟังก์ชันอย่างละเอียด พร้อมทั้งคำอธิบายหลักการทำงานของฟังก์ชันนั้นๆ เพื่อให้ผู้ใช้งานสามารถเข้าใจหลักการทำงานของฟังก์ชันความสะอาดข้อมูลทั้ง 10 ฟังก์ชัน และใช้งานได้อย่างมีประสิทธิภาพมากยิ่งขึ้น</p>
+                        <p className='text-textGray text-[16px] mt-6'> ภายในหน้า <strong>ทฤษฎี</strong> จะมีรายละเอียดการใช้งานฟังก์ชันทำความสะอาดทั้ง 11 ฟังก์ชัน ให้ผู้ใช้งานได้ศึกษาวิธีการใช้งานแต่ละฟังก์ชันอย่างละเอียด พร้อมทั้งคำอธิบายหลักการทำงานของฟังก์ชันนั้นๆ เพื่อให้ผู้ใช้งานสามารถเข้าใจหลักการทำงานของฟังก์ชันความสะอาดข้อมูลทั้ง 11 ฟังก์ชัน และใช้งานได้อย่างมีประสิทธิภาพมากยิ่งขึ้น</p>
                     </div>
 
                     <p className='text-textPrimary font-kanit text-[24px] mt-5 mx-10'>•	โปรเจกต์ของฉัน</p>
@@ -137,7 +137,7 @@ const Manual = () => {
                         <div class="rounded-lg shadow-xl dark:shadow-gray-900">
                             <Image src={functionCleansing} width={700} height={400} objectFit='contain' alt="functionCleansing" />
                         </div>
-                        <p className='text-textGray text-[16px] mt-6 py-6'> เมื่อผู้ใช้งานกดปุ่ม <strong>ทำความสะอาดข้อมูล</strong> จะมี Pop up ฟังก์ชันทำความสะอาดข้อมูลทั้ง 10 ฟังก์ชัน ขึ้นมาให้ผู้ใช้งานได้เลือกว่าต้องการใช้ฟังก์ชันทำความสะอาดข้อมูลใดกับชุดข้อมูลนี้ โดยสามารถเลือกใช้ได้ทีละ 1 ฟังก์ชัน</p>
+                        <p className='text-textGray text-[16px] mt-6 py-6'> เมื่อผู้ใช้งานกดปุ่ม <strong>ทำความสะอาดข้อมูล</strong> จะมี Pop up ฟังก์ชันทำความสะอาดข้อมูลทั้ง 11 ฟังก์ชัน ขึ้นมาให้ผู้ใช้งานได้เลือกว่าต้องการใช้ฟังก์ชันทำความสะอาดข้อมูลใดกับชุดข้อมูลนี้ โดยสามารถเลือกใช้ได้ทีละ 1 ฟังก์ชัน</p>
                         <div class="rounded-lg shadow-xl dark:shadow-gray-900">
                             <Image src={selectColumn} width={700} height={400} objectFit='contain' alt="selectColumn" />
                         </div>
