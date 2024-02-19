@@ -7,11 +7,12 @@ export const PivotView = ({dataColumns, dataRows}) => {
     // dataColumns.sort().forEach(column => {
     // transformedData[column.dataKey] = dataRows.map(row => row[column.dataKey]);
     // });
+    
     function determineColumnType(columnValues) {
         // Your logic to determine the type based on the values
         // Example: Check if all values are numbers, strings, or a mix of both
         const allNumbers = columnValues.every(value => typeof value === 'number');
-        const allStrings = columnValues.every(value => typeof value === 'string');
+        const allStrings = columnValues.every(value => typeof value === 'string'||value === null);
       
         if (allNumbers) {
           return 'integer';
@@ -20,7 +21,7 @@ export const PivotView = ({dataColumns, dataRows}) => {
         } else {
           return 'decimal';
         }
-      }
+    }
 
     const transformedData = dataColumns.map(column => {
         const rowValue = dataRows.map(row => row[column.dataKey])
@@ -32,9 +33,9 @@ export const PivotView = ({dataColumns, dataRows}) => {
         switch (type) {
             case 'integer': chartType = 'bar';
             break;
-            case 'decimal': chartType = 'pie';
+            case 'decimal': chartType = 'bar';
             break;
-            case 'string': chartType = 'bar';
+            case 'string': chartType = 'non';
             break;
             case 'category': chartType = 'pie';
             break;

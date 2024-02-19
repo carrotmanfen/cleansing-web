@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 import { BarChartCell } from './BarChartCell';
+import { TableDataOfString } from './TableOfString';
 
 export const DataTable = ({ tableData, onSelectChange }) => {
   // Extract column names from the first row of the tableData
   const columns = Object.keys(tableData[0] || []);
+  
   console.log(columns)
   const [type, setType] = useState("string")
+  
   return (
     <table className='w-full table-auto'>
       <thead>
@@ -24,9 +27,13 @@ export const DataTable = ({ tableData, onSelectChange }) => {
         </tr>
       </thead>
       <tbody>
-        {tableData.map((rowData, rowIndex) => (
+        {tableData.map((rowData, rowIndex) => {
+            
+            return(
           <tr key={rowIndex}>
-            {columns.map((column, colIndex) => (
+            {columns.map((column, colIndex) => 
+            {
+                return(
               <td
                 key={colIndex}
                 className='border p-2 text-center text-[20px] '
@@ -87,18 +94,21 @@ export const DataTable = ({ tableData, onSelectChange }) => {
                         <BarChartCell data={rowData[column].data} type={rowData[column].type} />
                       ) : rowData[column].type === 'pie' ? (
                         <BarChartCell data={rowData[column].data} type={rowData[column].type} />
-                      ) :rowData[column].type === 'non' ?(
-                        <p>จำนวนข้อมูลซ้ำทั้งหมด : example แถว</p>
-                      ):<p></p>
+                      ) :rowData[column].type === 'non' ?
+                     
+                        <TableDataOfString data={rowData[column].data}/>
+                        
+                        // <p>จำนวนข้อมูลซ้ำทั้งหมด : example แถว</p>
+                      :<p></p>
                 )
 
                 :(<p></p>)
                 }
                 
               </td>
-            ))}
+            )})}
           </tr>
-        ))}
+        )})}
       </tbody>
     </table>
   );
