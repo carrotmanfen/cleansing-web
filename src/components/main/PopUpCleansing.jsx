@@ -223,8 +223,8 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
 
             <div onClick={()=>{setCleanMenu(6); setCheckedItems(Array(columns.length).fill(false)); setMethod("3")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
                 <div className='flex flex-col'>
-                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>แก้ไขข้อมูลที่ผิดปกติ (Edit Inconsistant Data)</p>
-                    <p className='text-[16px] text-textGray cursor-pointer'>กับลบค่าว่างคือการลบข้อมูลค่าว่างคือการลบข้อมูลค่าว่าง</p>
+                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>แก้ไขข้อมูลที่ไม่สอดคล้อง (Edit Inconsistant Data)</p>
+                    <p className='text-[16px] text-textGray cursor-pointer'>แก้ไขข้อมูลเดียวกันที่บันทึกไม่เหมือนกัน เช่น "กทม." , "กรุงเทพ" ให้เป็นรูปแบบเดียวกัน</p>
                 </div>
                 <div className='flex items-center mr-8'>
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
@@ -242,8 +242,8 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
 
             <div onClick={()=>{setCleanMenu(14); setCheckedItems(Array(columns.length).fill(false)); setMethod("5")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
                 <div className='flex flex-col'>
-                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>แยกคอลัมน์ (split column)</p>
-                    <p className='text-[16px] text-textGray cursor-pointer'>แยกโดยใช้ตัวแบ่ง (delimiter)</p>
+                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>แยกคอลัมน์ (Split Column)</p>
+                    <p className='text-[16px] text-textGray cursor-pointer'>แยกโดยใช้ตัวแบ่ง (Delimiter)</p>
                 </div>
                 <div className='flex items-center mr-8'>
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
@@ -251,8 +251,8 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
             </div>
             <div onClick={()=>{setCleanMenu(16); setCheckedItems(Array(columns.length).fill(false)); setMethod("55")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
                 <div className='flex flex-col'>
-                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>รวมคอลัมน์ (merge column)</p>
-                    <p className='text-[16px] text-textGray cursor-pointer'>ทำการรวมคอลัมน์ 2 คอลัมน์โดยมีตัวเชื่อม (connector)</p>
+                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>รวมคอลัมน์ (Merge Column)</p>
+                    <p className='text-[16px] text-textGray cursor-pointer'>ทำการรวมคอลัมน์ 2 คอลัมน์โดยมีตัวเชื่อม (Connector)</p>
                 </div>
                 <div className='flex items-center mr-8'>
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
