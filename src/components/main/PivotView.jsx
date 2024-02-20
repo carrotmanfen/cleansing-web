@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
 import { Bar } from 'react-chartjs-2';
 import { DataTable } from './DataTable';
+import { columns } from '@/constants/datasetTest1';
 
-export const PivotView = ({dataColumns, dataRows}) => {
+export const PivotView = ({dataColumns, dataRows, updateProjectFunction}) => {
     // const transformedData = {};
     // dataColumns.sort().forEach(column => {
     // transformedData[column.dataKey] = dataRows.map(row => row[column.dataKey]);
@@ -15,36 +16,39 @@ export const PivotView = ({dataColumns, dataRows}) => {
         const allStrings = columnValues.every(value => typeof value === 'string'||value === null);
       
         if (allNumbers) {
-          return 'integer';
+          return 'number';
         } else if (allStrings) {
           return 'string';
         } else {
-          return 'decimal';
+          return 'number';
         }
     }
 
     const transformedData = dataColumns.map(column => {
         const rowValue = dataRows.map(row => row[column.dataKey])
-        const type = determineColumnType(rowValue)
         const nullUndefinedCount = rowValue.filter(value => value === null || value === undefined).length;
         // const chartType
         let chartType;
 
-        switch (type) {
-            case 'integer': chartType = 'bar';
+        switch (column.type) {
+            case 'number': chartType = 'bar';
             break;
-            case 'decimal': chartType = 'bar';
+            case 'Number': chartType = 'bar';
             break;
             case 'string': chartType = 'non';
             break;
+            case 'String': chartType = 'non';
+            break;
             case 'category': chartType = 'pie';
+            break;
+            case 'Category': chartType = 'pie';
             break;
             default: chartType = 'non';
         }
         console.log(chartType)
         return {
           'ชื่อคอลัมน์': column.label,
-          'ประเภท': type, 
+          'ประเภท': column.type, 
           'ข้อมูลว่าง': nullUndefinedCount, 
           'แผนภูมิ': {
             type: chartType, 
@@ -54,63 +58,23 @@ export const PivotView = ({dataColumns, dataRows}) => {
       });
 
     console.log(transformedData)
-    // console.log(dataColumns)
-    // console.log(dataRows)
 
     const [tableData, setTableData] = useState(transformedData)
-    // const [tableData, setTableData] = useState([
-    //     {
-    //         'ชื่อคอลัมน์': 'January',
-    //         'ประเภท': 'integer',
-    //         'ข้อมูลว่าง': 40,
-    //         'แผนภูมิ': {
-    //             type:"pie",
-    //             data:[10, 20, 30, 40, 50]
-    //         },
-    //       },
-    //       {
-    //         'ชื่อคอลัมน์': 'February',
-    //         'ประเภท': 'category',
-    //         'ข้อมูลว่าง': 20,
-    //         'แผนภูมิ': {
-    //             type:"bar",
-    //             data:[10, 20, 30, 40, 50]
-    //         },
-    //       },
-    //       {
-    //         'ชื่อคอลัมน์': 'March',
-    //         'ประเภท': 'decimal',
-    //         'ข้อมูลว่าง': 40,
-    //         'แผนภูมิ': {
-    //             type:"pie",
-    //             data:[10, 20, 30, 40, 50]
-    //         },
-    //       },
-    //       {
-    //         'ชื่อคอลัมน์': 'April',
-    //         'ประเภท': 'decimal',
-    //         'ข้อมูลว่าง': 40,
-    //         'แผนภูมิ': {
-    //             type:"bar",
-    //             data:[10, 20, 30, 40, 50]
-    //         },
-    //       },
-    //       {
-    //         'ชื่อคอลัมน์': 'May',
-    //         'ประเภท': 'string',
-    //         'ข้อมูลว่าง': 40,
-    //         'แผนภูมิ': {
-    //             type:"non",
-    //             data:10
-    //         },
-    //       },
-    //   ]);
       console.log(tableData)
-      const handleSelectChange = (rowIndex, columnName, selectedValue) => {
+      const handleSelectChange = async(rowIndex, columnName, selectedValue) => {
         // Update the state with the new selected value
         const updatedTableData = [...tableData];
         updatedTableData[rowIndex][columnName] = selectedValue;
+        updatedTableData[rowIndex][columnName] = selectedValue;
         setTableData(updatedTableData);
+        const queryParams = new URLSearchParams(window.location.search);
+        const searchProjectId = queryParams.get('projectId');
+        dataColumns[rowIndex].type = selectedValue;
+        const data_set ={
+            columns: dataColumns,
+            rows: dataRows,
+        }
+        await updateProjectFunction(searchProjectId,data_set)
       };
     
       return (

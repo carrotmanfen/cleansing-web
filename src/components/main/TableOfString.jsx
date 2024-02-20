@@ -1,7 +1,7 @@
 import React from "react";
 
 export const TableDataOfString = ({ data }) => {
-  console.log(data);
+//   console.log(data);
   let count = {};
 
   data.forEach((value) => {
@@ -19,8 +19,8 @@ export const TableDataOfString = ({ data }) => {
     }
   }
 
-  console.log(count);
-  console.log(nonUniqueCount);
+//   console.log(count);
+//   console.log(nonUniqueCount);
   return (
     <div>
       <p>จำนวนข้อมูลซ้ำทั้งหมด : {nonUniqueCount} แถว</p>

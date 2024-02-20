@@ -3,7 +3,7 @@ import Chart from "chart.js/auto";
 
 export const BarChartCell = ({ data, type }) => {
   const chartRef = useRef(null);
-  
+
   useEffect(() => {
     if (chartRef.current) {
       // Destroy previous chart instance if it exists
@@ -12,78 +12,166 @@ export const BarChartCell = ({ data, type }) => {
       }
 
       const ctx = chartRef.current.getContext("2d");
-      
-    function countInRange(data, min, max, numRanges) {
+
+      function countStrings(arr) {
+        let counts = {};
+        for (let i = 0; i < arr.length; i++) {
+          if (counts[arr[i]]) {
+            counts[arr[i]]++;
+          } else {
+            counts[arr[i]] = 1;
+          }
+        }
+
+        return counts;
+      }
+      let arrayNumber = [];
+      let arrayString = [];
+      function sumUntilHalf(obj) {
+        // Convert the object to an array of pairs and sort it in ascending order based on the values
+        let arr = Object.entries(obj).sort((a, b) => a[1] - b[1]);
+        
+        // Create a new object and add the pairs in sorted order
+        let sortObj = {};
+        for (let [key, value] of arr) {
+            sortObj[key] = value;
+        }
+        let arrSortObj = Object.entries(obj).sort((a, b) => a[1] - b[1]);
+        let totalSum = arrSortObj.reduce((a, b) => a + b[1], 0);
+        let sum = 0;
+        let j = 0;
+        for(let i = 0; i < arrSortObj.length; i++){
+            if(sum+arrSortObj[i][1] <= totalSum/2){
+                sum += arrSortObj[i][1];
+                j=i;
+                console.log("this"+arrSortObj[i][1])
+                console.log("sum"+sum);
+            }
+        }
+        console.log("sd"+j);
+        console.log("sdout"+sum);
+        let newArr = [];
+        for(let i = 0; i < arrSortObj.length; i++){
+            if(i <= j){
+                newArr.push(arrSortObj[i][0]);
+            }else{
+            }
+        }
+        for(let i = 0; i < newArr.length; i++){
+            delete sortObj[newArr[i]];
+        }
+        sortObj['other'] = sum;
+        let arrObj = Object.entries(sortObj);
+        console.log("arrObj");
+        console.log(arrObj);
+        for(let i = 0; i < arrObj.length; i++){
+            arrayNumber.push(arrObj[i][1]);
+            arrayString.push(arrObj[i][0]);
+        }
+        console.log(arrayNumber);
+        return sortObj;
+      }
+
+      function countInRange(data, min, max, numRanges) {
         let range = {};
         let rangeSize = Math.ceil((max - min + 1) / numRanges);
-        
-        for (let i = 0; i < numRanges; i++) {
-            if(min + i * rangeSize<max)
-            range[`${min + i * rangeSize}-${Math.min(min + (i + 1) * rangeSize - 1, max)}`] = 0;
-        }
-        
-        data.forEach((value) => {
-            if (value >= min && value <= max) {
-            let rangeIndex = Math.floor((value - min) / rangeSize);
-            range[`${min + rangeIndex * rangeSize}-${Math.min(min + (rangeIndex + 1) * rangeSize - 1, max)}`]++;
-            }
-        });
-        
-        return range;
-        }
-        
 
-      let intData ;
+        for (let i = 0; i < numRanges; i++) {
+          if (min + i * rangeSize < max)
+            range[
+              `${min + i * rangeSize}-${Math.min(
+                min + (i + 1) * rangeSize - 1,
+                max
+              )}`
+            ] = 0;
+        }
+
+        data.forEach((value) => {
+          if (value >= min && value <= max) {
+            let rangeIndex = Math.floor((value - min) / rangeSize);
+            range[
+              `${min + rangeIndex * rangeSize}-${Math.min(
+                min + (rangeIndex + 1) * rangeSize - 1,
+                max
+              )}`
+            ]++;
+          }
+        });
+
+        return range;
+      }
+
+      let intData;
       if (type === "bar") {
         let maxData = Math.max(...data);
         let minData = Math.min(...data);
-        console.log(maxData);
-        console.log(minData);
         intData = countInRange(data, minData, maxData, 5);
         delete intData.null;
         console.log(intData);
+      } else if (type === "pie") {
+        intData = countStrings(data);
+        console.log(intData);
+        intData = sumUntilHalf(intData);
+        console.log(intData);
       }
       // Create a new chart instance
-      chartRef.current.chart = new Chart(ctx, {
-        type: type,
-        data: {
-        //   labels: [
-        //     "Category 1",
-        //     "Category 2",
-        //     "Category 3",
-        //     "Category 4",
-        //     "Category 5",
-        //   ],
-          datasets: [
-            {
-              label: "Data",
-              data:type==='bar'? intData:data,
-              backgroundColor: "rgba(75,192,192,0.4)",
-              borderColor: "rgba(75,192,192,1)",
-              borderWidth: 1,
-              hoverBackgroundColor: "rgba(75,192,192,0.8)",
-              hoverBorderColor: "rgba(75,192,192,1)",
-            },
-          ],
-        },
-        options: {
-          scales: {
-            x: {
-              type: "category",
-            //   labels: [
-            //     "Category 1",
-            //     "Category 2",
-            //     "Category 3",
-            //     "Category 4",
-            //     "Category 5",
-            //   ],
-            },
-            y: {
-              beginAtZero: true,
-            },
-          },
-        },
-      });
+      chartRef.current.chart = new Chart(
+        ctx,
+
+        type === "bar"
+          ? {
+              type: "bar",
+              data: {
+                datasets: [
+                  {
+                    label: "Count",
+                    data: intData,
+                    backgroundColor: "rgba(75,192,192,0.4)",
+                    borderColor: "rgba(75,192,192,1)",
+                    borderWidth: 1,
+                    hoverBackgroundColor: "rgba(75,192,192,0.8)",
+                    hoverBorderColor: "rgba(75,192,192,1)",
+                  },
+                ],
+              },
+              options: {
+                scales: {
+                  x: {
+                    type: "category",
+                  },
+                  y: {
+                    beginAtZero: true,
+                  },
+                },
+              },
+            }
+          : {
+              type: "pie",
+              data: {
+                datasets: [
+                  {
+                    label: arrayString,
+                    data: arrayNumber,
+                    backgroundColor: "rgba(75,192,192,0.4)",
+                    borderColor: "rgba(75,192,192,1)",
+                    borderWidth: 1,
+                    hoverBackgroundColor: "rgba(75,192,192,0.8)",
+                    hoverBorderColor: "rgba(75,192,192,1)",
+                  },
+                ],
+              },
+              options: {
+                scales: {
+                  x: {
+                    type: "category",
+                  },
+                  y: {
+                    beginAtZero: true,
+                  },
+                },
+              },
+            }
+      );
     }
   }, [data, type]);
 

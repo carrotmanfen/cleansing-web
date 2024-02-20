@@ -23,9 +23,34 @@ const UploadPage = () => {
     setError(null)
     const csvFile = event.target.files[0];
     setFile(csvFile);
-    
     };
-
+    function convertStringsToNumbers(data, columnName) {
+        // Check if all values in the column can be converted to a number
+        if (data.every(row => !isNaN(Number(row[columnName])))) {
+          // If so, convert them
+          data.forEach(row => {
+            row[columnName] = Number(row[columnName]);
+          });
+        }
+      }
+      
+    function canConvertToNumber(str) {
+        return !isNaN(Number(str));
+      }
+    function determineColumnType(columnValues) {
+        // Your logic to determine the type based on the values
+        // Example: Check if all values are numbers, strings, or a mix of both
+        const allNumbers = columnValues.every(value => typeof value === 'number'||canConvertToNumber(value));
+        const allStrings = columnValues.every(value => typeof value === 'string'||value === null);
+      
+        if (allNumbers) {
+          return 'number';
+        } else if (allStrings) {
+          return 'string';
+        } else {
+          return 'number';
+        }
+    }
     const onUpload = async() => {
 
         if(file!==null){
@@ -37,10 +62,20 @@ const UploadPage = () => {
                     const columns = Object.keys(results.data[0]);
                     console.log('Columns:', columns);
                     // Parse it back to the original structure
-                    const rows = JSON.parse(JSON.stringify(results.data));
+                    const rows = await JSON.parse(JSON.stringify(results.data));
                     console.log(rows);
                     console.log(columns);
-                    const transformedColumns = columns.map((label) => ({ label, dataKey: label }));
+                    const transformedColumns = await columns.map((label) => (
+                        { 
+                            label,
+                            dataKey: label,
+                            type: determineColumnType(rows.map(row => row[label])),
+                        }
+                    ));
+                    await columns.map(column => {
+                        convertStringsToNumbers(rows, column);
+                    });
+                    console.log(rows);
                     console.log(transformedColumns);
                     console.log(file.name)
                     const parts = file.name.split(".");

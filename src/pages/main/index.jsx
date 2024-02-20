@@ -31,7 +31,7 @@ const Main = () => {
   const [popUpChangeProjectName, setPopUpChangeProjectName] = useState(false)
   const [projectNameFill, setProjectNameFill] = useState("")
   const [projectName, setProjectName] = useState("")
-  const { getProject, data } = useProject()
+  const { getProject, data, updateProject } = useProject()
   const { changeProjectNameInAccount } = useChangeProjectName()
   const { handleDownload } = useDownload()
   const [fileName, setFileName] = useState("defaultFilename");
@@ -41,6 +41,12 @@ const Main = () => {
   const {refreshLogin} = useAccount()
   const [reverse, setReverse] = useState(false)
   const {reverseProject} = useReverse()
+
+  const handleUpdateProject = async(id, data_set) =>{
+    await updateProject(id, data_set)
+    await getProject();
+    window.location.reload();
+  }
 
   const handleClosePopUpChangeProjectName = () => {
     setPopUpChangeProjectName(false)
@@ -188,10 +194,11 @@ const Main = () => {
     setDownloadPopup(false)
   }
 
-  const handleFindProjectName = () => {
+  const handleFindProjectName = async() => {
     if(projectName==""){
         const queryParams = new URLSearchParams(window.location.search);
         const searchProjectId = queryParams.get('projectId');
+        
         const results = user.project.filter(
           (project) =>{
               if(project._id!==null)
@@ -230,7 +237,7 @@ const Main = () => {
   }
 
   useEffect(() => {
-    if (data != null) {
+    if (data != null && user.isLogin != false) {
       handleFindProjectName()
       setProjectNameFill(projectName)
     }
@@ -330,7 +337,7 @@ const Main = () => {
           </div>
 
             : (data == null ? <p> </p> :<div className="w-full">
-              <PivotView dataColumns={data.data_set.columns} dataRows={data.data_set.rows}/>
+              <PivotView dataColumns={data.data_set.columns} dataRows={data.data_set.rows} updateProjectFunction={handleUpdateProject}/>
             </div>)
 
         }

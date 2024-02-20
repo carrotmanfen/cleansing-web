@@ -44,6 +44,32 @@ const DatabaseConnectPage = () => {
     setTable(e.target.value); // Update the state when the input changes
     setError(null)
   };
+  function convertStringsToNumbers(data, columnName) {
+    // Check if all values in the column can be converted to a number
+    if (data.every(row => !isNaN(Number(row[columnName])))) {
+      // If so, convert them
+      data.forEach(row => {
+        row[columnName] = Number(row[columnName]);
+      });
+    }
+  }
+  function canConvertToNumber(str) {
+    return !isNaN(Number(str));
+  }
+  function determineColumnType(columnValues) {
+    // Your logic to determine the type based on the values
+    // Example: Check if all values are numbers, strings, or a mix of both
+    const allNumbers = columnValues.every(value => typeof value === 'number'||canConvertToNumber(value));
+    const allStrings = columnValues.every(value => typeof value === 'string'||value === null);
+  
+    if (allNumbers) {
+      return 'number';
+    } else if (allStrings) {
+      return 'string';
+    } else {
+      return 'number';
+    }
+}
 
   const handleConnect = async () => {
     console.log(host)
@@ -73,8 +99,12 @@ const DatabaseConnectPage = () => {
       console.log(columns)
       const transformedColumns = columns.map(label => ({
         label: label,
-        dataKey: label
+        dataKey: label,
+        type: determineColumnType(result.data.map(row => row[label])),
       }));
+      columns.map(column => {
+        convertStringsToNumbers(result.data, column);
+        });
       console.log(transformedColumns)
       await createProject(transformedColumns, result.data, table, database)
       hideLoading()

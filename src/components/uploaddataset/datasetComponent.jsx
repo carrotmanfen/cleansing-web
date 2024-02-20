@@ -6,8 +6,42 @@ import useAddProject from '@/hooks/useAddProject';
 
 export const DatasetComponent = ({projectName, fileName, columns, rows}) => {
   const {error, isPending, createProject} = useAddProject()
-  const handleCreateProject = () =>{
-    createProject(columns, rows, projectName, fileName)
+  function convertStringsToNumbers(data, columnName) {
+    // Check if all values in the column can be converted to a number
+    if (data.every(row => !isNaN(Number(row[columnName])))) {
+      // If so, convert them
+      data.forEach(row => {
+        row[columnName] = Number(row[columnName]);
+      });
+    }
+  }
+  function canConvertToNumber(str) {
+    return !isNaN(Number(str));
+  }
+  function determineColumnType(columnValues) {
+    // Your logic to determine the type based on the values
+    // Example: Check if all values are numbers, strings, or a mix of both
+    const allNumbers = columnValues.every(value => typeof value === 'number'||canConvertToNumber(value));
+    const allStrings = columnValues.every(value => typeof value === 'string'||value === null);
+  
+    if (allNumbers) {
+      return 'number';
+    } else if (allStrings) {
+      return 'string';
+    } else {
+      return 'number';
+    }
+}
+  const handleCreateProject = async() =>{
+    await columns.map(column => {
+        column.type = determineColumnType(rows.map(row => row[column.dataKey]))
+    })
+    await columns.map(column => {
+        convertStringsToNumbers(rows, column);
+    });
+    console.log(columns)
+    console.log(rows)
+    await createProject(columns, rows, projectName, fileName)
   }
   return (
     <div className='flex flex-col w-full h-full border-2 border-borderNavbar rounded-xl '>

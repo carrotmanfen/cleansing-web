@@ -47,5 +47,30 @@ export default function useProject() {
 
     }, [data, getProject]);
 
-    return { data, error, isPending, getProject };
+    const updateProject = async (projectId, data_set) => {  
+        try {
+            showLoading();
+            const res = await axios.patch(url + 'projects/changeProject', {id:projectId, data_set:data_set});
+            console.log(res);
+            if (res.status === 200 || res.status == 201) {
+                console.log(res.data.results);
+                //    router.push('/login');
+                // setData(res.data.results)
+            } else if (res.status === 400) {
+                console.log("bad request look network for reason")
+            } else {
+                setError(err);
+            }
+            setIsPending(false);
+        } catch (err) {
+            setError(err);
+            setIsPending(false);
+        } finally {
+            hideLoading();
+        }
+    }
+
+    return { data, error, isPending, getProject, updateProject };
+
+
 }
