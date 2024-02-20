@@ -45,7 +45,7 @@ const Main = () => {
   const handleUpdateProject = async(id, data_set) =>{
     await updateProject(id, data_set)
     await getProject();
-    window.location.reload();
+    // window.location.reload();
   }
 
   const handleClosePopUpChangeProjectName = () => {

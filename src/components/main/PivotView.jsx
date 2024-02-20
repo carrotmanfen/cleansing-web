@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Bar } from 'react-chartjs-2';
 import { DataTable } from './DataTable';
 import { columns } from '@/constants/datasetTest1';
@@ -76,10 +76,12 @@ export const PivotView = ({dataColumns, dataRows, updateProjectFunction}) => {
         }
         await updateProjectFunction(searchProjectId,data_set)
       };
-    
+    useEffect(() => {
+        setTableData(transformedData)
+    }, [tableData]);
       return (
         <div className='w-full flex mb-4'>
-            <DataTable tableData={tableData} onSelectChange={handleSelectChange}/>
+            {tableData&&<DataTable tableData={tableData} onSelectChange={handleSelectChange}/>}
         </div>
       );
 }
