@@ -248,7 +248,30 @@ export default function useCleansing() {
             hideLoading();
         }
     }, [url, showLoading, hideLoading, router]);
-
+    function checkType(variable) {
+        // Check if the variable is an object
+        if (typeof variable === 'object' && variable !== null) {
+            return 'object';
+        }
+    
+        // Check if the variable is a JSON string
+        try {
+            let variableWithNull = variable.replace(/NaN/g, 'null');
+            JSON.parse(variableWithNull);
+            return 'JSON string';
+        } catch (e) {
+            return 'not a JSON string';
+        }
+    }
+    function jsonStringToObject(jsonString) {
+        // Replace NaN with null in the JSON string
+        let jsonStringWithNull = jsonString.replace(/NaN/g, 'null');
+    
+        // Parse the JSON string into a JavaScript object
+        let obj = JSON.parse(jsonStringWithNull);
+        
+        return obj;
+    }
     const getDataMethod3 = useCallback(async (data_set) => {
         try {
             setError(false);
@@ -263,8 +286,16 @@ export default function useCleansing() {
             const res = await axios.post(url+"editincdata", requestBody, {headers:headers});
             console.log(res);
             if (res.status === 200|| res.status==201) {
-                console.log(res.data.column)
-                setData3(res.data.column)
+                console.log(res.data)
+                console.log(checkType(res.data));
+                if(checkType(res.data)=='object'){
+                    setData3(res.data.column)
+                }else{
+                    let obj = jsonStringToObject(res.data);
+                    console.log(obj)
+                    console.log("parse json")
+                    setData3(obj.column)
+                }
                 
             }else if(res.status === 400){
                 console.log("bad request look network for reason")

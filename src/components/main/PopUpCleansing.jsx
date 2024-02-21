@@ -41,7 +41,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
     const handleRadio3Check = (value) =>{
         setRadio3(value)
     }
-  
+    
     const isAnyCheckboxChecked = checkedItems.some((isChecked) => isChecked);
   
     const [numberFill, setNumberFill] = useState("")
@@ -54,6 +54,13 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
         setOption4("")
     }
 
+    function removeNaN(arr) {
+        // Filter out the NaN values
+        let filteredArr = arr.filter(item => !isNaN(item));
+    
+        return filteredArr;
+    }
+    
     const handleMethod3 = async() =>{
         const dataSet = {
             columns:columns,
