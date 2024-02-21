@@ -256,7 +256,7 @@ const Main = () => {
   return (
     <div className="relative w-screen h-full">
       {data&&<NavbarMain popup={handleOpenPopUpChangeProjectName} projectName={projectName} downloadOnClick={handleDownloadPopup} />}
-      {data&&<NavbarDetail rowNumber={data.data_set.rows.length} colNumber={data.data_set.columns.length} clean_name={data.clean.clean_name} onClick={handleReversePopUp}/>}
+      {data&&<NavbarDetail rowNumber={data.data_set.rows.length} colNumber={data.data_set.columns.length} clean_name={data.clean.clean_name} onClick={handleReversePopUp} />}
       <PopUpChangeProjectName isOpen={popUpChangeProjectName}>
         <div className="fixed top-4 z-50 left-1/2 transform -translate-x-1/2 w-1/2">
             {notification && <Alert severity="error" className="w-full font-kanit text-lg">{notification}</Alert>}
