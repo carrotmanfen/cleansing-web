@@ -1,11 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { BarChartCell } from './BarChartCell';
+import { TableDataOfString } from './TableOfString';
 
 export const DataTable = ({ tableData, onSelectChange }) => {
   // Extract column names from the first row of the tableData
   const columns = Object.keys(tableData[0] || []);
-  console.log(columns)
+  
+  const [dataInTable, setDataInTable] = useState(tableData)
   const [type, setType] = useState("string")
+  
+  useEffect(() => {
+    setDataInTable(tableData)
+  }, [tableData])
   return (
     <table className='w-full table-auto'>
       <thead>
@@ -24,9 +30,13 @@ export const DataTable = ({ tableData, onSelectChange }) => {
         </tr>
       </thead>
       <tbody>
-        {tableData.map((rowData, rowIndex) => (
+        {dataInTable.map((rowData, rowIndex) => {
+            
+            return(
           <tr key={rowIndex}>
-            {columns.map((column, colIndex) => (
+            {columns.map((column, colIndex) => 
+            {
+                return(
               <td
                 key={colIndex}
                 className='border p-2 text-center text-[20px] '
@@ -35,47 +45,33 @@ export const DataTable = ({ tableData, onSelectChange }) => {
                   fontFamily: 'Sarabun',
                 }}
               >
-                {/* {colIndex === 1 ? (
-                  <select
-                    value={rowData[column]}
-                    onChange={(e) => {
-                      onSelectChange(rowIndex, column, e.target.value);
-                    }}
-                  >
-                    <option value='integer'>integer</option>
-                    <option value='decimal'>decimal</option>
-                    <option value='string'>string</option>
-                    <option value='category'>category</option>
-                  </select>
-                ) : column === 'แผนภูมิ' ? (
-                    
-                    rowData[column].type === 'bar' ? (
-                        <BarChartCell data={rowData[column].data} type={rowData[column].type} />
-                      ) : rowData[column].type === 'pie' ? (
-                        <BarChartCell data={rowData[column].data} type={rowData[column].type} />
-                      ) : (
-                        <p>จำนวนข้อมูลซ้ำทั้งหมด : {rowData[column].data} แถว</p>
-                      )
-                ) : (
-                  rowData[column]
-                )} */}
                  
                   {colIndex === 0 ?
                   <p>{rowData[column]}</p>
                     
                 :colIndex === 1 ?
                 (
+                    rowData[column] === 'string' ?
                     <select
                     value={rowData[column]}
                     onChange={(e) => {
                       onSelectChange(rowIndex, column, e.target.value);
                     }}
                   >
-                    <option value='integer'>integer</option>
-                    <option value='decimal'>decimal</option>
                     <option value='string'>string</option>
                     <option value='category'>category</option>
                   </select>
+                  :rowData[column] === 'category'?
+                  <select
+                    value={rowData[column]}
+                    onChange={(e) => {
+                      onSelectChange(rowIndex, column, e.target.value);
+                    }}
+                  >
+                    <option value='string'>string</option>
+                    <option value='category'>category</option>
+                  </select>
+                  :<p>{rowData[column]}</p>
                 )  
                 :colIndex === 2 ?
                 <p>{rowData[column]}</p>
@@ -87,18 +83,21 @@ export const DataTable = ({ tableData, onSelectChange }) => {
                         <BarChartCell data={rowData[column].data} type={rowData[column].type} />
                       ) : rowData[column].type === 'pie' ? (
                         <BarChartCell data={rowData[column].data} type={rowData[column].type} />
-                      ) :rowData[column].type === 'non' ?(
-                        <p>จำนวนข้อมูลซ้ำทั้งหมด : example แถว</p>
-                      ):<p></p>
+                      ) :rowData[column].type === 'non' ?
+                     
+                        <TableDataOfString data={rowData[column].data}/>
+                        
+                        // <p>จำนวนข้อมูลซ้ำทั้งหมด : example แถว</p>
+                      :<p></p>
                 )
 
                 :(<p></p>)
                 }
                 
               </td>
-            ))}
+            )})}
           </tr>
-        ))}
+        )})}
       </tbody>
     </table>
   );
