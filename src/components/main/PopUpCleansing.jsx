@@ -296,8 +296,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
                 </div>
             </div>
-
-            <div onClick={()=>{setCleanMenu(5); setCheckedItems(Array(columns.length).fill(false)); setMethod("9")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
+            <div onClick={()=>{setCleanMenu(10); setCheckedItems(Array(columns.length).fill(false)); setMethod("10")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
                 <div className='flex flex-col'>
                     <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>เปลี่ยนค่าผิดปกติทางสถิติ (Clamp Outliers)</p>
                     <p className='text-[16px] text-textGray cursor-pointer'>เปลี่ยนค่าผิดปกติทางสถิติเป็นค่าที่อยู่ในช่วงแทน</p>
@@ -306,8 +305,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
                 </div>
             </div>
-
-            <div onClick={()=>{setCleanMenu(10); setCheckedItems(Array(columns.length).fill(false)); setMethod("10")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
+            <div onClick={()=>{setCleanMenu(5); setCheckedItems(Array(columns.length).fill(false)); setMethod("9")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
                 <div className='flex flex-col'>
                     <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>ลบค่าผิดปกติทางสถิติ (Delete Outliers)</p>
                     <p className='text-[16px] text-textGray cursor-pointer'>นำแถวข้อมูลที่มีค่าผิดปกติทางสถิติออก</p>
@@ -316,6 +314,8 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
                 </div>
             </div>
+
+            
           </div>
           :cleanMenu==2?<div className="relative flex-auto">
             <div onClick={()=>{setOption4("mean");  setCleanMenu(3)}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar hover:bg-gray cursor-pointer'>

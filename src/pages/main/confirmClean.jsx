@@ -52,10 +52,12 @@ const ConfirmClean = () => {
 
   const buttonLeftClick = () => {
     setMenu(1);
+    setPage(1);
     setRowData(dataConfirm.rows)
   };
   const buttonRightClick = () => {
     setMenu(2);
+    setPage(1);
     const filteredRows = dataConfirm.rows.filter((row) => row['st@tus'] === 'delete' || row['st@tus'] === 'edit');
     setRowData(filteredRows);
 

@@ -55,10 +55,10 @@ export default function useCleansing() {
                 urlMethod = "flagoutlier/check"
             }
             else if(method=="9"){
-                urlMethod = "changeoutlier/check"
+                urlMethod = "removeoutlier/check"
             }
             else if(method=="10"){
-                urlMethod = "removeoutlier/check"
+                urlMethod = "changeoutlier/check"
             }
             const res = await axios.post(url+urlMethod, requestBody, {headers:headers});
             console.log(res);
@@ -217,11 +217,11 @@ export default function useCleansing() {
                 clean_name = "ระบุค่าผิดปกติทางสถิติ"
             }
             else if(method=="9"){
-                urlMethod = "changeoutlier/clean"
+                urlMethod = "removeoutlier/clean"
                 clean_name = "ระบุค่าผิดปกติทางสถิติ"
             }
             else if(method=="10"){
-                urlMethod = "removeoutlier/clean"
+                urlMethod = "changeoutlier/clean"
                 clean_name = "ลบค่าผิดปกติทางสถิติ"
             }
             const res = await axios.post(url+urlMethod, requestBody, {headers:headers});
