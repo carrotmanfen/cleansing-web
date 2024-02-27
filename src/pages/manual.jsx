@@ -3,7 +3,7 @@ import Image from 'next/legacy/image'
 import { Navbar } from '../components/Navbar'
 import {
     register, login, userManual,
-    theory,
+    doc,
     myProject,
     uploadFile,
     datatest,
@@ -69,7 +69,7 @@ const Manual = () => {
                     <p className='text-textPrimary font-kanit text-[24px] mt-5 mx-10'>•	ทฤษฎีการทำงานของฟังก์ชันทำความสะอาดข้อมูล</p>
                     <div className='w-[700px] mt-5 flex flex-col justify-center border-0'>
                         <div class="rounded-lg shadow-xl dark:shadow-gray-900">
-                            <Image src={theory} width={700} height={400} objectFit='contain' alt="theory" />
+                            <Image src={doc} width={700} height={350} objectFit='contain' alt="theory" />
                         </div>
                         <p className='text-textGray text-[16px] mt-6'> ภายในหน้า <strong>ทฤษฎี</strong> จะมีรายละเอียดการใช้งานฟังก์ชันทำความสะอาดทั้ง 11 ฟังก์ชัน ให้ผู้ใช้งานได้ศึกษาวิธีการใช้งานแต่ละฟังก์ชันอย่างละเอียด พร้อมทั้งคำอธิบายหลักการทำงานของฟังก์ชันนั้นๆ เพื่อให้ผู้ใช้งานสามารถเข้าใจหลักการทำงานของฟังก์ชันความสะอาดข้อมูลทั้ง 11 ฟังก์ชัน และใช้งานได้อย่างมีประสิทธิภาพมากยิ่งขึ้น</p>
                     </div>
@@ -134,14 +134,14 @@ const Manual = () => {
 
                     <p className='text-textPrimary font-kanit text-[24px] mt-5 mx-10'>•	การใช้ฟังก์ชันทำความสะอาดข้อมูล</p>
                     <div className='w-[700px] mt-5 flex flex-col justify-center border-0'>
-                        <div class="rounded-lg shadow-xl dark:shadow-gray-900">
-                            <Image src={functionCleansing} width={700} height={400} objectFit='contain' alt="functionCleansing" />
+                        <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
+                            <Image src={functionCleansing} width={700} height={350} objectFit='contain' alt="functionCleansing" />
                         </div>
-                        <p className='text-textGray text-[16px] mt-6 py-6'> เมื่อผู้ใช้งานกดปุ่ม <strong>ทำความสะอาดข้อมูล</strong> จะมี Pop up ฟังก์ชันทำความสะอาดข้อมูลทั้ง 11 ฟังก์ชัน ขึ้นมาให้ผู้ใช้งานได้เลือกว่าต้องการใช้ฟังก์ชันทำความสะอาดข้อมูลใดกับชุดข้อมูลนี้ โดยสามารถเลือกใช้ได้ทีละ 1 ฟังก์ชัน</p>
+                        <p className='text-textGray text-[16px] py-6'> เมื่อผู้ใช้งานกดปุ่ม <strong>ทำความสะอาดข้อมูล</strong> จะมี Pop up ฟังก์ชันทำความสะอาดข้อมูลทั้ง 11 ฟังก์ชัน ขึ้นมาให้ผู้ใช้งานได้เลือกว่าต้องการใช้ฟังก์ชันทำความสะอาดข้อมูลใดกับชุดข้อมูลนี้ โดยสามารถเลือกใช้ได้ทีละ 1 ฟังก์ชัน</p>
                         <div class="rounded-lg shadow-xl dark:shadow-gray-900">
-                            <Image src={selectColumn} width={700} height={400} objectFit='contain' alt="selectColumn" />
+                            <Image src={selectColumn} width={700} height={380} objectFit='contain' alt="selectColumn" />
                         </div>
-                        <p className='text-textGray text-[16px] mt-6 py-6'> เมื่อเลือกฟังก์ชันที่ต้องการแล้ว ระบบจะให้ผู้ใช้งานเลือกคอลัมน์ที่ต้องการให้ทำความสะอาดข้อมูล ซึ่งฟังก์ชันบางอย่างที่ไม่เหมาะกับประเภทข้อมูลของคอลัมน์นั้น หากเป็นเช่นนั้นระบบจะแจ้งเตือนให้ผู้ใช้งานเลือกคอลัมน์ที่ต้องการทำความสะอาดใหม่อีกครั้ง เพื่อให้เหมาะสมกับฟังก์ชันทำความสะอาดข้อมูล จากนั้นผู้ใช้งานกดปุ่ม <strong>ถัดไป</strong> เพื่อทำความสะอาดข้อมูล</p>
+                        <p className='text-textGray text-[16px] py-6'> เมื่อเลือกฟังก์ชันที่ต้องการแล้ว ระบบจะให้ผู้ใช้งานเลือกคอลัมน์ที่ต้องการให้ทำความสะอาดข้อมูล ซึ่งฟังก์ชันบางอย่างที่ไม่เหมาะกับประเภทข้อมูลของคอลัมน์นั้น หากเป็นเช่นนั้นระบบจะแจ้งเตือนให้ผู้ใช้งานเลือกคอลัมน์ที่ต้องการทำความสะอาดใหม่อีกครั้ง เพื่อให้เหมาะสมกับฟังก์ชันทำความสะอาดข้อมูล จากนั้นผู้ใช้งานกดปุ่ม <strong>ถัดไป</strong> เพื่อทำความสะอาดข้อมูล</p>
                         <div class="rounded-lg shadow-xl dark:shadow-gray-900">
                             <Image src={afterClean} width={700} height={400} objectFit='contain' alt="afterClean" />
                         </div>
@@ -162,7 +162,7 @@ const Manual = () => {
                     <p className='text-textPrimary font-kanit text-[24px] mt-5'>ขั้นตอนที่ 6 : ดาวน์โหลดข้อมูล</p>
                     <div className='w-[700px] mt-5 flex flex-col justify-center border-0'>
                         <div class="rounded-lg shadow-xl dark:shadow-gray-900">
-                            <Image src={download} width={700} height={400} objectFit='contain' alt="download" />
+                            <Image src={download} width={700} height={380} objectFit='contain' alt="download" />
                         </div>
                         <p className='text-textGray text-[16px] mt-6'> การดาวน์โหลดไฟล์ชุดข้อมูล เมื่อผู้ใช้งานกดปุ่ม <strong>ดาวน์โหลด</strong> บนสุดทางด้านขวาระบบจะแสดง Pop up ดาวน์โหลดไฟล์ให้ผู้ใช้งานแก้ไขชื่อไฟล์ (หากต้องการ) จากนั้นกดปุ่ม <strong>ดาวน์โหลด</strong> หรือหากต้องการยกเลิกการดาวน์โหลดสามารถกดปุ่มกากบาทที่ด้านขวาบนของ Pop up เพื่อปิด Pop up ดาวน์โหลดไฟล์ โดยไฟล์ชุดข้อมูลที่ดาวน์โหลดจาก <strong>คลีนเนอร์</strong> จะเป็นไฟล์ประเภท csv เท่านั้น</p>
                     </div>

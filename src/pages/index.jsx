@@ -55,8 +55,8 @@ export default function Home() {
 
             <p className='text-textPrimary font-kanit text-[24px] mt-5'>ฟังก์ชันทำความสะอาดข้อมูล</p>
             <div className='w-[700px] mt-5 flex flex-col justify-center border-0'>
-              <div class="rounded-lg shadow-xl dark:shadow-gray-900">
-                <Image src={functionCleansing} width={700} height={400} objectFit='contain' alt="functionCleansing" />
+              <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
+                <Image src={functionCleansing} width={700} height={350} objectFit='contain' alt="functionCleansing" />
               </div>
               <p className='text-textGray text-[16px] mt-6'> มีฟังก์ชันทำความสะอาดข้อมูลทั้ง 11 ฟังก์ชัน ให้ผู้ใช้งานได้เลือกใช้ให้เหมาะสมกับข้อมูลของผู้ใช้งาน ไม่ว่าจะเป็น <strong>ลบคอลัมน์ข้อมูลที่ไม่เกี่ยวข้อง (Delete Irrelevant Data), ลบข้อมูลที่ซ้ำซ้อน (Delete Duplicate Data), แก้ไขข้อมูลที่ผิดปกติ (Edit inconsistent value)</strong> ฯลฯ เป็นต้น</p>
             </div>
@@ -64,7 +64,7 @@ export default function Home() {
             <p className='text-textPrimary font-kanit text-[24px] mt-5'>ดาวน์โหลดไฟล์</p>
             <div className='w-[700px] mt-5 flex flex-col justify-center border-0'>
               <div class="rounded-lg shadow-xl dark:shadow-gray-900">
-                <Image src={download} width={700} height={400} objectFit='contain' alt="changProjectName" />
+                <Image src={download} width={700} height={380} objectFit='contain' alt="changProjectName" />
               </div>
               <p className='text-textGray text-[16px] mt-6'> เมื่อผู้ใช้งานทำความสะอาดข้อมูลเสร็จแล้ว สามารถดาวน์โหลดไฟล์ข้อมูลหลังทำความสะอาดได้ โดยไฟล์ที่ดาวโหลดจะเป็นไฟล์ .csv</p>
             </div>
