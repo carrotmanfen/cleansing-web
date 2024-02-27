@@ -221,7 +221,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
             <div onClick={()=>{setCleanMenu(4); setCheckedItems(Array(columns.length).fill(false)); setMethod("2")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
                 <div className='flex flex-col'>
                     <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>ลบข้อมูลที่ซ้ำซ้อน (Delete Duplicate Data)</p>
-                    <p className='text-[16px] text-textGray cursor-pointer'>ลบแถวข้อมูลที่มีข้อมูลทุกตัวซ้ำกับแถวอื่น</p>
+                    <p className='text-[16px] text-textGray cursor-pointer'>ลบแถวข้อมูล ที่มีข้อมูลทุกคอลัมน์ซ้ำกับแถวอื่น</p>
                 </div>
                 <div className='flex items-center mr-8'>
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
@@ -230,7 +230,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
 
             <div onClick={()=>{setCleanMenu(6); setCheckedItems(Array(columns.length).fill(false)); setMethod("3")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
                 <div className='flex flex-col'>
-                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>แก้ไขข้อมูลที่ไม่สอดคล้อง (Edit Inconsistant Data)</p>
+                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>แก้ไขข้อมูลที่ไม่สอดคล้อง (Edit Inconsistent Data)</p>
                     <p className='text-[16px] text-textGray cursor-pointer'>แก้ไขข้อมูลเดียวกันที่บันทึกไม่เหมือนกัน เช่น "กทม." , "กรุงเทพ" ให้เป็นรูปแบบเดียวกัน</p>
                 </div>
                 <div className='flex items-center mr-8'>
@@ -279,8 +279,8 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
 
             <div onClick={()=>{setCleanMenu(5); setCheckedItems(Array(columns.length).fill(false)); setMethod("7")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
                 <div className='flex flex-col'>
-                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>นำข้อมูลที่ไม่ตรงกับประเภทข้อมูลออก (Remove Unreadable Columns)</p>
-                    <p className='text-[16px] text-textGray cursor-pointer'>ลบแถวข้อมูลที่มีข้อมูลไม่ตรงกับ Column ที่กำหนด</p>
+                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>ลบข้อมูลที่ไม่ตรงกับประเภทข้อมูล (Remove Unreadable Columns)</p>
+                    <p className='text-[16px] text-textGray cursor-pointer'>ลบแถวข้อมูลที่มีข้อมูลไม่ตรงกับคอลัมน์ที่กำหนด</p>
                 </div>
                 <div className='flex items-center mr-8'>
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>

@@ -1,7 +1,7 @@
 import logo from './logo.svg'
 import uploadIcon from './uploadIcon.svg'
 import databaseIcon from './databaseIcon.svg'
-import doc from './doc.svg'
+import doc from './doc.png'
 import downloadIcon from './downloadIcon.svg'
 import arrowLeft from './arrowLeft.svg'
 import pencilIcon from './pencilIcon.svg'
@@ -19,7 +19,6 @@ import changProjectName from './changProjectName.png'
 import register from './register.png'
 import login from './login.png'
 import userManual from './userManual.png'
-import theory from './theory.png'
 import myProject from './myProject.png'
 import uploadFile from './uploadFile.png'
 import datatest from './datatest.png'
@@ -30,6 +29,34 @@ import dataHaveAction from './dataHaveAction.png'
 import navbarDetail from './navbarDetail.png'
 import download from './download.png'
 import selectColumn from './selectColumn.png'
+import functionCleansing1 from './functionCleansing1.png'
+import functionCleansing2 from './functionCleansing2.png'
+import functionCleansing3 from './functionCleansing3.png'
+import functionCleansing4 from './functionCleansing4.png'
+import functionCleansing5 from './functionCleansing5.png'
+import functionCleansing6 from './functionCleansing6.png'
+import functionCleansing7 from './functionCleansing7.png'
+import functionCleansing8 from './functionCleansing8.png'
+import functionCleansing9 from './functionCleansing9.png'
+import functionCleansing10 from './functionCleansing10.png'
+import functionCleansing11 from './functionCleansing11.png'
+import selectColumn2 from './selectColumn2.png'
+import selectColumn3 from './selectColumn3.png'
+import selectColumn4 from './selectColumn4.png'
+import confirmCleansing2 from './confirmCleansing2.png'
+import confirmCleansing3 from './confirmCleansing3.png'
+import confirmCleansing4 from './confirmCleansing4.png'
+import DeleteDuplicateData from './DeleteDuplicateData.png'
+import selectData from './selectData.png'
+import inputData from './inputData.png'
+import inputData2 from './inputData2.png'
+import inputData3 from './inputData3.png'
+import managingNullValues from './managingNullValues.png'
+import managingNullValues1 from './managingNullValues1.png'
+import inputdatafromuser from './inputdatafromuser.png'
+import flagOutliers from './flagOutliers.png'
+import clampOutliers from './clampOutliers.png'
+import inputdataAuto from './inputdataAuto.png'
 
 export{
     logo,
@@ -53,7 +80,6 @@ export{
     register,
     login,
     userManual,
-    theory,
     myProject,
     uploadFile,
     datatest,
@@ -63,6 +89,33 @@ export{
     dataHaveAction,
     navbarDetail,
     download,
-    selectColumn
-    
+    selectColumn,
+    functionCleansing1,
+    functionCleansing2,
+    functionCleansing3,
+    functionCleansing4,
+    functionCleansing5,
+    functionCleansing6,
+    functionCleansing7,
+    functionCleansing8,
+    functionCleansing9,
+    functionCleansing10,
+    functionCleansing11,
+    selectColumn2,
+    selectColumn3,
+    selectColumn4,
+    confirmCleansing2,
+    DeleteDuplicateData,
+    confirmCleansing3,
+    confirmCleansing4,
+    selectData,
+    inputData,
+    inputData2,
+    inputData3,
+    managingNullValues,
+    managingNullValues1,
+    inputdatafromuser,
+    flagOutliers,
+    clampOutliers,
+    inputdataAuto
 }
