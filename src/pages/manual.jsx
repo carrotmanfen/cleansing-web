@@ -36,7 +36,7 @@ const Manual = () => {
         }
     }, [userRole.isLogin, refreshLogin]);
     return (
-        <div className='relative w-screen h-full'>
+        <div className='relative w-screen h-full font-kanit'>
             <Navbar menu={2} />
             <div className='w-full flex flex-col items-center'>
                 <p className='text-[32px] text-textPrimary font-kanit mt-20'>คู่มือการใช้งาน</p>
@@ -88,7 +88,7 @@ const Manual = () => {
                         <div class="rounded-lg shadow-xl dark:shadow-gray-900">
                             <Image src={uploadFile} width={700} height={400} objectFit='contain' alt="uploadFile" />
                         </div>
-                        <p className='text-textGray text-[16px] mt-6'> การอัปโหลดข้อมูลเข้าสู่ <strong>คลีนเนอร์</strong> จะรองรับไฟล์ประเภท json, csv, xls และ xlsx เท่านั้น โดยผู้ใช้งานสามารถกดปุ่ม <strong>แนบไฟล์</strong> เพื่อทำการเลือกอัปโหลดไฟล์ชุดข้อมูลที่ต้องการอัปโหลดจากเครื่องคอมพิวเตอร์ของผู้ใช้งาน โดยสามารถอัปโหลดได้ทีละไฟล์ จากนั้นกดปุ่ม <strong>อัปโหลด</strong> เพื่อทำการอัปโหลดไฟล์ชุดข้อมูล</p>
+                        <p className='text-textGray text-[16px] mt-6'> การอัปโหลดข้อมูลเข้าสู่ <strong>คลีนเนอร์</strong> จะรองรับไฟล์ประเภท csv, xls และ xlsx เท่านั้น โดยผู้ใช้งานสามารถกดปุ่ม <strong>แนบไฟล์</strong> เพื่อทำการเลือกอัปโหลดไฟล์ชุดข้อมูลที่ต้องการอัปโหลดจากเครื่องคอมพิวเตอร์ของผู้ใช้งาน โดยสามารถอัปโหลดได้ทีละไฟล์ จากนั้นกดปุ่ม <strong>อัปโหลด</strong> เพื่อทำการอัปโหลดไฟล์ชุดข้อมูล</p>
                     </div>
 
                     <p className='text-textPrimary font-kanit text-[24px] mt-5 mx-10'>•	เชื่อมต่อฐานข้อมูล MySQL</p>

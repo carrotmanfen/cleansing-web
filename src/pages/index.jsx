@@ -23,7 +23,7 @@ export default function Home() {
     <main
       className="text-red"
     >
-      <div className='relative w-screen h-full'>
+      <div className='relative w-screen h-full font-kanit'>
         <Navbar />
         <div className='w-full flex flex-col items-center'>
           <div className='mt-8'>
@@ -42,7 +42,7 @@ export default function Home() {
               <div class="rounded-lg shadow-xl dark:shadow-gray-900">
                 <Image src={upload} width={700} height={400} objectFit='contain' alt="upload" />
               </div>
-              <p className='text-textGray text-[16px] mt-6'> ผู้ใช้งานสามารถอัพโหลดไฟล์ประเภท json, csv, xls และ xlsx ที่มีข้อมูลอยู่ในรูปแบบตาราง หรือเลือกเชื่อมต่อฐานข้อมูล MySQL หรือเลือกใช้ชุดข้อมูลทดลองที่มีบนเว็บไซต์ เพื่อนำมาทำความสะอาด </p>
+              <p className='text-textGray text-[16px] mt-6'> ผู้ใช้งานสามารถอัพโหลดไฟล์ประเภท csv, xls และ xlsx ที่มีข้อมูลอยู่ในรูปแบบตาราง หรือเลือกเชื่อมต่อฐานข้อมูล MySQL หรือเลือกใช้ชุดข้อมูลทดลองที่มีบนเว็บไซต์ เพื่อนำมาทำความสะอาด </p>
             </div>
 
             <p className='text-textPrimary font-kanit text-[24px] mt-5'>เชื่อมฐานข้อมูล</p>

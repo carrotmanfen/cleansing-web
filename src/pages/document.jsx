@@ -24,7 +24,7 @@ const Document = () => {
         }
     }, [userRole.isLogin, refreshLogin]);
     return (
-        <div className='relative w-screen h-full'>
+        <div className='relative w-screen h-full font-kanit'>
             <Navbar menu={1} />
             <div className='w-full flex flex-col items-center'>
                 <p className='text-[32px] text-textPrimary font-kanit mt-20'>ทฤษฎีการทำงานของฟังก์ชันทำความสะอาดข้อมูล</p>
