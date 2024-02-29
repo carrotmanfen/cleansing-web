@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/legacy/image'
 import Link from 'next/link'
 import { Navbar } from '../../components/Navbar'
@@ -9,7 +9,6 @@ import useAddProject from '@/hooks/useAddProject';
 import { atomUserRole } from "@/atoms/atomUserRole";
 import { useRecoilState } from "recoil";
 import useAccount from '@/hooks/useAccount';
-import { rows } from '@/constants/datasetTest1'
 
 const acceptableCSVFileTypes = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, .csv";
 
@@ -29,7 +28,12 @@ const UploadPage = () => {
         if (data.every(row => !isNaN(Number(row[columnName])))) {
           // If so, convert them
           data.forEach(row => {
-            row[columnName] = Number(row[columnName]);
+            if(row[columnName] !== null){
+                row[columnName] = Number(row[columnName]);
+            }
+            else{
+                row[columnName] = null
+            }
           });
         }
       }
@@ -55,31 +59,34 @@ const UploadPage = () => {
 
         if(file!==null){
             Papa.parse(file, {
+                transform: function(value, field) {
+                    if (value === "") {
+                        return null;
+                    }else{
+                        return value;
+                    }
+                },
                 skipEmptyLines: true,
                 header: true,
                 complete: async function(results) {
                     // Extract and log column names
+                    console.log('result:',results)
                     const columns = Object.keys(results.data[0]);
                     console.log('Columns:', columns);
-                    // Parse it back to the original structure
-                    const rows = await JSON.parse(JSON.stringify(results.data));
-                    console.log(rows);
-                    console.log(columns);
+                    const rows = results.data;
                     const transformedColumns = await columns.map((label) => (
                         { 
                             label,
                             dataKey: label,
-                            type: determineColumnType(rows.map(row => row[label])),
+                            type: determineColumnType(results.data.map(row => row[label])),
                         }
                     ));
-                    await columns.map(column => {
+                    console.log(results);
+                    columns.map(column => {
                         convertStringsToNumbers(rows, column);
                     });
-                    console.log(rows);
-                    console.log(transformedColumns);
-                    console.log(file.name)
                     const parts = file.name.split(".");
-                    console.log(parts[0])
+                    console.log(rows)
                     await createProject(transformedColumns, rows, parts[0], file.name)
                 }
             });
