@@ -90,8 +90,6 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
             router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+columnSelect+"&delimiter="+delimiter+"&columnNewName="+column1)
         }else if(cleanMethod==10){
             router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+columnSelect+"&order="+numberFill)
-        }else if(cleanMethod==12){
-            router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+radio3+"&newName="+delimiter)
         }
         else{
             router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+columnSelect)
@@ -210,16 +208,6 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
           </div>
           {/* Body */}
           {cleanMenu==1?<div className="relative flex-auto">
-          <div onClick={()=>{setCleanMenu(18); setCheckedItems(Array(columns.length).fill(false)); setMethod("12");}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
-                <div className='flex flex-col'>
-                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>เปลี่ยนชื่อคอลัมน์ (Rename Column Header)</p>
-                    <p className='text-[16px] text-textGray cursor-pointer'>เปลี่ยนชื่อคอลัมน์ที่ต้องการ</p>
-                </div>
-                <div className='flex items-center mr-8'>
-                    <Image src={afterArrow} alt='arrow' objectFit='fill'/>
-                </div>
-            </div>
-
             <div onClick={()=>{setCleanMenu(5); setCheckedItems(Array(columns.length).fill(false)); setMethod("1");}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
                 <div className='flex flex-col'>
                     <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>ลบคอลัมน์ข้อมูลที่ไม่เกี่ยวข้อง (Delete Irrelevant Data)</p>
@@ -652,45 +640,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
           </div>
         </div>
 
-          :cleanMenu==18?
-          <div className='flex flex-col'>
-              {columns.map((column, index) => (
-                <label key={index} className='flex flex-row w-full justify-between items-center gap-2 hover:cursor-pointer border-b border-borderNavbar p-3 hover:bg-gray'>
-                    <input
-                    type='radio'
-                    name='radioGroup'  
-                    onChange={() => handleRadio3Check(column.dataKey)}
-                    className='hover:cursor-pointer'
-                    />
-                    <p className='w-full text-[20px] font-kanit text-textPrimary'>{column.label}</p>
-                </label>
-                ))}
-            <div className='w-full flex items-center justify-end p-4'>
-              <button onClick={()=>{setCleanMenu(19)}} disabled={!radio3} className={`text-[20px] font-kanit  px-6 py-2 rounded-lg ${radio3?`bg-primary text-white hover:bg-hoverPrimary`:`bg-gray hover:cursor-not-allowed`} `}>ถัดไป <span className='ml-4'>{"->"}</span></button>
-            </div>
-          </div>
-          :cleanMenu==19?
-          <div className='flex px-12 flex-col justify-center border-b border-borderNavbar py-4 gap-4'>
-          <div className='flex flex-col gap-8 items-start'>
-              <div className='flex flex-col w-full'>
-                <p className='text-[20px] font-kanit text-textPrimary'>ชื่อคอลัมน์ใหม่</p>
-                <input type='text' value={delimiter} className='text-start text-[20px] text-textPrimary border-2 w-full rounded-md px-3'
-                onChange={(e)=>{const inputValue = e.target.value; 
-                setDelimiter(inputValue);
-                }}/>
-              </div>
-              <div className={`flex w-full justify-end`}>
-                  <button 
-                  onClick={()=>{
-                      if(delimiter!=""){
-                          handleConfirm()
-                      }
-                  }} 
-                  className={`text-[20px] font-kanit rounded-md py-2 px-4 text-white ${delimiter!=""?`bg-primary hover:bg-hoverPrimary`:`bg-gray hover:cursor-not-allowed`}`}>ยืนยัน</button>
-              </div>
-          </div>
-        </div>
-        :
+          :
           <p></p>
     }
         </div>

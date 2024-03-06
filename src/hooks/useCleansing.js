@@ -60,34 +60,18 @@ export default function useCleansing() {
             else if(method=="10"){
                 urlMethod = "changeoutlier/check"
             }
-            else if (method=="12"){
-                urlMethod = "renameheader/check"
-            }
             const res = await axios.post(url+urlMethod, requestBody, {headers:headers});
             console.log(res);
             if (res.status === 200|| res.status==201) {
-                let columns;
-                if(method=="12"){
-                    columns = res.data.columns
-                }else{
-                    columns = Object.keys(res.data[0]).map(label => {
-                        if (label !== 'st@tus') {
-                          return { label, dataKey: label };
-                        }
-                        return null; // Skip this label
-                      }).filter(Boolean);
-                }
-                let dataSet;
-                if(method=="12"){
-                    dataSet ={
-                        columns,
-                        rows:res.data.rows
+                const columns = Object.keys(res.data[0]).map(label => {
+                    if (label !== 'st@tus') {
+                      return { label, dataKey: label };
                     }
-                }else{
-                    dataSet ={
-                        columns,
-                        rows:res.data
-                    }
+                    return null; // Skip this label
+                  }).filter(Boolean);
+                const dataSet ={
+                    columns,
+                    rows:res.data
                 }
                 console.log(dataSet)
                 setData(dataSet)
@@ -239,29 +223,16 @@ export default function useCleansing() {
             else if(method=="10"){
                 urlMethod = "changeoutlier/clean"
                 clean_name = "ลบค่าผิดปกติทางสถิติ"
-            }else if (method=="12"){
-                clean_name = "เปลี่ยนชื่อคอลัมน์"
-                urlMethod = "renameheader/clean"
             }
             const res = await axios.post(url+urlMethod, requestBody, {headers:headers});
             console.log(res);
             if (res.status === 200|| res.status==201) {
-                if(method=="12"){
-                    if(res.data.rows[0]){
-                        const columns = res.data.columns;
-                        createProject(columns, res.data.rows, projectId, clean_name)
-                    }else{
-                        setError("ไม่สามารถทำความสะอาดด้วยวิธีนี้ได้เนื้องจากส่งผลให้ข้อมูลทั้งหมดหายไป")
-                        console.log("no data")
-                    }
+                if(res.data[0]){
+                    const columns = Object.keys(res.data[0]).map(label => ({ label, dataKey: label }));
+                    createProject(columns, res.data, projectId, clean_name)
                 }else{
-                    if(res.data[0]){
-                        const columns = Object.keys(res.data[0]).map(label => ({ label, dataKey: label }));
-                        createProject(columns, res.data, projectId, clean_name)
-                    }else{
-                        setError("ไม่สามารถทำความสะอาดด้วยวิธีนี้ได้เนื้องจากส่งผลให้ข้อมูลทั้งหมดหายไป")
-                        console.log("no data")
-                    }
+                    setError("ไม่สามารถทำความสะอาดด้วยวิธีนี้ได้เนื้องจากส่งผลให้ข้อมูลทั้งหมดหายไป")
+                    console.log("no data")
                 }
             }else if(res.status === 400){
                 console.log("bad request look network for reason")
