@@ -195,6 +195,12 @@ const ConfirmClean = () => {
         }else{
             dataSet.order_select = searchOrder
         }
+    }else if(searchMethod=="12"){
+        const searchNewColumn = queryParams.get('newName')
+        const newList =[searchNewColumn]
+        dataSet.header_new = searchNewColumn
+        dataSet.columns_match = resultArray[0]
+        // dataSet.header_new = newList
     }
     console.log("confirm");
     cleanConfirm(searchMethod, dataSet, searchProjectId)
@@ -253,6 +259,13 @@ const ConfirmClean = () => {
                 }else{
                     dataSet.order_select = searchOrder
                 }
+            }
+            else if(searchMethod=="12"){
+                const searchNewColumn = queryParams.get('newName')
+                const newList =[searchNewColumn]
+                dataSet.header_new = searchNewColumn
+                dataSet.columns_match = resultArray[0]
+                // dataSet.header_new = newList
             }
             getDataCheck(searchMethod,dataSet)
         }
