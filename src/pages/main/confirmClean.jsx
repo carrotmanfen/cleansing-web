@@ -59,8 +59,10 @@ const ConfirmClean = () => {
     setMenu(2);
     setPage(1);
     const filteredRows = dataConfirm.rows.filter((row) => row['st@tus'] === 'delete' || row['st@tus'] === 'edit');
+    console.log(rowsData)
+    console.log(filteredRows)
     setRowData(filteredRows);
-
+    console.log("ASDASDASD")
   };
 
   const handlePageChange = (event, page) => {
@@ -212,7 +214,7 @@ const ConfirmClean = () => {
     const searchColumn = queryParams.get('column');
     const resultArray = searchColumn.split(',');
     setProjectId(searchProjectId)
-    if (data != null) {
+    if (data != null ) {
         handleFindProjectName()
         if(dataConfirm === null){
             const dataSet = data.data_set
@@ -274,7 +276,7 @@ const ConfirmClean = () => {
         setColumnsData(dataConfirm.columns)
         setRowData(dataConfirm.rows)
     }
-  }, [data, user, dataConfirm, getDataCheck, handleFindProjectName]);
+  }, [data, user, dataConfirm]);
 
   useEffect(() => {
         
