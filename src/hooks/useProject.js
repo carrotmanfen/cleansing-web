@@ -38,7 +38,7 @@ export default function useProject() {
         } finally {
             hideLoading();
         }
-    }, [url, showLoading, hideLoading]);
+    }, [url, showLoading, hideLoading, router]);
 
     useEffect(() => {
         if (data == null) {

@@ -48,7 +48,7 @@ export default function useDeleteProject() {
         } finally {
             hideLoading();
         }
-    }, [url, showLoading, hideLoading, setUserRole, userRole.username]); 
+    }, [url, showLoading, hideLoading, router]);
 
     const deleteProject = useCallback(async (project_id) => {
 
@@ -71,7 +71,7 @@ export default function useDeleteProject() {
         } finally {
             hideLoading();
         }
-    }, [url, showLoading, hideLoading, deleteProjectInAccount]);
+    }, [url, showLoading, hideLoading, router]);
 
     return { error, isPending, deleteProject };
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/legacy/image";
 import Link from "next/link"
 import NavbarMain from "@/components/main/NavbarMain";
@@ -33,7 +33,7 @@ const ConfirmClean = () => {
   const [projectId, setProjectId] = useState("")
   const {data:dataConfirm, error, getDataCheck, cleanConfirm } = useCleansing()
 
-  const handleFindProjectName = useCallback(() => {
+  const handleFindProjectName = () => {
     if(projectName==""){
         const queryParams = new URLSearchParams(window.location.search);
         const searchProjectId = queryParams.get('projectId');
@@ -48,7 +48,7 @@ const ConfirmClean = () => {
             setProjectName(results[0].project_name)
         }
     }
-}, [projectName, user.project, setProjectName]);
+  };
 
   const buttonLeftClick = () => {
     setMenu(1);
@@ -274,7 +274,7 @@ const ConfirmClean = () => {
         setColumnsData(dataConfirm.columns)
         setRowData(dataConfirm.rows)
     }
-  }, [data, user, dataConfirm, getDataCheck, handleFindProjectName]);
+  }, [data, user, dataConfirm]);
 
   useEffect(() => {
         

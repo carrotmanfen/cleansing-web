@@ -72,6 +72,7 @@ export default function useAccount() {
                     userId:res.data.results._id,
                     project: res.data.results.project
                 });
+                console.log("lklkl")
                 router.push('/myProject')
             }else if(res.status === 400){
                 console.log("bad request look network for reason")
@@ -86,7 +87,7 @@ export default function useAccount() {
         } finally {
             hideLoading();
         }
-    },[url, showLoading, hideLoading, router, setUserRole])
+    },[url, showLoading, hideLoading, router])
 
     const refreshLogin = useCallback(async(username)=>{
         try {
@@ -119,7 +120,7 @@ export default function useAccount() {
         } finally {
             hideLoading();
         }
-    },[url, showLoading, hideLoading, setUserRole])
+    },[url, showLoading, hideLoading, router])
 
     return { data, error, isPending, register, login, refreshLogin, setError };
 }

@@ -55,7 +55,7 @@ export default function useChangeProjectName() {
         } finally {
             hideLoading();
         }
-    }, [url, showLoading, hideLoading, router, setUserRole, userRole]);
+    }, [url, showLoading, hideLoading, router]);
 
     return { error, isPending, changeProjectNameInAccount };
 }
