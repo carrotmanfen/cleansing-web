@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import { paper } from '@/assets'
+import React, { useEffect } from 'react'
 import { Navbar } from '@/components/Navbar'
 import { DatasetComponent } from '@/components/uploaddataset/datasetComponent';
 import {columns as columns1, rows as rows1} from '@/constants/datasetTest1';

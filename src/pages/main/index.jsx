@@ -1,5 +1,5 @@
 //index.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import NavbarMain from "@/components/main/NavbarMain";
 import { NavbarDetail } from "@/components/main/NavbarDetail";
 import Pagination from "@mui/material/Pagination";
@@ -61,8 +61,7 @@ const Main = () => {
     setNotification('');
   }
 
-  const handleChangeProjectName = async (e) => {
-    
+  const handleChangeProjectName = useCallback(async (e) => {
     if (!projectNameFill) {
       setNotification('กรุณาป้อนชื่อโปรเจกต์');
       return;
@@ -72,7 +71,7 @@ const Main = () => {
       setProjectName(projectNameFill)
       setPopUpChangeProjectName(false)
     }
-  }
+}, [projectNameFill, setNotification, changeProjectNameInAccount, getProject, setProjectName, setPopUpChangeProjectName]);
 
   const buttonLeftClick = () => {
     setMenu(1);
@@ -194,7 +193,7 @@ const Main = () => {
     setDownloadPopup(false)
   }
 
-  const handleFindProjectName = async() => {
+  const handleFindProjectName = useCallback(async () => {
     if(projectName==""){
         const queryParams = new URLSearchParams(window.location.search);
         const searchProjectId = queryParams.get('projectId');
@@ -210,7 +209,7 @@ const Main = () => {
             setProjectName(results[0].project_name)
         }
     }
-  };
+}, [projectName, user.project, setProjectName]);
 
   const handleEnterKeyPress = (e) => {
     if (e.key === 'Enter') {
@@ -241,7 +240,7 @@ const Main = () => {
       handleFindProjectName()
       setProjectNameFill(projectName)
     }
-  }, [data, user]);
+  }, [data, user, handleChangeProjectName, handleFindProjectName, projectName]);
   useEffect(() => {
         
     if (user.isLogin === false) {

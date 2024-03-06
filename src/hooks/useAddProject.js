@@ -14,40 +14,6 @@ export default function useAddProject() {
     const url = process.env.NEXT_PUBLIC_DATABASE_SERVICE_URL;
     const [userRole, setUserRole] = useRecoilState(atomUserRole)
 
-    const createProject = useCallback(async (columns, rows, project_name, file_name) => {
-        try {
-            showLoading();
-            const requestBody = {
-                "data_set": {
-                    "columns": columns,
-                    "rows": rows
-                },
-                "clean":""
-            }
-            const headers = {
-                "content-type": "application/json"
-            }
-            console.log(requestBody)
-            const res = await axios.post(url + 'projects/createProject', requestBody, { headers: headers });
-            console.log(res);
-            if (res.status === 200 || res.status == 201) {
-                console.log(res.data.results);
-                // router.push('/login');
-                addProject(userRole.username, res.data.results._id, project_name, file_name)
-            } else if (res.status === 400) {
-                console.log("bad request look network for reason")
-            } else {
-                setError(err);
-            }
-            setIsPending(false);
-        } catch (err) {
-            setError(err);
-            setIsPending(false);
-        } finally {
-            hideLoading();
-        }
-    }, [url, showLoading, hideLoading]);
-
     const addProject = useCallback(async (username, project_id, project_name, file_name) => {
         try {
             showLoading();
@@ -88,7 +54,43 @@ export default function useAddProject() {
         } finally {
             hideLoading();
         }
-    }, [url, showLoading, hideLoading, router]);
+    }, [url, showLoading, hideLoading, router, setUserRole, userRole]);
+
+    const createProject = useCallback(async (columns, rows, project_name, file_name) => {
+        try {
+            showLoading();
+            const requestBody = {
+                "data_set": {
+                    "columns": columns,
+                    "rows": rows
+                },
+                "clean":""
+            }
+            const headers = {
+                "content-type": "application/json"
+            }
+            console.log(requestBody)
+            const res = await axios.post(url + 'projects/createProject', requestBody, { headers: headers });
+            console.log(res);
+            if (res.status === 200 || res.status == 201) {
+                console.log(res.data.results);
+                // router.push('/login');
+                addProject(userRole.username, res.data.results._id, project_name, file_name)
+            } else if (res.status === 400) {
+                console.log("bad request look network for reason")
+            } else {
+                setError(err);
+            }
+            setIsPending(false);
+        } catch (err) {
+            setError(err);
+            setIsPending(false);
+        } finally {
+            hideLoading();
+        }
+    }, [url, showLoading, hideLoading, addProject, userRole.username]);
+
+    
 
     return { error, setError, isPending, showLoading, hideLoading, createProject, addProject };
 }

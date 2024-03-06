@@ -1,15 +1,12 @@
 import React from 'react'
-import Link from 'next/link';
 import Image from 'next/legacy/image'
-import { paper, binIcon } from '@/assets'
+import { paper } from '@/assets'
 import useAddProject from '@/hooks/useAddProject';
 
 export const DatasetComponent = ({projectName, fileName, columns, rows}) => {
-  const {error, isPending, createProject} = useAddProject()
+  const { createProject} = useAddProject()
   function convertStringsToNumbers(data, columnName) {
-    // Check if all values in the column can be converted to a number
     if (data.every(row => !isNaN(Number(row[columnName])))) {
-      // If so, convert them
       data.forEach(row => {
         row[columnName] = Number(row[columnName]);
       });
@@ -19,8 +16,6 @@ export const DatasetComponent = ({projectName, fileName, columns, rows}) => {
     return !isNaN(Number(str));
   }
   function determineColumnType(columnValues) {
-    // Your logic to determine the type based on the values
-    // Example: Check if all values are numbers, strings, or a mix of both
     const allNumbers = columnValues.every(value => typeof value === 'number'||canConvertToNumber(value));
     const allStrings = columnValues.every(value => typeof value === 'string'||value === null);
   

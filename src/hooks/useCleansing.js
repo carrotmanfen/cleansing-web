@@ -105,7 +105,7 @@ export default function useCleansing() {
         } finally {
             hideLoading();
         }
-    }, [url, showLoading, hideLoading, router]);
+    }, [url, showLoading, hideLoading]);
 
     const changeProjectInAccount = useCallback(async (username, project_id, project_clean) => {
         try {
@@ -147,7 +147,7 @@ export default function useCleansing() {
         } finally {
             hideLoading();
         }
-    }, [url, showLoading, hideLoading, router]);
+    }, [ showLoading, hideLoading, router, setUserRole, userRole]);
 
     const createProject = useCallback(async (columns, rows, projectId, clean_name) => {
         try {
@@ -182,7 +182,7 @@ export default function useCleansing() {
         } finally {
             hideLoading();
         }
-    }, [url, showLoading, hideLoading]);
+    }, [ showLoading, hideLoading, changeProjectInAccount, userRole.username]);
 
     const cleanConfirm = useCallback(async (method, data_set, projectId) => {
         try {
@@ -276,7 +276,7 @@ export default function useCleansing() {
         } finally {
             hideLoading();
         }
-    }, [url, showLoading, hideLoading, router]);
+    }, [url, showLoading, hideLoading, createProject]);
     function checkType(variable) {
         // Check if the variable is an object
         if (typeof variable === 'object' && variable !== null) {
@@ -339,7 +339,7 @@ export default function useCleansing() {
         } finally {
             hideLoading();
         }
-    }, [url, showLoading, hideLoading, router]);
+    }, [url, showLoading, hideLoading]);
 
     return { data, error, isPending, setError, getDataCheck, cleanConfirm, getDataMethod3, data3 };
 }

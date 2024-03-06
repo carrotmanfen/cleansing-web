@@ -54,7 +54,7 @@ export default function useReverse() {
         } finally {
             hideLoading();
         }
-    }, [url, showLoading, hideLoading, router]);
+    }, [ showLoading, hideLoading, router, setUserRole, userRole]);
 
     const reverseProject = useCallback(async (project_id, newProjectId) => {
 
@@ -77,7 +77,7 @@ export default function useReverse() {
         } finally {
             hideLoading();
         }
-    }, [url, showLoading, hideLoading, router]);
+    }, [url, showLoading, hideLoading, changeProjectInAccount]);
 
     return { error, isPending, reverseProject };
 }
