@@ -40,17 +40,20 @@ import functionCleansing8 from './functionCleansing8.png'
 import functionCleansing9 from './functionCleansing9.png'
 import functionCleansing10 from './functionCleansing10.png'
 import functionCleansing11 from './functionCleansing11.png'
+import functionCleansing12 from './functionCleansing12.png'
 import selectColumn2 from './SelectColumn2.png'
 import selectColumn3 from './SelectColumn3.png'
 import selectColumn4 from './SelectColumn4.png'
 import confirmCleansing2 from './confirmCleansing2.png'
 import confirmCleansing3 from './confirmCleansing3.png'
 import confirmCleansing4 from './confirmCleansing4.png'
+import confirmCleansing5 from './confirmCleansing5.png'
 import DeleteDuplicateData from './DeleteDuplicateData.png'
 import selectData from './selectData.png'
 import inputData from './inputData.png'
 import inputData2 from './inputData2.png'
 import inputData3 from './inputData3.png'
+import inputData4 from './inputData4.png'
 import managingNullValues from './managingNullValues.png'
 import managingNullValues1 from './managingNullValues1.png'
 import inputdatafromuser from './inputdatafromuser.png'
@@ -101,6 +104,7 @@ export{
     functionCleansing9,
     functionCleansing10,
     functionCleansing11,
+    functionCleansing12,
     selectColumn2,
     selectColumn3,
     selectColumn4,
@@ -108,10 +112,12 @@ export{
     DeleteDuplicateData,
     confirmCleansing3,
     confirmCleansing4,
+    confirmCleansing5,
     selectData,
     inputData,
     inputData2,
     inputData3,
+    inputData4,
     managingNullValues,
     managingNullValues1,
     inputdatafromuser,
