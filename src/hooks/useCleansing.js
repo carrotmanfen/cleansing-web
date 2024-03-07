@@ -184,6 +184,29 @@ export default function useCleansing() {
         }
     }, [ showLoading, hideLoading, changeProjectInAccount, userRole.username]);
 
+    function convertStringsToNumbers(data, columnName) {
+        if (data.every(row => !isNaN(Number(row[columnName])))) {
+          data.forEach(row => {
+            row[columnName] = Number(row[columnName]);
+          });
+        }
+      }
+      function canConvertToNumber(str) {
+        return !isNaN(Number(str));
+      }
+      function determineColumnType(columnValues) {
+        const allNumbers = columnValues.every(value => typeof value === 'number'||canConvertToNumber(value));
+        const allStrings = columnValues.every(value => typeof value === 'string'||value === null);
+      
+        if (allNumbers) {
+          return 'number';
+        } else if (allStrings) {
+          return 'string';
+        } else {
+          return 'number';
+        }
+    }
+
     const cleanConfirm = useCallback(async (method, data_set, projectId) => {
         try {
             setError(false);
@@ -257,6 +280,14 @@ export default function useCleansing() {
                 }else{
                     if(res.data[0]){
                         const columns = Object.keys(res.data[0]).map(label => ({ label, dataKey: label }));
+                        console.log(columns)
+                        columns.map(column => {
+                            column.type = determineColumnType(res.data.map(row => row[column.dataKey]))
+                        })
+                        console.log("columns end")
+                        columns.map(column => {
+                            convertStringsToNumbers(res.data, column);
+                        });
                         createProject(columns, res.data, projectId, clean_name)
                     }else{
                         setError("ไม่สามารถทำความสะอาดด้วยวิธีนี้ได้เนื้องจากส่งผลให้ข้อมูลทั้งหมดหายไป")
