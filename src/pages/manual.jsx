@@ -137,7 +137,7 @@ const Manual = () => {
                         <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
                             <Image src={functionCleansing} width={700} height={350} objectFit='contain' alt="functionCleansing" />
                         </div>
-                        <p className='text-textGray text-[16px] py-6'> เมื่อผู้ใช้งานกดปุ่ม <strong>ทำความสะอาดข้อมูล</strong> จะมี Pop up ฟังก์ชันทำความสะอาดข้อมูลทั้ง 11 ฟังก์ชัน ขึ้นมาให้ผู้ใช้งานได้เลือกว่าต้องการใช้ฟังก์ชันทำความสะอาดข้อมูลใดกับชุดข้อมูลนี้ โดยสามารถเลือกใช้ได้ทีละ 1 ฟังก์ชัน</p>
+                        <p className='text-textGray text-[16px] py-6'> เมื่อผู้ใช้งานกดปุ่ม <strong>ทำความสะอาดข้อมูล</strong> จะมี Pop up ฟังก์ชันทำความสะอาดข้อมูลทั้ง 12 ฟังก์ชัน ขึ้นมาให้ผู้ใช้งานได้เลือกว่าต้องการใช้ฟังก์ชันทำความสะอาดข้อมูลใดกับชุดข้อมูลนี้ โดยสามารถเลือกใช้ได้ทีละ 1 ฟังก์ชัน</p>
                         <div class="rounded-lg shadow-xl dark:shadow-gray-900">
                             <Image src={selectColumn} width={700} height={380} objectFit='contain' alt="selectColumn" />
                         </div>

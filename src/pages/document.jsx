@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/legacy/image'
 import { Navbar } from '../components/Navbar'
 import {
-    functionCleansing1, functionCleansing2, functionCleansing3, functionCleansing4, functionCleansing5, functionCleansing6, functionCleansing7, functionCleansing8, functionCleansing9, functionCleansing10, functionCleansing11,
+    functionCleansing1, functionCleansing2, functionCleansing3, functionCleansing4, functionCleansing5, functionCleansing6, functionCleansing7, functionCleansing8, functionCleansing9, functionCleansing10, functionCleansing11, functionCleansing12,
     selectColumn2, selectColumn3, selectColumn4, confirmCleansing2, navbarDetail, DeleteDuplicateData, confirmCleansing3, selectData, inputData, managingNullValues, managingNullValues1, inputdatafromuser, inputData2, inputData3,
-    flagOutliers, clampOutliers, inputdataAuto, confirmCleansing4
+    inputData4, flagOutliers, clampOutliers, inputdataAuto, confirmCleansing4, confirmCleansing5, selectColumn
 } from '@/assets'
 import Link from 'next/link'
 import { atomUserRole } from "@/atoms/atomUserRole";
@@ -29,7 +29,35 @@ const Document = () => {
             <div className='w-full flex flex-col items-center'>
                 <p className='text-[32px] text-textPrimary font-kanit mt-20'>ทฤษฎีการทำงานของฟังก์ชันทำความสะอาดข้อมูล</p>
                 <div className='w-[700px] flex flex-col mt-20 justify-around border-0'>
-                    <p className='text-textPrimary font-kanit text-[24px]'>ฟังก์ชันที่ 1 ลบคอลัมน์ข้อมูลที่ไม่เกี่ยวข้อง (Delete Irrelevant Data)</p>
+                    <p className='text-textPrimary font-kanit text-[24px]'>ฟังก์ชันที่ 1 เปลี่ยนชื่อคอลัมน์ (Rename Column Header)</p>
+                    <p className='text-textGray text-[16px] mt-5'>คือการเปลี่ยนชื่อคอลัมน์ของชุดข้อมูล</p>
+                    <p className='text-textGray text-[16px] mt-10'>ผู้ใช้งานควรใช้เมื่อ ต้องการเปลี่ยนชื่อคอลัมน์ของชุดข้อมูล โดยฟังก์ชันนี้สามารถใช้ได้กับข้อมูลทุกประเภท</p>
+                    <p className='text-textGray text-[16px] mt-10'><strong>วิธีการใช้งาน</strong></p>
+                    <div className='w-[700px] mt-5 flex flex-col justify-center border-0'>
+                        <p className='text-textGray text-[16px] mx-10'>1.	กดเลือกฟังก์ชัน เปลี่ยนชื่อคอลัมน์ (Rename Column Header)</p>
+                        <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
+                            <Image src={functionCleansing12} width={700} height={350} objectFit='contain' alt="functionCleansing12" />
+                        </div>
+                    </div>
+                    <div className='w-[700px] mt-5 flex flex-col justify-center border-0'>
+                        <p className='text-textGray text-[16px] mx-10'>2.	เลือกคอลัมน์ที่ต้องการใช้ทำความสะอาดข้อมูลด้วยฟังก์ชันนี้ (ผู้ใช้งานสามารถเลือกได้เพียง 1 คอลัมน์) จากนั้นกดถัดไป</p>
+                        <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
+                            <Image src={selectColumn4} width={700} height={420} objectFit='contain' alt="selectColumn4" />
+                        </div>
+                    </div>
+                    <div className='w-[700px] mt-5 flex flex-col justify-center border-0'>
+                        <p className='text-textGray text-[16px] mx-10'>3.	ผู้ใช้งานป้อนชื่อคอลัมน์ใหม่เพื่อเปลี่ยนข้อมูล จากนั้นกดยืนยัน</p>
+                        <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
+                            <Image src={inputData4} width={700} height={220} objectFit='contain' alt="inputData4" />
+                        </div>
+                    </div>
+                    <div className='w-[700px] mt-5 flex flex-col justify-center border-0'>
+                        <p className='text-textGray text-[16px] mx-10'>4.	ตรวจสอบข้อมูลที่จะถูกเปลี่ยนแปลง จากนั้นกดปุ่มยืนยันเพื่อทำความสะอาดข้อมูล</p>
+                        <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
+                            <Image src={confirmCleansing5} width={700} height={350} objectFit='contain' alt="confirmCleansing5" />
+                        </div>
+                    </div>
+                    <p className='text-textPrimary font-kanit text-[24px] mt-10'>ฟังก์ชันที่ 2 ลบคอลัมน์ข้อมูลที่ไม่เกี่ยวข้อง (Delete Irrelevant Data)</p>
                     <p className='text-textGray text-[16px] mt-5'>คือการลบคอลัมน์ที่ไม่จำเป็นในการนำไปประมวลผลออก เพื่อเป็นการลดขนาดของชุดข้อมูล</p>
                     <p className='text-textGray text-[16px] mt-10'>ผู้ใช้งานควรใช้เมื่อ ชุดข้อมูลมีคอลัมน์ที่ซ้ำซ้อน หรือมีคอลัมน์ที่เยอะเกินความจำเป็น เพื่อเป็นการลดขนาดของชุดข้อมูลทำให้ประหยัดทรัพยกรของเครื่องเมื่อนำชุดข้อมูลไปประมวลผล โดยฟังก์ชันนี้สามารถใช้ได้กับข้อมูลทุกประเภท</p>
                     <p className='text-textGray text-[16px] mt-10'><strong>วิธีการใช้งาน</strong></p>
@@ -64,7 +92,7 @@ const Document = () => {
                             <Image src={navbarDetail} width={700} height={400} objectFit='contain' alt="navbarDetail" />
                         </div>
                     </div>
-                    <p className='text-textPrimary font-kanit text-[24px] mt-10'>ฟังก์ชันที่ 2 ลบข้อมูลที่ซ้ำซ้อน (Delete Duplicate Data)</p>
+                    <p className='text-textPrimary font-kanit text-[24px] mt-10'>ฟังก์ชันที่ 3 ลบข้อมูลที่ซ้ำซ้อน (Delete Duplicate Data)</p>
                     <p className='text-textGray text-[16px] mt-5'>คือการลบแถวข้อมูล ที่มีข้อมูลทุกคอลัมน์ซ้ำกับแถวอื่น</p>
                     <p className='text-textGray text-[16px] mt-10'>ผู้ใช้งานควรใช้เมื่อ ชุดข้อมูลมีข้อมูลที่เหมือนกันในทุกคอลัมน์ เหมาะกับชุดข้อมูลที่เกิดการผิดพลาดในการบันทึกข้อมูลที่เหมือนกันมามากกว่าหนึ่งครั้ง ทั้งนี้ทั้งนั้น ฟังก์ชันทำความสะอาดนี้ไม่เหมาะกับข้อมูลที่ผ่านการ oversampling หรือการเพิ่มข้อมูลเพื่อให้ชุดข้อมูลเกิดความสมดุล เพราะจะทำให้ข้อมูลที่ถูกสร้างขึ้นจากการสุ่มตัวอย่างเดิมถูกลบออกไปด้วย</p>
                     <p className='text-textGray text-[16px] mt-10'><strong>วิธีการใช้งาน</strong></p>
@@ -87,7 +115,7 @@ const Document = () => {
                         </div>
                         <p className='text-textGray text-[16px] mt-5'>ผู้ใช้งานจะสังเกตเห็นว่าการลบข้อมูลที่ซ้ำซ้อนนั้นจะถูกไฮไลท์ด้วยสีแดง เนื่องจากเป็นการลบข้อมูลทั้งแถว</p>
                     </div>
-                    <p className='text-textPrimary font-kanit text-[24px] mt-10'>ฟังก์ชันที่ 3 แก้ไขข้อมูลที่ไม่สอดคล้อง (Edit Inconsistent Data)</p>
+                    <p className='text-textPrimary font-kanit text-[24px] mt-10'>ฟังก์ชันที่ 4 แก้ไขข้อมูลที่ไม่สอดคล้อง (Edit Inconsistent Data)</p>
                     <p className='text-textGray text-[16px] mt-5'>คือการแก้ไขข้อมูลเดียวกันที่บันทึกไม่เหมือนกัน เช่น &quot;กทม.&quot; , &quot;กรุงเทพ&quot; ให้เป็นรูปแบบเดียวกัน</p>
                     <p className='text-textGray text-[16px] mt-10'>ผู้ใช้งานควรใช้เมื่อ มีข้อมูลประเภท string โดยชุดข้อมูลผ่านการจัดเก็บจากหลากหลายบุคคล หลายหน่วยงาน ซึ่งอาจไม่ได้มีการกำหนดมาตรฐานในการบันทึก หรือรวมไปถึงความผิดพลาดจากผู้กรอกข้อมูล ซึ่งทำให้ข้อมูลที่ควรจะเป็นข้อมูลเดียวกันนั้น มีการแสดงผลที่ต่างกัน ฟังก์ชันนี้จึงเหมาะกับการเปลี่ยนข้อมูลที่มีความหมายเดียวกัน แต่รูปแบบต่างกัน ให้กลายเป็นรูปแบบเดียวกัน เพื่อไม่ให้การประมวลผลข้อมูลเกิดความผิดพลาด</p>
                     <p className='text-textGray text-[16px] mt-10'><strong>วิธีการใช้งาน</strong></p>
@@ -122,7 +150,7 @@ const Document = () => {
                         </div>
                         <p className='text-textGray text-[16px] mt-5'>ผู้ใช้งานจะสังเกตเห็นว่าการแก้ไขข้อมูลที่ไม่สอดคล้องนั้นจะถูกไฮไลท์ด้วยสีเหลือง เนื่องจากเป็นการเปลี่ยนแปลงข้อมูลบางแถวหรือบางคอลัมน์เท่านั้น</p>
                     </div>
-                    <p className='text-textPrimary font-kanit text-[24px] mt-10'>ฟังก์ชันที่ 4 จัดการข้อมูลที่ขาดหายไป (Managing Null Values) </p>
+                    <p className='text-textPrimary font-kanit text-[24px] mt-10'>ฟังก์ชันที่ 5 จัดการข้อมูลที่ขาดหายไป (Managing Null Values) </p>
                     <p className='text-textGray text-[16px] mt-5'>คือการเติมข้อมูลหรือตัดแถวข้อมูลที่มีค่าว่าง</p>
                     <p className='text-textGray text-[16px] mt-10'>ผู้ใช้งานควรใช้เมื่อ ชุดข้อมูลมีข้อมูลที่ไม่ครบถ้วนสมบูรณ์ ในบางครั้งเมื่อนำข้อมูลที่มีค่าว่างไปประมวลผลในโมเดล Machine Learning (การเรียนรู้ของเครื่อง) อาจส่งผลให้เกิดความผิดพลาดขึ้นได้ โดยในฟังก์ชันนี้ผู้ใช้สามารถจัดการกับข้อมูลที่ขาดหายไปได้ 4 แบบคือ 1.) เติมค่าว่างด้วยค่าเฉลี่ย 2.) เติมค่าว่างด้วยค่ามัธยฐาน 3.) เติมข้อมูลที่กำหนดเอง 4.) ตัดข้อมูลที่มีค่าว่าง</p>
                     <p className='text-textGray text-[16px] mt-10'><strong>วิธีการใช้งาน</strong></p>
@@ -161,7 +189,7 @@ const Document = () => {
                         </div>
                     </div>
                     <p className='text-textGray text-[16px] mx-10 mt-5'>4.	ตรวจสอบข้อมูลที่จะถูกเปลี่ยนแปลง จากนั้นกดปุ่มยืนยันเพื่อทำความสะอาดข้อมูล</p>
-                    <p className='text-textPrimary font-kanit text-[24px] mt-10'>ฟังก์ชันที่ 5 แยกคอลัมน์ (Split Column)</p>
+                    <p className='text-textPrimary font-kanit text-[24px] mt-10'>ฟังก์ชันที่ 6 แยกคอลัมน์ (Split Column)</p>
                     <p className='text-textGray text-[16px] mt-5'>คือแยกโดยใช้ตัวแบ่ง (Delimiter)</p>
                     <p className='text-textGray text-[16px] mt-10'>ผู้ใช้งานควรใช้เมื่อ ชุดข้อมูลมีคอลัมน์ที่สามารถแยกรายละเอียดออกมาได้ เช่น หากเป็นข้อมูล วันเดือนปี ผู้ใช้งานสามารถแยกออกมาเป็น 3 คอลัมน์ เป็น วัน เดือน ปี ได้ ทำให้ผู้ใช้งานสามารถมองเห็นรายละเอียดเชิงลึกของข้อมูลได้มากยิ่งขึ้น ฟังก์ชันนี้เหมาะสำหรับข้อมูลประเภท string หากนำไปใช้กับข้อมูลประเภท number นั้น ก็สามารถแปลงได้ แต่ทว่าเว็บแอพลิเคชันจะทำการเปลี่ยนประเภทข้อมูลของแถวข้อมูลนั้นเป็น string ก่อน แล้วจึงแยกคอลัมน์</p>
                     <p className='text-textGray text-[16px] mt-10'><strong>วิธีการใช้งาน</strong></p>
@@ -184,7 +212,7 @@ const Document = () => {
                         </div>
                     </div>
                     <p className='text-textGray text-[16px] mx-10 mt-5'>4.	ตรวจสอบข้อมูลที่จะถูกเปลี่ยนแปลง จากนั้นกดปุ่มยืนยันเพื่อทำความสะอาดข้อมูล</p>
-                    <p className='text-textPrimary font-kanit text-[24px] mt-10'>ฟังก์ชันที่ 6 รวมคอลัมน์ (Merge Column)</p>
+                    <p className='text-textPrimary font-kanit text-[24px] mt-10'>ฟังก์ชันที่ 7 รวมคอลัมน์ (Merge Column)</p>
                     <p className='text-textGray text-[16px] mt-5'>คือทำการรวมคอลัมน์ 2 คอลัมน์โดยมีตัวเชื่อม (Connector)</p>
                     <p className='text-textGray text-[16px] mt-10'>ผู้ใช้งานควรใช้เมื่อ มีข้อมูลที่สามารถรวมกันได้ เช่น ชื่อ และ นามสกุล เนื่องจากเป็นข้อมูลที่มีความเป็นเอกลักษณ์อยู่แล้ว และอาจจะไม่ได้ข้อมูลเชิงลึกจากการวิเคราะห์มากนัก ซึ่งเป็นการลดขนาดของชุดข้อมูลทำให้ประหยัดทรัพยากรในการประมวลผลอีกด้วย โดยคอลัมน์ที่ผ่านการรวมคอลัมน์จะมีประเภทเป็น string</p>
                     <p className='text-textGray text-[16px] mt-10'><strong>วิธีการใช้งาน</strong></p>
@@ -207,7 +235,7 @@ const Document = () => {
                         </div>
                     </div>
                     <p className='text-textGray text-[16px] mx-10 mt-5'>4.	ตรวจสอบข้อมูลที่จะถูกเปลี่ยนแปลง จากนั้นกดปุ่มยืนยันเพื่อทำความสะอาดข้อมูล</p>
-                    <p className='text-textPrimary font-kanit text-[24px] mt-10'>ฟังก์ชันที่ 7 เปลี่ยนข้อมูลประเภท กลุ่ม ที่มีจำนวนน้อย เป็น “อื่น ๆ” (Replace Excess Categories with “Other”)</p>
+                    <p className='text-textPrimary font-kanit text-[24px] mt-10'>ฟังก์ชันที่ 8 เปลี่ยนข้อมูลประเภท กลุ่ม ที่มีจำนวนน้อย เป็น “อื่น ๆ” (Replace Excess Categories with “Other”)</p>
                     <p className='text-textGray text-[16px] mt-5'>คือการจัดกลุ่มชุดข้อมูลตามประเภทของข้อมูล กลุ่มข้อมูลที่มีจำนวนน้อยกว่าที่กำหนดจะเปลี่ยนเป็นกลุ่ม “อื่นๆ” </p>
                     <p className='text-textGray text-[16px] mt-10'>ผู้ใช้งานควรใช้เมื่อ มีข้อมูลประเภท Categories (หมวดหมู่) ที่มีเยอะเกินไป หากนำข้อมูลนี้ไปแสดงผลอาจทำให้ไม่สามารถเห็นรายละเอียดที่ชัดเจน ฟังก์ชันนี้จึงเป็นการรวมหมวดหมู่ข้อมูลที่มีจำนวนน้อย ๆ ให้แสดงรวมกันเป็นคำว่า ”อื่น ๆ” เพื่อให้ผู้ใช้สามารถเข้าใจการแสดงผลข้อมูลได้ง่ายขึ้น ฟังก์ชันนี้หากนำไปใช้กับข้อมูลประเภทตัวเลข จะไม่เกิดการเปลี่ยนแปลงใด ๆ </p>
                     <p className='text-textGray text-[16px] mt-10'><strong>วิธีการใช้งาน</strong></p>
@@ -229,7 +257,7 @@ const Document = () => {
                             <Image src={confirmCleansing4} width={700} height={380} objectFit='contain' alt="confirmCleansing4" />
                         </div>
                     </div>
-                    <p className='text-textPrimary font-kanit text-[24px] mt-10'>ฟังก์ชันที่ 8 ลบข้อมูลที่ไม่ตรงกับประเภทข้อมูล (Remove Unreadable Columns)</p>
+                    <p className='text-textPrimary font-kanit text-[24px] mt-10'>ฟังก์ชันที่ 9 ลบข้อมูลที่ไม่ตรงกับประเภทข้อมูล (Remove Unreadable Columns)</p>
                     <p className='text-textGray text-[16px] mt-5'>คือการลบแถวข้อมูลที่มีข้อมูลไม่ตรงกับคอลัมน์ที่กำหนด</p>
                     <p className='text-textGray text-[16px] mt-10'>ผู้ใช้งานควรใช้เมื่อ ชุดข้อมูลมีการจัดเก็บตัวอักษรในช่องที่ควรจะเก็บแค่ตัวเลข ฟังก์ชันนี้จะทำการลบข้อมูลที่ไม่ใช่ตัวเลขทิ้ง และเปลี่ยนประเภทของคอลัมน์ข้อมูลเป็นตัวเลข (int หรือ float) ตามความเหมาะสม</p>
                     <p className='text-textGray text-[16px] mt-10'><strong>วิธีการใช้งาน</strong></p>
@@ -246,7 +274,7 @@ const Document = () => {
                         </div>
                     </div>
                     <p className='text-textGray text-[16px] mx-10 mt-5'>3.	ตรวจสอบข้อมูลที่จะถูกเปลี่ยนแปลง จากนั้นกดปุ่มยืนยันเพื่อทำความสะอาดข้อมูล</p>
-                    <p className='text-textPrimary font-kanit text-[24px] mt-10'>ฟังก์ชันที่ 9 ระบุค่าผิดปกติทางสถิติ (Flag Outliers)</p>
+                    <p className='text-textPrimary font-kanit text-[24px] mt-10'>ฟังก์ชันที่ 10 ระบุค่าผิดปกติทางสถิติ (Flag Outliers)</p>
                     <p className='text-textGray text-[16px] mt-5'>คือการสร้างคอลัมน์ใหม่หากมีค่าผิดปกติจะระบุค่าเป็น 1 หาไม่มีจะระบุค่าเป็น 0</p>
                     <p className='text-textGray text-[16px] mt-10'>ผู้ใช้งานควรใช้เมื่อมีชุดข้อมูลที่มีคอลัมน์เป็นค่าตัวเลข การใช้ฟังก์ชันนี้เป็นการชี้จุดให้ผู้ใช้เห็นว่า ข้อมูลแถวใดมีความผิดปกติทางสถิติ และผู้ใช้สามารถตรวจดูความผิดปกติของข้อมูลเหล่านั้นได้ ทั้งนี้ทั้งนั้นฟังก์ชันนี้หากใช้กับข้อมูลที่ไม่ใช่ตัวเลข จะไม่เกิดการเปลี่ยนแปลงใด ๆ เกิดขึ้นทั้งสิ้น โดยในคำนวณหาค่าข้อมูลที่มีค่าผิดปกติทางสถิตินั้น เว็บแอปพลิเคชันนี้จะใช้วิธีการหาแบบ Interquartile Range (ค่าพิสัยระหว่างควอไทล์) โดยค่าผิดปกติที่มีค่าน้อยกว่า 1.5 คูณด้วยค่า IQR และค่าผิดปกติที่มีค่ามากกว่า 1.5 คูณด้วยค่า IQR จะจัดเป็นค่าที่มีความผิดปกติทางสถิติ</p>
                     <p className='text-textGray text-[16px] mt-10'><strong>วิธีการใช้งาน</strong></p>
@@ -269,7 +297,7 @@ const Document = () => {
                         </div>
                     </div>
                     <p className='text-textGray text-[16px] mx-10 mt-5'>4.	ตรวจสอบข้อมูลที่จะถูกเปลี่ยนแปลง จากนั้นกดปุ่มยืนยันเพื่อทำความสะอาดข้อมูล</p>
-                    <p className='text-textPrimary font-kanit text-[24px] mt-10'>ฟังก์ชันที่ 10 เปลี่ยนค่าผิดปกติทางสถิติ (Clamp Outliers)</p>
+                    <p className='text-textPrimary font-kanit text-[24px] mt-10'>ฟังก์ชันที่ 11 เปลี่ยนค่าผิดปกติทางสถิติ (Clamp Outliers)</p>
                     <p className='text-textGray text-[16px] mt-5'>คือการเปลี่ยนค่าผิดปกติทางสถิติเป็นค่าที่อยู่ในช่วงแทน</p>
                     <p className='text-textGray text-[16px] mt-10'>ผู้ใช้งานควรใช้เมื่อมีชุดข้อมูลที่มีคอลัมน์เป็นค่าตัวเลข การใช้ฟังก์ชันนี้เป็นการปรับค่าผิดปกติที่อาจจะส่งผลต่อการประมวลผลเมื่อนำข้อมูลไปใช้เข้าโมเดลการเรียนรู้ของเครื่อง (Machine Learning) การปรับค่าผิดปกติจะแบ่งออกเป็น 2 รูปแบบตามที่ผู้ใช้เลือก ได้แก่ 1.) เปลี่ยนข้อมูลเป็นค่าที่มากที่สุดหรือน้อยที่สุดที่ไม่ผิดปกติทางสถิติ และ 2.) เปลี่ยนข้อมูลที่ผิดปกติทางสถิติทั้งหมดเป็นค่าที่ผู้ใช้ต้องการ ทั้งนี้ทั้งนั้นฟังก์ชันนี้หากใช้กับข้อมูลที่ไม่ใช่ตัวเลข จะไม่เกิดการเปลี่ยนแปลงใด ๆ เกิดขึ้นทั้งสิ้น โดยในคำนวณหาค่าข้อมูลที่มีค่าผิดปกติทางสถิตินั้น เว็บแอปพลิเคชันนี้จะใช้วิธีการหาแบบ Interquartile Range (ค่าพิสัยระหว่างควอไทล์) โดยค่าผิดปกติที่มีค่าน้อยกว่า 1.5 คูณด้วยค่า IQR และค่าผิดปกติที่มีค่ามากกว่า 1.5 คูณด้วยค่า IQR จะจัดเป็นค่าที่มีความผิดปกติทางสถิติ</p>
                     <p className='text-textGray text-[16px] mt-10'><strong>วิธีการใช้งาน</strong></p>
@@ -300,7 +328,7 @@ const Document = () => {
                         </div>
                     </div>
                     <p className='text-textGray text-[16px] mx-10 mt-5'>4.	ตรวจสอบข้อมูลที่จะถูกเปลี่ยนแปลง จากนั้นกดปุ่มยืนยันเพื่อทำความสะอาดข้อมูล</p>
-                    <p className='text-textPrimary font-kanit text-[24px] mt-10'>ฟังก์ชันที่ 11 ลบค่าผิดปกติทางสถิติ (Delete Outliers)</p>
+                    <p className='text-textPrimary font-kanit text-[24px] mt-10'>ฟังก์ชันที่ 12 ลบค่าผิดปกติทางสถิติ (Delete Outliers)</p>
                     <p className='text-textGray text-[16px] mt-5'>คือการนำแถวข้อมูลที่มีค่าผิดปกติทางสถิติออก</p>
                     <p className='text-textGray text-[16px] mt-10'>ผู้ใช้งานควรใช้เมื่อมีชุดข้อมูลที่มีคอลัมน์เป็นตัวเลข และมีค่าผิดปกติทางสถิติ การใช้ฟังก์ชันนี้จะเป็นการลบแถวข้อมูลที่มีค่าผิดปกติทิ้ง เนื่องจากค่าผิดปกติของข้อมูลอาจส่งผลกระทบต่อการประมวลผลข้อมูลเมื่อนำข้อมูลเหล่านี้ไปใช้ในการเรียนรู้ของเครื่อง (Machine Learning) ทั้งนี้ทั้งนั้นฟังก์ชันนี้หากใช้กับข้อมูลที่ไม่ใช่ตัวเลข จะไม่เกิดการเปลี่ยนแปลงใด ๆ เกิดขึ้นทั้งสิ้น โดยในการค่าข้อมูลที่มีค่าผิดปกติทางสถิตินั้น เว็บแอปพลิเคชันนี้จะใช้วิธีการหาแบบ Interquartile Range (ค่าพิสัยระหว่างควอไทล์) โดยค่าผิดปกติที่มีค่าน้อยกว่า 1.5 คูณด้วยค่า IQR และค่าผิดปกติที่มีค่ามากกว่า 1.5 คูณด้วยค่า IQR จะจัดเป็นค่าที่มีความผิดปกติทางสถิติ</p>
                     <p className='text-textGray text-[16px] mt-10'><strong>วิธีการใช้งาน</strong></p>
