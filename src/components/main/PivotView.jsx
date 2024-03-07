@@ -78,7 +78,7 @@ export const PivotView = ({dataColumns, dataRows, updateProjectFunction}) => {
       };
     useEffect(() => {
         setTableData(transformedData)
-    }, [tableData, transformedData]);
+    }, [tableData]);
       return (
         <div className='w-full flex mb-4'>
             {tableData&&<DataTable tableData={tableData} onSelectChange={handleSelectChange}/>}
