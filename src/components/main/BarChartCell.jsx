@@ -69,6 +69,7 @@ export const BarChartCell = ({ data, type }) => {
             arrayString.push(arrObj[i][0]);
         }
         console.log(arrayNumber);
+        console.log(arrayString);
         return sortObj;
       }
 
@@ -146,31 +147,31 @@ export const BarChartCell = ({ data, type }) => {
               },
             }
           : {
-              type: "pie",
-              data: {
-                datasets: [
-                  {
-                    label: arrayString,
-                    data: arrayNumber,
-                    backgroundColor: "rgba(75,192,192,0.4)",
-                    borderColor: "rgba(75,192,192,1)",
-                    borderWidth: 1,
-                    hoverBackgroundColor: "rgba(75,192,192,0.8)",
-                    hoverBorderColor: "rgba(75,192,192,1)",
-                  },
-                ],
-              },
-              options: {
-                scales: {
-                  x: {
-                    type: "category",
-                  },
-                  y: {
-                    beginAtZero: true,
-                  },
+            type: "pie",
+            data: {
+              labels: arrayString, // use arrayString as labels
+              datasets: [
+                {
+                  data: arrayNumber, // use arrayString as data
+                  backgroundColor: "rgba(75,192,192,0.4)",
+                  borderColor: "rgba(75,192,192,1)",
+                  borderWidth: 1,
+                  hoverBackgroundColor: "rgba(75,192,192,0.8)",
+                  hoverBorderColor: "rgba(75,192,192,1)",
+                },
+              ],
+            },
+            options: {
+              scales: {
+                x: {
+                  type: "category",
+                },
+                y: {
+                  beginAtZero: true,
                 },
               },
-            }
+            },
+          }
       );
     }
   }, [data, type]);

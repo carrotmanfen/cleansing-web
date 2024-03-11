@@ -240,7 +240,7 @@ const Main = () => {
       handleFindProjectName()
       setProjectNameFill(projectName)
     }
-  }, [data, user, handleChangeProjectName, handleFindProjectName, projectName]);
+  }, [data, user, projectName]);
   useEffect(() => {
         
     if (user.isLogin === false) {
