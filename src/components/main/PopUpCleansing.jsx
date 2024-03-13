@@ -46,12 +46,29 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
   
     const [numberFill, setNumberFill] = useState("")
 
-    const handleClose = () =>{
-        close()
+    const reSetValue = () => {
         setNumberFill("")
-        setCleanMenu(1)
         setSelectColumn3("")
         setOption4("")
+        setRadio3("")
+        setDelimiter("")
+        setColumn1("")
+        setColumn2("")
+    }
+
+    const handleClose = () =>{
+        close()
+        setCleanMenu(1)
+        reSetValue()
+    }
+
+    const imageQ = (url) =>{
+        return <div onClick={()=>window.open("http://localhost:3000/document#section-"+url, '_blank')} className='w-[30px] h-[30px] pl-2'>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-[30px] h-[30px]">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
+        </svg>
+        </div> 
+      
     }
 
     function removeNaN(arr) {
@@ -87,7 +104,13 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
         }else if(cleanMethod==5){
             router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+radio3+"&delimiter="+delimiter+"&columnName1="+column1+"&columnName2="+column2)
         }else if(cleanMethod==55){
-            router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+columnSelect+"&delimiter="+delimiter+"&columnNewName="+column1)
+            let secondColumn = ""
+            checkedItems.map((check,index)=>{
+                if(check&&index!=radio3){
+                    secondColumn=columns[index].dataKey
+                }
+            })
+            router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+columns[radio3].dataKey+","+secondColumn+"&delimiter="+delimiter+"&columnNewName="+column1)
         }else if(cleanMethod==10){
             router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+columnSelect+"&order="+numberFill)
         }else if(cleanMethod==12){
@@ -104,12 +127,12 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
   }
 
   return (
-    <div className="w-screen h-screen bg-black bg-opacity-30 fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none font-kanit text-textPrimary">
-      <div className="relative w-1/3 mx-auto my-6 max-h-screen">
+    <div className="w-screen h-screen bg-black bg-opacity-30 fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden  outline-none focus:outline-none font-kanit text-textPrimary">
+      <div className="relative w-2/5 mx-auto my-6 max-h-screen">
         {/* Modal content */}
-        <div className="relative flex flex-col w-full bg-white border-2 border-gray rounded-lg outline-none focus:outline-none">
+        <div className="relative flex flex-col w-full bg-white border-2 border-gray rounded-lg outline-none focus:outline-none max-h-[600px] overflow-y-auto">
           {/* Header */}
-          <div className="flex items-center justify-between px-6 py-4 rounded-t bg-primary">
+          <div className="flex items-center justify-between px-6 py-4 rounded-t bg-primary sticky top-0 z-10">
             {cleanMenu==1?<h3 className="text-[20px] text-white">ทำความสะอาดข้อมูล</h3>
             :cleanMenu==2?<div onClick={()=>setCleanMenu(9)} className='flex flex-row group hover:cursor-pointer'>
                 <div className='flex items-center mr-8'>
@@ -124,14 +147,14 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                 {option4 == "fillManual" ? <h3 className="text-[20px] text-white group-hover:underline">เติมด้วยค่าที่กำหนดเอง</h3>:<h3 className="text-[20px] text-white group-hover:underline">เติมด้วยค่าทางสถิติ</h3>}
             </div>
             :cleanMenu==4?
-            <div onClick={()=>setCleanMenu(1)} className='flex flex-row group hover:cursor-pointer'>
+            <div onClick={()=>{setCleanMenu(1); reSetValue();}} className='flex flex-row group hover:cursor-pointer'>
                 <div className='flex items-center mr-8'>
                     <Image src={arrowLeftWhite} alt='arrow' objectFit='contain'/>
                 </div>
                 <h3 className="text-[20px] text-white group-hover:underline">ลบข้อมูลที่ซ้ำซ้อน</h3>
             </div>
             :cleanMenu==6?
-            <div onClick={()=>setCleanMenu(1)} className='flex flex-row group hover:cursor-pointer'>
+            <div onClick={()=>{setCleanMenu(1); reSetValue();}} className='flex flex-row group hover:cursor-pointer'>
                 <div className='flex items-center mr-8'>
                     <Image src={arrowLeftWhite} alt='arrow' objectFit='contain'/>
                 </div>
@@ -182,11 +205,18 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
             </div>
             
             :cleanMenu==16?
-            <div onClick={()=>setCleanMenu(1)} className='flex flex-row group hover:cursor-pointer'>
+            <div onClick={()=>{setCleanMenu(1); reSetValue();}} className='flex flex-row group hover:cursor-pointer'>
                 <div className='flex items-center mr-8'>
                     <Image src={arrowLeftWhite} alt='arrow' objectFit='contain'/>
                 </div>
                 <h3 className="text-[20px] text-white group-hover:underline">เลือกคอลัมน์ที่ต้องการเชื่อม (เลือก 2 คอลัมน์)</h3>
+            </div>
+            :cleanMenu==160?
+            <div onClick={()=>{setCleanMenu(16);}} className='flex flex-row group hover:cursor-pointer'>
+                <div className='flex items-center mr-8'>
+                    <Image src={arrowLeftWhite} alt='arrow' objectFit='contain'/>
+                </div>
+                <h3 className="text-[20px] text-white group-hover:underline">เลือกคอลัมน์ที่อยู่ฝั่งซ้าย</h3>
             </div>
             :cleanMenu==17?
             <div onClick={()=>setCleanMenu(16)} className='flex flex-row group hover:cursor-pointer'>
@@ -197,7 +227,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
             </div>
             
             :
-            <div onClick={()=>setCleanMenu(1)} className='flex flex-row group hover:cursor-pointer'>
+            <div onClick={()=>{setCleanMenu(1); reSetValue();}} className='flex flex-row group hover:cursor-pointer'>
                 <div className='flex items-center mr-8'>
                     <Image src={arrowLeftWhite} alt='arrow' objectFit='contain'/>
                 </div>
@@ -210,27 +240,36 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
           </div>
           {/* Body */}
           {cleanMenu==1?<div className="relative flex-auto">
-          <div onClick={()=>{setCleanMenu(18); setCheckedItems(Array(columns.length).fill(false)); setMethod("12");}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
-                <div className='flex flex-col'>
-                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>เปลี่ยนชื่อคอลัมน์ (Rename Column Header)</p>
-                    <p className='text-[16px] text-textGray cursor-pointer'>เปลี่ยนชื่อคอลัมน์ที่ต้องการ</p>
-                </div>
-                <div className='flex items-center mr-8'>
-                    <Image src={afterArrow} alt='arrow' objectFit='fill'/>
-                </div>
+            <div className='flex flex-row items-center'>
+                {imageQ("one")}
+                <div onClick={()=>{setCleanMenu(18); setCheckedItems(Array(columns.length).fill(false)); setMethod("12");}} className='flex ml-4 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer w-full'>
+                        <div className='flex flex-col'>
+                            <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>เปลี่ยนชื่อคอลัมน์ (Rename Column Header)</p>
+                            <p className='text-[16px] text-textGray cursor-pointer'>เปลี่ยนชื่อคอลัมน์ที่ต้องการ</p>
+                        </div>
+                        <div className='flex items-center mr-8'>
+                            <Image src={afterArrow} alt='arrow' objectFit='fill'/>
+                        </div>
+                    </div>
             </div>
 
-            <div onClick={()=>{setCleanMenu(5); setCheckedItems(Array(columns.length).fill(false)); setMethod("1");}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
+
+            <div className='flex flex-row items-center'>
+                {imageQ("two")}
+            <div onClick={()=>{setCleanMenu(5); setCheckedItems(Array(columns.length).fill(false)); setMethod("1");}} className='flex ml-4 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer w-full'>
                 <div className='flex flex-col'>
-                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>ลบคอลัมน์ข้อมูลที่ไม่เกี่ยวข้อง (Delete Irrelevant Data)</p>
+                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>ลบคอลัมน์ข้อมูลที่ไม่เกี่ยวข้อง (Delete Irrelevant Column)</p>
                     <p className='text-[16px] text-textGray cursor-pointer'>ลบคอลัมน์ที่ไม่จำเป็นในการนำไปประมวลผลออก เพื่อเป็นการลดขนาดของชุดข้อมูล</p>
                 </div>
                 <div className='flex items-center mr-8'>
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
                 </div>
             </div>
+            </div>
 
-            <div onClick={()=>{setCleanMenu(4); setCheckedItems(Array(columns.length).fill(false)); setMethod("2")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
+            <div className='flex flex-row items-center'>
+                {imageQ("three")}
+            <div onClick={()=>{setCleanMenu(4); setCheckedItems(Array(columns.length).fill(false)); setMethod("2")}} className='flex ml-4 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer w-full'>
                 <div className='flex flex-col'>
                     <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>ลบข้อมูลที่ซ้ำซ้อน (Delete Duplicate Data)</p>
                     <p className='text-[16px] text-textGray cursor-pointer'>ลบแถวข้อมูล ที่มีข้อมูลทุกคอลัมน์ซ้ำกับแถวอื่น</p>
@@ -239,8 +278,11 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
                 </div>
             </div>
+            </div>
 
-            <div onClick={()=>{setCleanMenu(6); setCheckedItems(Array(columns.length).fill(false)); setMethod("3")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
+            <div className='flex flex-row items-center'>
+                {imageQ("four")}
+            <div onClick={()=>{setCleanMenu(6); setCheckedItems(Array(columns.length).fill(false)); setMethod("3")}} className='flex ml-4 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer w-full'>
                 <div className='flex flex-col'>
                     <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>แก้ไขข้อมูลที่ไม่สอดคล้อง (Edit Inconsistent Data)</p>
                     <p className='text-[16px] text-textGray cursor-pointer'>แก้ไขข้อมูลเดียวกันที่บันทึกไม่เหมือนกัน เช่น &quot;กทม.&quot; , &quot;กรุงเทพ&quot; ให้เป็นรูปแบบเดียวกัน</p>
@@ -249,7 +291,11 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
                 </div>
             </div>
-            <div onClick={()=>{setCleanMenu(9); setMethod("4")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
+            </div>
+
+            <div className='flex flex-row items-center'>
+                {imageQ("five")}
+            <div onClick={()=>{setCleanMenu(9); setMethod("4")}} className='flex ml-4 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer w-full'>
                 <div className='flex flex-col'>
                     <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>จัดการข้อมูลที่ขาดหายไป (Managing Null Values)</p>
                     <p className='text-[16px] text-textGray cursor-pointer'>เติมข้อมูลหรือตัดแถวข้อมูลที่มีค่าว่าง</p>
@@ -258,8 +304,12 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
                 </div>
             </div>
+            </div>
 
-            <div onClick={()=>{setCleanMenu(14); setCheckedItems(Array(columns.length).fill(false)); setMethod("5")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
+
+            <div className='flex flex-row items-center'>
+                {imageQ("six")}
+            <div onClick={()=>{setCleanMenu(14); setCheckedItems(Array(columns.length).fill(false)); setMethod("5")}} className='flex ml-4 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer w-full'>
                 <div className='flex flex-col'>
                     <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>แยกคอลัมน์ (Split Column)</p>
                     <p className='text-[16px] text-textGray cursor-pointer'>แยกโดยใช้ตัวแบ่ง (Delimiter)</p>
@@ -268,7 +318,11 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
                 </div>
             </div>
-            <div onClick={()=>{setCleanMenu(16); setCheckedItems(Array(columns.length).fill(false)); setMethod("55")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
+            </div>
+            
+            <div className='flex flex-row items-center'>
+                {imageQ("seven")}
+            <div onClick={()=>{setCleanMenu(16); setCheckedItems(Array(columns.length).fill(false)); setMethod("55")}} className='flex ml-4 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer w-full'>
                 <div className='flex flex-col'>
                     <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>รวมคอลัมน์ (Merge Column)</p>
                     <p className='text-[16px] text-textGray cursor-pointer'>ทำการรวมคอลัมน์ 2 คอลัมน์โดยมีตัวเชื่อม (Connector)</p>
@@ -277,19 +331,24 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
                 </div>
             </div>
-            <div onClick={()=>{setCleanMenu(5); setCheckedItems(Array(columns.length).fill(false)); setMethod("6")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
+            </div>
+
+            <div className='flex flex-row items-center'>
+                {imageQ("eight")}
+            <div onClick={()=>{setCleanMenu(5); setCheckedItems(Array(columns.length).fill(false)); setMethod("6")}} className='flex ml-4 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer w-full'>
                 <div className='flex flex-col'>
-                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>เปลี่ยนข้อมูลประเภท กลุ่ม ที่มีจำนวนน้อย เป็น “อื่น ๆ” 
-(Replace Excess Categories with “Other”)</p>
-                    <p className='text-[16px] text-textGray cursor-pointer'>จัดกลุ่มชุดข้อมูลตามประเภทของข้อมูล กลุ่มข้อมูลที่มีจำนวนน้อยกว่าที่กำหนดจะเปลี่ยนเป็นกลุ่ม “อื่นๆ”</p>
+                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>เปลี่ยนข้อมูลประเภท กลุ่ม ที่มีจำนวนน้อย เป็น “อื่น ๆ” <br/>(Replace Excess Categories with “Other”)</p>
+                    <p className='text-[16px] text-textGray cursor-pointer'>จัดกลุ่มชุดข้อมูลตามประเภทของข้อมูล กลุ่มข้อมูลที่มีจำนวนน้อยกว่า<br/>ที่กำหนดจะเปลี่ยนเป็นกลุ่ม “อื่นๆ”</p>
                 </div>
                 <div className='flex items-center mr-8'>
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
                 </div>
             </div>
+            </div>
 
-
-            <div onClick={()=>{setCleanMenu(5); setCheckedItems(Array(columns.length).fill(false)); setMethod("7")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
+            <div className='flex flex-row items-center'>
+                {imageQ("nine")}
+            <div onClick={()=>{setCleanMenu(5); setCheckedItems(Array(columns.length).fill(false)); setMethod("7")}} className='flex ml-4 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer w-full'>
                 <div className='flex flex-col'>
                     <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>ลบข้อมูลที่ไม่ตรงกับประเภทข้อมูล (Remove Unreadable Columns)</p>
                     <p className='text-[16px] text-textGray cursor-pointer'>ลบแถวข้อมูลที่มีข้อมูลไม่ตรงกับคอลัมน์ที่กำหนด</p>
@@ -298,17 +357,25 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
                 </div>
             </div>
+            </div>
 
-            <div onClick={()=>{setCleanMenu(5); setCheckedItems(Array(columns.length).fill(false)); setMethod("8")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
+
+            <div className='flex flex-row items-center'>
+                {imageQ("ten")}
+            <div onClick={()=>{setCleanMenu(5); setCheckedItems(Array(columns.length).fill(false)); setMethod("8")}} className='flex ml-4 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer w-full'>
                 <div className='flex flex-col'>
                     <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>ระบุค่าผิดปกติทางสถิติ (Flag Outliers)</p>
-                    <p className='text-[16px] text-textGray cursor-pointer'>ทำการสร้างคอลัมน์ใหม่หากมีค่าผิดปกติจะระบุค่าเป็น 1 หาไม่มีจะระบุค่าเป็น 0</p>
+                    <p className='text-[16px] text-textGray cursor-pointer'>ทำการสร้างคอลัมน์ใหม่หากมีค่าผิดปกติจะระบุค่าเป็น 1 หากไม่มีจะระบุค่าเป็น 0</p>
                 </div>
                 <div className='flex items-center mr-8'>
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
                 </div>
             </div>
-            <div onClick={()=>{setCleanMenu(10); setCheckedItems(Array(columns.length).fill(false)); setMethod("10")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
+            </div>
+
+            <div className='flex flex-row items-center'>
+                {imageQ("eleven")}
+            <div onClick={()=>{setCleanMenu(10); setCheckedItems(Array(columns.length).fill(false)); setMethod("10")}} className='flex ml-4 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer w-full'>
                 <div className='flex flex-col'>
                     <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>เปลี่ยนค่าผิดปกติทางสถิติ (Clamp Outliers)</p>
                     <p className='text-[16px] text-textGray cursor-pointer'>เปลี่ยนค่าผิดปกติทางสถิติเป็นค่าที่อยู่ในช่วงแทน</p>
@@ -317,7 +384,11 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
                 </div>
             </div>
-            <div onClick={()=>{setCleanMenu(5); setCheckedItems(Array(columns.length).fill(false)); setMethod("9")}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer'>
+            </div>
+
+            <div className='flex flex-row items-center'>
+                {imageQ("twelve")}
+            <div onClick={()=>{setCleanMenu(5); setCheckedItems(Array(columns.length).fill(false)); setMethod("9")}} className='flex ml-4 flex-row justify-between border-b border-borderNavbar pb-2 hover:bg-gray cursor-pointer w-full'>
                 <div className='flex flex-col'>
                     <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>ลบค่าผิดปกติทางสถิติ (Delete Outliers)</p>
                     <p className='text-[16px] text-textGray cursor-pointer'>นำแถวข้อมูลที่มีค่าผิดปกติทางสถิติออก</p>
@@ -326,29 +397,30 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
                 </div>
             </div>
+            </div>
 
             
           </div>
           :cleanMenu==2?<div className="relative flex-auto">
-            <div onClick={()=>{setOption4("mean");  setCleanMenu(3)}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar hover:bg-gray cursor-pointer'>
+            <div onClick={()=>{setOption4("mean");  setCleanMenu(3)}} className='flex pl-4 flex-row justify-between border-b border-borderNavbar hover:bg-gray cursor-pointer'>
                     <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>เติมข้อมูลด้วยค่าเฉลี่ย</p>
                 <div className='flex items-center mr-8'>
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
                 </div>
             </div>
-            <div onClick={()=>{setOption4("median");  setCleanMenu(3)}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar hover:bg-gray cursor-pointer'>
+            <div onClick={()=>{setOption4("median");  setCleanMenu(3)}} className='flex pl-4 flex-row justify-between border-b border-borderNavbar hover:bg-gray cursor-pointer'>
                     <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>เติมข้อมูลด้วยค่ามัธยฐาน</p>
                 <div className='flex items-center mr-8'>
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
                 </div>
             </div>
-            <div onClick={()=>{setCleanMenu(3); setOption4("fillManual");}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar hover:bg-gray cursor-pointer'>
+            <div onClick={()=>{setCleanMenu(3); setOption4("fillManual");}} className='flex pl-4 flex-row justify-between border-b border-borderNavbar hover:bg-gray cursor-pointer'>
                     <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>เติมด้วยค่าที่กำหนดเอง</p>
                 <div className='flex items-center mr-8'>
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
                 </div>
             </div>
-            <div onClick={()=>{setOption4("remove");  setCleanMenu(3)}} className='flex pl-12 flex-row justify-between border-b border-borderNavbar hover:bg-gray cursor-pointer'>
+            <div onClick={()=>{setOption4("remove");  setCleanMenu(3)}} className='flex pl-4 flex-row justify-between border-b border-borderNavbar hover:bg-gray cursor-pointer'>
                     <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>ตัดข้อมูลทิ้ง</p>
                 <div className='flex items-center mr-8'>
                     <Image src={afterArrow} alt='arrow' objectFit='fill'/>
@@ -546,10 +618,20 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
           </div>
         :cleanMenu==13?
         <div className='flex pl-12 flex-col justify-center border-b border-borderNavbar py-4 gap-4'>
-            <p className='text-[20px] font-kanit text-textPrimary'>ใส่ข้อมูล</p>
+            <p className='text-[20px] font-kanit text-textPrimary'>ใส่ข้อมูล (ที่เป็นตัวเลขเท่านั้น)</p>
             <div className='flex flex-row gap-8'>
-                <input type='text' value={numberFill} className='text-start text-[20px] text-textPrimary border-2 w-full rounded-md px-3'
-                onChange={(e)=>{setNumberFill(e.target.value); setOption4(e.target.value)}}/>
+            <input 
+                type='text' 
+                value={numberFill} 
+                className='text-start text-[20px] text-textPrimary border-2 w-full rounded-md px-3'
+                onChange={(e) => {
+                    const val = e.target.value;
+                    if (/^\d*\.?\d*$/.test(val)) {
+                    setNumberFill(val);
+                    setOption4(val);
+                    }
+                }}
+                />
                 <div className={`flex items-center mr-8 `}>
                     <button 
                     onClick={()=>{
@@ -621,9 +703,33 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                 )
               })}
             <div className='w-full flex items-center justify-end p-4'>
-              <button onClick={()=>{setCleanMenu(17);}} disabled={checkedItems.filter(item => item).length !== 2} className={`text-[20px] font-kanit  px-6 py-2 rounded-lg ${checkedItems.filter(item => item).length == 2?`bg-primary text-white hover:bg-hoverPrimary`:`bg-gray hover:cursor-not-allowed`} `}>ถัดไป <span className='ml-4'>{"->"}</span></button>
+              <button onClick={()=>{setCleanMenu(160);}} disabled={checkedItems.filter(item => item).length !== 2} className={`text-[20px] font-kanit  px-6 py-2 rounded-lg ${checkedItems.filter(item => item).length == 2?`bg-primary text-white hover:bg-hoverPrimary`:`bg-gray hover:cursor-not-allowed`} `}>ถัดไป <span className='ml-4'>{"->"}</span></button>
             </div>
           </div>
+
+          :cleanMenu==160?
+          
+          <div className='flex flex-col'>
+          {checkedItems.map((checked, index) => {
+            if(checked){
+              return(
+                <label key={index} className='flex flex-row w-full justify-between items-center gap-2 hover:cursor-pointer border-b border-borderNavbar p-3 hover:bg-gray'>
+                    <input
+                    type='radio'
+                    name='radioGroup'  
+                    onChange={() => handleRadio3Check(index)}
+                    className='hover:cursor-pointer'
+                    />
+                    <p className='w-full text-[20px] font-kanit text-textPrimary'>{columns[index].label}</p>
+                </label>
+              )
+            }
+          
+          })}
+        <div className='w-full flex items-center justify-end p-4'>
+          <button onClick={()=>{setCleanMenu(17);}} disabled={checkedItems.filter(item => item).length !== 2} className={`text-[20px] font-kanit  px-6 py-2 rounded-lg ${checkedItems.filter(item => item).length == 2?`bg-primary text-white hover:bg-hoverPrimary`:`bg-gray hover:cursor-not-allowed`} `}>ถัดไป <span className='ml-4'>{"->"}</span></button>
+        </div>
+      </div>
           
           :cleanMenu==17?
           <div className='flex px-12 flex-col justify-center border-b border-borderNavbar py-4 gap-4'>

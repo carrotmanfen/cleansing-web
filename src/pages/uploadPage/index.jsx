@@ -127,15 +127,15 @@ const UploadPage = () => {
                                 accept={acceptableCSVFileTypes}
                                 onChange={onFileChangeHandler}
                             />
-                            <div className='flex flex-row gap-16 border justify-around'>
+                            <div className='flex flex-row gap-4 border justify-around items-center'>
                                 {
                                     file ? 
-                                    <p className='text-[20px] max-w-[250px] font-kanit pl-2 truncate'>ไฟล์ที่เลือก: {file.name}</p>
+                                    <p className='text-[20px] max-w-[300px] font-kanit pl-2 '>{file.name}</p>
                                     :
                                     <p className='text-[20px] font-kanit pl-2'>ยังไ่ม่ได้เลือกไฟล์</p>
                                 }
-                                <label for="fileInput">
-                                    <span className='text-[20px] font-kanit bg-primary text-white px-2 h-full'>แนบไฟล์</span>
+                                <label for="fileInput" className='flex items-center justify-center text-[20px] font-kanit bg-primary text-white px-2 h-full text-center'>
+                                    แนบไฟล์
                                 </label>
                             </div>
                             {

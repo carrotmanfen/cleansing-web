@@ -20,7 +20,7 @@ export const Navbar = ({ menu }) => {
     router.push('/login')
   }
   return (
-    <div className='w-screen flex flex-row justify-between sticky h-[80px] border-b-2 border-borderNavbar z-50 top-0 bg-white'>
+    <div className='w-screen fixed flex flex-row justify-between h-[80px] border-b-2 border-borderNavbar z-50 top-0 bg-white overflow-x-hidden overflow-y-hidden'>
       <div className='flex flex-row items-center gap-4 h-full font-kanit text-[20px] text-textPrimary pl-8'>
         <Link href={"/"} className='h-full mt-4'>
           <Image src={logo} width={60} height={60} objectFit='contain' alt="logo" />
@@ -30,14 +30,14 @@ export const Navbar = ({ menu }) => {
             คลีนเนอร์
           </button>
         </Link>
-        <Link href={"/document"} className='h-full'>
-          <button className={`h-full hover:bg-primary hover:text-white px-4 ${menu == 1 ? `bg-primary text-white` : ``}`}>
-            ทฤษฏี
-          </button>
-        </Link>
         <Link href={"/manual"} className='h-full'>
           <button className={`h-full hover:bg-primary hover:text-white px-4 ${menu == 2 ? `bg-primary text-white` : ``}`}>
             คู่มือ
+          </button>
+        </Link>
+        <Link href={"/document"} className='h-full'>
+          <button className={`h-full hover:bg-primary hover:text-white px-4 ${menu == 1 ? `bg-primary text-white` : ``}`}>
+            ทฤษฏี
           </button>
         </Link>
         <Link href={"/myProject"} className='h-full'>

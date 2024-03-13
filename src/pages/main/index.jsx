@@ -280,7 +280,7 @@ const Main = () => {
         isOpen={downloadPopup}
         onClose={handleCloseDownload}
         projectName={projectName}
-        handleDownload={() => handleDownload(data, fileName, selectOption)}
+        handleDownload={() => {handleDownload(data, fileName, selectOption); handleCloseDownload();}}
         fileName={fileName}
         setFileName={setFileName}
         selectOption={selectOption}

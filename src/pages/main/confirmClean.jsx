@@ -135,8 +135,8 @@ const ConfirmClean = () => {
                 border: 1,
                 borderColor: 'black',
                 overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
+                // textOverflow: 'ellipsis',
+                // whiteSpace: 'nowrap',
                 maxWidth: '300px',
                 backgroundColor: row['st@tus']=="delete" ? '#FCA1A1' :row['st@tus']=="edit"? "#FFED92" :'white'
             }}
@@ -158,9 +158,9 @@ const ConfirmClean = () => {
     dataSet.columns_match=resultArray
     if(searchMethod=="3"){
         const searchNewValue = queryParams.get('newValue');
-        const newValue = parseInt(searchNewValue)
+        const newValue = parseFloat(searchNewValue)
         const searchOldValue = queryParams.get('oldValue');
-        const oldValue = parseInt(searchOldValue)
+        const oldValue = parseFloat(searchOldValue)
         if(!isNaN(newValue)) {
             dataSet.data_change = newValue
           } else {

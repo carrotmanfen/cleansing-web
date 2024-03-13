@@ -36,7 +36,7 @@ const DownloadPopup = ({ isOpen, onClose, projectName, handleDownload, data, fil
             {/* Body */}
             <div className='flex flex-col'>
               <p className='px-12 font-kanit text-[24px] text-textPrimary pt-12 mb-4'>ชื่อไฟล์</p>
-              <div className='flex flex-row mx-12 justify-between gap-12'>
+              <div className='flex flex-row mx-12 justify-between items-center gap-4'>
 
                 <input type="text" className='border-2 rounded-md p-2 text-[20px] w-full font-kanit text-textPrimary focus:border-primary focus:outline-none selection:border-primary '
                   value={fileName}
@@ -49,14 +49,12 @@ const DownloadPopup = ({ isOpen, onClose, projectName, handleDownload, data, fil
                   {notification && <Alert severity="error" className="w-full font-kanit text-lg">{notification}</Alert>}
                 </div>
 
-                <select
-                  className='border-2 rounded-md py-2 px-4 text-[20px] font-kanit text-textPrimary focus:border-primary selection:border-primary'
-                  value={selectOption}
-                  onChange={(e) => setSelectOption(e.target.value)}
+                <p
+                  className='rounded-md text-[20px] font-kanit text-textPrimary focus:border-primary selection:border-primary'
+                  
                 >
-                  <option value='csv'>csv</option>
-                  {/* <option value='xsl'>xsl</option> */}
-                </select>
+                  .CSV
+                </p>
 
               </div>
               <div className="relative py-10 flex flex-row justify-around">

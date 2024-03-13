@@ -91,7 +91,7 @@ const Login = () => {
             onChange={handlePasswordChange}
             onKeyDown={handleEnterKeyPress}
           />
-
+        <Link href={"/register"} className='text-primary hover:text-hoverPrimary underline'>สมัครสมาชิก</Link>
           <div className="flex flex-row w-full justify-between">
             <Link href={"/"}>
               <button className="px-16 py-2 mt-8 bg-gray hover:bg-textGray rounded-2xl">ยกเลิก</button>

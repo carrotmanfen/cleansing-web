@@ -119,6 +119,7 @@ const Register = () => {
             onChange={handleConfirmPassChange}
             onKeyDown={handleEnterKeyPress}
           />
+          <Link href={"/login"} className='text-primary hover:text-hoverPrimary underline'>เข้าสู่ระบบ</Link>
           <div className="flex flex-row w-full justify-between">
             <Link href={"/"}>
               <button className="px-16 py-2 mt-8 bg-gray hover:bg-textGray rounded-2xl">ยกเลิก</button>
