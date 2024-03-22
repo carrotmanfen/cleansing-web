@@ -57,7 +57,10 @@ const DownloadPopup = ({ isOpen, onClose, projectName, handleDownload, data, fil
                 </p>
 
               </div>
-              <div className="relative py-10 flex flex-row justify-around">
+              <div onClick={()=>window.open(process.env.NEXT_PUBLIC_WEB_SERVICE_URL+"manual#section-seven", '_blank')} className=' mx-12 mt-4 text-primary hover:text-hoverPrimary hover:cursor-pointer'>
+                <p className='rounded-md text-[20px] font-kanit underline'>คู่มือการ Decoder ไฟล์ด้วย UTF-8</p>
+              </div> 
+              <div className="py-10 flex flex-row justify-around">
                 <button onClick={async () => {
                   if (!fileName.trim()) {
                     setNotification('กรุณาป้อนชื่อไฟล์');

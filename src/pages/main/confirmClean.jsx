@@ -343,23 +343,23 @@ const ConfirmClean = () => {
                     <Alert severity="error" className="w-full font-kanit text-lg">{error}</Alert>
                 </div>
             }
-                <Paper style={{ height: "65vh", width: "100%" }}>
+                {error==false?<Paper style={{ height: "65vh", width: "100%" }}>
                     <TableVirtuoso
                         data={visibleRows}
                         components={VirtuosoTableComponents}
                         fixedHeaderContent={fixedHeaderContent}
                         itemContent={rowContent}
                     />
-                </Paper>
+                </Paper>:<p></p>}
 
-                <div className="w-full flex justify-end mt-6">
+                {error==false?<div className="w-full flex justify-end mt-6">
                     <Pagination
                         count={pageCount}
                         color="primary"
                         page={page}
                         onChange={handlePageChange}
                     />
-                </div>
+                </div>:<p></p>}
             </div>
       </div>
     </div>

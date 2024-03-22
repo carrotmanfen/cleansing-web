@@ -94,13 +94,13 @@ export default function useCleansing() {
                 
             }else if(res.status === 400){
                 console.log("bad request look network for reason")
-                setError(true);
+                setError("ไม่สามารถทำความสะอาดข้อมูลได้ในขณะนี้เนื่องจากข้อมูลไม่ถูกต้อง")
             } else {
-                setError(true);
+                setError("ไม่สามารถทำความสะอาดข้อมูลได้ในขณะนี้เนื่องจากเกิดข้อผิดพลาดจากระบบ")
             }
             setIsPending(false);
         } catch (err) {
-            setError(true);
+            setError("ไม่สามารถทำความสะอาดข้อมูลได้ในขณะนี้เนื่องจากเกิดข้อผิดพลาดจากระบบ")
             setIsPending(false);
         } finally {
             hideLoading();
@@ -137,12 +137,13 @@ export default function useCleansing() {
                 });
             } else if (res.status === 400) {
                 console.log("bad request look network for reason")
+                setError("ไม่สามารถทำความสะอาดข้อมูลได้ในขณะนี้เนื่องจากข้อมูลไม่ถูกต้อง")
             } else {
-                setError(err);
+                setError("ไม่สามารถทำความสะอาดข้อมูลได้ในขณะนี้เนื่องจากเกิดข้อผิดพลาดจากระบบ")
             }
             setIsPending(false);
         } catch (err) {
-            setError(err);
+            setError("ไม่สามารถทำความสะอาดข้อมูลได้ในขณะนี้เนื่องจากเกิดข้อผิดพลาดจากระบบ")
             setIsPending(false);
         } finally {
             hideLoading();
@@ -172,12 +173,13 @@ export default function useCleansing() {
                 changeProjectInAccount(userRole.username, projectId, res.data.results._id)
             } else if (res.status === 400) {
                 console.log("bad request look network for reason")
+                setError("ไม่สามารถทำความสะอาดข้อมูลได้ในขณะนี้เนื่องจากข้อมูลไม่ถูกต้อง")
             } else {
-                setError(err);
+                setError("ไม่สามารถทำความสะอาดข้อมูลได้ในขณะนี้เนื่องจากเกิดข้อผิดพลาดจากระบบ")
             }
             setIsPending(false);
         } catch (err) {
-            setError(err);
+            setError("ไม่สามารถทำความสะอาดข้อมูลได้ในขณะนี้เนื่องจากเกิดข้อผิดพลาดจากระบบ")
             setIsPending(false);
         } finally {
             hideLoading();
@@ -296,13 +298,13 @@ export default function useCleansing() {
                 }
             }else if(res.status === 400){
                 console.log("bad request look network for reason")
-                setError(true);
+                setError("ไม่สามารถทำความสะอาดข้อมูลได้ในขณะนี้เนื่องจากข้อมูลไม่ถูกต้อง")
             } else {
-                setError(true);
+                setError("ไม่สามารถทำความสะอาดข้อมูลได้ในขณะนี้เนื่องจากเกิดข้อผิดพลาดจากระบบ")
             }
             setIsPending(false);
         } catch (err) {
-            setError(true);
+            setError("ไม่สามารถทำความสะอาดข้อมูลได้ในขณะนี้เนื่องจากเกิดข้อผิดพลาดจากระบบ")
             setIsPending(false);
         } finally {
             hideLoading();
@@ -359,13 +361,13 @@ export default function useCleansing() {
                 
             }else if(res.status === 400){
                 console.log("bad request look network for reason")
-                setError(true);
+                setError("ไม่สามารถทำความสะอาดข้อมูลได้ในขณะนี้เนื่องจากข้อมูลไม่ถูกต้อง")
             } else {
-                setError(true);
+                setError("ไม่สามารถทำความสะอาดข้อมูลได้ในขณะนี้เนื่องจากเกิดข้อผิดพลาดจากระบบ")
             }
             setIsPending(false);
         } catch (err) {
-            setError(true);
+            setError("ไม่สามารถทำความสะอาดข้อมูลได้ในขณะนี้เนื่องจากเกิดข้อผิดพลาดจากระบบ")
             setIsPending(false);
         } finally {
             hideLoading();

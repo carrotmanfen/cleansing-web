@@ -60,6 +60,14 @@ import inputdatafromuser from './inputdatafromuser.png'
 import flagOutliers from './flagOutliers.png'
 import clampOutliers from './clampOutliers.png'
 import inputdataAuto from './inputdataAuto.png'
+import excelopen1 from './excelopen1.png'
+import excelopen2 from './excelopen2.png'
+import excelopen3 from './excelopen3.png'
+import excelopen4 from './excelopen4.png'
+import excelopen5 from './excelopen5.png'
+import excelopen6 from './excelopen6.png'
+import excelopen7 from './excelopen7.png'
+import excelopen8 from './excelopen8.png'
 
 export{
     logo,
@@ -123,5 +131,13 @@ export{
     inputdatafromuser,
     flagOutliers,
     clampOutliers,
-    inputdataAuto
+    inputdataAuto,
+    excelopen1,
+    excelopen2,
+    excelopen3,
+    excelopen4,
+    excelopen5,
+    excelopen6,
+    excelopen7,
+    excelopen8
 }
