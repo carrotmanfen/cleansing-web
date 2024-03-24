@@ -33,7 +33,7 @@ export default function Home() {
       <div className='relative w-full h-full font-kanit overflow-x-hidden'>
         <Navbar />
         <div className='w-full flex flex-col items-center'>
-          <div className='mt-8'>
+          <div className='mt-36'>
             <Image src={logo} width={150} height={200} objectFit='contain' alt="logo" />
           </div>
           <p className='text-[40px] text-textPrimary font-kanit mt-2'>คลีนเนอร์</p>

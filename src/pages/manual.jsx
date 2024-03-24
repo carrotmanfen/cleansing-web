@@ -217,12 +217,19 @@ const Manual = () => {
                     <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] '>ขั้นตอนที่ 4 : อัปโหลดข้อมูล</p>
                     <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] mt-5 mx-10'>•	อัปโหลดไฟล์ชุดข้อมูล</p>
                     <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
-                            <Image src={uploadFile}  objectFit='cover' alt="functionCleansing12" />
+                            <Image src={uploadFile}  objectFit='cover' alt="uploadFile" />
                         </div>
                     <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>การอัปโหลดข้อมูลเข้าสู่ <strong>คลีนเนอร์</strong> จะรองรับไฟล์ประเภท csv, xls และ xlsx เท่านั้น โดยผู้ใช้งานสามารถกดปุ่ม <strong>แนบไฟล์</strong> เพื่อทำการเลือกอัปโหลดไฟล์ชุดข้อมูลที่ต้องการอัปโหลดจากเครื่องคอมพิวเตอร์ของผู้ใช้งาน โดยสามารถอัปโหลดได้ทีละไฟล์ จากนั้นกดปุ่ม <strong>อัปโหลด</strong> เพื่อทำการอัปโหลดไฟล์ชุดข้อมูล</p>
+                    <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'><strong>Note: </strong>เว็บแอปพลิเคชันคลีนเนอร์รองรับเฉพาะชุดข้อมูลแบบมีโครงสร้างเท่านั้น (Data Structure) ซึ่งอาจส่งผลกระทบกับผู้ใช้งานบางกลุ่มให้ไม่สามารถอัปโหลดไฟล์ชุดข้อมูลที่ไม่อยู่ในรูปของข้อมูลแบบมีโครงสร้าง</p>
+                    <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'><strong>ข้อมูลแบบมีโครงสร้าง (Data Structure) คืออะไร?</strong></p> 
+                    <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>ข้อมูลแบบมีโครงสร้าง หรือข้อมูลที่จัดเก็บรวบรวมข้อมูลในรูปแบบตาราง โดยมีการแบ่งข้อมูลออกเป็นแถว (Row) และในแต่ละแถวแบ่งออกเป็นคอลัมน์ (Column) เพื่อเชื่อมโยงระหว่างข้อมูลในตารางกับข้อมูลในคอลัมน์ที่กำหนด </p>                 
+                    <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'><strong>ตัวอย่างข้อมูลแบบมีโครงสร้าง</strong></p> 
+                    <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
+                        <Image src={excelopen7}  objectFit='cover' alt="excelopen7" />
+                    </div>
                     <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] mt-5 mx-10'>•	ทฤษฎีการทำงานของฟังก์ชันทำความสะอาดข้อมูล</p>
                     <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
-                            <Image src={doc}  objectFit='cover' alt="functionCleansing12" />
+                            <Image src={doc}  objectFit='cover' alt="doc" />
                         </div>
                     <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>ภายในหน้า <strong>ทฤษฎี</strong> จะมีรายละเอียดการใช้งานฟังก์ชันทำความสะอาดทั้ง 11 ฟังก์ชัน ให้ผู้ใช้งานได้ศึกษาวิธีการใช้งานแต่ละฟังก์ชันอย่างละเอียด พร้อมทั้งคำอธิบายหลักการทำงานของฟังก์ชันนั้นๆ เพื่อให้ผู้ใช้งานสามารถเข้าใจหลักการทำงานของฟังก์ชันความสะอาดข้อมูลทั้ง 11 ฟังก์ชัน และใช้งานได้อย่างมีประสิทธิภาพมากยิ่งขึ้น</p>
 
@@ -300,40 +307,49 @@ const Manual = () => {
                 </section>
                 
                 <section id="section-seven" ref={ref => sectionRefs.current[7] = ref} className='pt-20'>
-                    <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] '>คู่มือการ Decoder ไฟล์ด้วย UTF-8</p>
+                    <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] mt-5 mx-10'>•	วิธีการเปิดไฟล์ด้วย Decoder Unicode UTF-8</p>
                     <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>เนื่องจากเว็บแอปพลิเคชันคลีนเนอร์รองรับการ Decoder ไฟล์แบบ Unicode UTF-8 อาจจะส่งผลให้ผู้ใช้งานที่เปิดไฟล์ที่ดาวน์โหลดจากเว็บแอปพลิเคชันคลีนเนอร์ โดยใช้โปรแกรม Excel ที่ไม่ได้ตั้งค่าเริ่มต้นในการเปิดไฟล์ด้วยการ Decoder ไฟล์แบบ Unicode UTF-8 พบปัญหาภาษาไทยกลายเป็นอักขระพิเศษที่ไม่สามารถอ่านได้ วิธีเปิดไฟล์ให้ภาษาไทยไม่กลายเป็นอักขระพิเศษสามารถทำได้ดังนี้</p>
-                    <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] '>วิธีการเปิดไฟล์ด้วย Decoder Unicode UTF-8</p>
-                    <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] mt-5 mx-10'>ขั้นตอนที่ 1 เปิดโปรแกรม Excel และเลือก Data จากนั้นเลือก Get Data (Power Query)</p>
+                    <p className='text-textPrimary font-kanit text-[18px] lg:text-[22px] xl:text-[26px] mt-5 mx-10'>ขั้นตอนที่ 1 เปิดโปรแกรม Excel และเลือก Data จากนั้นเลือก Get Data (Power Query)</p>
                     <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
-                            <Image src={excelopen1}  objectFit='cover' alt="functionCleansing12" />
+                            <Image src={excelopen1} objectFit='cover' alt="excelopen1" />
                         </div>
-                    <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] mt-5 mx-10'>ขั้นตอนที่ 2 เลือก From Text (Legacy)</p>
+                    <p className='text-textPrimary font-kanit text-[18px] lg:text-[22px] xl:text-[26px] mt-5 mx-10'>ขั้นตอนที่ 2 เลือก From Text (Legacy)</p>
                     <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
-                            <Image src={excelopen2}  objectFit='cover' alt="functionCleansing12" />
+                            <Image src={excelopen2} objectFit='cover' alt="excelopen2" />
                         </div>
-                    <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] mt-5 mx-10'>ขั้นตอนที่ 3 เลือกไฟล์ที่ต้องการเปิด</p>
+                    <p className='text-textPrimary font-kanit text-[18px] lg:text-[22px] xl:text-[26px] mt-5 mx-10'>ขั้นตอนที่ 3 เลือกไฟล์ที่ต้องการเปิด</p>
                     <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
-                            <Image src={excelopen3}  objectFit='cover' alt="functionCleansing12" />
+                            <Image src={excelopen3} objectFit='cover' alt="excelopen3" />
                         </div>
-                    <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] mt-5 mx-10'>ขั้นตอนที่ 4 เลือกประเภทของไฟล์เป็น Unicode (UTF-8) จากนั้นกด Next</p>
-                    <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
-                        <Image src={excelopen4}  objectFit='cover' alt="functionCleansing12" />
+                    <p className='text-textPrimary font-kanit text-[18px] lg:text-[22px] xl:text-[26px] mt-5 mx-10'>ขั้นตอนที่ 4 เลือกประเภทของไฟล์เป็น Unicode (UTF-8) จากนั้นกด Next</p>
+                    
+                    <div className='w-[400px] lg:w-[550px] xl:w-[800px]   mt-5 flex flex-col justify-center border-0 items-center'>
+                        <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
+                            <Image src={excelopen4}  objectFit='cover' alt="excelopen4" />
+                        </div>
                     </div>
-                    <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] mt-5 mx-10'>ขั้นตอนที่ 5 เลือกวิธีการแบ่งข้อมูลโดยใช้ตัวแบ่ง Comma จากนั้นกด Next</p>
-                    <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
-                        <Image src={excelopen5}  objectFit='cover' alt="functionCleansing12" />
+
+                    <p className='text-textPrimary font-kanit text-[18px] lg:text-[22px] xl:text-[26px] mt-5 mx-10'>ขั้นตอนที่ 5 เลือกวิธีการแบ่งข้อมูลโดยใช้ตัวแบ่ง Comma จากนั้นกด Next</p>
+                    <div className='w-[400px] lg:w-[550px] xl:w-[800px]   mt-5 flex flex-col justify-center border-0 items-center'>
+                        <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
+                            <Image src={excelopen5}  objectFit='cover' alt="excelopen5" />
+                        </div>
                     </div>
-                    <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] mt-5 mx-10'>ขั้นตอนที่ 6 เลือกรูปแบบของข้อมูลในคอลัมน์เป็น General จากนั้นกด Finish</p>
-                    <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
-                        <Image src={excelopen6}  objectFit='cover' alt="functionCleansing12" />
+                    <p className='text-textPrimary font-kanit text-[18px] lg:text-[22px] xl:text-[26px] mt-5 mx-10'>ขั้นตอนที่ 6 เลือกรูปแบบของข้อมูลในคอลัมน์เป็น General จากนั้นกด Finish</p>
+                    <div className='w-[400px] lg:w-[550px] xl:w-[800px]   mt-5 flex flex-col justify-center border-0 items-center'>
+                        <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
+                            <Image src={excelopen6}  objectFit='cover' alt="excelopen6" />
+                        </div>
                     </div>
-                    <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>ภาพแสดงผลเปรียบเทียบการเปิดไฟล์</p>
+                    <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'><strong>ภาพแสดงผลเปรียบเทียบการเปิดไฟล์</strong></p>
                     <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
-                        <Image src={excelopen7}  objectFit='cover' alt="functionCleansing12" />
+                        <Image src={excelopen8} objectFit='cover' alt="excelopen8" />
                     </div>
+                    <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>เปิดไฟล์ด้วยค่าเริ่มต้นที่ไม่ใช่ Unicode (UTF-8)</p>
                     <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
-                        <Image src={excelopen8}  objectFit='cover' alt="functionCleansing12" />
+                        <Image src={excelopen7} objectFit='cover' alt="excelopen7" />
                     </div>
+                    <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>เปิดไฟล์ด้วย Unicode (UTF-8)</p>
                 </section>
                 </div>
 
