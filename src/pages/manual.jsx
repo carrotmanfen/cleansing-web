@@ -117,49 +117,49 @@ const Manual = () => {
             <div className='fixed flex flex-col top-0 left-0 h-screen font-kanit text-[9px] lg:text-[13px] xl:text-[17px] leading-[11px] lg:leading-[15px] xl:leading-[20px] text-start'>
                 <p className='text-textPrimary mt-28 text-[24px] lg:text-[28px] xl:text-[32px] font-kanit pl-4 lg:pl-8 xl:pl-12 font-bold'>สารบัญ</p>
                 <a href='#section-one' 
-                className={` mt-4 pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==1?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}>
+                className={` mt-4 pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==1?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`} onClick={()=>setActiveSection(1)}>
                     <span className={`text-[16px] lg:text-[20px] xl:text-[24px] `}>
                     ขั้นตอนที่ 1<br />
                     </span>
                     สมัครสมาชิก 
                 </a>
                 <a href='#section-two'
-                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==2?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}>
+                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==2?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`} onClick={()=>setActiveSection(2)}>
                     <span className={`text-[16px] lg:text-[20px] xl:text-[24px] `}>
                     ขั้นตอนที่ 2<br />
                     </span>
                     เข้าสู่ระบบ 
                 </a>
                 <a href='#section-three' 
-                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==3?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}>
+                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==3?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`} onClick={()=>setActiveSection(3)}>
                     <span className={`text-[16px] lg:text-[20px] xl:text-[24px] `}>
                     ขั้นตอนที่ 3<br />
                     </span>
                     ศึกษาข้อมูลที่สำคัญ
                 </a>
                 <a href='#section-four' 
-                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==4?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}>
-                    <span className={`text-[16px] lg:text-[20px] xl:text-[24px] `}>
+                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==4?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`} onClick={()=>setActiveSection(4)}>
+                    <span className={`text-[16px] lg:text-[20px] xl:text-[24px] `} >
                     ขั้นตอนที่ 4<br />
                     </span>
                     อัปโหลดข้อมูล
                 </a>
                 <a href='#section-five'
-                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==5?`bg-white text-primary ml-4    `:`bg-white text-textPrimary`}`}>
+                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==5?`bg-white text-primary ml-4    `:`bg-white text-textPrimary`}`}onClick={()=>setActiveSection(5)}>
                     <span className={`text-[16px] lg:text-[20px] xl:text-[24px] `}>
                     ขั้นตอนที่ 5<br />
                     </span>
                     ทำความสะอาดข้อมูล
                 </a>
                 <a href='#section-six'
-                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==6?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}>
+                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==6?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}onClick={()=>setActiveSection(6)}>
                     <span className={`text-[16px] lg:text-[20px] xl:text-[24px] `}>
                     ขั้นตอนที่ 6<br />
                     </span>
                     ดาวน์โหลดข้อมูล
                 </a>
                 <a href='#section-seven' 
-                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==7?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}>
+                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==7?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}onClick={()=>setActiveSection(7)}>
                     <span className={`text-[16px] lg:text-[20px] xl:text-[24px] `}>
                     Decoder ไฟล์<br />
                     </span>

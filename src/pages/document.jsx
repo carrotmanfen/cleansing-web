@@ -112,84 +112,84 @@ const Document = () => {
             <div className='fixed flex flex-col top-0 left-0 h-screen font-kanit text-[9px] lg:text-[13px] xl:text-[17px] leading-[11px] lg:leading-[15px] xl:leading-[20px] text-start'>
                 <p className='text-textPrimary mt-28 text-[24px] lg:text-[28px] xl:text-[32px] font-kanit pl-4 lg:pl-8 xl:pl-12 font-bold'>สารบัญ</p>
                 <a href='#section-one' 
-                className={` mt-4 pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==1?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}>
+                className={` mt-4 pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==1?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}onClick={()=>setActiveSection(1)}>
                     <span className={`text-[16px] lg:text-[20px] xl:text-[24px] `}>
                         ฟังก์ชันที่ 1<br />
                     </span>
                     เปลี่ยนชื่อคอลัมน์ 
                 </a>
                 <a href='#section-two'
-                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==2?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}>
+                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==2?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}onClick={()=>setActiveSection(2)}>
                     <span className={`text-[16px] lg:text-[20px] xl:text-[24px] `}>
                         ฟังก์ชันที่ 2<br />
                     </span>
                     ลบคอลัมน์ข้อมูลที่ไม่เกี่ยวข้อง 
                 </a>
                 <a href='#section-three' 
-                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==3?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}>
+                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==3?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}onClick={()=>setActiveSection(3)}>
                     <span className={`text-[16px] lg:text-[20px] xl:text-[24px] `}>
                         ฟังก์ชันที่ 3<br />
                     </span>
                     ลบข้อมูลที่ซ้ำซ้อน
                 </a>
                 <a href='#section-four' 
-                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==4?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}>
+                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==4?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}onClick={()=>setActiveSection(4)}>
                     <span className={`text-[16px] lg:text-[20px] xl:text-[24px] `}>
                         ฟังก์ชันที่ 4<br />
                     </span>
                     แก้ไขข้อมูลที่ไม่สอดคล้อง
                 </a>
                 <a href='#section-five'
-                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==5?`bg-white text-primary ml-4    `:`bg-white text-textPrimary`}`}>
+                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==5?`bg-white text-primary ml-4    `:`bg-white text-textPrimary`}`}onClick={()=>setActiveSection(5)}>
                     <span className={`text-[16px] lg:text-[20px] xl:text-[24px] `}>
                         ฟังก์ชันที่ 5<br />
                     </span>
                     จัดการข้อมูลที่ขาดหายไป
                 </a>
                 <a href='#section-six'
-                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==6?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}>
+                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==6?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}onClick={()=>setActiveSection(6)}>
                     <span className={`text-[16px] lg:text-[20px] xl:text-[24px] `}>
                         ฟังก์ชันที่ 6<br />
                     </span>
                     แยกคอลัมน์
                 </a>
                 <a href='#section-seven' 
-                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==7?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}>
+                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==7?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}onClick={()=>setActiveSection(7)}>
                     <span className={`text-[16px] lg:text-[20px] xl:text-[24px] `}>
                         ฟังก์ชันที่ 7<br />
                     </span>
                     รวมคอลัมน์
                 </a>
                 <a href='#section-eight'
-                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==8?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}>
+                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==8?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}onClick={()=>setActiveSection(8)}>
                     <span className={`text-[16px] lg:text-[20px] xl:text-[24px] `}>
                         ฟังก์ชันที่ 8<br />
                     </span>
                     เปลี่ยนข้อมูลประเภท กลุ่ม ที่มีจำนวนน้อย เป็น “อื่น ๆ”
                 </a>
                 <a href='#section-nine'
-                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==9?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}>
+                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==9?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}onClick={()=>setActiveSection(9)}>
                     <span className={`text-[16px] lg:text-[20px] xl:text-[24px] `}>
                         ฟังก์ชันที่ 9<br />
                     </span>
                     ลบข้อมูลที่ไม่ตรงกับประเภทข้อมูล
                 </a>
                 <a href='#section-ten'
-                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==10?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}>
+                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==10?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}onClick={()=>setActiveSection(10)}>
                     <span className={`text-[16px] lg:text-[20px] xl:text-[24px] `}>
                         ฟังก์ชันที่ 10<br />
                     </span>
                     ระบุค่าผิดปกติทางสถิติ
                 </a>
                 <a href='#section-eleven'
-                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==11?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}>
+                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==11?`bg-white text-primary ml-4`:`bg-white text-textPrimary`}`}onClick={()=>setActiveSection(11)}>
                     <span className={`text-[16px] lg:text-[20px] xl:text-[24px]`}>
                         ฟังก์ชันที่ 11<br />
                     </span>
                     เปลี่ยนค่าผิดปกติทางสถิติ
                 </a>
                 <a href='#section-twelve' 
-                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==12?`bg-white text-primary ml-4 `:`bg-white text-textPrimary`}`}>
+                className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection==12?`bg-white text-primary ml-4 `:`bg-white text-textPrimary`}`}onClick={()=>setActiveSection(12)}>
                     <span className={`text-[16px] lg:text-[20px] xl:text-[24px]`}>
                         ฟังก์ชันที่ 12<br />
                     </span>
