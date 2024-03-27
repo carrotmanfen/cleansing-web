@@ -111,6 +111,8 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                 }
             })
             router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+columns[radio3].dataKey+","+secondColumn+"&delimiter="+delimiter+"&columnNewName="+column1)
+        }else if(cleanMethod==6){
+            router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+columnSelect+"&category="+delimiter)
         }else if(cleanMethod==10){
             router.push("/main/confirmClean?projectId="+searchProjectId+"&clean="+cleanMethod+"&column="+columnSelect+"&order="+numberFill)
         }else if(cleanMethod==12){
@@ -226,6 +228,13 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                 <h3 className="text-[20px] text-white group-hover:underline">กรอกข้อมูลให้ครบถ้วน</h3>
             </div>
             
+            :cleanMenu==20?
+            <div onClick={()=>setCleanMenu(21)} className='flex flex-row group hover:cursor-pointer'>
+                <div className='flex items-center mr-8'>
+                    <Image src={arrowLeftWhite} alt='arrow' objectFit='contain'/>
+                </div>
+                <h3 className="text-[20px] text-white group-hover:underline">กรอกข้อมูลให้ครบถ้วน</h3>
+            </div>
             :
             <div onClick={()=>{setCleanMenu(1); reSetValue();}} className='flex flex-row group hover:cursor-pointer'>
                 <div className='flex items-center mr-8'>
@@ -335,7 +344,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
 
             <div className='flex flex-row items-center border-b border-borderNavbar'>
                 {imageQ("eight")}
-            <div onClick={()=>{setCleanMenu(5); setCheckedItems(Array(columns.length).fill(false)); setMethod("6")}} className='flex ml-4 flex-row justify-between  pb-2 hover:bg-gray cursor-pointer w-full'>
+            <div onClick={()=>{setCleanMenu(21); setCheckedItems(Array(columns.length).fill(false)); setMethod("6")}} className='flex ml-4 flex-row justify-between  pb-2 hover:bg-gray cursor-pointer w-full'>
                 <div className='flex flex-col'>
                     <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>8. เปลี่ยนข้อมูลประเภท กลุ่ม ที่มีจำนวนน้อย เป็น “อื่น ๆ” <br/>(Replace Excess Categories with “Other”)</p>
                     <p className='text-[16px] text-textGray cursor-pointer'>จัดกลุ่มชุดข้อมูลตามประเภทของข้อมูล กลุ่มข้อมูลที่มีจำนวนน้อยกว่า<br/>ที่กำหนดจะเปลี่ยนเป็นกลุ่ม “อื่นๆ”</p>
@@ -796,7 +805,45 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
               </div>
           </div>
         </div>
-        :
+        :cleanMenu==20?
+        <div className='flex px-12 flex-col justify-center border-b border-borderNavbar py-4 gap-4'>
+          <div className='flex flex-col gap-8 items-start'>
+              <div className='flex flex-col w-full'>
+                <p className='text-[20px] font-kanit text-textPrimary'>ต้องการแสดงข้อมูลทั้งหมดกี่หมวดหมู่ (ใส่เป็นตัวเลขเท่านั้น)</p>
+                <input type='text' value={delimiter} className='text-start text-[20px] text-textPrimary border-2 w-full rounded-md px-3'
+                onChange={(e)=> {
+                    const inputValue = e.target.value; 
+                    if (/^\d*$/.test(inputValue)) {
+                      setDelimiter(inputValue);
+                    }
+                  }}/>
+              </div>
+              <div className={`flex w-full justify-end`}>
+                  <button 
+                  onClick={()=>{
+                      if(delimiter!=""){
+                          handleConfirm()
+                      }
+                  }} 
+                  className={`text-[20px] font-kanit rounded-md py-2 px-4 text-white ${delimiter!=""?`bg-primary hover:bg-hoverPrimary`:`bg-gray hover:cursor-not-allowed`}`}>ยืนยัน</button>
+              </div>
+          </div>
+        </div>
+        :cleanMenu==21?
+        <div className='flex flex-col'>
+              {columns.map((column, index)=>{
+                return(
+                    <label key={index} className='flex flex-row w-full justify-between items-center gap-2 hover:cursor-pointer border-b border-borderNavbar p-3 hover:bg-gray'>
+                        <input type="checkbox" checked={checkedItems[index]} onChange={() => handleCheckboxChange(index)} className='hover:cursor-pointer'/>
+                        <p className='w-full text-[20px] font-kanit text-textPrimary'>{column.label}</p>
+                    </label>
+                )
+              })}
+            <div className='w-full flex items-center justify-end p-4'>
+              <button onClick={()=>setCleanMenu(20)} disabled={!isAnyCheckboxChecked} className={`text-[20px] font-kanit  px-6 py-2 rounded-lg ${isAnyCheckboxChecked?`bg-primary text-white hover:bg-hoverPrimary`:`bg-gray hover:cursor-not-allowed`} `}>ถัดไป <span className='ml-4'>{"->"}</span></button>
+            </div>
+          </div>
+          :
           <p></p>
     }
         </div>

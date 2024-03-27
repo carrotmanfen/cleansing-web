@@ -189,6 +189,9 @@ const ConfirmClean = () => {
         dataSet.column_new = searchColNew
         dataSet.columns_match1 = resultArray[0]
         dataSet.columns_match2 = resultArray[1]
+    }else if(searchMethod=="6"){
+        const searchCategory = queryParams.get('category')
+        dataSet.categories_number = parseFloat(searchCategory)
     }else if(searchMethod=="10"){
         const searchOrder = queryParams.get('order')
         const orderValue = parseFloat(searchOrder)
@@ -252,6 +255,9 @@ const ConfirmClean = () => {
                 dataSet.column_new = searchColNew
                 dataSet.columns_match1 = resultArray[0]
                 dataSet.columns_match2 = resultArray[1]
+            }else if(searchMethod=="6"){
+                const searchCategory = queryParams.get('category')
+                dataSet.categories_number = parseFloat(searchCategory)
             }
             else if(searchMethod=="10"){
                 const searchOrder = queryParams.get('order')
