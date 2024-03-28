@@ -557,8 +557,8 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                     <input
                     type='radio'
                     name='radioGroupFor3'
-                    checked={selectColumn3 === column}
-                    onChange={() => {setSelectColumn3(column); console.log(column)}}
+                    checked={selectColumn3 == column.toString()}
+                    onChange={() => {setSelectColumn3(column.toString()); console.log(column)}}
                     className='hover:cursor-pointer'
                     />
                     <p className='w-full text-[20px] font-kanit text-textPrimary'>{column}</p>
@@ -746,7 +746,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
               <div className='flex flex-col w-full'>
                 <p className='text-[20px] font-kanit text-textPrimary'>เชื่อมโดยใช้ (เช่น , : _ -)</p>
                 <input type='text' value={delimiter} className='text-start text-[20px] text-textPrimary border-2 w-full rounded-md px-3'
-                onChange={(e)=>{const inputValue = e.target.value.slice(0, 1); 
+                onChange={(e)=>{const inputValue = e.target.value; 
                 setDelimiter(inputValue);
                 }}/>
               </div>

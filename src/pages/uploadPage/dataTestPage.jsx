@@ -47,7 +47,7 @@ const DataTest = () => {
         <div className="relative w-screen h-full">
             <Navbar />
             <div className='flex flex-col w-full px-16 justify-center'>
-                <p className='font-kanit text-textPrimary text-[32px] text-center mt-10'>ชุดข้อมูลสำหรับทดลอง</p>
+                <p className='font-kanit text-textPrimary text-[32px] text-center mt-36'>ชุดข้อมูลสำหรับทดลอง</p>
                 <div className='grid grid-cols-4 gap-12 mt-16'>
                     {testData.map((data, index) => {
                         console.log(rows1)
