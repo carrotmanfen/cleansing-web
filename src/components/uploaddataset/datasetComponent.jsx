@@ -24,7 +24,7 @@ export const DatasetComponent = ({projectName, fileName, columns, rows}) => {
     } else if (allStrings) {
       return 'string';
     } else {
-      return 'number';
+      return 'string';
     }
 }
   const handleCreateProject = async() =>{

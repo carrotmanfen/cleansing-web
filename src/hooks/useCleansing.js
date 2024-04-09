@@ -205,7 +205,7 @@ export default function useCleansing() {
         } else if (allStrings) {
           return 'string';
         } else {
-          return 'number';
+          return 'string';
         }
     }
 

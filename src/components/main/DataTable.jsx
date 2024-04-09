@@ -80,12 +80,21 @@ export const DataTable = ({ tableData, onSelectChange }) => {
                 (
                     
                     rowData[column].type === 'bar' ? (
-                        <BarChartCell data={rowData[column].data} type={rowData[column].type} />
+                        <div className='w-full flex justify-center items-center'>
+                            <div className='w-[500px]'>
+                                <BarChartCell data={rowData[column].data} type={rowData[column].type} />
+                            </div>
+                        </div>
                       ) : rowData[column].type === 'pie' ? (
-                        <BarChartCell data={rowData[column].data} type={rowData[column].type} />
+                        <div className='w-full flex justify-center items-center'>
+                            <div className='w-[500px]'>
+                            <BarChartCell data={rowData[column].data} type={rowData[column].type} />
+                            </div>
+                        </div>
                       ) :rowData[column].type === 'non' ?
-                     
-                        <TableDataOfString data={rowData[column].data}/>
+                        <div className='w-full flex justify-left items-left text-left'>
+                            <TableDataOfString data={rowData[column].data}/>
+                        </div>
                         
                         // <p>จำนวนข้อมูลซ้ำทั้งหมด : example แถว</p>
                       :<p></p>

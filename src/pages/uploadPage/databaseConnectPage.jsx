@@ -67,7 +67,7 @@ const DatabaseConnectPage = () => {
     } else if (allStrings) {
       return 'string';
     } else {
-      return 'number';
+      return 'string';
     }
 }
 

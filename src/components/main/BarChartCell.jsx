@@ -40,45 +40,61 @@ export const BarChartCell = ({ data, type }) => {
         let totalSum = arrSortObj.reduce((a, b) => a + b[1], 0);
         let sum = 0;
         let j = 0;
-        for(let i = 0; i < arrSortObj.length; i++){
-            if(sum+arrSortObj[i][1] <= totalSum/2){
-                sum += arrSortObj[i][1];
-                j=i;
-                console.log("this"+arrSortObj[i][1])
-                console.log("sum"+sum);
+        if(arrSortObj.length <= 5){
+            let arrObj = Object.entries(sortObj);
+            console.log("arrObj");
+            console.log(arrObj);
+            for(let i = 0; i < arrObj.length; i++){
+                arrayNumber.push(arrObj[i][1]);
+                arrayString.push(arrObj[i][0]);
             }
-        }
-        console.log("sd"+j);
-        console.log("sdout"+sum);
-        let newArr = [];
-        for(let i = 0; i < arrSortObj.length; i++){
-            if(i <= j){
-                newArr.push(arrSortObj[i][0]);
-            }else{
+            console.log(arrayNumber);
+            console.log(arrayString);
+            return sortObj;
+        }else{
+
+            for(let i = 0; i < arrSortObj.length; i++){
+                if(sum+arrSortObj[i][1] <= totalSum/2){
+                    sum += arrSortObj[i][1];
+                    j=i;
+                    console.log("this"+arrSortObj[i][1])
+                    console.log("sum"+sum);
+                }
             }
+            console.log("sd"+j);
+            console.log("sdout"+sum);
+            let newArr = [];
+            for(let i = 0; i < arrSortObj.length; i++){
+                if(i <= j){
+                    newArr.push(arrSortObj[i][0]);
+                }else{
+                }
+            }
+            
+            for(let i = 0; i < newArr.length; i++){
+                delete sortObj[newArr[i]];
+            }
+            sortObj['other'] = sum;
+            
+            let arrObj = Object.entries(sortObj);
+            console.log("arrObj");
+            console.log(arrObj);
+            for(let i = 0; i < arrObj.length; i++){
+                arrayNumber.push(arrObj[i][1]);
+                arrayString.push(arrObj[i][0]);
+            }
+            console.log(arrayNumber);
+            console.log(arrayString);
+            return sortObj;
         }
-        for(let i = 0; i < newArr.length; i++){
-            delete sortObj[newArr[i]];
-        }
-        sortObj['other'] = sum;
-        let arrObj = Object.entries(sortObj);
-        console.log("arrObj");
-        console.log(arrObj);
-        for(let i = 0; i < arrObj.length; i++){
-            arrayNumber.push(arrObj[i][1]);
-            arrayString.push(arrObj[i][0]);
-        }
-        console.log(arrayNumber);
-        console.log(arrayString);
-        return sortObj;
       }
 
       function countInRange(data, min, max, numRanges) {
         let range = {};
         let rangeSize = Math.ceil((max - min + 1) / numRanges);
-
+        console.log("rageSize: "+rangeSize);
         for (let i = 0; i < numRanges; i++) {
-          if (min + i * rangeSize < max)
+          if (min + i * rangeSize <= max)
             range[
               `${min + i * rangeSize}-${Math.min(
                 min + (i + 1) * rangeSize - 1,
@@ -124,15 +140,39 @@ export const BarChartCell = ({ data, type }) => {
               type: "bar",
               data: {
                 datasets: [
-                  {
-                    label: "Count",
-                    data: intData,
-                    backgroundColor: "rgba(75,192,192,0.4)",
-                    borderColor: "rgba(75,192,192,1)",
-                    borderWidth: 1,
-                    hoverBackgroundColor: "rgba(75,192,192,0.8)",
-                    hoverBorderColor: "rgba(75,192,192,1)",
-                  },
+                    {
+                        label: "Count",
+                        data: intData,
+                        backgroundColor: [
+                          "rgba(75,192,192,0.4)", 
+                          "rgba(255,99,132,0.2)", 
+                          "rgba(255,205,86,0.2)", 
+                          "rgba(153, 102, 255, 0.2)", 
+                          "rgba(255, 159, 64, 0.2)"
+                        ],
+                        borderColor: [
+                          "rgba(75,192,192,1)", 
+                          "rgba(255,99,132,1)", 
+                          "rgba(255,205,86,1)", 
+                          "rgba(153, 102, 255, 1)", 
+                          "rgba(255, 159, 64, 1)"
+                        ],
+                        borderWidth: 1,
+                        hoverBackgroundColor: [
+                          "rgba(75,192,192,0.8)", 
+                          "rgba(255,99,132,0.4)", 
+                          "rgba(255,205,86,0.4)", 
+                          "rgba(153, 102, 255, 0.4)", 
+                          "rgba(255, 159, 64, 0.4)"
+                        ],
+                        hoverBorderColor: [
+                          "rgba(75,192,192,1)", 
+                          "rgba(255,99,132,1)", 
+                          "rgba(255,205,86,1)", 
+                          "rgba(153, 102, 255, 1)", 
+                          "rgba(255, 159, 64, 1)"
+                        ],
+                      }
                 ],
               },
               options: {
@@ -144,6 +184,11 @@ export const BarChartCell = ({ data, type }) => {
                     beginAtZero: true,
                   },
                 },
+                plugins: {
+                    legend: {
+                      display: false
+                    }
+                  }
               },
             }
           : {
@@ -152,24 +197,48 @@ export const BarChartCell = ({ data, type }) => {
               labels: arrayString, // use arrayString as labels
               datasets: [
                 {
-                  data: arrayNumber, // use arrayString as data
-                  backgroundColor: "rgba(75,192,192,0.4)",
-                  borderColor: "rgba(75,192,192,1)",
-                  borderWidth: 1,
-                  hoverBackgroundColor: "rgba(75,192,192,0.8)",
-                  hoverBorderColor: "rgba(75,192,192,1)",
-                },
+                    data: arrayNumber, // use arrayString as data
+                    backgroundColor: [
+                      "rgba(75,192,192,0.4)", 
+                      "rgba(255,99,132,0.2)", 
+                      "rgba(255,205,86,0.2)", 
+                      "rgba(153, 102, 255, 0.2)", 
+                      "rgba(255, 159, 64, 0.2)",
+                      "rgba(255, 99, 132, 0.2)",
+                      "rgba(54, 162, 235, 0.2)"
+                    ],
+                    borderColor: [
+                      "rgba(75,192,192,1)", 
+                      "rgba(255,99,132,1)", 
+                      "rgba(255,205,86,1)", 
+                      "rgba(153, 102, 255, 1)", 
+                      "rgba(255, 159, 64, 1)",
+                      "rgba(255, 99, 132, 1)",
+                      "rgba(54, 162, 235, 1)"
+                    ],
+                    borderWidth: 1,
+                    hoverBackgroundColor: [
+                      "rgba(75,192,192,0.8)", 
+                      "rgba(255,99,132,0.4)", 
+                      "rgba(255,205,86,0.4)", 
+                      "rgba(153, 102, 255, 0.4)", 
+                      "rgba(255, 159, 64, 0.4)",
+                      "rgba(255, 99, 132, 0.4)",
+                      "rgba(54, 162, 235, 0.4)"
+                    ],
+                    hoverBorderColor: [
+                      "rgba(75,192,192,1)", 
+                      "rgba(255,99,132,1)", 
+                      "rgba(255,205,86,1)", 
+                      "rgba(153, 102, 255, 1)", 
+                      "rgba(255, 159, 64, 1)",
+                      "rgba(255, 99, 132, 1)",
+                      "rgba(54, 162, 235, 1)"
+                    ],
+                  },
               ],
             },
             options: {
-              scales: {
-                x: {
-                  type: "category",
-                },
-                y: {
-                  beginAtZero: true,
-                },
-              },
             },
           }
       );

@@ -52,7 +52,7 @@ const UploadPage = () => {
         } else if (allStrings) {
           return 'string';
         } else {
-          return 'number';
+          return 'string';
         }
     }
     const onUpload = async() => {
