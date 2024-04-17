@@ -30,7 +30,7 @@ export const TableDataOfString = ({ data }) => {
       <p className="w-full text-center">
         จำนวนข้อมูลเฉพาะทั้งหมด : {uniqueCount} แถว
       </p>
-      <div className="px-10">
+      <div className="px-10 overflow-auto max-h-[500px]">
         <table className="table-fixed w-full text-sm">
           <thead>
             <tr>
