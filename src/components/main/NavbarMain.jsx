@@ -13,7 +13,7 @@ const NavbarMain = ({projectName, popup, disableButton, downloadOnClick}) => {
                         <Image src={logo} width={60} height={60} objectFit='contain' alt="logo" />
                     </div>
                 </Link>
-                <p className="pl-2 text-center">
+                <p className="pl-2 text-center text-[16px]">
                     {projectName}
                 </p>
                 <div onClick={popup} className={`px-2 rounded-md hover:border ${disableButton?`cursor-not-allowed`:``}`}>

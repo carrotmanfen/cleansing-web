@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Chart from "chart.js/auto";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 export const BarChartCell = ({ data, type }) => {
   const chartRef = useRef(null);
@@ -139,6 +140,7 @@ export const BarChartCell = ({ data, type }) => {
           ? {
               type: "bar",
               data: {
+                labels: Object.keys(intData),
                 datasets: [
                     {
                         label: "Count",
@@ -175,18 +177,20 @@ export const BarChartCell = ({ data, type }) => {
                       }
                 ],
               },
+              plugins: [ChartDataLabels],
               options: {
-                scales: {
-                  x: {
-                    type: "category",
-                  },
-                  y: {
-                    beginAtZero: true,
-                  },
-                },
                 plugins: {
                     legend: {
                       display: false
+                    },
+                    datalabels: {
+                      color: '#000',
+                        anchor: 'end',
+                        align: 'start',
+                      formatter: function(value, context) {
+                        console.log("context"+context.chart.data.labels[context.dataIndex]);
+                        return intData[context.chart.data.labels[context.dataIndex]];
+                      }
                     }
                   }
               },
@@ -238,7 +242,18 @@ export const BarChartCell = ({ data, type }) => {
                   },
               ],
             },
+            plugins: [ChartDataLabels],
             options: {
+                plugins: {
+                    datalabels: {
+                      color: '#000',
+                        anchor: 'end',
+                        align: 'start',
+                      formatter: function(value, context) {
+                        return value;
+                      }
+                    },
+                  }
             },
           }
       );

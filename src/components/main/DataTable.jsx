@@ -57,9 +57,10 @@ export const DataTable = ({ tableData, onSelectChange }) => {
                     onChange={(e) => {
                       onSelectChange(rowIndex, column, e.target.value);
                     }}
+                    className='p-2 border-2 border-borderNavbar rounded-xl'
                   >
                     <option value='string'>string</option>
-                    <option value='category'>category</option>
+                    <option value='category'>string (category)</option>
                   </select>
                   :rowData[column] === 'category'?
                   <select
@@ -67,9 +68,10 @@ export const DataTable = ({ tableData, onSelectChange }) => {
                     onChange={(e) => {
                       onSelectChange(rowIndex, column, e.target.value);
                     }}
+                    className='p-2  border-2 border-borderNavbar rounded-xl'
                   >
                     <option value='string'>string</option>
-                    <option value='category'>category</option>
+                    <option value='category'>string (category)</option>
                   </select>
                   :<p>{rowData[column]}</p>
                 )  
