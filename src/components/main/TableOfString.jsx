@@ -23,7 +23,7 @@ export const TableDataOfString = ({ data }) => {
   //   console.log(count);
   //   console.log(nonUniqueCount);
   return (
-    <div className="w-full">
+    <div className="w-full text-[16px]">
       <p className="w-full text-center">
         จำนวนข้อมูลที่มีข้อมูลซ้ำในแถวอื่น : {nonUniqueCount} ข้อมูล
       </p>
@@ -31,10 +31,10 @@ export const TableDataOfString = ({ data }) => {
         จำนวนข้อมูลเฉพาะทั้งหมด : {uniqueCount} แถว
       </p>
       <div className="px-10 overflow-auto max-h-[500px]">
-        <table className="table-fixed w-full text-sm">
+        <table className="table-fixed w-full">
           <thead>
             <tr>
-              <th className="w-2/12 px-4 py-2 text-center">จำนวนข้อมูลซ้ำ</th>
+              <th className="w-2/12 px-4 py-2 text-center">จำนวน<br/>ข้อมูลซ้ำ</th>
               <th className="w-10/12 px-4 py-2">Value</th>
             </tr>
           </thead>
