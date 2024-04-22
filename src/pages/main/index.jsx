@@ -290,7 +290,7 @@ const Main = () => {
           <div className="gap-4 flex flex-row">
             <button
               onClick={buttonLeftClick}
-              className={`py-2 px-4 text-[16px] ${menu === 1
+              className={`py-2 px-4 text-[18px] ${menu === 1
                 ? `bg-primary hover:bg-hoverPrimary text-white`
                 : `bg-white hover:bg-gray text-black border`
                 }  rounded-md`}
@@ -299,7 +299,7 @@ const Main = () => {
             </button>
             <button
               onClick={buttonRightClick}
-              className={`py-2 px-4 text-[16px] ${menu === 2
+              className={`py-2 px-4 text-[18px] ${menu === 2
                 ? `bg-primary hover:bg-hoverPrimary text-white`
                 : `bg-white hover:bg-gray text-black border`
                 } rounded-md`}
@@ -309,7 +309,7 @@ const Main = () => {
           </div>
           <button
             onClick={handleOpenCleansing}
-            className={`py-2 px-4 text-[16px] bg-cleansing hover:bg-hoverCleansing text-white} text-white rounded-md`}
+            className={`py-2 px-4 text-[18px] bg-cleansing hover:bg-hoverCleansing text-white} text-white rounded-md`}
           >
             ทำความสะอาดข้อมูล
           </button>
