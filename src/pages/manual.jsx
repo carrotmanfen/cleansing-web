@@ -182,7 +182,7 @@ const Manual = () => {
                                 <Image src={register} objectFit='cover' alt="register" />
                             </div>
                         </div>
-                        <p className='text-textGray  text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>ผู้ใช้งานที่เข้ามาใช้งาน <strong>คลีนเนอร์</strong> ครั้งแรกต้องสมัครสมาชิก เพื่อสร้างบัญชีกับ <strong>คลีนเนอร์</strong> ก่อนใช้งาน</p>
+                        <p className='text-textGray  text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>ผู้ใช้งานที่เข้ามาใช้งาน <strong>คลีนเนอร์</strong> ครั้งแรกต้องสมัครสมาชิกเพื่อสร้างบัญชีกับ <strong>คลีนเนอร์</strong> ก่อนจึงจะสามารถใช้ฟังก์ชันต่าง ๆ ของเว็บแอปพลิเคชันคลีนเนอร์ได้ โดยผู้ใช้งานต้องกรอกข้อมูลที่จำเป็นในการสมัครเข้าใช้งานคือ ชื่อผู้ใช้งาน รหัสผ่าน และยืนยันรหัสผ่าน จากนั้นกดปุ่มยืนยันเพื่อสมัครสมาชิก</p>
                     </section>
 
                     <section id="section-two" ref={ref => sectionRefs.current[2] = ref} className='pt-20'>

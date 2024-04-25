@@ -63,8 +63,8 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
     }
 
     const imageQ = (url) =>{
-        return <div onClick={()=>window.open(process.env.NEXT_PUBLIC_WEB_SERVICE_URL+"document#section-"+url, '_blank')} className='w-[30px] h-[30px] pl-2 hover:cursor-pointer'>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-[30px] h-[30px]">
+        return <div onClick={()=>window.open(process.env.NEXT_PUBLIC_WEB_SERVICE_URL+"document#section-"+url, '_blank')} className='w-[30px] h-[30px] pl-2 '>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-[30px] h-[30px] hover:bg-primary rounded-full hover:cursor-pointer">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
         </svg>
         </div> 
@@ -359,7 +359,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                 {imageQ("nine")}
             <div onClick={()=>{setCleanMenu(5); setCheckedItems(Array(columns.length).fill(false)); setMethod("7")}} className='flex ml-4 flex-row justify-between  pb-2 hover:bg-gray cursor-pointer w-full'>
                 <div className='flex flex-col'>
-                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>9. ลบข้อมูลที่ไม่ตรงกับประเภทข้อมูล (Remove Unreadable Columns)</p>
+                    <p className=' w-full py-2 text-start text-[20px] text-textPrimary'>9. นำข้อมูลที่ไม่ใช่ตัวเลขออก (Remove Unreadable Columns)</p>
                     <p className='text-[16px] text-textGray cursor-pointer'>ลบแถวข้อมูลที่มีข้อมูลไม่ตรงกับคอลัมน์ที่กำหนด</p>
                 </div>
                 <div className='flex items-center mr-8'>
@@ -675,7 +675,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
               <div className='flex flex-col w-full'>
                 <p className='text-[20px] font-kanit text-textPrimary'>แบ่งโดยใช้ (เช่น , : _ -)</p>
                 <input type='text' value={delimiter} className='text-start text-[20px] text-textPrimary border-2 w-full rounded-md px-3'
-                onChange={(e)=>{const inputValue = e.target.value.slice(0, 1); 
+                onChange={(e)=>{const inputValue = e.target.value; 
                 setDelimiter(inputValue);
                 setOption4(inputValue);}}/>
               </div>

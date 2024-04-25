@@ -7,13 +7,15 @@ import { useRecoilState } from "recoil";
 import { atomUserRole } from "@/atoms/atomUserRole";
 import { useRouter } from "next/router";
 import Alert from '@mui/material/Alert';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter()
   const [notification, setNotification] = useState('');
-  const { isPending, refreshLogin, login, setError } = useAccount()
+  const { isPending, refreshLogin, login, setError, error } = useAccount()
 
   const [userRole, setUserRole] = useRecoilState(atomUserRole)
 
@@ -47,7 +49,9 @@ const Login = () => {
     }
     if (password && username) {
       await login(username, password);
-      setNotification('ไม่พบบัญชีผู้ใช้งาน');
+      if(error){
+          setNotification('ไม่พบบัญชีผู้ใช้งาน');
+      }
       return;
     }
   }
@@ -83,15 +87,25 @@ const Login = () => {
           />
 
           <p className="w-full text-left">รหัสผ่าน</p>
-          <input
-            type="password"
-            className="w-full px-4 py-2 border-2 border-primary rounded-lg focus:outline-none focus:ring focus:border-primary"
-            placeholder="******"
-            value={password}
-            onChange={handlePasswordChange}
-            onKeyDown={handleEnterKeyPress}
-          />
-        <Link href={"/register"} className='text-primary hover:text-hoverPrimary underline'>สมัครสมาชิก</Link>
+          <div className="relative">
+            <input
+                type={showPassword ? "text" : "password"} 
+                className="w-full px-4 py-2 border-2 border-primary rounded-lg focus:outline-none focus:ring focus:border-primary"
+                placeholder="******"
+                value={password}
+                onChange={handlePasswordChange}
+                onKeyDown={handleEnterKeyPress}
+            />
+            <div 
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+                onClick={() => setShowPassword(!showPassword)} 
+            >
+                {showPassword ? <FaEye /> :<FaEyeSlash /> }
+            </div>
+            </div>
+            <div className='flex'>
+                <Link href={"/register"} className='text-primary hover:text-hoverPrimary underline'>สมัครสมาชิก</Link>
+            </div>
           <div className="flex flex-row w-full justify-between">
             <Link href={"/"}>
               <button className="px-16 py-2 mt-8 bg-gray hover:bg-textGray rounded-2xl">ยกเลิก</button>

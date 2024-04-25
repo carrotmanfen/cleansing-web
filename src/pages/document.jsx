@@ -244,7 +244,7 @@ const Document = () => {
                     <section id="section-two" ref={ref => sectionRefs.current[1] = ref} className='pt-20'>
                         <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] '>ฟังก์ชันที่ 2 ลบคอลัมน์ข้อมูลที่ไม่เกี่ยวข้อง (Delete Irrelevant Column)</p>
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>คือการลบคอลัมน์ที่ไม่จำเป็นในการนำไปประมวลผลออก เพื่อเป็นการลดขนาดของชุดข้อมูล</p>
-                        <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-10'>ผู้ใช้งานควรใช้เมื่อ ชุดข้อมูลมีคอลัมน์ที่ซ้ำซ้อน หรือมีคอลัมน์ที่เยอะเกินความจำเป็น เพื่อเป็นการลดขนาดของชุดข้อมูลทำให้ประหยัดทรัพยกรของเครื่องเมื่อนำชุดข้อมูลไปประมวลผล โดยฟังก์ชันนี้สามารถใช้ได้กับข้อมูลทุกประเภท</p>
+                        <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-10'>ผู้ใช้งานควรใช้เมื่อ ชุดข้อมูลมีคอลัมน์ที่ซ้ำซ้อน หรือมีคอลัมน์ที่เยอะเกินความจำเป็น เพื่อเป็นการลดขนาดของชุดข้อมูลทำให้ประหยัดทรัพยากรของเครื่องเมื่อนำชุดข้อมูลไปประมวลผล โดยฟังก์ชันนี้สามารถใช้ได้กับข้อมูลทุกประเภท</p>
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-10'><strong>วิธีการใช้งาน</strong></p>
                         <div className='w-[400px] lg:w-[550px] xl:w-[800px]   mt-5 flex flex-col justify-center border-0 items-center'>
                             <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mx-10'>1.	กดเลือกฟังก์ชัน ลบคอลัมน์ข้อมูลที่ไม่เกี่ยวข้อง (Delete Irrelevant Column) </p>
@@ -271,7 +271,7 @@ const Document = () => {
                             <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
                                 <Image src={confirmCleansing2} objectFit='cover' alt="confirmCleansing2" />
                             </div>
-                            <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>ผู้ใช้งานจะสังเกตเห็นว่าการลบคอลัมน์ข้อมูลที่ไม่เกี่ยวข้องนั้นจะถูกไฮไลท์ด้วยสีเหลือง เนื่องจากเป็นการลบบางคอลัมน์เท่านั้น การถูกไฮไลท์ด้วยสีแดงหมายถึงการลบข้อมูลทั้งแถว</p>
+                            <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>ผู้ใช้งานจะสังเกตเห็นว่าการลบคอลัมน์ข้อมูลที่ไม่เกี่ยวข้องนั้นจะถูกไฮไลท์ด้วยสีเหลืองทั้งหมด เนื่องจากเป็นการลบคอลัมน์ ทำให้โครงสร้างของข้อมูลทั้งหมดเปลี่ยนแปลง ซึ่งเป็นกรณีกับสีแดง ที่หมายถึง แถวข้อมูลนั้นได้หายไปทั้งแถว </p>
                         </div>
                     </section>
                     <section id="section-three" ref={ref => sectionRefs.current[2] = ref} className='pt-20'>
@@ -301,7 +301,7 @@ const Document = () => {
                     </section>
                     <section id="section-four" ref={ref => sectionRefs.current[3] = ref} className='pt-20'>
                         <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] '>ฟังก์ชันที่ 4 แก้ไขข้อมูลที่ไม่สอดคล้อง (Edit Inconsistent Data)</p>
-                        <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>คือการแก้ไขข้อมูลเดียวกันที่บันทึกไม่เหมือนกัน เช่น &quot;กทม.&quot; , &quot;กรุงเทพ&quot; ให้เป็นรูปแบบเดียวกัน</p>
+                        <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>คือการแก้ไขข้อมูลเดียวกันที่บันทึกไม่เหมือนกัน เช่น &quot;กทม.&quot; , &quot;กรุงเทพ&quot; ให้เป็นรูปแบบเดียวกัน โดยจะแก้ไขข้อมูลทุกตัวที่ผู้ใช้เลือกเป็นข้อมูลแบบใหม่ที่ผู้ใช้ต้องการ</p>
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-10'>ผู้ใช้งานควรใช้เมื่อ มีข้อมูลประเภท string โดยชุดข้อมูลผ่านการจัดเก็บจากหลากหลายบุคคล หลายหน่วยงาน ซึ่งอาจไม่ได้มีการกำหนดมาตรฐานในการบันทึก หรือรวมไปถึงความผิดพลาดจากผู้กรอกข้อมูล ซึ่งทำให้ข้อมูลที่ควรจะเป็นข้อมูลเดียวกันนั้น มีการแสดงผลที่ต่างกัน ฟังก์ชันนี้จึงเหมาะกับการเปลี่ยนข้อมูลที่มีความหมายเดียวกัน แต่รูปแบบต่างกัน ให้กลายเป็นรูปแบบเดียวกัน เพื่อไม่ให้การประมวลผลข้อมูลเกิดความผิดพลาด</p>
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-10'><strong>วิธีการใช้งาน</strong></p>
                         <div className='w-[400px] lg:w-[550px] xl:w-[800px]   mt-5 flex flex-col justify-center border-0 items-center'>
@@ -335,7 +335,7 @@ const Document = () => {
                             <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
                                 <Image src={confirmCleansing2} objectFit='cover' alt="confirmCleansing2" />
                             </div>
-                            <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>ผู้ใช้งานจะสังเกตเห็นว่าการแก้ไขข้อมูลที่ไม่สอดคล้องนั้นจะถูกไฮไลท์ด้วยสีเหลือง เนื่องจากเป็นการเปลี่ยนแปลงข้อมูลบางแถวหรือบางคอลัมน์เท่านั้น</p>
+                            <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>ผู้ใช้งานจะสังเกตเห็นว่าการแก้ไขข้อมูลที่ไม่สอดคล้องนั้นจะถูกไฮไลท์ด้วยสีเหลือง เนื่องจากเป็นการเปลี่ยนแปลงข้อมูลบางแถวหรือบางคอลัมน์เท่านั้น ส่วนข้อมูลที่ไม่เกิดการเปลี่ยนแปลงจะไม่ถูกไฮไลท์ (สีขาว) </p>
                         </div>
                     </section>
                     <section id="section-five" ref={ref => sectionRefs.current[4] = ref} className='pt-20'>
@@ -382,7 +382,7 @@ const Document = () => {
                     <section id="section-six" ref={ref => sectionRefs.current[5] = ref} className='pt-20'>
                         <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] '>ฟังก์ชันที่ 6 แยกคอลัมน์ (Split Column)</p>
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>คือแยกโดยใช้ตัวแบ่ง (Delimiter)</p>
-                        <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-10'>ผู้ใช้งานควรใช้เมื่อ ชุดข้อมูลมีคอลัมน์ที่สามารถแยกรายละเอียดออกมาได้ เช่น หากเป็นข้อมูล วันเดือนปี ผู้ใช้งานสามารถแยกออกมาเป็น 3 คอลัมน์ เป็น วัน เดือน ปี ได้ ทำให้ผู้ใช้งานสามารถมองเห็นรายละเอียดเชิงลึกของข้อมูลได้มากยิ่งขึ้น ฟังก์ชันนี้เหมาะสำหรับข้อมูลประเภท string หากนำไปใช้กับข้อมูลประเภท number นั้น ก็สามารถแปลงได้ แต่ทว่าเว็บแอพลิเคชันจะทำการเปลี่ยนประเภทข้อมูลของแถวข้อมูลนั้นเป็น string ก่อน แล้วจึงแยกคอลัมน์</p>
+                        <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-10'>ผู้ใช้งานควรใช้เมื่อ ชุดข้อมูลมีคอลัมน์ที่สามารถแยกรายละเอียดออกมาได้ เช่น หากเป็นข้อมูล วันเดือนปี ผู้ใช้งานสามารถแยกออกมาเป็น 3 คอลัมน์ เป็น วัน เดือน ปี ได้ ทำให้ผู้ใช้งานสามารถมองเห็นรายละเอียดเชิงลึกของข้อมูลได้มากยิ่งขึ้น ฟังก์ชันนี้ใช้สำหรับข้อมูลประเภท string หากนำไปใช้กับข้อมูลประเภท number นั้น จะไม่เกิดการเปลี่ยนแปลงใด ๆ </p>
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-10'><strong>วิธีการใช้งาน</strong></p>
                         <div className='w-[400px] lg:w-[550px] xl:w-[800px] mt-5 border-0'>
                             <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mx-10'>1.	กดเลือกฟังก์ชัน แยกคอลัมน์ (Split Column)</p>
@@ -409,7 +409,7 @@ const Document = () => {
                     <section id="section-seven" ref={ref => sectionRefs.current[6] = ref} className='pt-20'>
                         <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] '>ฟังก์ชันที่ 7 รวมคอลัมน์ (Merge Column)</p>
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>คือทำการรวมคอลัมน์ 2 คอลัมน์โดยมีตัวเชื่อม (Connector)</p>
-                        <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-10'>ผู้ใช้งานควรใช้เมื่อ มีข้อมูลที่สามารถรวมกันได้ เช่น ชื่อ และ นามสกุล เนื่องจากเป็นข้อมูลที่มีความเป็นเอกลักษณ์อยู่แล้ว และอาจจะไม่ได้ข้อมูลเชิงลึกจากการวิเคราะห์มากนัก ซึ่งเป็นการลดขนาดของชุดข้อมูลทำให้ประหยัดทรัพยากรในการประมวลผลอีกด้วย โดยคอลัมน์ที่ผ่านการรวมคอลัมน์จะมีประเภทเป็น string</p>
+                        <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-10'>ผู้ใช้งานควรใช้เมื่อ มีข้อมูลที่สามารถรวมกันได้ เช่น ชื่อ และ นามสกุล เนื่องจากเป็นข้อมูลที่มีความเป็นเอกลักษณ์อยู่แล้ว และอาจจะไม่ได้ส่งผลต่อการวิเคราะห์เชิงลึกมากนัก ซึ่งเป็นการลดขนาดของชุดข้อมูลทำให้ประหยัดทรัพยากรในการประมวลผลอีกด้วย โดยคอลัมน์ที่ผ่านการรวมคอลัมน์จะมีประเภทเป็น string ผู้ใช้สามารถรวมคอลัมน์ประเภท number ได้ แต่จะถูก cast เป็น string ทั้งหมดหลังจากใช้ฟังก์ชันนี้ </p>
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-10'><strong>วิธีการใช้งาน</strong></p>
                         <div className='w-[400px] lg:w-[550px] xl:w-[800px] mt-5 border-0'>
                             <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mx-10'>1.	กดเลือกฟังก์ชัน รวมคอลัมน์ (Merge Column)</p>
@@ -419,21 +419,21 @@ const Document = () => {
                             </div>
                         </div>
                         <div className='w-[400px] lg:w-[550px] xl:w-[800px]   mt-5 flex flex-col justify-center border-0 items-center'>
-                            <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mx-10'>2.	เลือกคอลัมน์ที่ต้องการใช้ทำความสะอาดข้อมูลด้วยฟังก์ชันนี้ (ผู้ใช้งานสามารถเลือกได้มากกว่า 1 คอลัมน์) จากนั้นกดถัดไป</p>
+                            <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mx-10'>2.	เลือกคอลัมน์ที่ต้องการใช้ทำความสะอาดข้อมูลด้วยฟังก์ชันนี้ (ผู้ใช้งานจะต้องเลือก 2 คอลัมน์์) จากนั้นกดถัดไป </p>
                             <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
                                 <Image src={selectColumn3} objectFit='cover' alt="selectColumn3" />
                             </div>
                         </div>
                         <div className='w-[400px] lg:w-[550px] xl:w-[800px]   mt-5 flex flex-col justify-center border-0 items-center'>
-                            <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mx-10'>3.	กรอกข้อมูลที่ว่าต้องการรวมคอลัมน์โดยใช้ตัวแบ่งใดในการรวม เช่น , (จุลภาค) : (ทวิภาค) _ (ยัติภาค) – (ยัติภังค์) และป้อนชื่อคอมลัมน์ใหม่ จากนั้นกดปุ่มยืนยัน</p>
+                            <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mx-10'>3.	จะต้องเพิ่ม อีกขั้นตอนคือ เลือกคอลัมน์ที่อยู่ทางซ้าย </p>
                             <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
                                 <Image src={inputData3} objectFit='cover' alt="inputData3" />
                             </div>
                         </div>
-                        <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mx-10 mt-5'>4.	ตรวจสอบข้อมูลที่จะถูกเปลี่ยนแปลง จากนั้นกดปุ่มยืนยันเพื่อทำความสะอาดข้อมูล</p>
+                        <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mx-10 mt-5'>4. ตรวจสอบข้อมูลที่จะถูกเปลี่ยนแปลง จากนั้นกดปุ่มยืนยันเพื่อทำความสะอาดข้อมูล</p>
                     </section>
                     <section id="section-eight" ref={ref => sectionRefs.current[7] = ref} className='pt-20'>
-                        <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] '>ฟังก์ชันที่ 8 เปลี่ยนข้อมูลประเภท กลุ่ม ที่มีจำนวนน้อย เป็น “อื่น ๆ” (Replace Excess Categories with “Other”)</p>
+                        <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] '>ฟังก์ชันที่ 8 เปลี่ยนข้อมูลประเภท กลุ่ม ที่มีจำนวนน้อย เป็น “อื่น ๆ” (Replace Excess Categories with “Other”) ต้องเพิ่มขั้นตอน </p>
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>คือการจัดกลุ่มชุดข้อมูลตามประเภทของข้อมูล กลุ่มข้อมูลที่มีจำนวนน้อยกว่าที่กำหนดจะเปลี่ยนเป็นกลุ่ม “อื่นๆ” </p>
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-10'>ผู้ใช้งานควรใช้เมื่อ มีข้อมูลประเภท Categories (หมวดหมู่) ที่มีเยอะเกินไป หากนำข้อมูลนี้ไปแสดงผลอาจทำให้ไม่สามารถเห็นรายละเอียดที่ชัดเจน ฟังก์ชันนี้จึงเป็นการรวมหมวดหมู่ข้อมูลที่มีจำนวนน้อย ๆ ให้แสดงรวมกันเป็นคำว่า ”อื่น ๆ” เพื่อให้ผู้ใช้สามารถเข้าใจการแสดงผลข้อมูลได้ง่ายขึ้น ฟังก์ชันนี้หากนำไปใช้กับข้อมูลประเภทตัวเลข จะไม่เกิดการเปลี่ยนแปลงใด ๆ </p>
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-10'><strong>วิธีการใช้งาน</strong></p>
@@ -457,7 +457,7 @@ const Document = () => {
                         </div>
                     </section>
                     <section id="section-nine" ref={ref => sectionRefs.current[8] = ref} className='pt-20'>
-                        <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] '>ฟังก์ชันที่ 9 ลบข้อมูลที่ไม่ตรงกับประเภทข้อมูล (Remove Unreadable Columns)</p>
+                        <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] '>ฟังก์ชันที่ 9 นำข้อมูลที่ไม่ใช่ตัวเลขออก (Remove Unreadable Numbers) (แก้ UI ด้วย)</p>
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>คือการลบแถวข้อมูลที่มีข้อมูลไม่ตรงกับคอลัมน์ที่กำหนด</p>
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-10'>ผู้ใช้งานควรใช้เมื่อ ชุดข้อมูลมีการจัดเก็บตัวอักษรในช่องที่ควรจะเก็บแค่ตัวเลข ฟังก์ชันนี้จะทำการลบข้อมูลที่ไม่ใช่ตัวเลขทิ้ง และเปลี่ยนประเภทของคอลัมน์ข้อมูลเป็นตัวเลข (int หรือ float) ตามความเหมาะสม</p>
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-10'><strong>วิธีการใช้งาน</strong></p>
@@ -500,7 +500,7 @@ const Document = () => {
                                 <Image src={flagOutliers} objectFit='cover' alt="flagOutliers" />
                             </div>
                         </div>
-                        <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mx-10 mt-5'>4.	ตรวจสอบข้อมูลที่จะถูกเปลี่ยนแปลง จากนั้นกดปุ่มยืนยันเพื่อทำความสะอาดข้อมูล</p>
+                        <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mx-10 mt-5'>4. ตรวจสอบข้อมูลที่จะถูกเปลี่ยนแปลง จากนั้นกดปุ่มยืนยันเพื่อทำความสะอาดข้อมูล โดยข้อมูลทั้งหมดจะถูกเปลี่ยนเป็นสีเหลือง เนื่องจากมีการเพิ่มคอลัมน์มาอีกหนึ่งคอลัมน์ทำให้โครงสร้างข้อมูลทั้งหมดเปลี่ยนไป แต่หากใช้ฟังก์ชันนี้กับข้อมูลประเภท String จะไม่เปิดการเปลี่ยนแปลงใด ๆ (สีขาว) </p>
                     </section>
                     <section id="section-eleven" ref={ref => sectionRefs.current[10] = ref} className='pt-20'>
                         <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] '>ฟังก์ชันที่ 11 เปลี่ยนค่าผิดปกติทางสถิติ (Clamp Outliers)</p>
