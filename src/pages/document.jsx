@@ -4,7 +4,7 @@ import { Navbar } from '../components/Navbar'
 import {
     functionCleansing1, functionCleansing2, functionCleansing3, functionCleansing4, functionCleansing5, functionCleansing6, functionCleansing7, functionCleansing8, functionCleansing9, functionCleansing10, functionCleansing11, functionCleansing12,
     selectColumn2, selectColumn3, selectColumn4, confirmCleansing2, navbarDetail, DeleteDuplicateData, confirmCleansing3, selectData, inputData, managingNullValues, managingNullValues1, inputdatafromuser, inputData2, inputData3,
-    inputData4, flagOutliers, clampOutliers, inputdataAuto, confirmCleansing4, confirmCleansing5, selectColumn
+    inputData4, flagOutliers, clampOutliers, inputdataAuto, confirmCleansing4, confirmCleansing5, selectColumn, selectColumn5, selectColumn6
 } from '@/assets'
 import Link from 'next/link'
 import { atomUserRole } from "@/atoms/atomUserRole";
@@ -425,15 +425,21 @@ const Document = () => {
                             </div>
                         </div>
                         <div className='w-[400px] lg:w-[550px] xl:w-[800px]   mt-5 flex flex-col justify-center border-0 items-center'>
-                            <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mx-10'>3.	จะต้องเพิ่ม อีกขั้นตอนคือ เลือกคอลัมน์ที่อยู่ทางซ้าย </p>
+                            <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mx-10'>3.	เลือกคอลัมน์ของข้อมูลที่ต้องการให้อยู่ฝั่งซ้าย จากนั้นกดปุ่มถัดไป</p>
+                            <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
+                                <Image src={selectColumn5} objectFit='cover' alt="selectColumn5" />
+                            </div>
+                        </div>
+                        <div className='w-[400px] lg:w-[550px] xl:w-[800px]   mt-5 flex flex-col justify-center border-0 items-center'>
+                            <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mx-10'>4.	กรอกข้อมูลว่าต้องการรวมคอลัมน์โดยใช้ตัวแบ่งใดในการรวม เช่น , (จุลภาค) : (ทวิภาค) _ (ยัติภาค) – (ยัติภังค์) และป้อนชื่อคอมลัมน์ใหม่ จากนั้นกดปุ่มยืนยัน</p>
                             <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
                                 <Image src={inputData3} objectFit='cover' alt="inputData3" />
                             </div>
                         </div>
-                        <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mx-10 mt-5'>4. ตรวจสอบข้อมูลที่จะถูกเปลี่ยนแปลง จากนั้นกดปุ่มยืนยันเพื่อทำความสะอาดข้อมูล</p>
+                        <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mx-10 mt-5'>5. ตรวจสอบข้อมูลที่จะถูกเปลี่ยนแปลง จากนั้นกดปุ่มยืนยันเพื่อทำความสะอาดข้อมูล</p>
                     </section>
                     <section id="section-eight" ref={ref => sectionRefs.current[7] = ref} className='pt-20'>
-                        <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] '>ฟังก์ชันที่ 8 เปลี่ยนข้อมูลประเภท กลุ่ม ที่มีจำนวนน้อย เป็น “อื่น ๆ” (Replace Excess Categories with “Other”) ต้องเพิ่มขั้นตอน </p>
+                        <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] '>ฟังก์ชันที่ 8 เปลี่ยนข้อมูลประเภท กลุ่ม ที่มีจำนวนน้อย เป็น “อื่น ๆ” (Replace Excess Categories with “Other”)</p>
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>คือการจัดกลุ่มชุดข้อมูลตามประเภทของข้อมูล กลุ่มข้อมูลที่มีจำนวนน้อยกว่าที่กำหนดจะเปลี่ยนเป็นกลุ่ม “อื่นๆ” </p>
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-10'>ผู้ใช้งานควรใช้เมื่อ มีข้อมูลประเภท Categories (หมวดหมู่) ที่มีเยอะเกินไป หากนำข้อมูลนี้ไปแสดงผลอาจทำให้ไม่สามารถเห็นรายละเอียดที่ชัดเจน ฟังก์ชันนี้จึงเป็นการรวมหมวดหมู่ข้อมูลที่มีจำนวนน้อย ๆ ให้แสดงรวมกันเป็นคำว่า ”อื่น ๆ” เพื่อให้ผู้ใช้สามารถเข้าใจการแสดงผลข้อมูลได้ง่ายขึ้น ฟังก์ชันนี้หากนำไปใช้กับข้อมูลประเภทตัวเลข จะไม่เกิดการเปลี่ยนแปลงใด ๆ </p>
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-10'><strong>วิธีการใช้งาน</strong></p>
@@ -450,14 +456,20 @@ const Document = () => {
                             </div>
                         </div>
                         <div className='w-[400px] lg:w-[550px] xl:w-[800px]   mt-5 flex flex-col justify-center border-0 items-center'>
-                            <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mx-10'>3.	ตรวจสอบข้อมูลที่จะถูกเปลี่ยนแปลง จากนั้นกดปุ่มยืนยันเพื่อทำความสะอาดข้อมูล</p>
+                            <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mx-10'>3.	กรอกจำนวนหมวดหมู่ของข้อมูลที่ต้องการให้เหลืออยู่ ระบบจะทำการคำนวณว่ามีข้อมูลของผู้ใช้งานมีทั้งหมดกี่หมวดหมู่และจะเรียงลำดับข้อมูลที่มีจำนวนซ้ำมากไปน้อย เมื่อผู้ใช้งานกรอกจำนวนหมวดหมู่ที่ต้องการ ระบบจะเก็บหมวดหมู่ตามจำนวนที่ผู้ใช้กรอกไว้ และเปลี่ยนหมวดหมู่ข้อมูลที่เหลือเป็น "อื่น ๆ" เรียงจากหมวดหมู่ที่มีข้อมูลซ้ำน้อยไปมาก</p>
+                            <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
+                                <Image src={selectColumn6} objectFit='cover' alt="selectColumn6" />
+                            </div>
+                        </div>
+                        <div className='w-[400px] lg:w-[550px] xl:w-[800px]   mt-5 flex flex-col justify-center border-0 items-center'>
+                            <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mx-10'>4.	ตรวจสอบข้อมูลที่จะถูกเปลี่ยนแปลง จากนั้นกดปุ่มยืนยันเพื่อทำความสะอาดข้อมูล</p>
                             <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
                                 <Image src={confirmCleansing4} objectFit='cover' alt="confirmCleansing4" />
                             </div>
                         </div>
                     </section>
                     <section id="section-nine" ref={ref => sectionRefs.current[8] = ref} className='pt-20'>
-                        <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] '>ฟังก์ชันที่ 9 นำข้อมูลที่ไม่ใช่ตัวเลขออก (Remove Unreadable Numbers) (แก้ UI ด้วย)</p>
+                        <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] '>ฟังก์ชันที่ 9 นำข้อมูลที่ไม่ใช่ตัวเลขออก (Remove Unreadable Numbers)</p>
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>คือการลบแถวข้อมูลที่มีข้อมูลไม่ตรงกับคอลัมน์ที่กำหนด</p>
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-10'>ผู้ใช้งานควรใช้เมื่อ ชุดข้อมูลมีการจัดเก็บตัวอักษรในช่องที่ควรจะเก็บแค่ตัวเลข ฟังก์ชันนี้จะทำการลบข้อมูลที่ไม่ใช่ตัวเลขทิ้ง และเปลี่ยนประเภทของคอลัมน์ข้อมูลเป็นตัวเลข (int หรือ float) ตามความเหมาะสม</p>
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-10'><strong>วิธีการใช้งาน</strong></p>
