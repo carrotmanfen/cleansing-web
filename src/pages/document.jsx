@@ -172,7 +172,7 @@ const Document = () => {
                     <span className={`text-[16px] lg:text-[20px] xl:text-[24px] `}>
                         ฟังก์ชันที่ 9<br />
                     </span>
-                    ลบข้อมูลที่ไม่ตรงกับประเภทข้อมูล
+                    นำข้อมูลที่ไม่ใช่ตัวเลขออก
                 </a>
                 <a href='#section-ten'
                     className={`pl-4 lg:pl-8 xl:pl-12 py-1 ${activeSection == 10 ? `bg-white text-primary ml-4` : `bg-white text-textPrimary`}`} onClick={() => setActiveSection(10)}>
