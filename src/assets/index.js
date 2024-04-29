@@ -44,6 +44,8 @@ import functionCleansing12 from './functionCleansing12.png'
 import selectColumn2 from './SelectColumn2.png'
 import selectColumn3 from './SelectColumn3.png'
 import selectColumn4 from './SelectColumn4.png'
+import selectColumn5 from './SelectColumn5.png'
+import selectColumn6 from './SelectColumn6.png'
 import confirmCleansing2 from './confirmCleansing2.png'
 import confirmCleansing3 from './confirmCleansing3.png'
 import confirmCleansing4 from './confirmCleansing4.png'
@@ -116,6 +118,8 @@ export{
     selectColumn2,
     selectColumn3,
     selectColumn4,
+    selectColumn5,
+    selectColumn6,
     confirmCleansing2,
     DeleteDuplicateData,
     confirmCleansing3,
