@@ -34,8 +34,8 @@ export const TableDataOfString = ({ data }) => {
         <table className="table-fixed w-full">
           <thead>
             <tr>
-              <th className="w-2/12 px-4 py-2 text-center">จำนวน<br/>ข้อมูลซ้ำ</th>
               <th className="w-10/12 px-4 py-2">Value</th>
+              <th className="w-2/12 px-4 py-2 text-center">จำนวน<br/>ข้อมูลซ้ำ</th>
             </tr>
           </thead>
           <tbody>
@@ -43,10 +43,10 @@ export const TableDataOfString = ({ data }) => {
               .sort((a, b) => a[1] - b[1])
               .map(([key, value], index) => (
                 <tr key={index}>
-                  <td className="border px-4 py-2 text-center">{value}</td>
                   <td className="border px-4 py-2 overflow-hidden overflow-ellipsis whitespace-nowrap">
                     {key}
                   </td>
+                  <td className="border px-4 py-2 text-center">{value}</td>
                 </tr>
               ))}
           </tbody>

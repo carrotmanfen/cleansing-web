@@ -192,6 +192,24 @@ export const BarChartCell = ({ data, type }) => {
                         return intData[context.chart.data.labels[context.dataIndex]];
                       }
                     }
+                  },
+                  scales: {
+                    y: {
+                      beginAtZero: true,
+                      title: {
+                        display: true,
+                        text: 'ความถี่ (Frequency)', 
+                        align: 'end'
+                      }
+                    },
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                          display: true,
+                          text: 'ช่วงของข้อมูล (Length of data)', 
+                          align: 'end'
+                        }
+                      }
                   }
               },
             }
