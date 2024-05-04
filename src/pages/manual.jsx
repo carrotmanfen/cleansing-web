@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/legacy/image'
+import { useRouter } from 'next/router'
 import { Navbar } from '../components/Navbar'
 import {
     register, registe2, login, login2, userManual,
@@ -26,6 +27,7 @@ import {
     excelopen7,
     excelopen8,
     register2,
+    download2
 } from '@/assets'
 
 import Link from 'next/link'
@@ -34,6 +36,7 @@ import { useRecoilState } from "recoil";
 import useAccount from '@/hooks/useAccount';
 
 const Manual = () => {
+    const router = useRouter()
     const [userRole, setUserRole] = useRecoilState(atomUserRole)
     const { refreshLogin } = useAccount()
     const handleClean = () => {
@@ -43,68 +46,97 @@ const Manual = () => {
             window.location.href = "/uploadPage"
         }
     }
-    const [activeSection, setActiveSection] = useState(0);
+    const [activeSection, setActiveSection] = useState(1);
     const sectionRefs = useRef([]);
+
+    const handleNextPage = () => {
+        if (activeSection == 1) {
+            router.push("#section-two")
+            setActiveSection(2)
+        }
+        else if (activeSection == 2) {
+            router.push("#section-three")
+            setActiveSection(3)
+        }
+        else if (activeSection == 3) {
+            router.push("#section-four")
+            setActiveSection(4)
+        }
+        else if (activeSection == 4) {
+            router.push("#section-five")
+            setActiveSection(5)
+        }
+        else if (activeSection == 5) {
+            router.push("#section-six")
+            setActiveSection(6)
+        }
+        else if (activeSection == 6) {
+            router.push("#section-seven")
+            setActiveSection(7)
+        }
+    }
+
+    const handlePrevPage = () => {
+        if (activeSection == 2) {
+            router.push("#section-one")
+            setActiveSection(1)
+        }
+        else if (activeSection == 3) {
+            router.push("#section-two")
+            setActiveSection(2)
+        }
+        else if (activeSection == 4) {
+            router.push("#section-three")
+            setActiveSection(3)
+        }
+        else if (activeSection == 5) {
+            router.push("#section-four")
+            setActiveSection(4)
+        }
+        else if (activeSection == 6) {
+            router.push("#section-five")
+            setActiveSection(5)
+        }
+        else if (activeSection == 7) {
+            router.push("#section-six")
+            setActiveSection(6)
+        }
+    }
+
     useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        console.log('Section is in the viewport!', entry.target.id);
-                        switch (entry.target.id) {
-                            case 'section-one':
-                                setActiveSection(1);
-                                break;
-                            case 'section-two':
-                                setActiveSection(2);
-                                break;
-                            case 'section-three':
-                                setActiveSection(3);
-                                break;
-                            case 'section-four':
-                                setActiveSection(4);
-                                break;
-                            case 'section-five':
-                                setActiveSection(5);
-                                break;
-                            case 'section-six':
-                                setActiveSection(6);
-                                break;
-                            case 'section-seven':
-                                setActiveSection(7);
-                                break;
-                            default:
-                                setActiveSection(0);
-                                break;
-                        }
-                    } else {
-                        console.log('Section is not in the viewport.', entry.target.id);
-                    }
-                });
-            },
-            {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.2
+        console.log("helllo", router.asPath)
+        if(router.asPath.includes('#')){
+            const parts = router.asPath.split('#');
+            const pathSection = parts.slice(1).join('#');
+            switch (pathSection) {
+                case 'section-one':
+                    setActiveSection(1);
+                    break;
+                case 'section-two':
+                    setActiveSection(2);
+                    break;
+                case 'section-three':
+                    setActiveSection(3);
+                    break;
+                case 'section-four':
+                    setActiveSection(4);
+                    break;
+                case 'section-five':
+                    setActiveSection(5);
+                    break;
+                case 'section-six':
+                    setActiveSection(6);
+                    break;
+                case 'section-seven':
+                    setActiveSection(7);
+                    break;
+                default:
+                    setActiveSection(1);
+                    break;
             }
-        );
-
-        sectionRefs.current.forEach(ref => {
-            if (ref) {
-                observer.observe(ref);
-            }
-        });
-
-        return () => {
-            sectionRefs.current.forEach(ref => {
-                if (ref) {
-                    observer.unobserve(ref);
-                }
-            });
-        };
+        }
     }, []);
     useEffect(() => {
-
         if (userRole.isLogin === false) {
             const username = localStorage.getItem('username')
             if (username) {
@@ -172,10 +204,10 @@ const Manual = () => {
 
             <div className=' flex flex-col w-full items-center overflow-x-hidden'>
 
-                <p className='text-[34px] lg:text-[38px] xl:text-[42px]  text-textPrimary font-kanit mt-28'>คู่มือการใช้งาน</p>
+                {/* <p className='text-[34px] lg:text-[38px] xl:text-[42px]  text-textPrimary font-kanit mt-28'>คู่มือการใช้งาน</p> */}
                 <div className='w-[400px] lg:w-[550px] xl:w-[800px]   flex flex-col justify-around border-0'>
-                    <section id="section-one" ref={ref => sectionRefs.current[1] = ref} className='pt-20'>
-
+                    <section id="section-one" ref={ref => sectionRefs.current[1] = ref} className={`pt-10 ${activeSection == 1?'block':'hidden'}`}>
+                    <p className='text-[34px] lg:text-[38px] xl:text-[42px] text-center text-textPrimary font-kanit mt-16 mb-8'>คู่มือการใช้งาน</p>
                         <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px]'>ขั้นตอนที่ 1 : สมัครสมาชิก</p>
 
                         <div className='w-[400px] lg:w-[550px] xl:w-[800px] mt-5 flex flex-col justify-center border-0 items-center'>
@@ -183,16 +215,17 @@ const Manual = () => {
                                 <Image src={register} objectFit='cover' alt="register" />
                             </div>
                         </div>
-                        <p className='text-textGray  text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>ผู้ใช้งานที่เข้ามาใช้งาน <strong>คลีนเนอร์</strong> ครั้งแรกต้องสมัครสมาชิกเพื่อสร้างบัญชีกับ <strong>คลีนเนอร์</strong> ก่อนจึงจะสามารถใช้ฟังก์ชันต่าง ๆ ของเว็บแอปพลิเคชันคลีนเนอร์ได้ โดยผู้ใช้งานต้องกรอกข้อมูลที่จำเป็นในการสมัครเข้าใช้งานคือ ชื่อผู้ใช้งาน รหัสผ่าน และยืนยันรหัสผ่าน จากนั้นกดปุ่มยืนยันเพื่อสมัครสมาชิก</p>
+                        <p className='text-textGray  text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>ผู้ใช้งานที่เข้ามาใช้งาน <strong>คลีนเนอร์</strong> ครั้งแรกต้องสมัครสมาชิกเพื่อสร้างบัญชีกับ <strong>คลีนเนอร์</strong> ก่อนจึงจะสามารถใช้ฟังก์ชันต่าง ๆ ของเว็บแอปพลิเคชันคลีนเนอร์ได้ โดยผู้ใช้งานต้องกรอกข้อมูลที่จำเป็นในการสมัครเข้าใช้งานคือ ชื่อผู้ใช้งาน รหัสผ่าน และยืนยันรหัสผ่าน จากนั้นกดปุ่ม <strong>ยืนยัน</strong> เพื่อสมัครสมาชิก</p>
                         <div className='w-[400px] lg:w-[550px] xl:w-[800px] mt-5 flex flex-col justify-center border-0 items-center'>
                             <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
                                 <Image src={register2} objectFit='cover' alt="register2" />
                             </div>
                         </div>
-                        <p className='text-textGray  text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>ผู้ใช้งานที่เข้ามาใช้งาน <strong>คลีนเนอร์</strong> ครั้งแรกต้องสมัครสมาชิกเพื่อสร้างบัญชีกับ <strong>คลีนเนอร์</strong> ก่อนจึงจะสามารถใช้ฟังก์ชันต่าง ๆ ของเว็บแอปพลิเคชันคลีนเนอร์ได้ โดยผู้ใช้งานต้องกรอกข้อมูลที่จำเป็นในการสมัครเข้าใช้งานคือ ชื่อผู้ใช้งาน รหัสผ่าน และยืนยันรหัสผ่าน จากนั้นกดปุ่มยืนยันเพื่อสมัครสมาชิก</p>
+                        <p className='text-textGray  text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>หากผู้ใช้งานต้องการดูรหัสผ่านที่ตนเองพิมพ์สามารถกดที่ไอคอนรูปตาเพื่อดูรหัสผ่านว่าพิมพ์ถูกต้องหรือไม่ หากถูกต้องแล้วให้กดปุ่ม <strong>ยืนยัน</strong> เพื่อสมัครสมาชิก หรือหากผู้ใช้งานมีบัญชีอยู่แล้ว สามารถกดปุ่ม <strong>เข้าสู่ระบบ</strong> ตรงมุมด้านล่างซ้ายเพื่อเปลี่ยนไปยังหน้าเข้าสู่ระบบ</p>
                     </section>
 
-                    <section id="section-two" ref={ref => sectionRefs.current[2] = ref} className='pt-20'>
+                    <section id="section-two" ref={ref => sectionRefs.current[2] = ref} className={`pt-10 ${activeSection == 2?'block':'hidden'}`}>
+                    <p className='text-[34px] lg:text-[38px] xl:text-[42px] text-center text-textPrimary font-kanit mt-16 mb-8'>คู่มือการใช้งาน</p>
                         <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] '>ขั้นตอนที่ 2 : เข้าสู่ระบบ</p>
 
                         <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
@@ -202,10 +235,11 @@ const Manual = () => {
                         <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
                             <Image src={login2} objectFit='cover' alt="login2" />
                         </div>
-                        <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>เข้าสู่ระบบด้วยบัญชีที่เคยสร้างไว้กับ <strong>คลีนเนอร์</strong> เพื่อเข้าถึงข้อมูลที่เคยบันทึกไว้ในบัญชีนั้น ไม่ว่าจะเป็นโปรเจกต์ ประวัติการทำความสะอาดข้อมูล และดาวน์โหลดไฟล์โปรเจกต์ที่ทำความสะอาดแล้ว เป็นต้น</p>
+                        <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>หากผู้ใช้งานยังไม่เคยสร้างบัญชีกับ <strong>คลีนเนอร์</strong>  ให้ย้อนกลับไปขั้นตอนที่ 1 เพื่อสมัครสมาชิกกับเว็บแอปพลิเคชันคลีนเนอร์ก่อน โดยผู้ใช้งานสามารถกลับไปยังหน้าสมัครสมาชิกได้ที่ปุ่ม <strong>สมัครสมาชิก</strong>  ตรงมุมด้านล่างซ้าย</p>
                     </section>
 
-                    <section id="section-three" ref={ref => sectionRefs.current[3] = ref} className='pt-20'>
+                    <section id="section-three" ref={ref => sectionRefs.current[3] = ref} className={`pt-10 ${activeSection == 3?'block':'hidden'}`}>
+                    <p className='text-[34px] lg:text-[38px] xl:text-[42px] text-center text-textPrimary font-kanit mt-16 mb-8'>คู่มือการใช้งาน</p>
                         <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] '>ขั้นตอนที่ 3 : ศึกษาข้อมูลที่สำคัญ</p>
                         <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] mt-5 mx-10'>•	คู่มือการใช้งาน</p>
                         <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
@@ -225,7 +259,8 @@ const Manual = () => {
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>ผู้ใช้งานสามารถดูโปรเจกต์ที่สร้างไว้ได้ภายในหน้า <strong>โปรเจกต์ของฉัน</strong> และสามารถเลือกโปรเจกต์ที่ต้องการทำความสะอาดได้ภายในหน้านี้ และหากต้องการสร้างโปรเจกต์ใหม่ สามารถกดปุ่ม <strong>อัปโหลด</strong> เพื่ออัปโหลดไฟล์หรือเชื่อมต่อฐานข้อมูลเพื่อสร้างโปรเจกต์ใหม่ และหากต้องการลบโปรเจกต์ ผู้ใช้งานสามารถกดปุ่มรูปถังขยะมุมล่างขวาของโปรเจกต์นั้นๆ เพื่อทำการลบโปรเจกต์</p>
                     </section>
 
-                    <section id="section-four" ref={ref => sectionRefs.current[4] = ref} className='pt-20'>
+                    <section id="section-four" ref={ref => sectionRefs.current[4] = ref} className={`pt-10 ${activeSection == 4?'block':'hidden'}`}>
+                    <p className='text-[34px] lg:text-[38px] xl:text-[42px] text-center text-textPrimary font-kanit mt-16 mb-8'>คู่มือการใช้งาน</p>
                         <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] '>ขั้นตอนที่ 4 : อัปโหลดข้อมูล</p>
                         <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] mt-5 mx-10'>•	อัปโหลดไฟล์ชุดข้อมูล</p>
                         <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
@@ -252,7 +287,8 @@ const Manual = () => {
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>ภายในหน้า <strong>ชุดข้อมูลสำหรับทดลอง</strong> จะมีชุดข้อมูลให้ผู้ใช้งานเลือกใช้ทดลองได้ 3 ชุด คือ Zomato Café Reviews, ดัชนีสมรรถนะสิ่งแวดล้อมของประเทศไทย และ ผลการรับฟังประสบการณ์ผู้ป่วยสู่การปรับระบบบริการ ซึ่งเมื่อผู้ใช้งานเลือกชุดข้อมูลใด ชุดข้อมูลนั้นจะถูกเพิ่มเข้าไปในหน้า <strong>โปรเจกต์ของฉัน</strong> เพื่อเก็บเป็นโปรเจกต์ของผู้ใช้งาน</p>
                     </section>
 
-                    <section id="section-five" ref={ref => sectionRefs.current[5] = ref} className='pt-20'>
+                    <section id="section-five" ref={ref => sectionRefs.current[5] = ref} className={`pt-10 ${activeSection == 5?'block':'hidden'}`}>
+                    <p className='text-[34px] lg:text-[38px] xl:text-[42px] text-center text-textPrimary font-kanit mt-16 mb-8'>คู่มือการใช้งาน</p>
                         <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] '>ขั้นตอนที่ 5 : ทำความสะอาดข้อมูล</p>
                         <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] mt-5 mx-10'>•	เปลี่ยนชื่อโปรเจกต์</p>
                         <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
@@ -294,8 +330,8 @@ const Manual = () => {
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>แถบเมนูด้านบนจะแสดงประวัติการทำความสะอาดข้อมูลของชุดข้อมูลนั้นๆ หากผู้ใช้งานต้องการยกเลิกการทำความสะอาดข้อมูลครั้งล่าสุดสามารถกดปุ่มกากบาท ที่ประวัติการทำความสะอาดข้อมูลนั้น จากนั้นจะมี Pop up ยืนยันการยกเลิกการทำความสะอาดข้อมูลครั้งล่าสุดขึ้นมาให้ผู้ใช้งานกดยืนยันอีกครั้ง เมื่อผู้ใช้งานกดปุ่ม <strong>ยืนยัน</strong> ข้อมูลจะกลับไปเป็นข้อมูลเดิมก่อนที่จะใช้ฟังก์ชันทำความสะอาดนั้น</p>
                     </section>
 
-                    <section id="section-six" ref={ref => sectionRefs.current[6] = ref} className='pt-20'>
-
+                    <section id="section-six" ref={ref => sectionRefs.current[6] = ref} className={`pt-10 ${activeSection == 6?'block':'hidden'}`}>
+                    <p className='text-[34px] lg:text-[38px] xl:text-[42px] text-center text-textPrimary font-kanit mt-16 mb-8'>คู่มือการใช้งาน</p>
                         <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px]'>ขั้นตอนที่ 6 : ดาวน์โหลดข้อมูล</p>
                         <div className='w-[400px] lg:w-[550px] xl:w-[800px]   mt-5 flex flex-col justify-center border-0 items-center'>
 
@@ -303,10 +339,18 @@ const Manual = () => {
                                 <Image src={download} objectFit='cover' alt="functionCleansing12" />
                             </div>
                         </div>
-                        <p className='text-textGray  text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>การดาวน์โหลดไฟล์ชุดข้อมูล เมื่อผู้ใช้งานกดปุ่ม <strong>ดาวน์โหลด</strong> บนสุดทางด้านขวาระบบจะแสดง Pop up ดาวน์โหลดไฟล์ให้ผู้ใช้งานแก้ไขชื่อไฟล์ (หากต้องการ) จากนั้นกดปุ่ม <strong>ดาวน์โหลด</strong> หรือหากต้องการยกเลิกการดาวน์โหลดสามารถกดปุ่มกากบาทที่ด้านขวาบนของ Pop up เพื่อปิด Pop up ดาวน์โหลดไฟล์ โดยไฟล์ชุดข้อมูลที่ดาวน์โหลดจาก <strong>คลีนเนอร์</strong> จะเป็นไฟล์ประเภท csv เท่านั้น</p>
+                        <p className='text-textGray  text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>การดาวน์โหลดไฟล์ชุดข้อมูล เมื่อผู้ใช้งานกดปุ่ม <strong>ดาวน์โหลด</strong> บนสุดทางด้านขวาระบบจะแสดง Pop up ดาวน์โหลดไฟล์ให้ผู้ใช้งานแก้ไขชื่อไฟล์ (หากต้องการ) จากนั้นกดปุ่ม <strong>ดาวน์โหลด</strong> หรือหากต้องการยกเลิกการดาวน์โหลดสามารถกดปุ่มกากบาทที่มุมด้านขวาบนของ Pop up เพื่อปิด Pop up ดาวน์โหลดไฟล์ โดยไฟล์ชุดข้อมูลที่ดาวน์โหลดจาก <strong>คลีนเนอร์</strong> จะเป็นไฟล์ประเภท csv เท่านั้น</p>
+                        <div className='w-[400px] lg:w-[550px] xl:w-[800px]   mt-5 flex flex-col justify-center border-0 items-center'>
+
+                            <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
+                                <Image src={download2} objectFit='cover' alt="functionCleansing12" />
+                            </div>
+                        </div>
+                        <p className='text-textGray  text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>เมื่อผู้ใช้งานที่ดาวน์โหลดไฟล์จากเว็บแอปพลิเคชัน <strong>คลีนเนอร์</strong> ไปเปิดด้วยโปรแกรม Excel อาจจะพบกับปัญหาเรื่องตัวอักษรภาษาไทยเพี้ยน ปัญหานี้เกิดจากโปรแกรม Excel ของผู้ใช้งานไม่ได้อ่านไฟล์ด้วย UTF-8 ผู้ใช้งานสามารถอ่านคู่มือการเปิดไฟล์ในลิงก์ <strong>วิธีการเปิดไฟล์ด้วย Decoder Unicode UTF-8</strong>  ด้านบนปุ่ม <strong>ดาวน์โหลด</strong>  เพื่อแก้ไขปัญหาดังกล่าว</p>
                     </section>
 
-                    <section id="section-seven" ref={ref => sectionRefs.current[7] = ref} className='pt-20'>
+                    <section id="section-seven" ref={ref => sectionRefs.current[7] = ref} className={`pt-10 ${activeSection == 7?'block':'hidden'}`}>
+                    <p className='text-[34px] lg:text-[38px] xl:text-[42px] text-center text-textPrimary font-kanit mt-16 mb-8'>คู่มือการใช้งาน</p>
                         <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] mt-5 mx-10'>•	วิธีการเปิดไฟล์ด้วย Decoder Unicode UTF-8</p>
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>เนื่องจากเว็บแอปพลิเคชันคลีนเนอร์รองรับการ Decoder ไฟล์แบบ Unicode UTF-8 อาจจะส่งผลให้ผู้ใช้งานที่เปิดไฟล์ที่ดาวน์โหลดจากเว็บแอปพลิเคชันคลีนเนอร์ โดยใช้โปรแกรม Excel ที่ไม่ได้ตั้งค่าเริ่มต้นในการเปิดไฟล์ด้วยการ Decoder ไฟล์แบบ Unicode UTF-8 พบปัญหาภาษาไทยกลายเป็นอักขระพิเศษที่ไม่สามารถอ่านได้ วิธีเปิดไฟล์ให้ภาษาไทยไม่กลายเป็นอักขระพิเศษสามารถทำได้ดังนี้</p>
                         <p className='text-textPrimary font-kanit text-[18px] lg:text-[22px] xl:text-[26px] mt-5 mx-10'>ขั้นตอนที่ 1 เปิดโปรแกรม Excel และเลือก Data จากนั้นเลือก Get Data (Power Query)</p>
@@ -351,12 +395,18 @@ const Manual = () => {
                         </div>
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>เปิดไฟล์ด้วย Unicode (UTF-8)</p>
                     </section>
+
+
+                    <div className='flex flex-row justify-between items-center w-full mt-10'>
+                        <p className={`${activeSection==1?'bg-gray cursor-not-allowed':'bg-primary text-white cursor-pointer'} lg:text-[22px] xl:text-[26px] w-24 xl:w-32 py-2 rounded-md text-center items-center`} onClick={handlePrevPage}>{"< ก่อนหน้า"}</p>
+                        <p className={`${activeSection==7?'bg-gray cursor-not-allowed':'bg-primary text-white cursor-pointer '} lg:text-[22px] xl:text-[26px] w-24 xl:w-32 py-2 rounded-md text-center items-center`} onClick={handleNextPage}>{"ถัดไป >"}</p>
+                    </div>
                 </div>
 
             </div>
-            <div className='flex flex-col overflow-x-hidden w-full mt-2 font-kanit text-textPrimary text-center items-center'>
+            {/* <div className='flex flex-col overflow-x-hidden w-full mt-2 font-kanit text-textPrimary text-center items-center'>
                 <div onClick={handleClean} className='px-12 py-2 bg-primary text-white text-[32px] w-fit rounded-2xl mt-8 hover:bg-hoverPrimary hover:cursor-pointer'>ทำความสะอาดข้อมูล</div>
-            </div>
+            </div> */}
 
             <div className="w-full h-[250px] mt-20 grid grid-cols-3 bg-primary font-kanit text-white">
                 <div className="flex justify-center items-center mt-10">

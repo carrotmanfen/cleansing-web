@@ -72,6 +72,7 @@ import excelopen5 from './excelopen5.png'
 import excelopen6 from './excelopen6.png'
 import excelopen7 from './excelopen7.png'
 import excelopen8 from './excelopen8.png'
+import download2 from './download2.png'
 
 export{
     logo,
@@ -147,5 +148,6 @@ export{
     excelopen5,
     excelopen6,
     excelopen7,
-    excelopen8
+    excelopen8,
+    download2,
 }
