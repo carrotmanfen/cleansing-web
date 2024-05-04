@@ -17,7 +17,9 @@ import connectMysql from './connectMysql.png'
 import functionCleansing from './functionCleansing.png'
 import changProjectName from './changProjectName.png'
 import register from './register.png'
+import register2 from './register2.png'
 import login from './login.png'
+import login2 from './login2.png'
 import userManual from './userManual.png'
 import myProject from './myProject.png'
 import uploadFile from './uploadFile.png'
@@ -91,7 +93,9 @@ export{
     functionCleansing,
     changProjectName,
     register,
+    register2,
     login,
+    login2,
     userManual,
     myProject,
     uploadFile,

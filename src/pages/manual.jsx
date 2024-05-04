@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/legacy/image'
 import { Navbar } from '../components/Navbar'
 import {
-    register, login, userManual,
+    register, registe2, login, login2, userManual,
     doc,
     myProject,
     uploadFile,
@@ -25,6 +25,7 @@ import {
     excelopen6,
     excelopen7,
     excelopen8,
+    register2,
 } from '@/assets'
 
 import Link from 'next/link'
@@ -84,7 +85,7 @@ const Manual = () => {
             {
                 root: null,
                 rootMargin: '0px',
-                threshold: 0.1
+                threshold: 0.2
             }
         );
 
@@ -176,10 +177,16 @@ const Manual = () => {
                     <section id="section-one" ref={ref => sectionRefs.current[1] = ref} className='pt-20'>
 
                         <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px]'>ขั้นตอนที่ 1 : สมัครสมาชิก</p>
-                        <div className='w-[400px] lg:w-[550px] xl:w-[800px]   mt-5 flex flex-col justify-center border-0 items-center'>
 
+                        <div className='w-[400px] lg:w-[550px] xl:w-[800px] mt-5 flex flex-col justify-center border-0 items-center'>
                             <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
                                 <Image src={register} objectFit='cover' alt="register" />
+                            </div>
+                        </div>
+                        <p className='text-textGray  text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>ผู้ใช้งานที่เข้ามาใช้งาน <strong>คลีนเนอร์</strong> ครั้งแรกต้องสมัครสมาชิกเพื่อสร้างบัญชีกับ <strong>คลีนเนอร์</strong> ก่อนจึงจะสามารถใช้ฟังก์ชันต่าง ๆ ของเว็บแอปพลิเคชันคลีนเนอร์ได้ โดยผู้ใช้งานต้องกรอกข้อมูลที่จำเป็นในการสมัครเข้าใช้งานคือ ชื่อผู้ใช้งาน รหัสผ่าน และยืนยันรหัสผ่าน จากนั้นกดปุ่มยืนยันเพื่อสมัครสมาชิก</p>
+                        <div className='w-[400px] lg:w-[550px] xl:w-[800px] mt-5 flex flex-col justify-center border-0 items-center'>
+                            <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
+                                <Image src={register2} objectFit='cover' alt="register2" />
                             </div>
                         </div>
                         <p className='text-textGray  text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>ผู้ใช้งานที่เข้ามาใช้งาน <strong>คลีนเนอร์</strong> ครั้งแรกต้องสมัครสมาชิกเพื่อสร้างบัญชีกับ <strong>คลีนเนอร์</strong> ก่อนจึงจะสามารถใช้ฟังก์ชันต่าง ๆ ของเว็บแอปพลิเคชันคลีนเนอร์ได้ โดยผู้ใช้งานต้องกรอกข้อมูลที่จำเป็นในการสมัครเข้าใช้งานคือ ชื่อผู้ใช้งาน รหัสผ่าน และยืนยันรหัสผ่าน จากนั้นกดปุ่มยืนยันเพื่อสมัครสมาชิก</p>
@@ -187,8 +194,13 @@ const Manual = () => {
 
                     <section id="section-two" ref={ref => sectionRefs.current[2] = ref} className='pt-20'>
                         <p className='text-textPrimary font-kanit text-[26px] lg:text-[30px] xl:text-[34px] '>ขั้นตอนที่ 2 : เข้าสู่ระบบ</p>
+
                         <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
                             <Image src={login} objectFit='cover' alt="login" />
+                        </div>
+                        <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>เข้าสู่ระบบด้วยบัญชีที่เคยสร้างไว้กับ <strong>คลีนเนอร์</strong> เพื่อเข้าถึงข้อมูลที่เคยบันทึกไว้ในบัญชีนั้น ไม่ว่าจะเป็นโปรเจกต์ ประวัติการทำความสะอาดข้อมูล และดาวน์โหลดไฟล์โปรเจกต์ที่ทำความสะอาดแล้ว เป็นต้น</p>
+                        <div class="rounded-lg shadow-xl dark:shadow-gray-900 mt-5">
+                            <Image src={login2} objectFit='cover' alt="login2" />
                         </div>
                         <p className='text-textGray text-[18px] lg:text-[22px] xl:text-[26px] mt-5'>เข้าสู่ระบบด้วยบัญชีที่เคยสร้างไว้กับ <strong>คลีนเนอร์</strong> เพื่อเข้าถึงข้อมูลที่เคยบันทึกไว้ในบัญชีนั้น ไม่ว่าจะเป็นโปรเจกต์ ประวัติการทำความสะอาดข้อมูล และดาวน์โหลดไฟล์โปรเจกต์ที่ทำความสะอาดแล้ว เป็นต้น</p>
                     </section>
