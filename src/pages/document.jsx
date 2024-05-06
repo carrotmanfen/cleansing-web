@@ -24,7 +24,7 @@ const Document = () => {
         }
     }
 
-    const [activeSection, setActiveSection] = useState(0);
+    const [activeSection, setActiveSection] = useState(1);
     const sectionRefs = useRef([]);
     const handleNextPage = () => {
         if (activeSection == 1) {

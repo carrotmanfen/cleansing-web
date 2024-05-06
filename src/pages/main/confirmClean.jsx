@@ -299,7 +299,7 @@ const ConfirmClean = () => {
   return (
     <div className="relative w-screen h-full">
       <NavbarMain disableButton={true}  projectName={projectName} />
-      <NavbarDetail rowNumber={rowsData.length} colNumber={rowsData.length} />
+      <NavbarDetail rowNumber={rowsData.length} colNumber={columnsData.length} />
      
       <div className="flex flex-col w-full px-10 font-kanit">
         <div className="flex flex-row py-4 justify-between">
