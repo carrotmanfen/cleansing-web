@@ -7,7 +7,7 @@ import { atomUserRole } from "@/atoms/atomUserRole";
 
 export default function useAccount() {
     const [data, setData] = useState(null);
-    const [isPending, setIsPending] = useState(true);
+    const [isPending, setIsPending] = useState(false);
     const [error, setError] = useState(false);
     const { showLoading, hideLoading } = useLoadingScreen();
     const router = useRouter()
@@ -81,7 +81,7 @@ export default function useAccount() {
             }
             setIsPending(false);
         } catch (err) {
-            setError(true);
+            setError('ไม่พบบัญชีผู้ใช้งาน หรือ รหัสผ่านไม่ถูกต้อง');
             setIsPending(false);
         } finally {
             hideLoading();
@@ -114,7 +114,7 @@ export default function useAccount() {
             }
             setIsPending(false);
         } catch (err) {
-            setError(true);
+            setError('ไม่พบบัญชีผู้ใช้งาน หรือ รหัสผ่านไม่ถูกต้อง');
             setIsPending(false);
         } finally {
             hideLoading();

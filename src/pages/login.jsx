@@ -49,12 +49,11 @@ const Login = () => {
     }
     if (password && username) {
       await login(username, password);
-      if(error){
-          setNotification('ไม่พบบัญชีผู้ใช้งาน');
-      }
-      return;
     }
+    
+
   }
+
   useEffect(() => {
         
     if (userRole.isLogin === false) {
@@ -69,6 +68,7 @@ const Login = () => {
     <div className="relative w-screen h-full">
       <div className="fixed top-4 z-50 left-1/2 transform -translate-x-1/2 w-1/2">
         {notification && <Alert severity="error" className="w-full font-kanit text-lg">{notification}</Alert>}
+        {error && <Alert severity="error" className="w-full font-kanit text-lg">{error}</Alert>}
       </div>
       <div className="w-full flex flex-col items-center pb-20 ">
         <div className='mt-8'>
