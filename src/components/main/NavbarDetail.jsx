@@ -6,7 +6,9 @@ export const NavbarDetail = ({rowNumber, colNumber,  clean_name, onClick}) => {
     <div className='w-screen flex flex-row justify-start sticky h-[80px] z-50 top-[80px] bg-lightBlue items-center px-10'>
         <p className='font-kanit text-textPrimary text-[20px]'>รายละเอียดข้อมูล</p>
         <div className="border-l-2 border-borderNavbar h-[50px] mx-4"></div>
-        <p className='font-kanit text-textPrimary text-[20px]'>{rowNumber} แถว {colNumber} คอลัมน์</p>
+        {colNumber!=0&&
+            <p className='font-kanit text-textPrimary text-[20px]'>{rowNumber} แถว {colNumber} คอลัมน์</p>}
+        {colNumber==0&&<p className='font-kanit text-textPrimary text-[20px]'>0 แถว 0 คอลัมน์</p>}
         <div className="border-l-2 border-borderNavbar h-[50px] mx-4"></div>
         {clean_name&&<p onClick={onClick} className='font-kanit text-textPrimary text-[16px] border rounded-md px-2 cursor-pointer hover:bg-primaryRed hover:text-white'>{clean_name} x</p>}
     </div>

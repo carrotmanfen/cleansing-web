@@ -420,7 +420,7 @@ const Manual = () => {
                 </div>
 
                 <div>
-                    <p className="flex justify-center items-center text-center">126 ปรรชาอุทิศ แขวงบางมด<br />เขตทุ่งครุ จังหวัดกรุงเทพ 10140</p>
+                    <p className="flex justify-center items-center text-center">126 ประชาอุทิศ แขวงบางมด<br />เขตทุ่งครุ จังหวัดกรุงเทพ 10140</p>
                 </div>
                 <div>
                     <p className="flex justify-center items-center text-center"> Kanthila.k@mail.kmutt.ac.th<br />

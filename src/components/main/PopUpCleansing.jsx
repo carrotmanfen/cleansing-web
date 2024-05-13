@@ -3,6 +3,7 @@ import Image from 'next/legacy/image';
 import { afterArrow, arrowLeftWhite } from '@/assets';
 import { useRouter } from 'next/router';
 import useCleansing from "@/hooks/useCleansing";
+import Alert from '@mui/material/Alert';
 
 const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
     const [cleanMenu, setCleanMenu] = useState(1)
@@ -16,6 +17,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
     const [delimiter, setDelimiter] = useState("")
     const [column1, setColumn1] = useState("")
     const [column2, setColumn2] = useState("")
+    const [notification, setNotification] = useState('');
     const handleCheckboxChange = (index) => {
       const newCheckedItems = [...checkedItems];
       newCheckedItems[index] = !newCheckedItems[index];
@@ -792,13 +794,19 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                 <input type='text' value={delimiter} className='text-start text-[20px] text-textPrimary border-2 w-full rounded-md px-3'
                 onChange={(e)=>{const inputValue = e.target.value; 
                 setDelimiter(inputValue);
+                setNotification("");
                 }}/>
               </div>
               <div className={`flex w-full justify-end`}>
                   <button 
                   onClick={()=>{
                       if(delimiter!=""){
-                          handleConfirm()
+                        if (!columns.includes(delimiter)) {
+                            setNotification("ชื่อคอลัมน์ใหม่ไม่สามารถซ้ำกับชื่อคอลัมน์เดิมได้")
+                        }
+                        else{
+                            handleConfirm()
+                        }
                       }
                   }} 
                   className={`text-[20px] font-kanit rounded-md py-2 px-4 text-white ${delimiter!=""?`bg-primary hover:bg-hoverPrimary`:`bg-gray hover:cursor-not-allowed`}`}>ยืนยัน</button>
@@ -847,6 +855,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
           <p></p>
     }
         </div>
+      {notification && <Alert severity="error" className="w-full font-kanit text-lg">{notification}</Alert>}
       </div>
     </div>
   );
