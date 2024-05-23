@@ -92,7 +92,7 @@ export default function Home() {
           </div>
 
           <div>
-            <p className="flex justify-center items-center text-center">126 ปรรชาอุทิศ แขวงบางมด<br />เขตทุ่งครุ จังหวัดกรุงเทพ 10140</p>
+            <p className="flex justify-center items-center text-center">126 ประชาอุทิศ แขวงบางมด<br />เขตทุ่งครุ จังหวัดกรุงเทพ 10140</p>
           </div>
           <div>
             <p className="flex justify-center items-center text-center"> Kanthila.k@mail.kmutt.ac.th<br />
@@ -101,8 +101,8 @@ export default function Home() {
           </div>
           <div>
             <p className="flex justify-center items-center text-center"> 093 262 1995<br />
-              088 876 2848<br />
-              091 202 1999</p>
+              088 871 4320<br />
+              095 371 4986</p>
           </div>
         </div>
       </div>

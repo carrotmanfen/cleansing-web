@@ -56,6 +56,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
         setDelimiter("")
         setColumn1("")
         setColumn2("")
+        setNotification('')
     }
 
     const handleClose = () =>{
@@ -801,7 +802,7 @@ const PopUpCleansing = ({ isOpen, close, columns, rows }) => {
                   <button 
                   onClick={()=>{
                       if(delimiter!=""){
-                        if (!columns.includes(delimiter)) {
+                        if (columns.some(column => column.label === delimiter)) {
                             setNotification("ชื่อคอลัมน์ใหม่ไม่สามารถซ้ำกับชื่อคอลัมน์เดิมได้")
                         }
                         else{
