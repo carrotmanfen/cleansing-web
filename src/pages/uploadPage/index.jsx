@@ -109,7 +109,7 @@ const UploadPage = () => {
     return (
         <div className='relative w-screen h-full'>
             <Navbar />
-            {error && <div className='w-full flex justify-center absolute mt-10'>
+            {error && <div className='w-full flex justify-center absolute top-20'>
                 <Alert severity="error" className='w-1/2 font-kanit text-[16px]'>เกิดข้อผิดพลาด - ไฟล์ที่อัปโหลดมีรูปแบบไม่ถูกต้องหรือเซิฟเวอร์ไม่ตอบสนอง</Alert>
             </div>}
             
