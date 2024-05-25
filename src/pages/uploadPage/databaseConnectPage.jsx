@@ -16,6 +16,7 @@ const DatabaseConnectPage = () => {
   const [password, setPassword] = useState('');
   const [database, setDatabase] = useState('');
   const [table, setTable] = useState('');
+  const [port, setPort] = useState('');
   const {error, setError, isPending, showLoading, hideLoading, createProject} = useAddProject()
   const [userRole, setUserRole] = useRecoilState(atomUserRole)
   const {refreshLogin} = useAccount()
@@ -44,6 +45,15 @@ const DatabaseConnectPage = () => {
     setTable(e.target.value); // Update the state when the input changes
     setError(null)
   };
+
+  const handlePortChange = (e) => {
+    const value = e.target.value;
+    if (!isNaN(value)) {
+        setPort(value); // Update the state when the input changes
+        setError(null);
+    }
+  };
+
   function convertStringsToNumbers(data, columnName) {
     // Check if all values in the column can be converted to a number
     if (data.every(row => !isNaN(Number(row[columnName])))) {
@@ -77,6 +87,7 @@ const DatabaseConnectPage = () => {
     console.log(password)
     console.log(database)
     console.log(table)
+    console.log(port)
     showLoading()
     const response = await fetch("/api/connect", {
       method: "POST",
@@ -89,6 +100,7 @@ const DatabaseConnectPage = () => {
         password: password,
         database: database,
         table: table,
+        port: Number(port),
       }),
     });
 
@@ -176,9 +188,18 @@ const DatabaseConnectPage = () => {
           <input
             type="text"
             className="w-full px-4 py-2 border-2 border-primary rounded-lg focus:outline-none focus:ring focus:border-primary"
-            placeholder="root"
+            placeholder="table_name"
             value={table}
             onChange={handleTableChange}
+          />
+
+          <p className="w-full text-left">Port<span className="text-primaryRed"> *</span></p>
+          <input
+            type="text"
+            className="w-full px-4 py-2 border-2 border-primary rounded-lg focus:outline-none focus:ring focus:border-primary"
+            placeholder="3306"
+            value={port}
+            onChange={handlePortChange}
           />
 
           <div className="flex flex-row w-full justify-between">
@@ -188,7 +209,7 @@ const DatabaseConnectPage = () => {
             <button 
                 onClick={handleConnect} 
                 className={`px-16 py-2 mt-8 rounded-2xl  ${host && user && database && table ? 'bg-primary hover:bg-hoverPrimary text-white' : 'bg-gray cursor-not-allowed text-textPrimary'}`}
-                disabled={!host || !user || !database || !table}
+                disabled={!host || !user || !database || !table || !port}
             >
                     ยืนยัน
             </button>
