@@ -3,7 +3,7 @@ import mysql from 'mysql2/promise';
 export const config = {
     api: {
       bodyParser: {
-        sizeLimit: '50mb', // Adjust the size limit as needed
+        sizeLimit: '10mb', // Adjust the size limit as needed
       },
     },
   };
