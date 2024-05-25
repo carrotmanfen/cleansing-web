@@ -1,5 +1,13 @@
 import mysql from 'mysql2/promise';
 
+export const config = {
+    api: {
+      bodyParser: {
+        sizeLimit: '50mb', // Adjust the size limit as needed
+      },
+    },
+  };
+  
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).end(); // Method Not Allowed
