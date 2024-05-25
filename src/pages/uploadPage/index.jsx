@@ -20,8 +20,13 @@ const UploadPage = () => {
 
     const onFileChangeHandler = (event) => {
     setError(null)
-    const csvFile = event.target.files[0];
-    setFile(csvFile);
+    const file = event.target.files[0];
+    if (file && (file.type === "text/csv" || file.type === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" || file.type === "application/vnd.ms-excel")) {
+        setFile(file);
+    } else {
+        setFile(null);
+        setError("Invalid file type. Please select a CSV or XLSX file.");
+    }
     };
     function convertStringsToNumbers(data, columnName) {
         // Check if all values in the column can be converted to a number
