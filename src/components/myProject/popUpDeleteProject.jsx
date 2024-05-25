@@ -23,7 +23,7 @@ const PopUpDeleteProject = ({ isOpen , onClick, onClickCancel }) => {
           {/* Body */}
           <div className="relative p-6 flex flex-row justify-around">
             <button onClick={onClickCancel} className='font-kanit text-[20px] px-12 py-3 bg-white border-2 rounded-xl hover:bg-gray'>ยกเลิก</button>
-            <button onClick={handleDelete} className='font-kanit text-[20px] text-white bg-primaryRed px-12 py-3 border-black border-2 rounded-xl hover:bg-hoverPrimary'>ยืนยัน</button>
+            <button onClick={handleDelete} className='font-kanit text-[20px] text-white bg-primaryRed px-12 py-3 border-black border-2 rounded-xl hover:bg-hoverRed'>ยืนยัน</button>
           </div>
         </div>
       </div>
